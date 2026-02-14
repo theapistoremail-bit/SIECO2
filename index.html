@@ -325,6 +325,62 @@
             box-shadow: 0 12px 40px rgba(255, 255, 255, 0.3);
         }
 
+        /* Content Container */
+        .content {
+            position: relative;
+            z-index: 10;
+            padding-top: 100px;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 40px 80px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            color: var(--water-deep);
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 180, 216, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 5em;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 25px;
+            letter-spacing: -3px;
+            line-height: 1.1;
+            text-shadow: 0 4px 30px rgba(0, 180, 216, 0.5);
+        }
+
+        .hero h1 .water-text {
+            background: linear-gradient(135deg, var(--water-light), var(--foam), var(--water-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(72, 202, 228, 0.6));
+        }
+
+        .hero p {
+            font-size: 1.35em;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 750px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
         /* Water Feature Section - Destacar el agua */
         .water-feature {
             max-width: 1400px;
