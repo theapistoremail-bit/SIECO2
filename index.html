@@ -148,6 +148,108 @@
             transition: opacity 2s ease;
         }
         .slide.active { opacity: 1; }
+ /* Glass Cards Section */
+        .cards-section {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 45px;
+            box-shadow: 0 10px 40px rgba(0, 180, 216, 0.15);
+            border: 2px solid rgba(72, 202, 228, 0.2);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(72, 202, 228, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(0, 180, 216, 0.3);
+            border-color: rgba(72, 202, 228, 0.5);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--water-blue), var(--water-light));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 24px rgba(0, 180, 216, 0.3);
+        }
+
+        .glass-card h3 {
+            font-size: 1.6em;
+            color: var(--water-dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .glass-card p {
+            color: #2c3e50;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            max-width: 1400px;
+            margin: 100px auto;
+            padding: 70px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 180, 216, 0.2);
+            border: 2px solid rgba(72, 202, 228, 0.3);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            text-align: center;
+        }
+
+        .stat-item h2 {
+            font-size: 4em;
+            background: linear-gradient(135deg, var(--water-deep), var(--water-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .stat-item p {
+            color: var(--water-dark);
+            font-size: 1.15em;
+            font-weight: 600;
+        }
 
     </style>
 </head>
