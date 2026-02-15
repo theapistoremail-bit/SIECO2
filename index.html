@@ -219,6 +219,37 @@
         </section>
     </div>
 
+        // Slider lento y ordenado
+        const slides = document.querySelectorAll(".slide");
+        let current = 0;
+        setInterval(()=>{
+            slides.forEach((s)=>s.classList.remove("active"));
+            current = (current + 1) % slides.length;
+            slides[current].classList.add("active");
+        }, 4000); // Cambio cada 4 segundos
+    </script>
+    
+<section class="services">
+    <div class="service-item">💧 Tratamiento de Agua</div>
+    <div class="service-item">⚙️ Mantenimiento</div>
+    <div class="service-item">🔬 Laboratorio</div>
+    <div class="service-item">🏭 Consultoría</div>
+</section>
+
+<footer class="footer-sieco">
+    <div class="circle-container">
+        <div class="circle-center">
+            <img src="./SIEC - Sistemas y Soluciones Integrales_files/ChatGPT Image 4 feb 2026, 10_50_44 a.m..png">
+        </div>
+        <div class="circle-item item1">Agua Residual</div>
+        <div class="circle-item item2">Ósmosis</div>
+        <div class="circle-item item3">Desinfección</div>
+        <div class="circle-item item4">Filtración</div>
+        <div class="circle-item item5">Comercial</div>
+        <div class="circle-item item6">Resinas</div>
+        <div class="circle-item item7">Ultrafiltración</div>
+        <div class="circle-item item8">Aire</div>
+    </div>
     <footer>
         <p>© 2026 AquaPure. Agua pura para una vida saludable. Todos los derechos reservados.</p>
     </footer>
@@ -251,36 +282,5 @@
             render();
         }
 
-        // Slider lento y ordenado
-        const slides = document.querySelectorAll(".slide");
-        let current = 0;
-        setInterval(()=>{
-            slides.forEach((s)=>s.classList.remove("active"));
-            current = (current + 1) % slides.length;
-            slides[current].classList.add("active");
-        }, 4000); // Cambio cada 4 segundos
-    </script>
-    
-<section class="services">
-    <div class="service-item">💧 Tratamiento de Agua</div>
-    <div class="service-item">⚙️ Mantenimiento</div>
-    <div class="service-item">🔬 Laboratorio</div>
-    <div class="service-item">🏭 Consultoría</div>
-</section>
-
-<footer class="footer-sieco">
-    <div class="circle-container">
-        <div class="circle-center">
-            <img src="./SIEC - Sistemas y Soluciones Integrales_files/ChatGPT Image 4 feb 2026, 10_50_44 a.m..png">
-        </div>
-        <div class="circle-item item1">Agua Residual</div>
-        <div class="circle-item item2">Ósmosis</div>
-        <div class="circle-item item3">Desinfección</div>
-        <div class="circle-item item4">Filtración</div>
-        <div class="circle-item item5">Comercial</div>
-        <div class="circle-item item6">Resinas</div>
-        <div class="circle-item item7">Ultrafiltración</div>
-        <div class="circle-item item8">Aire</div>
-    </div>
 </body>
 </html>
