@@ -434,6 +434,51 @@
                 height: 500px;
                 opacity: 0;
             }
+            .water-section {
+    position: relative;
+    height: 600px;
+    background: url('agua-animada.gif') center/cover no-repeat;
+    overflow: hidden;
+}
+
+/* Contenedor flotante */
+.image-slider {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Imágenes */
+.slide {
+    position: absolute;
+    width: 400px;
+    border-radius: 20px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Imagen activa */
+.slide.active {
+    opacity: 1;
+    transform: scale(1);
+    animation: pulse 2.5s infinite;
+}
+
+/* Pulsación elegante */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0px rgba(255,255,255,0.3);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255,255,255,0.6);
+    }
+    100% {
+        box-shadow: 0 0 0px rgba(255,255,255,0.3);
+    }
+}
+
         }
  /* Contenedor */
 .image-wrapper {
@@ -692,6 +737,16 @@
             requestAnimationFrame(render);
         }
         render();
+
+const slides = document.querySelectorAll(".slide");
+let index = 0;
+
+setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}, 4000);
+
 
 
     </script>
