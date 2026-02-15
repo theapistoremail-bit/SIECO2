@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio -SIECO</title>
+    <title>Inicio - SIECO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -40,6 +40,20 @@
             z-index: 1;
             pointer-events: none;
         }
+        
+        /* LOGO */
+        .logo-top-left {
+            position: fixed;
+            top: 15px;
+            left: 25px;
+            z-index: 1001;
+        }
+        .logo-top-left img {
+            height: 65px;
+            width: auto;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+        }
+
         nav {
             position: fixed;
             top: 0;
@@ -54,23 +68,11 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 40px 0 110px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
         }
-        /* LOGO */
-.logo-top-left{
-    position:fixed;
-    top:20px;
-    left:30px;
-    z-index:999;
-}
-
-.logo-top-left img{
-    height:200px;
-}
-
         .nav-links {
             display: flex;
             gap: 30px;
@@ -98,35 +100,108 @@
         }
         .nav-links a:hover::after { width: 100%; }
 
-        .content { position: relative; z-index: 10; padding-top: 100px; }
-
-        .page-header { max-width: 1400px; margin: 0 auto; padding: 80px 40px 60px; text-align: center; }
-        .page-header h1 { font-size: 4em; font-weight: 300; color: white; margin-bottom: 20px; letter-spacing: -1px; text-shadow: 0 4px 30px rgba(0, 180, 216, 0.5); }
-        .page-header h1 strong { font-weight: 600; background: linear-gradient(135deg, var(--water-light), var(--foam)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .page-header p { font-size: 1.15em; font-weight: 300; color: rgba(255, 255, 255, 0.9); max-width: 750px; margin: 0 auto; line-height: 1.8; }
-
-        footer { padding: 40px; text-align: center; color: rgba(255, 255, 255, 0.7); background: rgba(0, 18, 25, 0.8); backdrop-filter: blur(10px); margin-top: 100px; font-weight: 300; }
-
-        @media (max-width: 968px) { .page-header h1 { font-size: 2.5em; } .nav-links { display: none; } }
+        .content { 
+            position: relative; 
+            z-index: 10; 
+            padding-top: 100px; 
+        }
 
         /* Hero Section */
-        .hero { max-width: 1400px; margin: 0 auto; padding: 100px 40px 80px; text-align: center; }
-        .hero h1 { font-size: 5em; font-weight: 700; color: white; margin-bottom: 25px; letter-spacing: -3px; line-height: 1.1; text-shadow: 0 4px 30px rgba(0, 180, 216, 0.5); }
-        .hero h1 .water-text { background: linear-gradient(135deg, var(--water-light), var(--foam), var(--water-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(72, 202, 228, 0.6)); }
-        .hero p { font-size: 1.35em; color: rgba(255, 255, 255, 0.95); max-width: 750px; margin: 0 auto 50px; line-height: 1.7; text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3); }
+        .hero { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 100px 40px 80px; 
+            text-align: center; 
+        }
+        .hero h1 { 
+            font-size: 5em; 
+            font-weight: 700; 
+            color: white; 
+            margin-bottom: 25px; 
+            letter-spacing: -3px; 
+            line-height: 1.1; 
+            text-shadow: 0 4px 30px rgba(0, 180, 216, 0.5); 
+        }
+        .hero h1 strong { 
+            display: block;
+            background: linear-gradient(135deg, var(--water-light), var(--foam), var(--water-blue)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+            filter: drop-shadow(0 0 20px rgba(72, 202, 228, 0.6)); 
+        }
+        .hero p { 
+            font-size: 1.35em; 
+            color: rgba(255, 255, 255, 0.95); 
+            max-width: 750px; 
+            margin: 0 auto 50px; 
+            line-height: 1.7; 
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3); 
+        }
 
-        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .cta-primary { display: inline-flex; align-items: center; gap: 10px; padding: 18px 45px; background: linear-gradient(135deg, var(--water-blue), var(--water-deep)); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 1.1em; transition: all 0.3s; box-shadow: 0 8px 30px rgba(0, 180, 216, 0.4); }
-        .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0, 180, 216, 0.6); }
+        .cta-group { 
+            display: flex; 
+            gap: 20px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+        }
+        .cta-primary { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 10px; 
+            padding: 18px 45px; 
+            background: linear-gradient(135deg, var(--water-blue), var(--water-deep)); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            font-size: 1.1em; 
+            transition: all 0.3s; 
+            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.4); 
+        }
+        .cta-primary:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 40px rgba(0, 180, 216, 0.6); 
+        }
 
         /* Water Feature Section */
-        .water-feature { max-width: 1400px; margin: 60px auto; padding: 0 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .water-visual { position: relative; height: 500px; background: linear-gradient(135deg, rgba(0, 180, 216, 0.1), rgba(72, 202, 228, 0.1)); backdrop-filter: blur(20px); border-radius: 30px; border: 2px solid rgba(72, 202, 228, 0.3); overflow: hidden; box-shadow: 0 20px 60px rgba(0, 180, 216, 0.3); }
+        .water-feature { 
+            max-width: 1400px; 
+            margin: 60px auto; 
+            padding: 0 40px; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 60px; 
+            align-items: center; 
+        }
+        .water-visual { 
+            position: relative; 
+            height: 500px; 
+            background: linear-gradient(135deg, rgba(0, 180, 216, 0.1), rgba(72, 202, 228, 0.1)); 
+            backdrop-filter: blur(20px); 
+            border-radius: 30px; 
+            border: 2px solid rgba(72, 202, 228, 0.3); 
+            overflow: hidden; 
+            box-shadow: 0 20px 60px rgba(0, 180, 216, 0.3); 
+        }
 
-        .water-ripple { position: absolute; width: 300px; height: 300px; border-radius: 50%; border: 2px solid rgba(72, 202, 228, 0.4); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: ripple 3s ease-out infinite; }
+        .water-ripple { 
+            position: absolute; 
+            width: 300px; 
+            height: 300px; 
+            border-radius: 50%; 
+            border: 2px solid rgba(72, 202, 228, 0.4); 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            animation: ripple 3s ease-out infinite; 
+        }
         .water-ripple:nth-child(2) { animation-delay: 1s; }
         .water-ripple:nth-child(3) { animation-delay: 2s; }
-        @keyframes ripple { 0% { width: 100px; height: 100px; opacity: 1; } 100% { width: 500px; height: 500px; opacity: 0; } }
+        @keyframes ripple { 
+            0% { width: 100px; height: 100px; opacity: 1; } 
+            100% { width: 500px; height: 500px; opacity: 0; } 
+        }
 
         /* Slider dentro del glass */
         .image-wrapper {
@@ -134,8 +209,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 680px;
-            height: 600px;
+            width: 80%;
+            height: 80%;
             overflow: hidden;
             border-radius: 20px;
         }
@@ -148,7 +223,23 @@
             transition: opacity 2s ease;
         }
         .slide.active { opacity: 1; }
- /* Glass Cards Section */
+
+        .water-feature-content h2 {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-shadow: 0 2px 20px rgba(0, 180, 216, 0.5);
+        }
+        .water-feature-content p {
+            font-size: 1.15em;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Glass Cards Section */
         .cards-section {
             max-width: 1400px;
             margin: 80px auto;
@@ -251,18 +342,100 @@
             font-weight: 600;
         }
 
+        /* CTA Final Section */
+        .cta-section {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 80px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 180, 216, 0.15), rgba(72, 202, 228, 0.15));
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 2px solid rgba(72, 202, 228, 0.3);
+        }
+        .cta-section h2 {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-shadow: 0 2px 20px rgba(0, 180, 216, 0.5);
+        }
+        .cta-section p {
+            font-size: 1.25em;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        .cta-white {
+            display: inline-block;
+            padding: 18px 45px;
+            background: white;
+            color: var(--water-deep);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+        }
+        .cta-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.5);
+            background: var(--foam);
+        }
+
+        footer { 
+            padding: 40px; 
+            text-align: center; 
+            color: rgba(255, 255, 255, 0.7); 
+            background: rgba(0, 18, 25, 0.8); 
+            backdrop-filter: blur(10px); 
+            margin-top: 100px; 
+            font-weight: 300; 
+        }
+
+        @media (max-width: 968px) { 
+            .hero h1 { font-size: 2.5em; letter-spacing: -1px; } 
+            .hero p { font-size: 1.1em; }
+            .nav-links { display: none; }
+            .nav-container { padding: 0 20px; }
+            .logo-top-left { left: 15px; }
+            .logo-top-left img { height: 50px; }
+            .water-feature { 
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            .water-visual { height: 400px; }
+            .cards-section { 
+                grid-template-columns: 1fr; 
+                padding: 0 20px;
+            }
+            .glass-card { padding: 35px; }
+            .stats-section { 
+                padding: 50px 20px;
+                gap: 30px;
+            }
+            .stat-item h2 { font-size: 3em; }
+            .cta-section { 
+                padding: 60px 20px; 
+                margin: 60px 20px;
+            }
+            .cta-section h2 { font-size: 2em; }
+            .water-feature-content h2 { font-size: 2em; }
+        }
     </style>
 </head>
 <body>
     <div class="logo-top-left">
-    <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true">
-</div>
+        <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+    </div>
+    
     <canvas id="waterCanvas"></canvas>
     <div class="water-overlay"></div>
 
     <nav>
         <div class="nav-container">
-            <div class="logo">AquaPure</div>
             <ul class="nav-links">
                 <li><a href="inicio.html">Inicio</a></li>
                 <li><a href="soluciones.html">Soluciones</a></li>
@@ -277,14 +450,9 @@
     </nav>
 
     <div class="content">
-        <section class="page-header">
-            <h1></h1>
-            <p></p>
-        </section>
-
         <section class="hero">
             <h1>
-                <strong>BIENVENIDOS</strong>
+                <strong>BIENVENIDOS A SIECO</strong>
                 SISTEMAS Y SOLUCIONES INTEGRALES
             </h1>
             <p>Tecnología de última generación para purificación de agua, control eléctrico, refrigeración y mantenimiento industrial</p>
@@ -300,9 +468,9 @@
                 <div class="water-ripple"></div>
                 <div class="water-ripple"></div>
                 <div class="image-wrapper">
-                    <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/FILTRO1.png?raw=true" class="slide active">
-                    <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/FILTRO3.jpg?raw=true" class="slide">
-                    <img src="img3.jpg" class="slide">
+                    <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/FILTRO1.png?raw=true" class="slide active" alt="Sistema de Filtración 1">
+                    <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/FILTRO3.jpg?raw=true" class="slide" alt="Sistema de Filtración 2">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800" class="slide" alt="Sistema de Filtración 3">
                 </div>
             </div>
             <div class="water-feature-content">
@@ -312,12 +480,11 @@
                     de contaminantes, metales pesados, bacterias y químicos, 
                     preservando los minerales esenciales para tu salud.
                 </p>
-                <a href="#" class="cta-primary">Conocer Más →</a>
+                <a href="soluciones.html" class="cta-primary">Conocer Más →</a>
             </div>
         </section>
 
-        <section class="services-grid">
-                 <!-- Tarjetas de Servicios -->
+        <!-- Tarjetas de Servicios -->
         <section class="cards-section">
             <div class="glass-card">
                 <div class="card-icon">🏢</div>
@@ -383,27 +550,32 @@
                 Solicita un análisis gratuito de tu agua y descubre cómo nuestros 
                 sistemas pueden mejorar tu calidad de vida desde el primer día
             </p>
-            <a href="#" class="cta-white">Contactar Ahora</a>
-        </section>
-    </div>
-
+            <a href="contacto.html" class="cta-white">Contactar Ahora</a>
         </section>
     </div>
 
     <footer>
-        <p>© 2026 AquaPure. Agua pura para una vida saludable. Todos los derechos reservados.</p>
+        <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
     </footer>
 
     <script>
         // Water Canvas
         const canvas = document.getElementById('waterCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; if(gl) gl.viewport(0,0,canvas.width,canvas.height); }
-        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+        
+        function resizeCanvas() { 
+            canvas.width = window.innerWidth; 
+            canvas.height = window.innerHeight; 
+            if(gl) gl.viewport(0, 0, canvas.width, canvas.height); 
+        }
+        resizeCanvas(); 
+        window.addEventListener('resize', resizeCanvas);
 
         if(gl) {
             const vs = gl.createShader(gl.VERTEX_SHADER);
-            gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }'); gl.compileShader(vs);
+            gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }'); 
+            gl.compileShader(vs);
+            
             const fs = gl.createShader(gl.FRAGMENT_SHADER);
             gl.shaderSource(fs, `precision highp float;
                 uniform float time; uniform vec2 resolution;
@@ -412,24 +584,46 @@
                 float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<6;i++){v+=a*smoothNoise(p);p*=2.0;a*=0.5;}return v;}
                 void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
             gl.compileShader(fs);
+            
             const prog = gl.createProgram();
-            gl.attachShader(prog,vs); gl.attachShader(prog,fs); gl.linkProgram(prog); gl.useProgram(prog);
-            const buffer=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buffer); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-            const posLoc = gl.getAttribLocation(prog,'position'); gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
-            const timeLoc = gl.getUniformLocation(prog,'time'); const resLoc = gl.getUniformLocation(prog,'resolution');
-            let start=Date.now();
-            function render(){const t=(Date.now()-start)*0.001; gl.uniform1f(timeLoc,t); gl.uniform2f(resLoc,canvas.width,canvas.height); gl.clearColor(0.0,0.37,0.45,1.0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLE_STRIP,0,4); requestAnimationFrame(render);}
+            gl.attachShader(prog, vs); 
+            gl.attachShader(prog, fs); 
+            gl.linkProgram(prog); 
+            gl.useProgram(prog);
+            
+            const buffer = gl.createBuffer(); 
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer); 
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+            
+            const posLoc = gl.getAttribLocation(prog, 'position'); 
+            gl.enableVertexAttribArray(posLoc); 
+            gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+            
+            const timeLoc = gl.getUniformLocation(prog, 'time'); 
+            const resLoc = gl.getUniformLocation(prog, 'resolution');
+            
+            let start = Date.now();
+            function render() {
+                const t = (Date.now() - start) * 0.001; 
+                gl.uniform1f(timeLoc, t); 
+                gl.uniform2f(resLoc, canvas.width, canvas.height); 
+                gl.clearColor(0.0, 0.37, 0.45, 1.0); 
+                gl.clear(gl.COLOR_BUFFER_BIT); 
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); 
+                requestAnimationFrame(render);
+            }
             render();
         }
 
-        // Slider lento y ordenado
+        // Slider de imágenes
         const slides = document.querySelectorAll(".slide");
         let current = 0;
-        setInterval(()=>{
-            slides.forEach((s)=>s.classList.remove("active"));
+        
+        setInterval(() => {
+            slides.forEach((s) => s.classList.remove("active"));
             current = (current + 1) % slides.length;
             slides[current].classList.add("active");
-        }, 4000); // Cambio cada 4 segundos
+        }, 4000);
     </script>
 </body>
 </html>
