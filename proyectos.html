@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos - AquaPure</title>
+    <title>Proyectos - SIECO | Sistemas y Soluciones Integrales</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
@@ -46,6 +45,18 @@
             pointer-events: none;
         }
 
+        .logo-top-left {
+            position: fixed;
+            top: 15px;
+            left: 25px;
+            z-index: 1001;
+        }
+        .logo-top-left img {
+            height: 65px;
+            width: auto;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+        }
+
         nav {
             position: fixed;
             top: 0;
@@ -61,20 +72,10 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 40px 0 110px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--water-deep), var(--water-blue), var(--water-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
         }
 
         .nav-links {
@@ -108,6 +109,8 @@
         .nav-links a:hover::after {
             width: 100%;
         }
+
+        .nav-links a.active { color: var(--water-blue); font-weight: 600; }
 
         .content {
             position: relative;
@@ -161,8 +164,9 @@
         @media (max-width: 968px) {
             .page-header h1 { font-size: 2.5em; }
             .nav-links { display: none; }
+            .nav-container { padding: 0 20px; }
+            .logo-top-left img { height: 50px; }
         }
-
 
         .services-grid {
             max-width: 1400px;
@@ -238,79 +242,117 @@
             color: var(--water-blue);
             font-weight: 600;
         }
-
     </style>
 </head>
 <body>
+    <div class="logo-top-left">
+        <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+    </div>
+
     <canvas id="waterCanvas"></canvas>
     <div class="water-overlay"></div>
 
     <nav>
         <div class="nav-container">
-            <div class="logo">AquaPure</div>
             <ul class="nav-links">
-
                 <li><a href="inicio.html">Inicio</a></li>
                 <li><a href="soluciones.html">Soluciones</a></li>
                 <li><a href="control-electrico.html">Control Eléctrico</a></li>
                 <li><a href="refrigeracion.html">Refrigeración</a></li>
                 <li><a href="mantenimiento.html">Mantenimiento</a></li>
-                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="proyectos.html" class="active">Proyectos</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
-
             </ul>
         </div>
     </nav>
 
     <div class="content">
         <section class="page-header">
-            <h1>Proyectos <strong>Integrales</strong></h1>
-            <p>Gestión completa llave en mano</p>
+            <h1>Proyectos <strong>Destacados</strong></h1>
+            <p>Soluciones implementadas en diversas industrias de México</p>
         </section>
-
 
         <section class="services-grid">
             <div class="service-card">
-                <div class="service-icon">⚙️</div>
-                <h3>Servicio Premium</h3>
-                <p>Soluciones integrales diseñadas específicamente para tus necesidades con tecnología de vanguardia.</p>
+                <div class="service-icon">🏭</div>
+                <h3>Industria Alimentaria</h3>
+                <p>Sistemas de purificación y refrigeración para plantas procesadoras de alimentos a nivel nacional.</p>
                 <ul class="service-features">
-                    <li>Calidad garantizada</li>
-                    <li>Soporte técnico 24/7</li>
-                    <li>Instalación profesional</li>
+                    <li>Purificación de agua para procesos</li>
+                    <li>Cámaras frigoríficas de conservación</li>
+                    <li>Túneles de congelación IQF</li>
+                    <li>Certificación HACCP y FDA</li>
                 </ul>
             </div>
+
             <div class="service-card">
-                <div class="service-icon">🏆</div>
-                <h3>Experiencia Comprobada</h3>
-                <p>Más de 20 años sirviendo a la industria con proyectos exitosos en todo México.</p>
+                <div class="service-icon">💊</div>
+                <h3>Sector Farmacéutico</h3>
+                <p>Instalaciones de agua purificada USP y sistemas de climatización validados para áreas limpias.</p>
                 <ul class="service-features">
-                    <li>+500 proyectos completados</li>
-                    <li>Certificaciones internacionales</li>
-                    <li>Clientes satisfechos</li>
+                    <li>Agua purificada USP grado inyectable</li>
+                    <li>Sistema HVAC clase 100,000</li>
+                    <li>Documentación de validación IQ/OQ/PQ</li>
+                    <li>Cumplimiento COFEPRIS</li>
                 </ul>
             </div>
+
             <div class="service-card">
-                <div class="service-icon">💡</div>
-                <h3>Innovación Constante</h3>
-                <p>Utilizamos las últimas tecnologías y mejores prácticas de la industria global.</p>
+                <div class="service-icon">🏨</div>
+                <h3>Hotelería y Turismo</h3>
+                <p>Soluciones integrales de climatización, refrigeración y tratamiento de agua para complejos turísticos.</p>
                 <ul class="service-features">
-                    <li>Tecnología de punta</li>
-                    <li>Actualización continua</li>
-                    <li>Eficiencia energética</li>
+                    <li>Chillers de alta eficiencia</li>
+                    <li>Plantas de tratamiento de agua</li>
+                    <li>Automatización BMS</li>
+                    <li>Reducción de costos operativos 35%</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔬</div>
+                <h3>Laboratorios Clínicos</h3>
+                <p>Sistemas de agua tipo 1, 2 y 3 para equipamiento de análisis de alta precisión.</p>
+                <ul class="service-features">
+                    <li>Agua ultrapura resistividad 18.2 MΩ·cm</li>
+                    <li>Libre de RNasa y DNasa</li>
+                    <li>Monitoreo TOC en línea</li>
+                    <li>Trazabilidad completa</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Manufactura Industrial</h3>
+                <p>Tableros de control, subestaciones eléctricas y sistemas de automatización para plantas de producción.</p>
+                <ul class="service-features">
+                    <li>Centros de control de motores CCM</li>
+                    <li>Sistemas SCADA y PLC</li>
+                    <li>Subestaciones de media tensión</li>
+                    <li>Estudios de calidad de energía</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🥤</div>
+                <h3>Industria de Bebidas</h3>
+                <p>Tratamiento de agua para embotellado, refrigeración de proceso y sistemas CIP automatizados.</p>
+                <ul class="service-features">
+                    <li>Osmosis inversa para embotellado</li>
+                    <li>Sistemas CIP automatizados</li>
+                    <li>Enfriadores de proceso</li>
+                    <li>Cumplimiento NOM-201-SSA1</li>
                 </ul>
             </div>
         </section>
-    
     </div>
 
     <footer>
-        <p>© 2026 AquaPure. Agua pura para una vida saludable. Todos los derechos reservados.</p>
+        <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
     </footer>
 
     <script>
-
         const canvas = document.getElementById('waterCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         
@@ -435,8 +477,6 @@
             requestAnimationFrame(render);
         }
         render();
-
-
     </script>
 </body>
 </html>
