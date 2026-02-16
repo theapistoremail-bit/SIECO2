@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - AquaPure</title>
+    <title>Contacto - SIECO | Sistemas y Soluciones Integrales</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
@@ -46,6 +45,18 @@
             pointer-events: none;
         }
 
+        .logo-top-left {
+            position: fixed;
+            top: 15px;
+            left: 25px;
+            z-index: 1001;
+        }
+        .logo-top-left img {
+            height: 65px;
+            width: auto;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+        }
+
         nav {
             position: fixed;
             top: 0;
@@ -61,20 +72,10 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 40px 0 110px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--water-deep), var(--water-blue), var(--water-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
         }
 
         .nav-links {
@@ -108,6 +109,8 @@
         .nav-links a:hover::after {
             width: 100%;
         }
+
+        .nav-links a.active { color: var(--water-blue); font-weight: 600; }
 
         .content {
             position: relative;
@@ -148,6 +151,155 @@
             line-height: 1.8;
         }
 
+        .contact-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 180, 216, 0.15);
+            border: 2px solid rgba(72, 202, 228, 0.2);
+            height: fit-content;
+        }
+
+        .contact-info h2 {
+            font-size: 2em;
+            color: var(--water-dark);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .info-item {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            font-size: 1.1em;
+            color: var(--water-dark);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .info-content p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .info-content a {
+            color: var(--water-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .info-content a:hover {
+            color: var(--water-deep);
+        }
+
+        .contact-form-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 180, 216, 0.15);
+            border: 2px solid rgba(72, 202, 228, 0.2);
+        }
+
+        .contact-form-container h2 {
+            font-size: 2em;
+            color: var(--water-dark);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--water-dark);
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid rgba(72, 202, 228, 0.3);
+            border-radius: 12px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 1em;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--water-blue);
+            box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 180, 216, 0.4);
+        }
+
         footer {
             padding: 40px;
             text-align: center;
@@ -161,95 +313,32 @@
         @media (max-width: 968px) {
             .page-header h1 { font-size: 2.5em; }
             .nav-links { display: none; }
+            .nav-container { padding: 0 20px; }
+            .logo-top-left img { height: 50px; }
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .contact-form-container {
+                padding: 35px;
+            }
         }
-
-
-        .services-grid {
-            max-width: 1400px;
-            margin: 60px auto;
-            padding: 0 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 180, 216, 0.15);
-            border: 2px solid rgba(72, 202, 228, 0.2);
-            transition: all 0.4s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 180, 216, 0.3);
-            border-color: var(--water-blue);
-        }
-
-        .service-icon {
-            width: 75px;
-            height: 75px;
-            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2em;
-            margin-bottom: 22px;
-            box-shadow: 0 8px 24px rgba(0, 180, 216, 0.3);
-        }
-
-        .service-card h3 {
-            font-size: 1.6em;
-            font-weight: 500;
-            color: var(--water-dark);
-            margin-bottom: 15px;
-            letter-spacing: -0.3px;
-        }
-
-        .service-card p {
-            color: #555;
-            line-height: 1.75;
-            font-weight: 300;
-            font-size: 1.05em;
-            margin-bottom: 18px;
-        }
-
-        .service-features {
-            list-style: none;
-            margin-top: 15px;
-        }
-
-        .service-features li {
-            padding: 6px 0;
-            font-size: 0.92em;
-            font-weight: 300;
-            color: #666;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .service-features li::before {
-            content: '✓';
-            color: var(--water-blue);
-            font-weight: 600;
-        }
-
     </style>
 </head>
 <body>
+    <div class="logo-top-left">
+        <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+    </div>
+
     <canvas id="waterCanvas"></canvas>
     <div class="water-overlay"></div>
 
     <nav>
         <div class="nav-container">
-            <div class="logo">AquaPure</div>
             <ul class="nav-links">
-
                 <li><a href="inicio.html">Inicio</a></li>
                 <li><a href="soluciones.html">Soluciones</a></li>
                 <li><a href="control-electrico.html">Control Eléctrico</a></li>
@@ -257,60 +346,112 @@
                 <li><a href="mantenimiento.html">Mantenimiento</a></li>
                 <li><a href="proyectos.html">Proyectos</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-
+                <li><a href="contacto.html" class="active">Contacto</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="content">
         <section class="page-header">
-            <h1>Contáctanos <strong>Hoy</strong></h1>
-            <p>Estamos listos para ayudarte</p>
+            <h1><strong>Contacto</strong></h1>
+            <p>Estamos listos para ayudarte con tu proyecto industrial</p>
         </section>
 
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Información de Contacto</h2>
+                
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <h3>Dirección</h3>
+                        <p>Av. Industrial #123<br>Parque Industrial Norte<br>Ciudad de México, 01234</p>
+                    </div>
+                </div>
 
-        <section class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">⚙️</div>
-                <h3>Servicio Premium</h3>
-                <p>Soluciones integrales diseñadas específicamente para tus necesidades con tecnología de vanguardia.</p>
-                <ul class="service-features">
-                    <li>Calidad garantizada</li>
-                    <li>Soporte técnico 24/7</li>
-                    <li>Instalación profesional</li>
-                </ul>
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <h3>Teléfono</h3>
+                        <p><a href="tel:+525512345678">+52 (55) 1234-5678</a><br>
+                        <a href="tel:+525587654321">+52 (55) 8765-4321</a></p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">✉️</div>
+                    <div class="info-content">
+                        <h3>Email</h3>
+                        <p><a href="mailto:ventas@sieco.com.mx">ventas@sieco.com.mx</a><br>
+                        <a href="mailto:contacto@sieco.com.mx">contacto@sieco.com.mx</a></p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">🕐</div>
+                    <div class="info-content">
+                        <h3>Horario de Atención</h3>
+                        <p>Lunes a Viernes: 8:00 AM - 6:00 PM<br>
+                        Sábados: 9:00 AM - 2:00 PM<br>
+                        Emergencias 24/7</p>
+                    </div>
+                </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon">🏆</div>
-                <h3>Experiencia Comprobada</h3>
-                <p>Más de 20 años sirviendo a la industria con proyectos exitosos en todo México.</p>
-                <ul class="service-features">
-                    <li>+500 proyectos completados</li>
-                    <li>Certificaciones internacionales</li>
-                    <li>Clientes satisfechos</li>
-                </ul>
+
+            <div class="contact-form-container">
+                <h2>Envíanos un Mensaje</h2>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo *</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Empresa</label>
+                            <input type="text" id="empresa" name="empresa">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono *</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="servicio">Servicio de Interés *</label>
+                        <select id="servicio" name="servicio" required>
+                            <option value="">Selecciona un servicio</option>
+                            <option value="purificacion">Sistemas de Purificación de Agua</option>
+                            <option value="control-electrico">Control Eléctrico y Automatización</option>
+                            <option value="refrigeracion">Refrigeración Industrial</option>
+                            <option value="mantenimiento">Mantenimiento Industrial</option>
+                            <option value="proyecto">Proyecto Integral</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje *</label>
+                        <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                </form>
             </div>
-            <div class="service-card">
-                <div class="service-icon">💡</div>
-                <h3>Innovación Constante</h3>
-                <p>Utilizamos las últimas tecnologías y mejores prácticas de la industria global.</p>
-                <ul class="service-features">
-                    <li>Tecnología de punta</li>
-                    <li>Actualización continua</li>
-                    <li>Eficiencia energética</li>
-                </ul>
-            </div>
-        </section>
-    
+        </div>
     </div>
 
     <footer>
-        <p>© 2026 AquaPure. Agua pura para una vida saludable. Todos los derechos reservados.</p>
+        <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
     </footer>
 
     <script>
-
         const canvas = document.getElementById('waterCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         
@@ -436,7 +577,12 @@
         }
         render();
 
-
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+            this.reset();
+        });
     </script>
 </body>
 </html>
