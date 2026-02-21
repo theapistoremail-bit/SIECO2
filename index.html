@@ -40,59 +40,109 @@
             z-index: 1;
             pointer-events: none;
         }
-        
-        /* LOGO */
-     /* LOGO GRANDE */
-.logo-strip img{
-  max-width:100px; /* aquí controlas el tamaño */
-  width:30%;
-  height:auto;
-}
+
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(20px);
             box-shadow: 0 4px 30px rgba(0, 180, 216, 0.1);
             z-index: 1000;
-            padding: 20px 0;
             border-bottom: 2px solid rgba(0, 180, 216, 0.2);
         }
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 40px 0 110px;
+            padding: 0 40px;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
+            height: 72px;
+        }
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+            display: block;
         }
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 28px;
             list-style: none;
+            align-items: center;
         }
         .nav-links a {
             text-decoration: none;
             color: #001219;
-            font-weight: 400;
-            font-size: 0.85em;
+            font-weight: 500;
+            font-size: 0.82em;
             transition: all 0.3s;
             position: relative;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
         }
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -4px;
             left: 0;
             width: 0;
             height: 2px;
             background: var(--water-blue);
             transition: width 0.3s;
         }
+        .nav-links a:hover { color: var(--water-deep); }
         .nav-links a:hover::after { width: 100%; }
+
+        /* Hamburguesa */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #001219;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Menú móvil desplegable */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            padding: 20px 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,180,216,0.15);
+            border-bottom: 2px solid rgba(0,180,216,0.2);
+        }
+        .mobile-menu.open { display: flex; flex-direction: column; gap: 0; }
+        .mobile-menu a {
+            text-decoration: none;
+            color: #001219;
+            font-weight: 500;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0,180,216,0.1);
+            transition: color 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--water-blue); }
 
         .content { 
             position: relative; 
@@ -393,9 +443,9 @@
             .hero h1 { font-size: 2.5em; letter-spacing: -1px; } 
             .hero p { font-size: 1.1em; }
             .nav-links { display: none; }
+            .hamburger { display: flex; }
             .nav-container { padding: 0 20px; }
-            .logo-top-left { left: 15px; }
-            .logo-top-left img { height: 50px; }
+            .nav-logo img { height: 38px; }
             .water-feature { 
                 grid-template-columns: 1fr; 
                 gap: 40px;
@@ -421,15 +471,17 @@
     </style>
 </head>
 <body>
-    <div class="logo-top-left">
-        <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
-    </div>
-    
     <canvas id="waterCanvas"></canvas>
     <div class="water-overlay"></div>
 
     <nav>
         <div class="nav-container">
+            <!-- Logo a la izquierda dentro del nav -->
+            <a href="index.html" class="nav-logo">
+                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+            </a>
+
+            <!-- Links a la derecha (desktop) -->
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="soluciones.html">Soluciones</a></li>
@@ -440,8 +492,25 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
+
+            <!-- Hamburguesa (móvil) -->
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Menú móvil desplegable -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Inicio</a>
+        <a href="soluciones.html">Soluciones</a>
+        <a href="control-electrico.html">Control Eléctrico</a>
+        <a href="refrigeracion.html">Refrigeración</a>
+        <a href="mantenimiento.html">Mantenimiento</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="blog.html">Blog</a>
+        <a href="contacto.html">Contacto</a>
+    </div>
 
     <div class="content">
         <section class="hero">
@@ -608,6 +677,21 @@
             }
             render();
         }
+
+        // Hamburguesa móvil
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+        // Cerrar menú al hacer click en un link
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
 
         // Slider de imágenes
         const slides = document.querySelectorAll(".slide");
