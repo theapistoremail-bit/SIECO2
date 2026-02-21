@@ -23,318 +23,203 @@
             overflow-x: hidden;
         }
         #waterCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; z-index: 0;
         }
         .water-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 18, 25, 0.3) 100%);
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .logo-top-left {
-            position: fixed;
-            top: 15px;
-            left: 25px;
-            z-index: 1001;
-        }
-        .logo-top-left img {
-            height: 65px;
-            width: auto;
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
+            z-index: 1; pointer-events: none;
         }
 
+        /* NAV */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255,255,255,0.97);
             backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0, 180, 216, 0.1);
+            box-shadow: 0 4px 30px rgba(0,180,216,0.1);
             z-index: 1000;
-            padding: 20px 0;
-            border-bottom: 2px solid rgba(0, 180, 216, 0.2);
+            border-bottom: 2px solid rgba(0,180,216,0.2);
         }
         .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px 0 110px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
+            max-width: 1400px; margin: 0 auto;
+            padding: 0 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 90px;
         }
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
+        .nav-logo img { height: 80px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
         .nav-links a {
-            text-decoration: none;
-            color: #001219;
-            font-weight: 400;
-            font-size: 0.85em;
-            transition: all 0.3s;
-            position: relative;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            text-decoration: none; color: #001219;
+            font-weight: 500; font-size: 0.82em;
+            transition: all 0.3s; position: relative;
+            letter-spacing: 0.6px; text-transform: uppercase;
         }
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--water-blue);
-            transition: width 0.3s;
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--water-blue); transition: width 0.3s;
         }
+        .nav-links a:hover { color: var(--water-deep); }
         .nav-links a:hover::after { width: 100%; }
         .nav-links a.active { color: var(--water-blue); font-weight: 600; }
+        .nav-links a.active::after { width: 100%; }
 
-        .content { 
-            position: relative; 
-            z-index: 10; 
-            padding-top: 100px; 
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; padding: 5px; background: none; border: none;
         }
+        .hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: #001219; border-radius: 2px; transition: all 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none; position: fixed; top: 90px; left: 0; width: 100%;
+            background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+            z-index: 999; padding: 20px 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,180,216,0.15);
+            border-bottom: 2px solid rgba(0,180,216,0.2);
+        }
+        .mobile-menu.open { display: flex; flex-direction: column; }
+        .mobile-menu a {
+            text-decoration: none; color: #001219; font-weight: 500;
+            font-size: 1em; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--water-blue); }
+
+        .content { position: relative; z-index: 10; padding-top: 100px; }
 
         .page-header { 
-            max-width: 1400px; 
-            margin: 0 auto; 
-            padding: 80px 40px 60px; 
-            text-align: center; 
+            max-width: 1400px; margin: 0 auto;
+            padding: 80px 40px 60px; text-align: center;
         }
         .page-header h1 { 
-            font-size: 4em; 
-            font-weight: 300; 
-            color: white; 
-            margin-bottom: 20px; 
-            letter-spacing: -1px; 
-            text-shadow: 0 4px 30px rgba(0, 180, 216, 0.5); 
+            font-size: 4em; font-weight: 300; color: white;
+            margin-bottom: 20px; letter-spacing: -1px;
+            text-shadow: 0 4px 30px rgba(0,180,216,0.5);
         }
         .page-header h1 strong { 
-            font-weight: 600; 
-            background: linear-gradient(135deg, var(--water-light), var(--foam)); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            background-clip: text; 
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--water-light), var(--foam));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
         .page-header p { 
-            font-size: 1.15em; 
-            font-weight: 300; 
-            color: rgba(255, 255, 255, 0.9); 
-            max-width: 750px; 
-            margin: 0 auto; 
-            line-height: 1.8; 
+            font-size: 1.15em; font-weight: 300;
+            color: rgba(255,255,255,0.9); max-width: 750px;
+            margin: 0 auto; line-height: 1.8;
         }
 
-        .section {
-            max-width: 1400px;
-            margin: 60px auto;
-            padding: 0 40px;
-        }
+        .section { max-width: 1400px; margin: 60px auto; padding: 0 40px; }
 
         .intro-box {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 50px;
-            box-shadow: 0 10px 40px rgba(0, 180, 216, 0.15);
-            border: 2px solid rgba(72, 202, 228, 0.2);
-            margin-bottom: 60px;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+            border-radius: 24px; padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,180,216,0.15);
+            border: 2px solid rgba(72,202,228,0.2); margin-bottom: 60px;
         }
-        .intro-box h2 {
-            font-size: 2.2em;
-            color: var(--water-dark);
-            margin-bottom: 20px;
-        }
-        .intro-box p {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
+        .intro-box h2 { font-size: 2.2em; color: var(--water-dark); margin-bottom: 20px; }
+        .intro-box p { font-size: 1.1em; line-height: 1.8; color: #2c3e50; margin-bottom: 15px; }
 
-        .process-section {
-            margin: 80px 0;
-        }
+        .process-section { margin: 80px 0; }
         .process-title {
-            text-align: center;
-            font-size: 3em;
-            color: white;
-            margin-bottom: 50px;
-            text-shadow: 0 2px 20px rgba(0, 180, 216, 0.5);
+            text-align: center; font-size: 3em; color: white;
+            margin-bottom: 50px; text-shadow: 0 2px 20px rgba(0,180,216,0.5);
         }
 
         .stage-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 180, 216, 0.15);
-            border-left: 6px solid var(--water-blue);
-            transition: all 0.3s;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+            border-radius: 24px; padding: 40px; margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,180,216,0.15);
+            border-left: 6px solid var(--water-blue); transition: all 0.3s;
         }
-        .stage-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 15px 50px rgba(0, 180, 216, 0.25);
-        }
+        .stage-card:hover { transform: translateX(10px); box-shadow: 0 15px 50px rgba(0,180,216,0.25); }
         .stage-number {
-            display: inline-block;
-            width: 60px;
-            height: 60px;
+            display: inline-block; width: 60px; height: 60px;
             background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 60px;
-            font-size: 1.8em;
-            font-weight: 700;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.4);
+            color: white; border-radius: 50%; text-align: center;
+            line-height: 60px; font-size: 1.8em; font-weight: 700;
+            margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,180,216,0.4);
         }
-        .stage-card h3 {
-            font-size: 1.8em;
-            color: var(--water-dark);
-            margin-bottom: 15px;
-        }
-        .stage-card ul {
-            list-style: none;
-            padding-left: 0;
-        }
+        .stage-card h3 { font-size: 1.8em; color: var(--water-dark); margin-bottom: 15px; }
+        .stage-card ul { list-style: none; padding-left: 0; }
         .stage-card ul li {
-            padding: 8px 0;
-            padding-left: 30px;
-            position: relative;
-            color: #2c3e50;
-            line-height: 1.6;
+            padding: 8px 0 8px 30px; position: relative;
+            color: #2c3e50; line-height: 1.6;
         }
-        .stage-card ul li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--water-blue);
-            font-weight: bold;
-        }
+        .stage-card ul li::before { content: "✓"; position: absolute; left: 0; color: var(--water-blue); font-weight: bold; }
 
         .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; margin: 60px 0;
         }
         .benefit-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 35px;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.15);
-            border: 2px solid rgba(72, 202, 228, 0.2);
-            transition: all 0.3s;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+            border-radius: 20px; padding: 35px; text-align: center;
+            box-shadow: 0 8px 30px rgba(0,180,216,0.15);
+            border: 2px solid rgba(72,202,228,0.2); transition: all 0.3s;
         }
-        .benefit-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 45px rgba(0, 180, 216, 0.3);
-        }
-        .benefit-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-        .benefit-card h4 {
-            font-size: 1.4em;
-            color: var(--water-dark);
-            margin-bottom: 15px;
-        }
-        .benefit-card p {
-            color: #2c3e50;
-            line-height: 1.6;
-        }
+        .benefit-card:hover { transform: translateY(-10px); box-shadow: 0 15px 45px rgba(0,180,216,0.3); }
+        .benefit-icon { font-size: 3em; margin-bottom: 20px; }
+        .benefit-card h4 { font-size: 1.4em; color: var(--water-dark); margin-bottom: 15px; }
+        .benefit-card p { color: #2c3e50; line-height: 1.6; }
 
         .cta-section {
-            max-width: 1400px;
-            margin: 80px auto;
-            padding: 80px 40px;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(0, 180, 216, 0.15), rgba(72, 202, 228, 0.15));
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            border: 2px solid rgba(72, 202, 228, 0.3);
+            max-width: 1400px; margin: 80px auto; padding: 80px 40px; text-align: center;
+            background: linear-gradient(135deg, rgba(0,180,216,0.15), rgba(72,202,228,0.15));
+            backdrop-filter: blur(20px); border-radius: 30px;
+            border: 2px solid rgba(72,202,228,0.3);
         }
         .cta-section h2 {
-            font-size: 3em;
-            color: white;
-            margin-bottom: 20px;
-            font-weight: 600;
-            text-shadow: 0 2px 20px rgba(0, 180, 216, 0.5);
+            font-size: 3em; color: white; margin-bottom: 20px;
+            font-weight: 600; text-shadow: 0 2px 20px rgba(0,180,216,0.5);
         }
         .cta-section p {
-            font-size: 1.25em;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 700px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
+            font-size: 1.25em; color: rgba(255,255,255,0.9);
+            max-width: 700px; margin: 0 auto 40px; line-height: 1.7;
         }
         .cta-button {
-            display: inline-block;
-            padding: 18px 45px;
-            background: white;
-            color: var(--water-deep);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1em;
-            transition: all 0.3s;
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+            display: inline-block; padding: 18px 45px; background: white;
+            color: var(--water-deep); text-decoration: none; border-radius: 50px;
+            font-weight: 600; font-size: 1.1em; transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(255,255,255,0.3);
         }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.5);
-            background: var(--foam);
-        }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,255,255,0.5); background: var(--foam); }
 
         footer { 
-            padding: 40px; 
-            text-align: center; 
-            color: rgba(255, 255, 255, 0.7); 
-            background: rgba(0, 18, 25, 0.8); 
-            backdrop-filter: blur(10px); 
-            margin-top: 100px; 
-            font-weight: 300; 
+            padding: 40px; text-align: center; color: rgba(255,255,255,0.7);
+            background: rgba(0,18,25,0.8); backdrop-filter: blur(10px);
+            margin-top: 100px; font-weight: 300;
         }
 
         @media (max-width: 968px) {
             .page-header h1 { font-size: 2.5em; }
             .nav-links { display: none; }
+            .hamburger { display: flex; }
             .nav-container { padding: 0 20px; }
-            .logo-top-left img { height: 50px; }
+            .nav-logo img { height: 50px; }
             .intro-box { padding: 30px; }
             .stage-card { padding: 30px; }
             .benefits-grid { grid-template-columns: 1fr; }
+            .section { padding: 0 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="logo-top-left">
-        <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
-    </div>
-    
     <canvas id="waterCanvas"></canvas>
     <div class="water-overlay"></div>
 
     <nav>
         <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+            </a>
             <ul class="nav-links">
-                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="index.html">Inicio</a></li>
                 <li><a href="soluciones.html" class="active">Soluciones</a></li>
                 <li><a href="control-electrico.html">Control Eléctrico</a></li>
                 <li><a href="refrigeracion.html">Refrigeración</a></li>
@@ -343,8 +228,22 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Inicio</a>
+        <a href="soluciones.html">Soluciones</a>
+        <a href="control-electrico.html">Control Eléctrico</a>
+        <a href="refrigeracion.html">Refrigeración</a>
+        <a href="mantenimiento.html">Mantenimiento</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="blog.html">Blog</a>
+        <a href="contacto.html">Contacto</a>
+    </div>
 
     <div class="content">
         <section class="page-header">
@@ -500,20 +399,15 @@
     <script>
         const canvas = document.getElementById('waterCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-        
         function resizeCanvas() { 
-            canvas.width = window.innerWidth; 
-            canvas.height = window.innerHeight; 
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight; 
             if(gl) gl.viewport(0, 0, canvas.width, canvas.height); 
         }
-        resizeCanvas(); 
-        window.addEventListener('resize', resizeCanvas);
-
+        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
         if(gl) {
             const vs = gl.createShader(gl.VERTEX_SHADER);
             gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }'); 
             gl.compileShader(vs);
-            
             const fs = gl.createShader(gl.FRAGMENT_SHADER);
             gl.shaderSource(fs, `precision highp float;
                 uniform float time; uniform vec2 resolution;
@@ -522,36 +416,38 @@
                 float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<6;i++){v+=a*smoothNoise(p);p*=2.0;a*=0.5;}return v;}
                 void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
             gl.compileShader(fs);
-            
             const prog = gl.createProgram();
-            gl.attachShader(prog, vs); 
-            gl.attachShader(prog, fs); 
-            gl.linkProgram(prog); 
-            gl.useProgram(prog);
-            
+            gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
             const buffer = gl.createBuffer(); 
             gl.bindBuffer(gl.ARRAY_BUFFER, buffer); 
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
-            
             const posLoc = gl.getAttribLocation(prog, 'position'); 
-            gl.enableVertexAttribArray(posLoc); 
-            gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
-            
+            gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
             const timeLoc = gl.getUniformLocation(prog, 'time'); 
             const resLoc = gl.getUniformLocation(prog, 'resolution');
-            
             let start = Date.now();
             function render() {
                 const t = (Date.now() - start) * 0.001; 
-                gl.uniform1f(timeLoc, t); 
-                gl.uniform2f(resLoc, canvas.width, canvas.height); 
-                gl.clearColor(0.0, 0.37, 0.45, 1.0); 
-                gl.clear(gl.COLOR_BUFFER_BIT); 
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); 
-                requestAnimationFrame(render);
+                gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height); 
+                gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT); 
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(render);
             }
             render();
         }
+
+        // Hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
     </script>
 </body>
 </html>
