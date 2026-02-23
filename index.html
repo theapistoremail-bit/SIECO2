@@ -408,12 +408,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            font-size: 12px;
-            font-weight: 700;
-            color: #0369a1;
-            line-height: 1.3;
-            padding: 10px 6px;
-            cursor: default;
+            padding: 8px 6px 6px;
+            cursor: pointer;
             animation: orbit 52s linear infinite;
             box-shadow:
                 0 6px 24px rgba(14,165,233,0.18),
@@ -421,19 +417,39 @@
             backdrop-filter: blur(8px);
             z-index: 5;
             transition: box-shadow 0.3s, background 0.3s, border-color 0.3s;
+            overflow: hidden;
+            text-decoration: none;
         }
 
         .circle-item:hover {
-            background: rgba(232,248,255,0.98);
+            background: rgba(224,245,255,0.98);
             border-color: #0ea5e9;
-            box-shadow: 0 10px 36px rgba(14,165,233,0.4), inset 0 1px 4px rgba(255,255,255,1);
+            box-shadow: 0 10px 36px rgba(14,165,233,0.45), inset 0 1px 4px rgba(255,255,255,1);
         }
 
-        .item-icon {
-            font-size: 26px;
-            margin-bottom: 5px;
+        .item-img {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            object-fit: cover;
             display: block;
-            line-height: 1;
+            flex-shrink: 0;
+            border: 2px solid rgba(14,165,233,0.2);
+            margin-bottom: 5px;
+        }
+
+        .item-label {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: #0369a1;
+            line-height: 1.2;
+            text-decoration: none;
+            display: block;
+        }
+
+        .circle-item:hover .item-label {
+            text-decoration: underline;
+            color: #0284c7;
         }
 
         .item1 { animation-delay:    0s; }
@@ -507,8 +523,9 @@
             .circle-center img { width: 90px; height: 90px; }
             .circle-center .center-label { font-size: 11px; }
             .circle-center .center-fallback svg { width: 44px; height: 44px; }
-            .circle-item { width: 100px; height: 100px; margin: -50px; font-size: 10.5px; }
-            .item-icon { font-size: 21px; }
+            .circle-item { width: 100px; height: 100px; margin: -50px; padding: 6px 4px 4px; }
+            .item-img { width: 52px; height: 52px; margin-bottom: 4px; }
+            .item-label { font-size: 8.5px; }
 
             @keyframes orbit {
                 from { transform: rotate(0deg) translateX(169px) rotate(0deg); }
@@ -524,7 +541,7 @@
     <nav>
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+                <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png" alt="SIECO Logo">
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
@@ -578,7 +595,7 @@
                     <div class="orbit-inner-ring"></div>
                     <div class="circle-center">
                         <img
-                            src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true"
+                            src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png"
                             alt="SIECO"
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                         >
@@ -589,14 +606,38 @@
                             <span class="center-label">SIECO</span>
                         </div>
                     </div>
-                    <div class="circle-item item1"><span class="item-icon">🚰</span>Agua Residual</div>
-                    <div class="circle-item item2"><span class="item-icon">🔬</span>Ósmosis</div>
-                    <div class="circle-item item3"><span class="item-icon">✨</span>Desinfección</div>
-                    <div class="circle-item item4"><span class="item-icon">🌊</span>Filtración</div>
-                    <div class="circle-item item5"><span class="item-icon">🏢</span>Comercial</div>
-                    <div class="circle-item item6"><span class="item-icon">⚗️</span>Resinas</div>
-                    <div class="circle-item item7"><span class="item-icon">💧</span>Ultrafiltración</div>
-                    <div class="circle-item item8"><span class="item-icon">💨</span>Aire</div>
+                    <a class="circle-item item1" href="soluciones.html#agua-residual">
+                        <img class="item-img" src="https://images.unsplash.com/photo-1504707748692-419802cf939d?w=200&h=200&fit=crop" alt="Agua Residual">
+                        <span class="item-label">Agua Residual</span>
+                    </a>
+                    <a class="circle-item item2" href="soluciones.html#osmosis">
+                        <img class="item-img" src="https://images.unsplash.com/photo-1559825481-12a05cc00344?w=200&h=200&fit=crop" alt="Ósmosis">
+                        <span class="item-label">Ósmosis</span>
+                    </a>
+                    <a class="circle-item item3" href="soluciones.html#desinfeccion">
+                        <img class="item-img" src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=200&h=200&fit=crop" alt="Desinfección">
+                        <span class="item-label">Desinfección</span>
+                    </a>
+                    <a class="circle-item item4" href="soluciones.html#filtracion">
+                        <img class="item-img" src="https://images.unsplash.com/photo-1534996858221-380b92700493?w=200&h=200&fit=crop" alt="Filtración">
+                        <span class="item-label">Filtración</span>
+                    </a>
+                    <a class="circle-item item5" href="soluciones.html#comercial">
+                        <img class="item-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&h=200&fit=crop" alt="Comercial">
+                        <span class="item-label">Comercial</span>
+                    </a>
+                    <a class="circle-item item6" href="soluciones.html#resinas">
+                        <img class="item-img" src="https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=200&h=200&fit=crop" alt="Resinas">
+                        <span class="item-label">Resinas</span>
+                    </a>
+                    <a class="circle-item item7" href="soluciones.html#ultrafiltracion">
+                        <img class="item-img" src="https://images.unsplash.com/photo-1581093806997-124204d9fa9d?w=200&h=200&fit=crop" alt="Ultrafiltración">
+                        <span class="item-label">Ultrafiltración</span>
+                    </a>
+                    <a class="circle-item item8" href="soluciones.html#aire">
+                        <img class="item-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=200&fit=crop" alt="Aire">
+                        <span class="item-label">Aire</span>
+                    </a>
                 </div>
             </div>
         </section>
