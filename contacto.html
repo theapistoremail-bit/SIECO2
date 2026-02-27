@@ -131,9 +131,7 @@
             text-transform: uppercase; letter-spacing: 0.5px;
         }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,180,216,0.4); }
-        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
-        /* Success / error messages */
         .form-message {
             display: none; padding: 16px 20px; border-radius: 12px;
             margin-bottom: 20px; font-weight: 500; font-size: 0.95em;
@@ -205,7 +203,6 @@
 
         <div class="contact-container">
 
-            <!-- ===== INFORMACIÓN DE CONTACTO (ARREGLADA) ===== -->
             <div class="contact-info">
                 <h2>Información de Contacto</h2>
 
@@ -228,7 +225,6 @@
                     </div>
                 </div>
 
-                <!-- FIX: etiquetas cerradas correctamente, los 3 correos ahora se muestran -->
                 <div class="info-item">
                     <div class="info-icon">✉️</div>
                     <div class="info-content">
@@ -253,45 +249,38 @@
                     </div>
                 </div>
             </div>
-            <!-- ===== FIN INFORMACIÓN ===== -->
 
-            <!-- ===== FORMULARIO (envía a serviciocliente@siecomexico.com vía Formspree) ===== -->
             <div class="contact-form-container">
                 <h2>Envíanos un Mensaje</h2>
 
                 <div class="form-message" id="formMessage"></div>
 
-                <!--
-                    INSTRUCCIONES PARA ACTIVAR EL ENVÍO DE CORREOS:
-                    1. Ve a https://formspree.io y crea una cuenta gratuita.
-                    2. Crea un nuevo formulario y pon como dirección de destino: serviciocliente@siecomexico.com
-                    3. Formspree te dará un endpoint con este formato: https://formspree.io/f/XXXXXXXX
-                    4. Reemplaza "TU_ENDPOINT_DE_FORMSPREE" abajo por ese código (solo el ID, ej: xpwzgkqb).
-                -->
+                <!-- ✅ El formulario envía directamente a serviciocliente@siecomexico.com -->
                 <form id="contactForm">
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nombre">Nombre Completo *</label>
-                            <input type="text" id="nombre" name="nombre" required>
+                            <input type="text" id="nombre" name="Nombre" required>
                         </div>
                         <div class="form-group">
                             <label for="empresa">Empresa</label>
-                            <input type="text" id="empresa" name="empresa">
+                            <input type="text" id="empresa" name="Empresa">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="Email" required>
                         </div>
                         <div class="form-group">
                             <label for="telefono">Teléfono *</label>
-                            <input type="tel" id="telefono" name="telefono" required>
+                            <input type="tel" id="telefono" name="Telefono" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="servicio">Servicio de Interés *</label>
-                        <select id="servicio" name="servicio" required>
+                        <select id="servicio" name="Servicio" required>
                             <option value="">Selecciona un servicio</option>
                             <option value="purificacion">Sistemas de Purificación de Agua</option>
                             <option value="control-electrico">Control Eléctrico y Automatización</option>
@@ -303,12 +292,11 @@
                     </div>
                     <div class="form-group">
                         <label for="mensaje">Mensaje *</label>
-                        <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
+                        <textarea id="mensaje" name="Mensaje" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
                     </div>
                     <button type="submit" class="submit-btn" id="submitBtn">Enviar Mensaje</button>
                 </form>
             </div>
-            <!-- ===== FIN FORMULARIO ===== -->
 
         </div>
     </div>
@@ -356,6 +344,40 @@
             })();
         }
 
+        /* ── Formulario: envía a serviciocliente@siecomexico.com ── */
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const msg = document.getElementById('formMessage');
+            btn.disabled = true;
+            btn.textContent = 'Enviando…';
+            msg.className = 'form-message';
+            msg.textContent = '';
+            const data = new FormData(this);
+            data.append('_replyto', data.get('email'));
+            data.append('_subject', 'Nuevo contacto SIECO - ' + data.get('nombre'));
+            try {
+                const res = await fetch('https://formsubmit.co/ajax/serviciocliente@siecomexico.com', {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+                const json = await res.json();
+                if (json.success === 'true' || res.ok) {
+                    msg.className = 'form-message success';
+                    msg.textContent = '✅ ¡Mensaje enviado! Nos pondremos en contacto contigo pronto.';
+                    this.reset();
+                } else { throw new Error(); }
+            } catch {
+                msg.className = 'form-message error';
+                msg.textContent = '❌ Hubo un problema. Escríbenos directamente a serviciocliente@siecomexico.com';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Enviar Mensaje';
+                msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+
         /* ── Mobile menu ── */
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -368,45 +390,6 @@
                 hamburger.classList.remove('open');
                 mobileMenu.classList.remove('open');
             });
-        });
-
-        /* ── Formulario → Formspree ── */
-        const FORMSPREE_ID = 'TU_ENDPOINT_DE_FORMSPREE'; // ← reemplaza esto con tu ID de Formspree
-
-        document.getElementById('contactForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const btn = document.getElementById('submitBtn');
-            const msg = document.getElementById('formMessage');
-            btn.disabled = true;
-            btn.textContent = 'Enviando…';
-            msg.className = 'form-message';
-            msg.textContent = '';
-
-            const formData = new FormData(this);
-
-            try {
-                const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (res.ok) {
-                    msg.className = 'form-message success';
-                    msg.textContent = '✅ ¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
-                    this.reset();
-                } else {
-                    throw new Error('Error en el servidor');
-                }
-            } catch (err) {
-                msg.className = 'form-message error';
-                msg.textContent = '❌ Hubo un problema al enviar el mensaje. Por favor intenta de nuevo o escríbenos directamente a serviciocliente@siecomexico.com';
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Enviar Mensaje';
-                msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
         });
     </script>
 </body>
