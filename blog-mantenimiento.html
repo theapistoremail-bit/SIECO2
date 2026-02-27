@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento Predictivo: Evita Paros No Programados — Blog SIECO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --water-blue: #00b4d8;
+            --water-light: #48cae4;
+            --water-deep: #0077b6;
+            --water-dark: #03045e;
+            --foam: #caf0f8;
+        }
+        body { font-family: 'IBM Plex Sans', sans-serif; background: #001219; color: #333; overflow-x: hidden; }
+        #waterCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .water-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
+            z-index: 1; pointer-events: none;
+        }
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,180,216,0.1);
+            z-index: 1000; border-bottom: 2px solid rgba(0,180,216,0.2);
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto; padding: 0 40px;
+            display: flex; justify-content: space-between; align-items: center; height: 90px;
+        }
+        .nav-logo img { height: 80px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: #001219; font-weight: 500; font-size: 0.82em;
+            transition: all 0.3s; position: relative; letter-spacing: 0.6px; text-transform: uppercase;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--water-blue); transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--water-deep); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--water-blue); font-weight: 600; }
+        .nav-links a.active::after { width: 100%; }
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; padding: 5px; background: none; border: none;
+        }
+        .hamburger span { display: block; width: 24px; height: 2px; background: #001219; border-radius: 2px; transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .mobile-menu {
+            display: none; position: fixed; top: 90px; left: 0; width: 100%;
+            background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+            z-index: 999; padding: 20px 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,180,216,0.15);
+            border-bottom: 2px solid rgba(0,180,216,0.2);
+        }
+        .mobile-menu.open { display: flex; flex-direction: column; }
+        .mobile-menu a {
+            text-decoration: none; color: #001219; font-weight: 500; font-size: 1em;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--water-blue); }
+        .content { position: relative; z-index: 10; padding-top: 100px; }
+
+        /* ARTICLE LAYOUT */
+        .article-hero {
+            max-width: 1400px; margin: 0 auto; padding: 60px 40px 0;
+        }
+        .breadcrumb {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.82em; color: rgba(255,255,255,0.5);
+            margin-bottom: 40px; flex-wrap: wrap;
+        }
+        .breadcrumb a { color: var(--water-light); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: white; }
+        .breadcrumb span { color: rgba(255,255,255,0.3); }
+
+        .article-header { margin-bottom: 48px; }
+        .article-category {
+            display: inline-block; padding: 7px 20px;
+            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
+            color: white; border-radius: 20px; font-size: 0.78em; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 22px;
+        }
+        .article-header h1 {
+            font-size: 3.2em; font-weight: 300; color: white; line-height: 1.2;
+            letter-spacing: -1px; margin-bottom: 20px;
+            text-shadow: 0 4px 40px rgba(0,180,216,0.4);
+        }
+        .article-header h1 strong { font-weight: 700; }
+        .article-meta {
+            display: flex; align-items: center; gap: 28px;
+            color: rgba(255,255,255,0.55); font-size: 0.88em; flex-wrap: wrap;
+        }
+        .article-meta span { display: flex; align-items: center; gap: 7px; }
+
+        .article-cover {
+            width: 100%; height: 520px; object-fit: cover;
+            border-radius: 20px; margin-bottom: 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        /* TWO-COLUMN LAYOUT */
+        .article-body {
+            max-width: 1400px; margin: 0 auto; padding: 0 40px 80px;
+            display: grid; grid-template-columns: 1fr 340px; gap: 60px;
+            align-items: start;
+        }
+
+        /* ARTICLE CONTENT */
+        .article-content {
+            background: rgba(255,255,255,0.97);
+            border-radius: 0 0 24px 24px;
+            padding: 56px 60px;
+        }
+        .article-content h2 {
+            font-size: 1.75em; font-weight: 600; color: var(--water-dark);
+            margin: 48px 0 18px; line-height: 1.3;
+        }
+        .article-content h2:first-child { margin-top: 0; }
+        .article-content h3 {
+            font-size: 1.25em; font-weight: 600; color: var(--water-deep);
+            margin: 32px 0 14px;
+        }
+        .article-content p {
+            color: #444; line-height: 1.95; font-weight: 300; font-size: 1.05em;
+            margin-bottom: 22px;
+        }
+        .article-content ul, .article-content ol {
+            color: #444; line-height: 1.9; font-weight: 300; font-size: 1.05em;
+            margin: 16px 0 22px; padding-left: 28px;
+        }
+        .article-content li { margin-bottom: 10px; }
+        .article-content strong { color: var(--water-dark); font-weight: 600; }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0,180,216,0.08), rgba(0,119,182,0.06));
+            border-left: 4px solid var(--water-blue);
+            border-radius: 0 14px 14px 0;
+            padding: 24px 28px; margin: 32px 0;
+        }
+        .highlight-box p { margin: 0; color: #333; font-size: 1.05em; line-height: 1.85; }
+        .highlight-box strong { color: var(--water-deep); }
+
+        .data-table {
+            width: 100%; border-collapse: collapse; margin: 28px 0;
+            font-size: 0.95em;
+        }
+        .data-table th {
+            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
+            color: white; padding: 14px 18px; text-align: left;
+            font-weight: 600; font-size: 0.9em; letter-spacing: 0.3px;
+        }
+        .data-table th:first-child { border-radius: 10px 0 0 0; }
+        .data-table th:last-child { border-radius: 0 10px 0 0; }
+        .data-table td {
+            padding: 12px 18px; border-bottom: 1px solid rgba(0,180,216,0.1);
+            color: #444; font-weight: 300;
+        }
+        .data-table tr:nth-child(even) td { background: rgba(0,180,216,0.04); }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:last-child td:first-child { border-radius: 0 0 0 10px; }
+        .data-table tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+
+        .tip-box {
+            background: rgba(202,240,248,0.4);
+            border: 1px solid rgba(0,180,216,0.25);
+            border-radius: 14px; padding: 22px 26px; margin: 28px 0;
+            display: flex; gap: 16px; align-items: flex-start;
+        }
+        .tip-icon { font-size: 1.6em; flex-shrink: 0; margin-top: 2px; }
+        .tip-box p { margin: 0; font-size: 0.98em; color: #333; line-height: 1.85; }
+
+        .steps-list { counter-reset: step; list-style: none; padding: 0; margin: 24px 0; }
+        .steps-list li {
+            counter-increment: step;
+            display: flex; gap: 20px; align-items: flex-start;
+            margin-bottom: 24px; font-size: 1.05em; color: #444; font-weight: 300; line-height: 1.85;
+        }
+        .steps-list li::before {
+            content: counter(step);
+            flex-shrink: 0; width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
+            color: white; border-radius: 50%; font-weight: 700; font-size: 0.85em;
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 3px;
+        }
+
+        .cta-article {
+            background: linear-gradient(135deg, var(--water-blue), var(--water-dark));
+            border-radius: 18px; padding: 36px 40px; margin-top: 52px; text-align: center;
+            box-shadow: 0 12px 40px rgba(0,180,216,0.25);
+        }
+        .cta-article h3 { color: white; font-size: 1.5em; font-weight: 600; margin-bottom: 12px; }
+        .cta-article p { color: rgba(255,255,255,0.85); font-size: 1em; font-weight: 300; margin-bottom: 28px; line-height: 1.75; }
+        .cta-btn {
+            display: inline-block; padding: 15px 40px;
+            background: white; color: var(--water-deep);
+            border-radius: 40px; font-weight: 700; font-size: 0.95em;
+            text-decoration: none; transition: all 0.3s; letter-spacing: 0.3px;
+        }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+
+        /* SIDEBAR */
+        .article-sidebar { padding-top: 0; }
+        .sidebar-card {
+            background: rgba(255,255,255,0.96);
+            border-radius: 20px; padding: 30px 28px;
+            box-shadow: 0 8px 30px rgba(0,180,216,0.12);
+            border: 1px solid rgba(0,180,216,0.15);
+            margin-bottom: 28px;
+        }
+        .sidebar-card h4 {
+            font-size: 1em; font-weight: 700; color: var(--water-dark);
+            margin-bottom: 18px; padding-bottom: 12px;
+            border-bottom: 2px solid rgba(0,180,216,0.2);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .sidebar-card p { font-size: 0.92em; color: #555; line-height: 1.8; font-weight: 300; margin-bottom: 16px; }
+        .sidebar-btn {
+            display: block; padding: 12px 20px; text-align: center;
+            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
+            color: white; border-radius: 10px; text-decoration: none;
+            font-weight: 600; font-size: 0.88em; transition: all 0.3s;
+        }
+        .sidebar-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,180,216,0.35); }
+
+        .related-post {
+            display: flex; gap: 14px; align-items: flex-start;
+            padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1);
+            text-decoration: none; transition: all 0.2s;
+        }
+        .related-post:last-child { border-bottom: none; padding-bottom: 0; }
+        .related-post:hover .rp-title { color: var(--water-blue); }
+        .rp-img { width: 68px; height: 52px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+        .rp-content { flex: 1; }
+        .rp-cat { font-size: 0.7em; font-weight: 700; color: var(--water-blue); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+        .rp-title { font-size: 0.88em; font-weight: 600; color: #222; line-height: 1.35; transition: color 0.2s; }
+
+        .tags-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag {
+            padding: 6px 14px; border: 1px solid rgba(0,180,216,0.3);
+            border-radius: 20px; font-size: 0.8em; color: var(--water-deep);
+            text-decoration: none; font-weight: 500; transition: all 0.2s;
+        }
+        .tag:hover { background: rgba(0,180,216,0.1); border-color: var(--water-blue); }
+
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .stat-item {
+            background: linear-gradient(135deg, rgba(0,180,216,0.08), rgba(0,119,182,0.06));
+            border-radius: 12px; padding: 16px 14px; text-align: center;
+            border: 1px solid rgba(0,180,216,0.15);
+        }
+        .stat-num { font-size: 1.8em; font-weight: 700; color: var(--water-blue); line-height: 1; }
+        .stat-lbl { font-size: 0.72em; color: #666; font-weight: 400; margin-top: 4px; line-height: 1.3; }
+
+        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.7); background: rgba(0,18,25,0.8); backdrop-filter: blur(10px); margin-top: 60px; font-weight: 300; }
+
+        @media (max-width: 1024px) {
+            .article-body { grid-template-columns: 1fr; }
+            .article-sidebar { order: -1; }
+        }
+        @media (max-width: 768px) {
+            .article-header h1 { font-size: 2em; }
+            .article-content { padding: 32px 24px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .nav-container { padding: 0 20px; }
+            .nav-logo img { height: 50px; }
+            .article-hero, .article-body { padding-left: 20px; padding-right: 20px; }
+            .article-cover { height: 260px; border-radius: 12px; }
+        }
+</style>
+</head>
+<body>
+    <canvas id="waterCanvas"></canvas>
+    <div class="water-overlay"></div>
+    
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="soluciones.html">Soluciones</a></li>
+                <li><a href="control-electrico.html">Control Eléctrico</a></li>
+                <li><a href="refrigeracion.html">Refrigeración</a></li>
+                <li><a href="mantenimiento.html">Mantenimiento</a></li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Inicio</a>
+        <a href="soluciones.html">Soluciones</a>
+        <a href="control-electrico.html">Control Eléctrico</a>
+        <a href="refrigeracion.html">Refrigeración</a>
+        <a href="mantenimiento.html">Mantenimiento</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="blog.html">Blog</a>
+        <a href="contacto.html">Contacto</a>
+    </div>
+
+    <div class="content">
+        <section class="article-hero">
+            <div class="breadcrumb">
+                <a href="index.html">Inicio</a>
+                <span>/</span>
+                <a href="blog.html">Blog</a>
+                <span>/</span>
+                <span style="color:rgba(255,255,255,0.7)">Mantenimiento</span>
+            </div>
+            <div class="article-header">
+                <span class="article-category">Mantenimiento</span>
+                <h1>Mantenimiento Predictivo: <strong>La Clave para Evitar Paros No Programados</strong></h1>
+                <div class="article-meta">
+                    <span>📅 5 de Febrero, 2026</span>
+                    <span>⏱ 9 min de lectura</span>
+                    <span>✍️ Equipo Técnico SIECO</span>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1400&q=90" alt="Mantenimiento Predictivo: Evita Paros No Programados" class="article-cover">
+        </section>
+
+        <section class="article-body">
+            <article class="article-content">
+                
+<h2>Del Mantenimiento Reactivo al Predictivo</h2>
+<p>Durante décadas, la industria operó bajo un modelo correctivo: reparar cuando algo se rompe. Luego vino el mantenimiento preventivo: cambiar componentes según calendario, independientemente de su estado real. Hoy, el mantenimiento predictivo —apoyado en sensores, análisis de datos y machine learning— está redefiniendo lo que significa mantener una planta industrial operando.</p>
+<p>La diferencia en costo es dramática. Un paro no programado en una planta industrial promedio cuesta entre <strong>$50,000 y $500,000 MXN por hora</strong>, considerando pérdida de producción, materias primas en proceso, horas extra y penalidades por incumplimiento de entregas.</p>
+
+<div class="highlight-box">
+    <p><strong>Estadística de industria:</strong> Según estudios de Deloitte, el mantenimiento predictivo reduce los costos de mantenimiento en un <strong>25–30%</strong>, disminuye los paros no programados en un <strong>70–75%</strong> y extiende la vida útil de los equipos entre un <strong>20–40%</strong>.</p>
+</div>
+
+<h2>Las 5 Tecnologías del Mantenimiento Predictivo</h2>
+
+<h3>1. Análisis de Vibraciones</h3>
+<p>Los sensores de vibración (acelerómetros) instalados en rodamientos, ejes y acoplamientos permiten detectar con semanas de anticipación problemas como desbalanceo, desalineación, desgaste de rodamientos y holguras mecánicas. El análisis espectral de la señal de vibración permite incluso identificar <em>qué tipo</em> de problema existe y en <em>qué componente específico</em>.</p>
+
+<h3>2. Termografía Infrarroja</h3>
+<p>Las cámaras termográficas revelan puntos calientes en conexiones eléctricas, motores, transformadores y superficies de intercambio de calor. Una conexión eléctrica mal apretada puede estar generando pérdidas de energía durante meses antes de causar un incendio o un paro.</p>
+
+<h3>3. Análisis de Aceite Lubricante</h3>
+<p>El aceite de un sistema hidráulico o de un compresor contiene información valiosísima. El análisis de partículas metálicas en suspensión (espectrometría), la viscosidad, el índice de acidez y la presencia de agua permiten detectar desgaste incipiente antes de que sea visible o cause daño.</p>
+
+<h3>4. Ultrasonido Estructural</h3>
+<p>Los sensores de ultrasonido detectan fricciones, fugas de gas o vapor, y cavitación en bombas con una sensibilidad imposible para el oído humano. Son especialmente útiles para detectar fugas en sistemas de aire comprimido, donde las pérdidas pueden representar hasta el 30% del consumo del compresor.</p>
+
+<h3>5. Monitoreo de Parámetros de Proceso</h3>
+<p>El análisis de tendencias en variables como presión diferencial, temperatura de descarga, corriente de motores y caudales puede revelar degradación gradual del equipo que no dispara alarmas pero sí reduce eficiencia y precede fallas.</p>
+
+<table class="data-table">
+    <tr>
+        <th>Tecnología</th>
+        <th>Tipo de Equipo</th>
+        <th>Anticipación Detección</th>
+        <th>Costo Relativo</th>
+    </tr>
+    <tr><td>Análisis de vibraciones</td><td>Motores, bombas, compresores</td><td>2–8 semanas</td><td>Medio</td></tr>
+    <tr><td>Termografía IR</td><td>Eléctrico, intercambiadores</td><td>1–4 semanas</td><td>Medio-Alto</td></tr>
+    <tr><td>Análisis de aceite</td><td>Hidráulico, compresores, reductores</td><td>4–12 semanas</td><td>Bajo</td></tr>
+    <tr><td>Ultrasonido</td><td>Rodamientos, fugas, válvulas</td><td>2–10 semanas</td><td>Bajo</td></tr>
+    <tr><td>Monitoreo de proceso</td><td>Todos</td><td>1–6 semanas</td><td>Variable</td></tr>
+</table>
+
+<h2>Implementación por Fases: El Modelo SIECO</h2>
+<ol class="steps-list">
+    <li><strong>Inventario y criticidad de equipos</strong> — Clasificar todos los equipos por impacto en producción, costo de reemplazo y frecuencia histórica de fallas. Los equipos Clase A (críticos) son el primer objetivo.</li>
+    <li><strong>Instalación de sensores permanentes en equipos críticos</strong> — Acelerómetros, sensores de temperatura y transductores de presión conectados a un gateway IoT con transmisión en tiempo real.</li>
+    <li><strong>Establecimiento de líneas base</strong> — Durante 4–6 semanas de operación normal, el sistema aprende el comportamiento "saludable" de cada equipo y establece umbrales de alerta personalizados.</li>
+    <li><strong>Integración con CMMS</strong> — Las alertas predictivas generan automáticamente órdenes de trabajo en el sistema de gestión de mantenimiento, con la información de diagnóstico ya incluida.</li>
+    <li><strong>Revisiones periódicas con tecnologías portátiles</strong> — Para equipos de criticidad media, inspecciones programadas mensuales o trimestrales con equipos portátiles de vibración y termografía.</li>
+</ol>
+
+<h2>El Factor Humano</h2>
+<p>La tecnología por sí sola no salva equipos. El mantenimiento predictivo exitoso requiere técnicos capacitados que sepan interpretar los datos, experiencia para distinguir falsas alarmas de señales reales, y una cultura organizacional que valore la prevención sobre la reacción.</p>
+
+<div class="tip-box">
+    <div class="tip-icon">🔧</div>
+    <p><strong>Recomendación SIECO:</strong> Comienza el predictivo con 5–10 equipos críticos bien monitoreados antes de intentar cubrir toda la planta. Los resultados rápidos generan el apoyo organizacional necesario para expandir el programa.</p>
+</div>
+
+                <div class="cta-article">
+                    <h3>¿Necesitas una Solución a Medida?</h3>
+                    <p>Nuestro equipo de ingenieros especializados puede diseñar e implementar el sistema perfecto para tu empresa. Solicita una consulta gratuita hoy.</p>
+                    <a href="contacto.html" class="cta-btn">Contactar a un Experto →</a>
+                </div>
+            </article>
+
+            <aside class="article-sidebar">
+                
+<div class="sidebar-card">
+    <h4>Impacto Comprobado</h4>
+    <div class="stat-grid">
+        <div class="stat-item"><div class="stat-num">75%</div><div class="stat-lbl">Menos paros no programados</div></div>
+        <div class="stat-item"><div class="stat-num">30%</div><div class="stat-lbl">Reducción costo mantto.</div></div>
+        <div class="stat-item"><div class="stat-num">40%</div><div class="stat-lbl">Mayor vida útil equipos</div></div>
+        <div class="stat-item"><div class="stat-num">8 sem</div><div class="stat-lbl">Anticipación promedio</div></div>
+    </div>
+</div>
+<div class="sidebar-card">
+    <h4>Artículos Relacionados</h4>
+    <a href="blog-automatizacion.html" class="related-post">
+        <img src="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=200&q=80" class="rp-img" alt="">
+        <div class="rp-content">
+            <div class="rp-cat">Automatización</div>
+            <div class="rp-title">PLC vs SCADA: ¿Cuál Sistema Necesitas?</div>
+        </div>
+    </a>
+    <a href="blog-eficiencia.html" class="related-post">
+        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=200&q=80" class="rp-img" alt="">
+        <div class="rp-content">
+            <div class="rp-cat">Eficiencia Energética</div>
+            <div class="rp-title">Reducir Costos en Sistemas de Refrigeración</div>
+        </div>
+    </a>
+    <a href="blog-normas.html" class="related-post">
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=200&q=80" class="rp-img" alt="">
+        <div class="rp-content">
+            <div class="rp-cat">Normativas</div>
+            <div class="rp-title">Cumplimiento NOM-127 en Instalaciones Eléctricas</div>
+        </div>
+    </a>
+</div>
+
+                <div class="sidebar-card">
+                    <h4>Etiquetas</h4>
+                    <div class="tags-list">
+                        <a href="blog.html" class="tag">Mantenimiento Predictivo</a><a href="blog.html" class="tag">Vibraciones</a><a href="blog.html" class="tag">Termografía</a><a href="blog.html" class="tag">IoT Industrial</a><a href="blog.html" class="tag">CMMS</a><a href="blog.html" class="tag">Industria 4.0</a>
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h4>¿Hablamos?</h4>
+                    <p>Agenda una consulta gratuita con nuestros ingenieros y recibe una propuesta personalizada para tu empresa.</p>
+                    <a href="contacto.html" class="sidebar-btn">Solicitar Consulta Gratuita</a>
+                </div>
+            </aside>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        const canvas = document.getElementById('waterCanvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        function resizeCanvas() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            if(gl) gl.viewport(0, 0, canvas.width, canvas.height);
+        }
+        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+        if(gl) {
+            const vs = gl.createShader(gl.VERTEX_SHADER);
+            gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }');
+            gl.compileShader(vs);
+            const fs = gl.createShader(gl.FRAGMENT_SHADER);
+            gl.shaderSource(fs, `precision highp float;
+                uniform float time; uniform vec2 resolution;
+                float noise(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+                float smoothNoise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);float a=noise(i);float b=noise(i+vec2(1.0,0.0));float c=noise(i+vec2(0.0,1.0));float d=noise(i+vec2(1.0,1.0));return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);}
+                float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<6;i++){v+=a*smoothNoise(p);p*=2.0;a*=0.5;}return v;}
+                void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
+            gl.compileShader(fs);
+            const prog = gl.createProgram();
+            gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+            const posLoc = gl.getAttribLocation(prog, 'position');
+            gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+            const timeLoc = gl.getUniformLocation(prog, 'time');
+            const resLoc = gl.getUniformLocation(prog, 'resolution');
+            let start = Date.now();
+            function render() {
+                const t = (Date.now() - start) * 0.001;
+                gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height);
+                gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(render);
+            }
+            render();
+        }
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+</script>
+</body>
+</html>
