@@ -100,7 +100,7 @@
             font-size: 1.3em; flex-shrink: 0;
         }
         .info-content h3 { font-size: 1.1em; color: var(--water-dark); margin-bottom: 5px; font-weight: 600; }
-        .info-content p { color: #555; line-height: 1.6; font-size: 0.95em; }
+        .info-content p { color: #555; line-height: 1.8; font-size: 0.95em; }
         .info-content a { color: var(--water-blue); text-decoration: none; transition: color 0.3s; }
         .info-content a:hover { color: var(--water-deep); }
 
@@ -131,6 +131,21 @@
             text-transform: uppercase; letter-spacing: 0.5px;
         }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,180,216,0.4); }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+        /* Success / error messages */
+        .form-message {
+            display: none; padding: 16px 20px; border-radius: 12px;
+            margin-bottom: 20px; font-weight: 500; font-size: 0.95em;
+        }
+        .form-message.success {
+            display: block;
+            background: rgba(0,180,216,0.1); border: 2px solid rgba(0,180,216,0.3); color: var(--water-deep);
+        }
+        .form-message.error {
+            display: block;
+            background: rgba(220,50,50,0.08); border: 2px solid rgba(220,50,50,0.3); color: #c0392b;
+        }
 
         footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.7); background: rgba(0,18,25,0.8); backdrop-filter: blur(10px); margin-top: 100px; font-weight: 300; }
 
@@ -189,8 +204,11 @@
         </section>
 
         <div class="contact-container">
+
+            <!-- ===== INFORMACIÓN DE CONTACTO (ARREGLADA) ===== -->
             <div class="contact-info">
                 <h2>Información de Contacto</h2>
+
                 <div class="info-item">
                     <div class="info-icon">📍</div>
                     <div class="info-content">
@@ -198,46 +216,58 @@
                         <p>Av. Industrial #123<br>Parque Industrial Norte<br>Ciudad de México, 01234</p>
                     </div>
                 </div>
+
                 <div class="info-item">
                     <div class="info-icon">📞</div>
                     <div class="info-content">
                         <h3>Teléfono</h3>
-                        <p><a href="tel:+525512345678">+52 (55) 1234-5678</a><br>
-                        <a href="tel:+525587654321">+52 (55) 8765-4321</a></p>
+                        <p>
+                            <a href="tel:+525512345678">+52 (55) 1234-5678</a><br>
+                            <a href="tel:+525587654321">+52 (55) 8765-4321</a>
+                        </p>
                     </div>
                 </div>
+
+                <!-- FIX: etiquetas cerradas correctamente, los 3 correos ahora se muestran -->
                 <div class="info-item">
                     <div class="info-icon">✉️</div>
                     <div class="info-content">
                         <h3>Email</h3>
-                        <div class="info-content">
-         <p>
-        <a href="mailto:administracion@siecomexico.com">
-            administracion@siecomexico.com
-        </a><br>
+                        <p>
+                            <a href="mailto:administracion@siecomexico.com">administracion@siecomexico.com</a><br>
+                            <a href="mailto:serviciocliente@siecomexico.com">serviciocliente@siecomexico.com</a><br>
+                            <a href="mailto:ventas@siecomexico.com">ventas@siecomexico.com</a>
+                        </p>
+                    </div>
+                </div>
 
-        <a href="mailto:serviciocliente@siecomexico.com">
-            serviciocliente@siecomexico.com
-        </a><br>
-
-        <a href="mailto:ventas@siecomexico.com">
-            ventas@siecomexico.com
-        </a>
-    </p>
-</div>
-         <div class="info-item">
+                <div class="info-item">
                     <div class="info-icon">🕐</div>
                     <div class="info-content">
                         <h3>Horario de Atención</h3>
-                        <p>Lunes a Viernes: 8:00 AM - 6:00 PM<br>
-                        Sábados: 9:00 AM - 2:00 PM<br>
-                        Emergencias 24/7</p>
+                        <p>
+                            Lunes a Viernes: 8:00 AM – 6:00 PM<br>
+                            Sábados: 9:00 AM – 2:00 PM<br>
+                            Emergencias 24/7
+                        </p>
                     </div>
                 </div>
             </div>
+            <!-- ===== FIN INFORMACIÓN ===== -->
 
+            <!-- ===== FORMULARIO (envía a serviciocliente@siecomexico.com vía Formspree) ===== -->
             <div class="contact-form-container">
                 <h2>Envíanos un Mensaje</h2>
+
+                <div class="form-message" id="formMessage"></div>
+
+                <!--
+                    INSTRUCCIONES PARA ACTIVAR EL ENVÍO DE CORREOS:
+                    1. Ve a https://formspree.io y crea una cuenta gratuita.
+                    2. Crea un nuevo formulario y pon como dirección de destino: serviciocliente@siecomexico.com
+                    3. Formspree te dará un endpoint con este formato: https://formspree.io/f/XXXXXXXX
+                    4. Reemplaza "TU_ENDPOINT_DE_FORMSPREE" abajo por ese código (solo el ID, ej: xpwzgkqb).
+                -->
                 <form id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
@@ -275,9 +305,11 @@
                         <label for="mensaje">Mensaje *</label>
                         <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                    <button type="submit" class="submit-btn" id="submitBtn">Enviar Mensaje</button>
                 </form>
             </div>
+            <!-- ===== FIN FORMULARIO ===== -->
+
         </div>
     </div>
 
@@ -286,14 +318,15 @@
     </footer>
 
     <script>
+        /* ── Water WebGL background ── */
         const canvas = document.getElementById('waterCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         function resizeCanvas() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            if(gl) gl.viewport(0, 0, canvas.width, canvas.height);
+            if (gl) gl.viewport(0, 0, canvas.width, canvas.height);
         }
         resizeCanvas(); window.addEventListener('resize', resizeCanvas);
-        if(gl) {
+        if (gl) {
             const vs = gl.createShader(gl.VERTEX_SHADER);
             gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }');
             gl.compileShader(vs);
@@ -313,17 +346,17 @@
             const posLoc = gl.getAttribLocation(prog, 'position');
             gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
             const timeLoc = gl.getUniformLocation(prog, 'time');
-            const resLoc = gl.getUniformLocation(prog, 'resolution');
+            const resLoc  = gl.getUniformLocation(prog, 'resolution');
             let start = Date.now();
-            function render() {
+            (function render() {
                 const t = (Date.now() - start) * 0.001;
                 gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height);
                 gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT);
                 gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(render);
-            }
-            render();
+            })();
         }
 
+        /* ── Mobile menu ── */
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
         hamburger.addEventListener('click', () => {
@@ -337,10 +370,43 @@
             });
         });
 
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        /* ── Formulario → Formspree ── */
+        const FORMSPREE_ID = 'TU_ENDPOINT_DE_FORMSPREE'; // ← reemplaza esto con tu ID de Formspree
+
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
-            this.reset();
+
+            const btn = document.getElementById('submitBtn');
+            const msg = document.getElementById('formMessage');
+            btn.disabled = true;
+            btn.textContent = 'Enviando…';
+            msg.className = 'form-message';
+            msg.textContent = '';
+
+            const formData = new FormData(this);
+
+            try {
+                const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (res.ok) {
+                    msg.className = 'form-message success';
+                    msg.textContent = '✅ ¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
+                    this.reset();
+                } else {
+                    throw new Error('Error en el servidor');
+                }
+            } catch (err) {
+                msg.className = 'form-message error';
+                msg.textContent = '❌ Hubo un problema al enviar el mensaje. Por favor intenta de nuevo o escríbenos directamente a serviciocliente@siecomexico.com';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Enviar Mensaje';
+                msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         });
     </script>
 </body>
