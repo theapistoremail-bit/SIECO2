@@ -600,7 +600,7 @@
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="agua.html">Soluciones En Agua</a></li
+                <li><a href="agua.html">Soluciones En Agua</a></li>
                 <li><a href="refrigeracion.html">Refrigeración</a></li>
                 <li><a href="mantenimiento.html">Mantenimiento</a></li>
                 <li><a href="proyectos.html">Proyectos</a></li>
@@ -841,25 +841,6 @@ Nos especializamos en ofrecer servicios de ingeniería para una variedad de sect
             current = (current + 1) % slides.length;
             slides[current].classList.add("active");
         }, 4000);
-    </script>
- import { Analytics } from '@vercel/analytics/next';
- 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <head>
-        <title>Next.js</title>
-      </head>
-      <body>
-        {children}
-        <Analytics />
-      </body>
-    </html>
-  );
-}
+
 </body>
 </html>
