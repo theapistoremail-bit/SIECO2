@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>JS Bin</title>
-  <!-- ESTILOS DEL FLIPBOOK -->
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Solutions - Innovación y Tecnología</title>
+    <style>
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a1628;
+            color: #0D1B2A;
+            overflow-x: hidden;
+        }
+<!-- ============================================
+     FLIPBOOK SIECO — CATÁLOGO EMBEBIDO
+     Pegar dentro de <body>, donde se necesite.
+     Requiere: nada externo, todo está incluido.
+============================================ -->
+
+<!-- ESTILOS DEL FLIPBOOK -->
+
 .flipbook-section {
   max-width: 1400px;
   margin: 0 auto 80px;
@@ -28,7 +42,7 @@
   border-radius: 6px;
   padding: 3px;
   background: linear-gradient(135deg, rgba(72,202,228,0.3), rgba(0,119,182,0.2));
-  box-shadow: 0 0 0 1px rgba(72,202,228,0.15), 0 20px 60px rgba(0,180,216,0.25), 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 0 0 1px rgba(13, 27, 42, 1), 0 20px 60px rgba(0,180,216,0.25), 0 4px 16px rgba(0,0,0,0.4);
 }
 #fbCanvas { display: block; border-radius: 4px; }
 .fb-controls {
@@ -96,14 +110,6 @@
   .flipbook-heading { font-size: 1.6em; }
 }
 </style>
-</head>
-<body>
-<!-- ============================================
-     FLIPBOOK SIECO — CATÁLOGO EMBEBIDO
-     Pegar dentro de <body>, donde se necesite.
-     Requiere: nada externo, todo está incluido.
-============================================ -->
-
 
 <!-- HTML DEL FLIPBOOK -->
 <section class="flipbook-section">
@@ -375,8 +381,8 @@ document.addEventListener('keydown', e => {
 let _p=0, _iv=setInterval(()=>{ _p=Math.min(_p+10,65); fbVeilFill.style.width=_p+'%'; if(_p>=65)clearInterval(_iv); },80);
 setTimeout(loadEmbeddedPDF, 200);
 
+window.fbGo = fbGo;
+
 })(); // end IIFE
 </script>
 <!-- FIN FLIPBOOK SIECO -->
-</body>
-</html>
