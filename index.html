@@ -279,6 +279,41 @@
             justify-content: center;
             align-items: center;
         }
+
+        /* White card behind the diagram only */
+        .orbit-card {
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 40px;
+            box-shadow:
+                0 20px 60px rgba(0,180,216,0.18),
+                0 4px 20px rgba(0,0,0,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            border: 1.5px solid rgba(72,202,228,0.25);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* On white bg, darken the orbit glow slightly */
+        .orbit-card .orbit-glow {
+            background: conic-gradient(from 0deg,
+                rgba(72,202,228,0.06),
+                rgba(0,180,216,0.18),
+                rgba(0,119,182,0.12),
+                rgba(72,202,228,0.06));
+        }
+        .orbit-card .orbit-track {
+            border-color: rgba(0,119,182,0.3);
+        }
+        .orbit-card .orbit-inner-ring {
+            border-color: rgba(0,180,216,0.2);
+        }
+        .orbit-card .pulse-ring {
+            border-color: rgba(0,150,200,0.5);
+        }
+        .orbit-card .pulse-ring.p2 { border-color: rgba(0,119,182,0.4); }
+        .orbit-card .pulse-ring.p3 { border-color: rgba(0,90,160,0.3); }
         .circle-container {
             position: relative;
             width: 680px;
@@ -655,6 +690,7 @@
             <p class="section-eyebrow">Lo que hacemos</p>
             <h2 class="section-heading">Nuestros Servicios</h2>
             <div class="orbit-wrapper">
+            <div class="orbit-card">
                 <div class="circle-container">
 
                     <!-- Background layers -->
@@ -768,34 +804,10 @@
                         >
                         <span class="item-label">Aire Industrial</span>
                     </a>
-                  
 
                 </div>
             </div>
-             }
-.diagram-container {
-      background: #ffffff;
-      border-radius: 24px;
-      box-shadow: 0 8px 48px rgba(0,0,0,0.10);
-      padding: 32px;
-      width: 100%;
-      max-width: 740px;
-    }
-    .diagram-title {
-      text-align: center;
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: #1a90c4;
-      margin-bottom: 16px;
-    }
-    .diagram-svg {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
+            </div>
         </section>
         <!-- ====== FIN ORBIT SERVICES ====== -->
 
