@@ -1,38 +1,10 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es">
 <head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingeniería Industrial en Querétaro | Refrigeración, Control Eléctrico y Purificación | SIECO</title>
-    <meta name="description" content="Empresa de ingeniería industrial en Querétaro especializada en refrigeración industrial, control eléctrico y sistemas de purificación de agua.">
-    <meta name="keywords" content="ingeniería industrial Querétaro, refrigeración industrial Querétaro, control eléctrico Querétaro, purificación de agua industrial Querétaro,SIECO,sieco">
-    <meta name="author" content="SIECO Ingeniería Industrial Para Purificación de agua">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://siecomexico.com.mx/">
-    <meta name="geo.region" content="MX-QUE">
-    <meta name="geo.placename" content="Querétaro">
-    <meta property="og:title" content="Ingeniería Industrial en Querétaro | SIECO">
-    <meta property="og:description" content="Soluciones industriales en Querétaro: refrigeración, automatización eléctrica y purificación de agua para empresas.">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="es_MX">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "SIECO Ingeniería Industrial",
-      "url": "https://tudominio.com/",
-      "telephone": "+52 442 XXX XXXX",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Querétaro",
-        "addressRegion": "QRO",
-        "addressCountry": "MX"
-      },
-      "areaServed": "Querétaro"
-    }
-    </script>
- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos - SIECO | Sistemas y Soluciones Integrales</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -44,67 +16,47 @@
             --water-dark: #03045e;
             --foam: #caf0f8;
         }
-        body {
-            font-family: 'IBM Plex Sans', sans-serif;
-            background: #001219;
-            color: #333;
-            overflow-x: hidden;
-        }
-        #waterCanvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-        }
+        body { font-family: 'IBM Plex Sans', sans-serif; background: #001219; color: #333; overflow-x: hidden; }
+        #waterCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .water-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 18, 25, 0.3) 100%);
-            z-index: 1;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
+            z-index: 1; pointer-events: none;
         }
 
+        /* NAV */
         nav {
-            position: fixed;
-            top: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0, 180, 216, 0.1);
-            z-index: 1000;
-            border-bottom: 2px solid rgba(0, 180, 216, 0.2);
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,180,216,0.1);
+            z-index: 1000; border-bottom: 2px solid rgba(0,180,216,0.2);
         }
         .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 90px;
+            max-width: 1400px; margin: 0 auto; padding: 0 40px;
+            display: flex; justify-content: space-between; align-items: center; height: 90px;
         }
-        .nav-logo img { height: 64px; width: auto; display: block; }
+        .nav-logo img { height: 60px; width: auto; display: block; }
         .nav-links { display: flex; gap: 11px; list-style: none; align-items: center; }
         .nav-links a {
-            text-decoration: none; color: #001219;
-            font-weight: 500; font-size: 0.82em;
-            transition: all 0.3s; position: relative;
-            letter-spacing: 0.6px; text-transform: uppercase;
+            text-decoration: none; color: #001219; font-weight: 500; font-size: 0.82em;
+            transition: all 0.3s; position: relative; letter-spacing: 0.6px; text-transform: uppercase;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--water-blue); transition: width 0.3s;
         }
         .nav-links a:hover { color: var(--water-deep); }
-
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--water-blue); font-weight: 600; }
+        .nav-links a.active::after { width: 100%; }
         .hamburger {
             display: none; flex-direction: column; gap: 5px;
             cursor: pointer; padding: 5px; background: none; border: none;
         }
-        .hamburger span {
-            display: block; width: 24px; height: 2px;
-            background: #001219; border-radius: 2px; transition: all 0.3s;
-        }
+        .hamburger span { display: block; width: 24px; height: 2px; background: #001219; border-radius: 2px; transition: all 0.3s; }
         .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
         .mobile-menu {
             display: none; position: fixed; top: 90px; left: 0; width: 100%;
             background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
@@ -112,508 +64,93 @@
             box-shadow: 0 10px 30px rgba(0,180,216,0.15);
             border-bottom: 2px solid rgba(0,180,216,0.2);
         }
-        .mobile-menu.open { display: flex; flex-direction: column; gap: 0; }
+        .mobile-menu.open { display: flex; flex-direction: column; }
         .mobile-menu a {
-            text-decoration: none; color: #001219; font-weight: 500;
-            font-size: 1em; text-transform: uppercase; letter-spacing: 0.5px;
+            text-decoration: none; color: #001219; font-weight: 500; font-size: 1em;
+            text-transform: uppercase; letter-spacing: 0.5px;
             padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
         }
         .mobile-menu a:hover { color: var(--water-blue); }
 
+        /* PAGE */
         .content { position: relative; z-index: 10; padding-top: 100px; }
+        .page-header { max-width: 1400px; margin: 0 auto; padding: 80px 40px 60px; text-align: center; }
+        .page-header h1 { font-size: 4em; font-weight: 300; color: white; margin-bottom: 20px; letter-spacing: -1px; text-shadow: 0 4px 30px rgba(0,180,216,0.5); }
+        .page-header h1 strong { font-weight: 600; background: linear-gradient(135deg, var(--water-light), var(--foam)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .page-header p { font-size: 1.15em; font-weight: 300; color: rgba(255,255,255,0.9); max-width: 750px; margin: 0 auto; line-height: 1.8; }
 
-        /* Hero */
-        .hero { max-width: 1400px; margin: 0 auto; padding: 100px 40px 80px; text-align: center; }
-        .hero h1 {
-            font-size: 5em; font-weight: 700; color: white;
-            margin-bottom: 25px; letter-spacing: -3px; line-height: 1.1;
-            text-shadow: 0 4px 30px rgba(0, 180, 216, 0.5);
-        }
-        .hero h1 strong {
-            display: block;
-            background: linear-gradient(135deg, var(--water-light), var(--foam), var(--water-blue));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            filter: drop-shadow(0 0 20px rgba(72, 202, 228, 0.6));
-        }
-        .hero p {
-            font-size: 1.35em; color: rgba(255,255,255,0.95);
-            max-width: 750px; margin: 0 auto 50px; line-height: 1.7;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.3);
-        }
-        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .cta-primary {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 18px 45px;
-            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
-            color: white; text-decoration: none; border-radius: 50px;
-            font-weight: 600; font-size: 1.1em; transition: all 0.3s;
-            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.4);
-        }
-        .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,180,216,0.6); }
-
-        /* Water Feature */
-        .water-feature {
+        /* GRID — igual que el original */
+        .services-grid {
             max-width: 1400px; margin: 60px auto; padding: 0 40px;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-        }
-        .water-visual {
-            position: relative; height: 500px;
-            border-radius: 30px; overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,180,216,0.3);
-        }
-        .image-wrapper {
-            position: absolute; inset: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-        }
-        .slide { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 2s ease; }
-        .slide.active { opacity: 1; }
-        .glass-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(0,180,216,0.12), rgba(72,202,228,0.06));
-            border: 2px solid rgba(72,202,228,0.3);
-            border-radius: 30px;
-            z-index: 1;
-        }
-        .water-ripple {
-            position: absolute; border-radius: 50%;
-            border: 2px solid rgba(72,202,228,0.55); top: 50%; left: 50%;
-            transform: translate(-50%, -50%); animation: ripple 3s ease-out infinite;
-            z-index: 2;
-        }
-        .water-ripple:nth-child(3) { animation-delay: 1s; }
-        .water-ripple:nth-child(4) { animation-delay: 2s; }
-        @keyframes ripple {
-            0%   { width: 80px;  height: 80px;  opacity: 0.8; }
-            100% { width: 520px; height: 520px; opacity: 0; }
-        }
-        .water-feature-content h2 {
-            font-size: 2.5em; color: white; margin-bottom: 20px;
-            font-weight: 600; text-shadow: 0 2px 20px rgba(0,180,216,0.5);
-        }
-        .water-feature-content p {
-            font-size: 1.15em; color: rgba(255,255,255,0.9);
-            line-height: 1.8; margin-bottom: 30px;
-            text-shadow: 0 1px 10px rgba(0,0,0,0.3);
-        }
-
-        /* Cards */
-        .cards-section {
-            max-width: 1400px; margin: 80px auto; padding: 0 40px;
             display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;
         }
-        .glass-card {
+
+        /* CARD — igual que el original */
+        .service-card {
             background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
-            border-radius: 24px; padding: 45px;
+            border-radius: 20px; padding: 0;
             box-shadow: 0 10px 40px rgba(0,180,216,0.15);
-            border: 2px solid rgba(72,202,228,0.2);
-            transition: all 0.4s; position: relative; overflow: hidden;
+            border: 2px solid rgba(72,202,228,0.2); transition: all 0.4s;
+            overflow: hidden; cursor: pointer;
         }
-        .glass-card::before {
-            content: ''; position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(72,202,228,0.1), transparent);
-            transform: rotate(45deg); transition: all 0.5s;
-        }
-        .glass-card:hover::before { left: 100%; }
-        .glass-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 60px rgba(0,180,216,0.3);
-            border-color: rgba(72,202,228,0.5);
-        }
-        .card-icon {
-            width: 70px; height: 70px;
-            background: linear-gradient(135deg, var(--water-blue), var(--water-light));
-            border-radius: 18px; display: flex; align-items: center;
-            justify-content: center; font-size: 2em; margin-bottom: 25px;
-            box-shadow: 0 8px 24px rgba(0,180,216,0.3);
-        }
-        .glass-card h3 { font-size: 1.6em; color: var(--water-dark); margin-bottom: 15px; font-weight: 600; }
-        .glass-card p { color: #2c3e50; line-height: 1.8; font-size: 1.05em; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,180,216,0.3); border-color: var(--water-blue); }
 
-        /* Stats */
-        .stats-section {
-            max-width: 1400px; margin: 100px auto; padding: 70px 40px;
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
-            border-radius: 30px; box-shadow: 0 20px 60px rgba(0,180,216,0.2);
-            border: 2px solid rgba(72,202,228,0.3);
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 50px; text-align: center;
-        }
-        .stat-item h2 {
-            font-size: 4em;
-            background: linear-gradient(135deg, var(--water-deep), var(--water-blue));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            font-weight: 700; margin-bottom: 10px; letter-spacing: -2px;
-        }
-        .stat-item p { color: var(--water-dark); font-size: 1.15em; font-weight: 600; }
+        /* SLIDER — reemplaza el SVG/imagen fija */
+        .card-slider { position: relative; height: 240px; overflow: hidden; flex-shrink: 0; background: #001a2e; }
+        .cs-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease; }
+        .cs-slide.active { opacity: 1; }
+        .cs-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 7s ease; }
+        .cs-slide.active img { transform: scale(1.07); }
 
-        /* =====================================================
-           ORBIT SERVICES SECTION
-        ===================================================== */
-        .services-orbit-section {
-            max-width: 1400px;
-            margin: 10px auto 80px;
-            padding: 20px 40px 80px;
-            text-align: center;
+        .cs-placeholder {
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+            background: linear-gradient(135deg, #001525, #002a42, #001525);
+            background-size: 200% 200%; animation: shimmer 5s ease infinite;
         }
-        .services-orbit-section .section-eyebrow {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--water-light);
-            margin-bottom: 16px;
-            opacity: 0.85;
-        }
-        .services-orbit-section .section-heading {
-            font-size: 2.6em;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 60px;
-            text-shadow: 0 2px 20px rgba(0,180,216,0.4);
-            letter-spacing: -1px;
-        }
-        .orbit-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        @keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .cs-placeholder svg { width: 54px; height: 54px; opacity: 0.45; }
+        .cs-placeholder span { font-size: 0.7em; font-weight: 300; letter-spacing: 4px; color: rgba(0,180,216,0.55); text-transform: uppercase; }
 
-        .orbit-card {
-            background: #ffffff;
-            border-radius: 36px;
-            padding: 40px;
-            box-shadow:
-                0 20px 60px rgba(0,180,216,0.18),
-                0 4px 20px rgba(0,0,0,0.08),
-                inset 0 1px 0 rgba(255,255,255,0.9);
-            border: 1.5px solid rgba(72,202,228,0.25);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .cs-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 34px; height: 34px; border-radius: 50%;
+            background: rgba(0,0,0,0.5); border: 1.5px solid rgba(255,255,255,0.25);
+            color: white; font-size: 0.9em; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; transition: all 0.25s; backdrop-filter: blur(4px); opacity: 0;
         }
+        .card-slider:hover .cs-arrow { opacity: 1; }
+        .cs-arrow:hover { background: var(--water-blue); border-color: var(--water-blue); transform: translateY(-50%) scale(1.12); }
+        .cs-prev { left: 10px; } .cs-next { right: 10px; }
 
-        .orbit-card .orbit-glow {
-            background: conic-gradient(from 0deg,
-                rgba(72,202,228,0.06),
-                rgba(0,180,216,0.18),
-                rgba(0,119,182,0.12),
-                rgba(72,202,228,0.06));
-        }
-        .orbit-card .orbit-track {
-            border-color: rgba(0,119,182,0.3);
-        }
-        .orbit-card .orbit-inner-ring {
-            border-color: rgba(0,180,216,0.2);
-        }
-        .orbit-card .pulse-ring {
-            border-color: rgba(0,150,200,0.5);
-        }
-        .orbit-card .pulse-ring.p2 { border-color: rgba(0,119,182,0.4); }
-        .orbit-card .pulse-ring.p3 { border-color: rgba(0,90,160,0.3); }
-        .circle-container {
-            position: relative;
-            width: 680px;
-            height: 680px;
-        }
+        .cs-dots { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; gap: 7px; z-index: 10; }
+        .cs-dot { width: 7px; height: 7px; border-radius: 50%; border: none; background: rgba(255,255,255,0.3); cursor: pointer; padding: 0; transition: all 0.3s; }
+        .cs-dot.active { background: var(--water-blue); transform: scale(1.5); box-shadow: 0 0 7px var(--water-blue); }
 
-        .orbit-glow {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 670px; height: 670px;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            background: conic-gradient(from 0deg,
-                rgba(72,202,228,0.08),
-                rgba(0,180,216,0.25),
-                rgba(255,255,255,0.12),
-                rgba(0,119,182,0.2),
-                rgba(72,202,228,0.08));
-            animation: spinGlow 18s linear infinite;
-            pointer-events: none;
+        /* CARD BODY — exactamente igual que el original */
+        .service-content { padding: 35px; }
+        .service-icon {
+            width: 75px; height: 75px;
+            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
+            border-radius: 18px; display: flex; align-items: center; justify-content: center;
+            font-size: 2.2em; margin-bottom: 22px; box-shadow: 0 8px 24px rgba(0,180,216,0.3);
         }
-        @keyframes spinGlow {
-            from { transform: translate(-50%,-50%) rotate(0deg); }
-            to   { transform: translate(-50%,-50%) rotate(360deg); }
-        }
+        .service-card h3 { font-size: 1.6em; font-weight: 500; color: var(--water-dark); margin-bottom: 15px; }
+        .service-card p { color: #555; line-height: 1.75; font-weight: 300; font-size: 1.05em; margin-bottom: 18px; }
+        .service-features { list-style: none; margin-top: 15px; }
+        .service-features li { padding: 6px 0; font-size: 0.92em; font-weight: 300; color: #666; display: flex; align-items: center; gap: 8px; }
+        .service-features li::before { content: '✓'; color: var(--water-blue); font-weight: 600; }
 
-        .orbit-track {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 540px; height: 540px;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            border: 1.5px dashed rgba(72,202,228,0.4);
-            pointer-events: none;
-            animation: rotateCW 80s linear infinite;
-        }
-        @keyframes rotateCW {
-            from { transform: translate(-50%,-50%) rotate(0deg); }
-            to   { transform: translate(-50%,-50%) rotate(360deg); }
-        }
+        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.7); background: rgba(0,18,25,0.8); backdrop-filter: blur(10px); margin-top: 100px; font-weight: 300; }
 
-        .orbit-inner-ring {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 270px; height: 270px;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            border: 1.5px solid rgba(72,202,228,0.25);
-            pointer-events: none;
-            animation: rotateCCW 30s linear infinite;
-        }
-        @keyframes rotateCCW {
-            from { transform: translate(-50%,-50%) rotate(0deg); }
-            to   { transform: translate(-50%,-50%) rotate(-360deg); }
-        }
-
-        .pulse-ring {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            border: 1.5px solid rgba(72,202,228,0.6);
-            pointer-events: none;
-            z-index: 4;
-            animation: pulseRing 3.6s ease-out infinite;
-        }
-        .pulse-ring.p2 { animation-delay: 1.2s; border-color: rgba(0,180,216,0.5); }
-        .pulse-ring.p3 { animation-delay: 2.4s; border-color: rgba(0,119,182,0.4); }
-
-        @keyframes pulseRing {
-            0%   { width: 220px; height: 220px; opacity: 0.8; }
-            100% { width: 600px; height: 600px; opacity: 0; }
-        }
-
-        .orbit-dot {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 9px; height: 9px;
-            margin: -4.5px;
-            background: #48cae4;
-            border-radius: 50%;
-            box-shadow: 0 0 16px 5px rgba(72,202,228,0.75), 0 0 4px rgba(72,202,228,1);
-            animation: orbitDot 9s linear infinite;
-            pointer-events: none;
-            z-index: 6;
-        }
-        .orbit-dot.d2 {
-            animation-delay: -3s;
-            background: #00b4d8;
-            box-shadow: 0 0 14px 4px rgba(0,180,216,0.7), 0 0 4px rgba(0,180,216,1);
-            width: 7px; height: 7px; margin: -3.5px;
-        }
-        .orbit-dot.d3 {
-            animation-delay: -6s;
-            background: #90e0ef;
-            box-shadow: 0 0 12px 3px rgba(144,224,239,0.6);
-            width: 5px; height: 5px; margin: -2.5px;
-        }
-
-        @keyframes orbitDot {
-            from { transform: rotate(0deg) translateX(270px) rotate(0deg); }
-            to   { transform: rotate(360deg) translateX(270px) rotate(-360deg); }
-        }
-
-        .circle-center {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 210px; height: 210px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #FAFDFF 0%, #0ea5e9 40%, #0284c7 75%, #0369a1 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            z-index: 20;
-            overflow: hidden;
-            box-shadow:
-                0 0 0 10px rgba(14,165,233,0.12),
-                0 0 0 20px rgba(14,165,233,0.06),
-                0 24px 70px rgba(2,132,199,0.55),
-                inset 0 3px 12px rgba(255,255,255,0.25);
-            animation: centerPulse 3.5s ease-in-out infinite;
-        }
-        .circle-center::before {
-            content: '';
-            position: absolute;
-            top: -35%; left: -15%;
-            width: 75%; height: 55%;
-            background: rgba(255,255,255,0.18);
-            border-radius: 50%;
-            filter: blur(10px);
-            pointer-events: none;
-        }
-        .circle-center img {
-            width: 120px; height: 120px;
-            object-fit: contain;
-            position: relative; z-index: 1;
-        }
-        .circle-center .center-fallback {
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            gap: 6px; position: relative; z-index: 1;
-        }
-        .circle-center .center-fallback svg { width: 52px; height: 52px; fill: rgba(255,255,255,0.95); }
-        .circle-center .center-label {
-            font-size: 13px; font-weight: 800; letter-spacing: 3px;
-            color: rgba(255,255,255,0.92); text-transform: uppercase;
-        }
-
-        @keyframes centerPulse {
-            0%, 100% {
-                box-shadow:
-                    0 0 0 10px rgba(14,165,233,0.12),
-                    0 0 0 20px rgba(14,165,233,0.06),
-                    0 24px 70px rgba(2,132,199,0.55),
-                    inset 0 3px 12px rgba(255,255,255,0.25);
-            }
-            50% {
-                box-shadow:
-                    0 0 0 14px rgba(14,165,233,0.18),
-                    0 0 0 28px rgba(14,165,233,0.08),
-                    0 24px 90px rgba(2,132,199,0.72),
-                    inset 0 3px 12px rgba(255,255,255,0.25);
-            }
-        }
-
-        /* ORBIT ANIMATION — 6 items evenly spaced: 60s / 6 = 10s apart */
-        @keyframes orbit {
-            from { transform: rotate(0deg) translateX(270px) rotate(0deg); }
-            to   { transform: rotate(360deg) translateX(270px) rotate(-360deg); }
-        }
-
-        .circle-item {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 130px; height: 130px;
-            margin: -65px;
-            border-radius: 50%;
-            background: #040d14;
-            border: 2.5px solid rgba(56,189,248,0.6);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 6px 4px 5px;
-            cursor: pointer;
-            animation: orbit 52s linear infinite;
-            box-shadow: 0 6px 28px rgba(14,165,233,0.3);
-            z-index: 5;
-            transition: box-shadow 0.3s, border-color 0.3s;
-            overflow: hidden;
-            text-decoration: none;
-        }
-        .circle-item:hover {
-            border-color: #7dd3fc;
-            box-shadow: 0 10px 40px rgba(56,189,222,0.65), 0 0 20px rgba(56,189,222,0.3);
-        }
-        .item-img {
-            width: 82px; height: 82px;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            flex-shrink: 0;
-            margin-bottom: 4px;
-            transition: transform 0.4s;
-        }
-        .circle-item:hover .item-img { transform: scale(1.08); }
-        .item-label {
-            font-size: 9.5px; font-weight: 700;
-            color: #7dd3fc; line-height: 1.2;
-            text-decoration: none; display: block;
-        }
-        .circle-item:hover .item-label { color: #bae6fd; }
-
-        /* 6 items evenly spaced at 52s/6 ≈ 8.67s apart */
-        .item1 { animation-delay:    0s; }
-        .item2 { animation-delay:  -8.67s; }
-        .item3 { animation-delay: -17.33s; }
-        .item4 { animation-delay: -26s; }
-        .item5 { animation-delay: -34.67s; }
-        .item6 { animation-delay: -43.33s; }
-
-        /* CTA Final */
-        .cta-section {
-            max-width: 1400px; margin: 80px auto; padding: 80px 40px; text-align: center;
-            background: linear-gradient(135deg, rgba(0,180,216,0.15), rgba(72,202,228,0.15));
-            backdrop-filter: blur(20px); border-radius: 30px;
-            border: 2px solid rgba(72,202,228,0.3);
-        }
-        .cta-section h2 {
-            font-size: 3em; color: white; margin-bottom: 20px; font-weight: 600;
-            text-shadow: 0 2px 20px rgba(0,180,216,0.5);
-        }
-        .cta-section p {
-            font-size: 1.25em; color: rgba(255,255,255,0.9);
-            max-width: 700px; margin: 0 auto 40px; line-height: 1.7;
-        }
-        .cta-white {
-            display: inline-block; padding: 18px 45px; background: white;
-            color: var(--water-deep); text-decoration: none; border-radius: 50px;
-            font-weight: 600; font-size: 1.1em; transition: all 0.3s;
-            box-shadow: 0 8px 30px rgba(255,255,255,0.3);
-        }
-        .cta-white:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(255,255,255,0.5);
-            background: var(--foam);
-        }
-
-        footer {
-            padding: 40px; text-align: center; color: rgba(255,255,255,0.7);
-            background: rgba(0,18,25,0.8); backdrop-filter: blur(10px);
-            margin-top: 100px; font-weight: 300;
-        }
-
-        /* RESPONSIVE */
         @media (max-width: 968px) {
-            .hero h1 { font-size: 2.5em; letter-spacing: -1px; }
-            .hero p { font-size: 1.1em; }
+            .page-header h1 { font-size: 2.5em; }
             .nav-links { display: none; }
             .hamburger { display: flex; }
             .nav-container { padding: 0 20px; }
-            .nav-logo img { height: 38px; }
-            .water-feature { grid-template-columns: 1fr; gap: 40px; }
-            .water-visual { height: 400px; }
-            .cards-section { grid-template-columns: 1fr; padding: 0 20px; }
-            .glass-card { padding: 35px; }
-            .stats-section { padding: 50px 20px; gap: 30px; }
-            .stat-item h2 { font-size: 3em; }
-            .cta-section { padding: 60px 20px; margin: 60px 20px; }
-            .cta-section h2 { font-size: 2em; }
-            .water-feature-content h2 { font-size: 2em; }
-
-            .services-orbit-section { margin: 0 auto 40px; padding: 0 20px 40px; }
-            .services-orbit-section .section-heading { font-size: 1.9em; margin-bottom: 30px; }
-            .circle-container { width: 430px; height: 430px; }
-            .orbit-glow { width: 425px; height: 425px; }
-            .orbit-track { width: 338px; height: 338px; }
-            .orbit-inner-ring { width: 185px; height: 185px; }
-            .circle-center { width: 152px; height: 152px; }
-            .circle-center img { width: 90px; height: 90px; }
-            .circle-center .center-label { font-size: 11px; }
-            .circle-center .center-fallback svg { width: 44px; height: 44px; }
-            .circle-item { width: 100px; height: 100px; margin: -50px; padding: 5px 3px 4px; }
-            .item-img { width: 62px; height: 62px; margin-bottom: 3px; }
-            .item-label { font-size: 8.5px; }
-
-            @keyframes orbit {
-                from { transform: rotate(0deg) translateX(169px) rotate(0deg); }
-                to   { transform: rotate(360deg) translateX(169px) rotate(-360deg); }
-            }
-            @keyframes orbitDot {
-                from { transform: rotate(0deg) translateX(169px) rotate(0deg); }
-                to   { transform: rotate(360deg) translateX(169px) rotate(-360deg); }
-            }
-            @keyframes pulseRing {
-                0%   { width: 160px; height: 160px; opacity: 0.8; }
-                100% { width: 420px; height: 420px; opacity: 0; }
-            }
+            .nav-logo img { height: 50px; }
+            .services-grid { grid-template-columns: 1fr; padding: 0 20px; }
         }
     </style>
 </head>
@@ -624,14 +161,14 @@
     <nav>
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png" alt="SIECO Logo">
+                <img src="Diseño sin título (9).png" alt="SIECO" onerror="this.style.display='none';this.parentNode.querySelector('span').style.display='block'"><span style="display:none;font-size:1.5em;font-weight:700;color:#001219;letter-spacing:2px;">SIECO</span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="agua.html">Soluciones En Agua</a></li>
                 <li><a href="refrigeracion.html">Refrigeración</a></li>
                 <li><a href="mantenimiento.html">Mantenimiento</a></li>
-                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="proyectos.html" class="active">Proyectos</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
@@ -640,10 +177,10 @@
             </button>
         </div>
     </nav>
-
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html">Inicio</a>
-        <a href="agua.html">Soluciones</a>
+        <a href="soluciones.html">Soluciones</a>
+        <a href="control-electrico.html">Control Eléctrico</a>
         <a href="refrigeracion.html">Refrigeración</a>
         <a href="mantenimiento.html">Mantenimiento</a>
         <a href="proyectos.html">Proyectos</a>
@@ -652,145 +189,446 @@
     </div>
 
     <div class="content">
-        <!-- HERO -->
-        <section class="hero">
-            <h1>
-                <strong>BIENVENIDOS</strong>
-                SISTEMAS Y SOLUCIONES INTEGRALES
-            </h1>
-            <p>Tecnología de purificación de agua, control eléctrico, refrigeración y mantenimiento industrial</p>
-            <div class="cta-group">
-                <a href="contacto.html" class="cta-primary">Solicitar Cotización →</a>
-            </div>
+        <section class="page-header">
+            <h1>Proyectos</h1>
+            <p>Soluciones implementadas en diversas industrias</p>
         </section>
-
-        <!-- ====== ORBIT SERVICES SECTION ====== -->
-        <section class="services-orbit-section">
-            <p class="section-eyebrow">Lo que hacemos</p>
-            <h2 class="section-heading">Nuestros Servicios</h2>
-            <div class="orbit-wrapper">
-            <div class="orbit-card">
-                <div class="circle-container">
-
-                    <div class="orbit-glow"></div>
-                    <div class="orbit-track"></div>
-                    <div class="orbit-inner-ring"></div>
-
-                    <div class="pulse-ring p1"></div>
-                    <div class="pulse-ring p2"></div>
-                    <div class="pulse-ring p3"></div>
-
-                    <div class="orbit-dot d1"></div>
-                    <div class="orbit-dot d2"></div>
-                    <div class="orbit-dot d3"></div>
-
-                    <!-- CENTER: SIECO logo -->
-                    <div class="circle-center">
-                        <img
-                            src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png"
-                            alt="SIECO"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                        >
-                        <div class="center-fallback" style="display:none;">
-                            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M32 4C20 4 10 22 10 32c0 4 1.5 8.5 4.5 12C18 50 24.5 60 32 60c7.5 0 14-10 17.5-16C52.5 40.5 54 36 54 32c0-10-10-28-22-28zm0 44c-5 0-9-6.5-9-16s4-18 9-18 9 8 9 18-4 16-9 16z"/>
+        <section class="services-grid">
+            <div class="service-card">
+            <div class="card-slider" data-total="3">
+                <div class="cs-slide active">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 1</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 2</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 3</span>
+                    </div>
+                </div>
+                <button class="cs-arrow cs-prev">&#8592;</button>
+                <button class="cs-arrow cs-next">&#8594;</button>
+                <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot " data-i="1"></button><button class="cs-dot " data-i="2"></button></div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">🏭</div>
+                <h3>Industria Alimentaria</h3>
+                <p>Sistemas de purificación y refrigeración para plantas procesadoras de alimentos a nivel nacional.</p>
+                <ul class="service-features"><li>Purificación de agua para procesos</li><li>Cámaras frigoríficas de conservación</li><li>Túneles de congelación IQF</li><li>Certificación HACCP y FDA</li></ul>
+            </div>
+        </div>
+<div class="service-card">
+            <div class="card-slider" data-total="3">
+                <div class="cs-slide active">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 1</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 2</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 3</span>
+                    </div>
+                </div>
+                <button class="cs-arrow cs-prev">&#8592;</button>
+                <button class="cs-arrow cs-next">&#8594;</button>
+                <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot " data-i="1"></button><button class="cs-dot " data-i="2"></button></div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">💊</div>
+                <h3>Sector Farmacéutico</h3>
+                <p>Instalaciones de agua purificada USP y sistemas de climatización validados para áreas limpias.</p>
+                <ul class="service-features"><li>Agua purificada USP grado inyectable</li><li>Sistema HVAC clase 100,000</li><li>Documentación IQ/OQ/PQ</li><li>Cumplimiento COFEPRIS</li></ul>
+            </div>
+        </div>
+<div class="service-card">
+            <div class="card-slider" data-total="3">
+                <div class="cs-slide active">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 1</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 2</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 3</span>
+                    </div>
+                </div>
+                <button class="cs-arrow cs-prev">&#8592;</button>
+                <button class="cs-arrow cs-next">&#8594;</button>
+                <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot " data-i="1"></button><button class="cs-dot " data-i="2"></button></div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">🏨</div>
+                <h3>Hotelería y Turismo</h3>
+                <p>Soluciones integrales de climatización, refrigeración y tratamiento de agua para complejos turísticos.</p>
+                <ul class="service-features"><li>Chillers de alta eficiencia</li><li>Plantas de tratamiento de agua</li><li>Automatización BMS</li><li>Reducción de costos 35%</li></ul>
+            </div>
+        </div>
+<div class="service-card">
+            <div class="card-slider" data-total="3">
+                <div class="cs-slide active">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 1</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 2</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 3</span>
+                    </div>
+                </div>
+                <button class="cs-arrow cs-prev">&#8592;</button>
+                <button class="cs-arrow cs-next">&#8594;</button>
+                <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot " data-i="1"></button><button class="cs-dot " data-i="2"></button></div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">🔬</div>
+                <h3>Laboratorios Clínicos</h3>
+                <p>Sistemas de agua tipo 1, 2 y 3 para equipamiento de análisis de alta precisión.</p>
+                <ul class="service-features"><li>Agua ultrapura 18.2 MΩ·cm</li><li>Libre de RNasa y DNasa</li><li>Monitoreo TOC en línea</li><li>Trazabilidad completa</li></ul>
+            </div>
+        </div>
+<div class="service-card">
+            <div class="card-slider" data-total="3">
+                <div class="cs-slide active">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 1</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 2</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 3</span>
+                    </div>
+                </div>
+                <button class="cs-arrow cs-prev">&#8592;</button>
+                <button class="cs-arrow cs-next">&#8594;</button>
+                <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot " data-i="1"></button><button class="cs-dot " data-i="2"></button></div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">⚡</div>
+                <h3>Manufactura Industrial</h3>
+                <p>Tableros de control, subestaciones eléctricas y automatización para plantas de producción.</p>
+                <ul class="service-features"><li>Centros de control de motores CCM</li><li>Sistemas SCADA y PLC</li><li>Subestaciones de media tensión</li><li>Calidad de energía</li></ul>
+            </div>
+        </div>
+<div class="service-card">
+            <div class="card-slider" data-total="3">
+                <div class="cs-slide active">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 1</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 2</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 3</span>
+                    </div>
+                </div>
+                <button class="cs-arrow cs-prev">&#8592;</button>
+                <button class="cs-arrow cs-next">&#8594;</button>
+                <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot " data-i="1"></button><button class="cs-dot " data-i="2"></button></div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">🥤</div>
+                <h3>Industria de Bebidas</h3>
+                <p>Tratamiento de agua para embotellado, refrigeración de proceso y sistemas CIP automatizados.</p>
+                <ul class="service-features"><li>Osmosis inversa para embotellado</li><li>Sistemas CIP automatizados</li><li>Enfriadores de proceso</li><li>Cumplimiento NOM-201-SSA1</li></ul>
+            </div>
+        </div>
+<div class="service-card">
+            <div class="card-slider" data-total="3">
+                <div class="cs-slide active">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 1</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 2</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 3</span>
+                    </div>
+                </div>
+                <button class="cs-arrow cs-prev">&#8592;</button>
+                <button class="cs-arrow cs-next">&#8594;</button>
+                <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot " data-i="1"></button><button class="cs-dot " data-i="2"></button></div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">🔩</div>
+                <h3>Sistemas de Bombeo</h3>
+                <p>Skids de bombeo con bombas verticales multietapa para distribución y presurización en plantas.</p>
+                <ul class="service-features"><li>Bombas multietapa de acero inoxidable</li><li>Tablero de control integrado</li><li>Variadores de frecuencia VFD</li><li>Instalación llave en mano</li></ul>
+            </div>
+        </div>
+<div class="service-card">
+            <div class="card-slider" data-total="3">
+                <div class="cs-slide active">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 1</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 2</span>
+                    </div>
+                </div><div class="cs-slide">
+                    <div class="cs-placeholder">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                            <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Foto 3</span>
+                    </div>
+                </div>
+                <button class="cs-arrow cs-prev">&#8592;</button>
+                <button class="cs-arrow cs-next">&#8594;</button>
+                <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot " data-i="1"></button><button class="cs-dot " data-i="2"></button></div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">💧</div>
+                <h3>Filtración y Suavización</h3>
+                <p>Sistemas de filtración de sedimentos y suavización con válvulas de control digital programables.</p>
+                <ul class="service-features"><li>Filtro de sedimentos multimedia</li><li>Suavizador con resina iónica</li><li>Válvulas digitales con LCD</li><li>Regeneración automática programable</li></ul>
+            </div>
+        </div>
+            <!-- CARD 9: SECTOR AGROINDUSTRIAL -->
+            <div class="service-card">
+                <div class="card-slider" data-total="3">
+                    <div class="cs-slide active">
+                        <div class="cs-placeholder">
+                            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                                <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
                             </svg>
-                            <span class="center-label">SIECO</span>
+                            <span>Foto 1</span>
                         </div>
                     </div>
-
-                    <!-- ====== 6 ORBITING SERVICE ITEMS ====== -->
-
-                    <!-- 1 · Agua Residual -->
-                    <a href="agua.html" class="circle-item item1">
-                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=200&h=200&fit=crop&auto=format" alt="Agua Residual" class="item-img">
-                        <span class="item-label">Agua Residual</span>
-                    </a>
-
-                    <!-- 2 · Ósmosis Inversa -->
-                    <a href="agua.html" class="circle-item item2">
-                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=200&h=200&fit=crop&auto=format" alt="Ósmosis Inversa" class="item-img">
-                        <span class="item-label">Ósmosis Inversa</span>
-                    </a>
-
-                    <!-- 3 · Desinfección UV -->
-                    <a href="agua.html" class="circle-item item3">
-                        <img src="https://images.unsplash.com/photo-1582719471381-a9c3c9b51d4b?w=200&h=200&fit=crop&auto=format" alt="Desinfección UV" class="item-img">
-                        <span class="item-label">Desinfección UV</span>
-                    </a>
-
-                    <!-- 4 · Filtración -->
-                    <a href="agua.html" class="circle-item item4">
-                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=200&fit=crop&auto=format" alt="Filtración" class="item-img">
-                        <span class="item-label">Filtración</span>
-                    </a>
-
-                    <!-- 5 · Comercial -->
-                    <a href="contacto.html" class="circle-item item5">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&h=200&fit=crop&auto=format" alt="Comercial" class="item-img">
-                        <span class="item-label">Comercial</span>
-                    </a>
-
-                    <!-- 6 · Resinas de Intercambio -->
-                    <a href="agua.html" class="circle-item item6">
-                        <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=200&h=200&fit=crop&auto=format" alt="Resinas" class="item-img">
-                        <span class="item-label">Resinas</span>
-                    </a>
-
+                    <div class="cs-slide">
+                        <div class="cs-placeholder">
+                            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                                <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Foto 2</span>
+                        </div>
+                    </div>
+                    <div class="cs-slide">
+                        <div class="cs-placeholder">
+                            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                                <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Foto 3</span>
+                        </div>
+                    </div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon">🌾</div>
+                    <h3>Sector Agroindustrial</h3>
+                    <p>Sistemas de riego tecnificado, tratamiento de agua y refrigeración para el sector agrícola y agroindustrial.</p>
+                    <ul class="service-features">
+                        <li>Filtración para agua de riego</li>
+                        <li>Cámaras de conservación de productos</li>
+                        <li>Sistemas de enfriamiento rápido</li>
+                        <li>Tratamiento de aguas residuales</li>
+                    </ul>
                 </div>
             </div>
-            </div>
-        </section>
-        <!-- ====== FIN ORBIT SERVICES ====== -->
 
-        <!-- WATER FEATURE -->
-        <section class="water-feature">
-            <div class="water-visual">
-                <div class="image-wrapper">
-                    <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/FILTRO1.png?raw=true" class="slide active" alt="Sistema de Filtración 1">
-                    <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/FILTRO3.jpg?raw=true" class="slide" alt="Sistema de Filtración 2">
-                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800" class="slide" alt="Sistema de Filtración 3">
+            <!-- CARD 10: CENTROS COMERCIALES -->
+            <div class="service-card">
+                <div class="card-slider" data-total="3">
+                    <div class="cs-slide active">
+                        <div class="cs-placeholder">
+                            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                                <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Foto 1</span>
+                        </div>
+                    </div>
+                    <div class="cs-slide">
+                        <div class="cs-placeholder">
+                            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                                <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Foto 2</span>
+                        </div>
+                    </div>
+                    <div class="cs-slide">
+                        <div class="cs-placeholder">
+                            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/>
+                                <path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Foto 3</span>
+                        </div>
+                    </div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                    </div>
                 </div>
-                <div class="glass-overlay"></div>
-                <div class="water-ripple"></div>
-                <div class="water-ripple"></div>
-                <div class="water-ripple"></div>
+                <div class="service-content">
+                    <div class="service-icon">🏬</div>
+                    <h3>Centros Comerciales</h3>
+                    <p>Soluciones de climatización centralizada, tratamiento de agua y mantenimiento preventivo para plazas y centros comerciales.</p>
+                    <ul class="service-features">
+                        <li>Sistemas VRF y fan coils</li>
+                        <li>Torres de enfriamiento</li>
+                        <li>Suavización de agua para calderas</li>
+                        <li>Contratos de mantenimiento integral</li>
+                    </ul>
+                </div>
             </div>
-            <div class="water-feature-content">
-                <h2>¿QUIÉNES SOMOS?</h2>
-                <p>En <b>SIECO</b> somos un equipo multidisciplinario de profesionales con experiencia en el diseño e implementación de soluciones integrales en <b>el tratamiento y filtración de agua, control eléctrico, sistemas de refrigeración y aire acondicionado.</b>
-Nos especializamos en ofrecer servicios de ingeniería para una variedad de sectores: industrial, comercial y residencial.</p>
-                <a href="contacto.html" class="cta-primary">Conocer Más →</a>
-            </div>
-        </section>
-
-        <!-- CARDS -->
-        <section class="cards-section">
-            <div class="glass-card">
-                <div class="card-icon">🏢</div>
-                <h3>Soluciones Empresariales</h3>
-                <p>Soluciones integrales en infraestructura, mantenimiento industrial y corporativo, diseñadas para prevenir fallas operativas con un enfoque sistémico y estratégico.</p>
-            </div>
-            <div class="glass-card">
-                <div class="card-icon">🏠</div>
-                <h3>Filtración Residencial</h3>
-                <p>Purificadores compactos y elegantes diseñados para integrarse perfectamente en tu hogar, proporcionando agua pura ilimitada.</p>
-            </div>
-            <div class="glass-card">
-                <div class="card-icon">🔬</div>
-                <h3>Análisis de Calidad</h3>
-                <p>Mediante inspecciones técnicas y pruebas físicas, obtenemos un diagnóstico claro y confiable que nos permite definir la solución más adecuada para cada necesidad.</p>
-            </div>
-
-        </section>
-
-
-
-        <!-- CTA FINAL -->
-        <section class="cta-section">
-            <h2>Agua Purificada Hoy</h2>
-            <p>Solicita un análisis gratuito y descubre cómo nuestros sistemas pueden mejorar tu calidad de vida desde el primer día</p>
-            <a href="contacto.html" class="cta-white">Ver Más</a>
         </section>
     </div>
 
@@ -799,7 +637,6 @@ Nos especializamos en ofrecer servicios de ingeniería para una variedad de sect
     </footer>
 
     <script>
-        // Water Canvas WebGL
         const canvas = document.getElementById('waterCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         function resizeCanvas() {
@@ -820,22 +657,24 @@ Nos especializamos en ofrecer servicios de ingeniería para una variedad de sect
                 void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
             gl.compileShader(fs);
             const prog = gl.createProgram();
-            gl.attachShader(prog,vs); gl.attachShader(prog,fs); gl.linkProgram(prog); gl.useProgram(prog);
-            const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
-            gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-            const posLoc=gl.getAttribLocation(prog,'position'); gl.enableVertexAttribArray(posLoc);
-            gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
-            const timeLoc=gl.getUniformLocation(prog,'time'); const resLoc=gl.getUniformLocation(prog,'resolution');
-            let start=Date.now();
-            function render(){
-                const t=(Date.now()-start)*0.001; gl.uniform1f(timeLoc,t); gl.uniform2f(resLoc,canvas.width,canvas.height);
-                gl.clearColor(0.0,0.37,0.45,1.0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
-                requestAnimationFrame(render);
+            gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+            const posLoc = gl.getAttribLocation(prog, 'position');
+            gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+            const timeLoc = gl.getUniformLocation(prog, 'time');
+            const resLoc = gl.getUniformLocation(prog, 'resolution');
+            let start = Date.now();
+            function render() {
+                const t = (Date.now() - start) * 0.001;
+                gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height);
+                gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(render);
             }
             render();
         }
 
-        // Hamburger menu
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
         hamburger.addEventListener('click', () => {
@@ -848,15 +687,46 @@ Nos especializamos en ofrecer servicios de ingeniería para una variedad de sect
                 mobileMenu.classList.remove('open');
             });
         });
+    </script>
+    <script>
+    const hb = document.getElementById('hamburger');
+    const mm = document.getElementById('mobileMenu');
+    hb.addEventListener('click', () => { hb.classList.toggle('open'); mm.classList.toggle('open'); });
+    mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); mm.classList.remove('open'); }));
 
-        // Image slider
-        const slides = document.querySelectorAll(".slide");
-        let current = 0;
-        setInterval(() => {
-            slides.forEach(s => s.classList.remove("active"));
-            current = (current + 1) % slides.length;
-            slides[current].classList.add("active");
-        }, 4000);
+    document.querySelectorAll('.card-slider').forEach((slider, cardIdx) => {
+        const slides = Array.from(slider.querySelectorAll('.cs-slide'));
+        const dots   = Array.from(slider.querySelectorAll('.cs-dot'));
+        const total  = slides.length;
+        let cur = 0, timer;
+
+        function show(idx) {
+            slides[cur].classList.remove('active');
+            dots[cur] && dots[cur].classList.remove('active');
+            cur = (idx + total) % total;
+            slides[cur].classList.add('active');
+            dots[cur] && dots[cur].classList.add('active');
+        }
+
+        function startAuto() {
+            clearInterval(timer);
+            timer = setInterval(() => show(cur + 1), 3200 + cardIdx * 350);
+        }
+
+        slider.querySelector('.cs-prev').addEventListener('click', e => { e.stopPropagation(); show(cur-1); startAuto(); });
+        slider.querySelector('.cs-next').addEventListener('click', e => { e.stopPropagation(); show(cur+1); startAuto(); });
+        dots.forEach((d,i) => d.addEventListener('click', e => { e.stopPropagation(); show(i); startAuto(); }));
+
+        let tx = 0;
+        slider.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+        slider.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - tx;
+            if (Math.abs(dx) > 40) { show(dx < 0 ? cur+1 : cur-1); startAuto(); }
+        });
+        slider.addEventListener('mouseenter', () => clearInterval(timer));
+        slider.addEventListener('mouseleave', () => startAuto());
+        startAuto();
+    });
     </script>
 </body>
 </html>
