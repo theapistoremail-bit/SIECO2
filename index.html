@@ -115,6 +115,7 @@
         z-index: 999; padding: 20px 40px 30px;
         box-shadow: 0 10px 30px rgba(0,180,216,0.15);
         border-bottom: 2px solid rgba(0,180,216,0.2);
+        transition: top 0.3s;
     }
     .mobile-menu.open { display: flex; flex-direction: column; gap: 0; }
     .mobile-menu a {
@@ -866,73 +867,99 @@
 
     /* RESPONSIVE */
     @media (max-width: 968px) {
-        .hero h1 { font-size: 2.5em; letter-spacing: -1px; }
-        .hero p { font-size: 1.1em; }
+        /* Nav */
         .nav-links { display: none; }
         .hamburger { display: flex; }
-        .nav-container { padding: 0 20px; }
-        .nav-logo img { height: 38px; }
-        .water-feature { grid-template-columns: 1fr; gap: 40px; }
-        .water-visual { height: 400px; }
-        .cards-section { grid-template-columns: 1fr; padding: 0 20px; }
-        .glass-card { padding: 35px; }
-        .stats-section { padding: 50px 20px; gap: 30px; }
-        .stat-item h2 { font-size: 3em; }
-        .cta-section { padding: 60px 20px 90px; margin: 60px 20px; }
-        .cta-section h2 { font-size: 2em; }
+        .nav-container { padding: 0 20px; height: 70px; }
+        .nav-logo img { height: 42px; }
+
+        /* Hero */
+        .hero { padding: 80px 20px 60px; }
+        .hero h1 { font-size: 2.4em; letter-spacing: -1px; }
+        .hero p { font-size: 1.05em; }
+
+        /* Mobile menu top aligned to nav height */
+        .mobile-menu { top: 70px; }
+
+        /* Water feature */
+        .water-feature { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; }
+        .water-visual { height: 340px; }
+        .water-feature-content { padding: 0 20px; }
         .water-feature-content h2 { font-size: 2em; }
 
+        /* Cards */
+        .cards-section { grid-template-columns: 1fr; padding: 0 20px; }
+        .glass-card { padding: 30px; }
+
+        /* Stats */
+        .stats-section { padding: 40px 20px; gap: 24px; margin: 60px 20px; }
+        .stat-item h2 { font-size: 3em; }
+
+        /* Orbit */
         .services-orbit-section { margin: 0 auto 40px; padding: 0 20px 40px; }
-        .services-orbit-section .section-heading { font-size: 1.9em; margin-bottom: 30px; }
-        .circle-container { width: 430px; height: 430px; }
-        .orbit-glow { width: 425px; height: 425px; }
-        .orbit-track { width: 338px; height: 338px; }
-        .orbit-inner-ring { width: 185px; height: 185px; }
-        .circle-center { width: 152px; height: 152px; }
-        .circle-center img { width: 90px; height: 90px; }
-        .circle-center .center-label { font-size: 11px; }
-        .circle-center .center-fallback svg { width: 44px; height: 44px; }
-        .circle-item { width: 100px; height: 100px; margin: -50px; padding: 5px 3px 4px; }
-        .item-img { width: 62px; height: 62px; margin-bottom: 3px; }
-        .item-label { font-size: 8.5px; }
-
-        /* Videos responsive */
-        .videos-emergence { height: 280px; }
-        .video-card { width: 180px; }
-        .video-card:nth-child(1) { height: 155px; }
-        .video-card:nth-child(2) { height: 185px; }
-        .video-card:nth-child(3) { height: 145px; }
-        .video-cards { gap: 14px; bottom: 60px; }
-
-        /* Footer responsive */
-        .footer-main {
-            grid-template-columns: 1fr 1fr;
-            gap: 32px; padding: 40px 24px 28px;
-        }
-        .footer-logo { grid-column: 1 / -1; }
-        .footer-bottom { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 6px; }
+        .services-orbit-section .section-heading { font-size: 1.8em; margin-bottom: 30px; }
+        .orbit-card { padding: 20px; }
+        .circle-container { width: 360px; height: 360px; }
+        .orbit-glow { width: 355px; height: 355px; }
+        .orbit-track { width: 280px; height: 280px; }
+        .orbit-inner-ring { width: 155px; height: 155px; }
+        .circle-center { width: 130px; height: 130px; }
+        .circle-center img { width: 80px; height: 80px; }
+        .circle-center .center-label { font-size: 10px; }
+        .circle-center .center-fallback svg { width: 38px; height: 38px; }
+        .circle-item { width: 88px; height: 88px; margin: -44px; padding: 4px 2px; }
+        .item-img { width: 54px; height: 54px; margin-bottom: 2px; }
+        .item-label { font-size: 7.5px; }
 
         @keyframes orbit {
-            from { transform: rotate(0deg) translateX(169px) rotate(0deg); }
-            to   { transform: rotate(360deg) translateX(169px) rotate(-360deg); }
+            from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+            to   { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
         }
         @keyframes orbitDot {
-            from { transform: rotate(0deg) translateX(169px) rotate(0deg); }
-            to   { transform: rotate(360deg) translateX(169px) rotate(-360deg); }
+            from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+            to   { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
         }
         @keyframes pulseRing {
-            0%   { width: 160px; height: 160px; opacity: 0.8; }
-            100% { width: 420px; height: 420px; opacity: 0; }
+            0%   { width: 130px; height: 130px; opacity: 0.8; }
+            100% { width: 350px; height: 350px; opacity: 0; }
         }
+
+        /* CTA */
+        .cta-section { padding: 50px 20px 40px; margin: 60px 12px; border-radius: 20px; }
+        .cta-section h2 { font-size: 1.8em; }
+        .cta-section p { font-size: 1em; }
+        .cta-white { padding: 14px 32px; font-size: 1em; margin-bottom: 40px; }
+
+        /* Videos — apilados verticalmente en mobile */
+        .video-cards { flex-direction: column; align-items: center; gap: 14px; }
+        .video-card { width: 100%; max-width: 400px; }
+
+        /* Footer */
+        .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; padding: 36px 20px 24px; }
+        .footer-logo { grid-column: 1 / -1; }
+        .footer-bottom { padding: 14px 20px; flex-direction: column; align-items: flex-start; gap: 4px; }
     }
 
     @media (max-width: 520px) {
-        .video-cards { gap: 10px; }
-        .video-card { width: 130px; }
-        .video-card:nth-child(1) { height: 130px; }
-        .video-card:nth-child(2) { height: 160px; }
-        .video-card:nth-child(3) { height: 120px; }
-        .footer-main { grid-template-columns: 1fr; }
+        .nav-container { padding: 0 16px; }
+        .nav-logo img { height: 36px; }
+        .mobile-menu { padding: 16px 20px 24px; }
+        .hero h1 { font-size: 1.9em; }
+        .circle-container { width: 300px; height: 300px; }
+        .orbit-glow { width: 295px; height: 295px; }
+        .orbit-track { width: 235px; height: 235px; }
+        .orbit-inner-ring { width: 128px; height: 128px; }
+        .circle-center { width: 108px; height: 108px; }
+        .circle-center img { width: 66px; height: 66px; }
+        .circle-item { width: 74px; height: 74px; margin: -37px; }
+        .item-img { width: 44px; height: 44px; }
+        .item-label { font-size: 6.5px; }
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(117px) rotate(0deg); }
+            to   { transform: rotate(360deg) translateX(117px) rotate(-360deg); }
+        }
+        .footer-main { grid-template-columns: 1fr; gap: 20px; }
+        .video-card { max-width: 100%; }
     }
 </style>
 ```
