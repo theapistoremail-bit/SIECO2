@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -24,177 +25,265 @@
             z-index: 1; pointer-events: none;
         }
 
-        /* NAV */
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0,180,216,0.1);
-            z-index: 1000; border-bottom: 2px solid rgba(0,180,216,0.2);
-        }
-        .nav-container {
-            max-width: 1400px; margin: 0 auto; padding: 0 40px;
-            display: flex; justify-content: space-between; align-items: center; height: 90px;
-        }
-        .nav-logo img { height: 188px; width: auto; display: block; }
-        .nav-links { display: flex; gap: 11px; list-style: none; align-items: center; }
-        .nav-links a {
-            text-decoration: none; color: #001219; font-weight: 500; font-size: 0.82em;
-            transition: all 0.3s; position: relative; letter-spacing: 0.6px; text-transform: uppercase;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -4px; left: 0;
-            width: 0; height: 2px; background: var(--water-blue); transition: width 0.3s;
-        }
-        .nav-links a:hover { color: var(--water-deep); }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a.active { color: var(--water-blue); font-weight: 600; }
-        .nav-links a.active::after { width: 100%; }
+```
+    /* NAV */
+    nav {
+        position: fixed; top: 0; width: 100%;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 4px 30px rgba(0,180,216,0.15);
+        z-index: 9000; border-bottom: 2px solid rgba(0,180,216,0.25);
+    }
+    .nav-container {
+        max-width: 1400px; margin: 0 auto; padding: 0 40px;
+        display: flex; justify-content: space-between; align-items: center; height: 90px;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 64px; width: auto; display: block; object-fit: contain; }
+    .nav-logo .nav-logo-text {
+        font-size: 1.6em; font-weight: 800; letter-spacing: 4px;
+        color: var(--water-deep); text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 11px; list-style: none; align-items: center; }
+    .nav-links a {
+        text-decoration: none; color: #001219; font-weight: 500; font-size: 0.82em;
+        transition: all 0.3s; position: relative; letter-spacing: 0.6px; text-transform: uppercase; padding: 6px 4px;
+    }
+    .nav-links a::after {
+        content: ''; position: absolute; bottom: 0; left: 0;
+        width: 0; height: 2px; background: var(--water-blue); transition: width 0.3s; border-radius: 2px;
+    }
+    .nav-links a:hover { color: var(--water-deep); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a.active { color: var(--water-blue); font-weight: 600; }
 
-        .hamburger {
-            display: none; flex-direction: column; gap: 5px;
-            cursor: pointer; padding: 5px; background: none; border: none;
-        }
-        .hamburger span { display: block; width: 24px; height: 2px; background: #001219; border-radius: 2px; transition: all 0.3s; }
-        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .hamburger {
+        display: none; flex-direction: column; gap: 5px;
+        cursor: pointer; padding: 8px; background: none; border: none; z-index: 9001;
+    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #001219; border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        .mobile-menu {
-            display: none; position: fixed; top: 90px; left: 0; width: 100%;
-            background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
-            z-index: 999; padding: 20px 40px 30px;
-            box-shadow: 0 10px 30px rgba(0,180,216,0.15);
-            border-bottom: 2px solid rgba(0,180,216,0.2);
-        }
-        .mobile-menu.open { display: flex; flex-direction: column; }
-        .mobile-menu a {
-            text-decoration: none; color: #001219; font-weight: 500; font-size: 1em;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
-        }
-        .mobile-menu a:hover { color: var(--water-blue); }
+    .mobile-menu {
+        display: none; position: fixed; top: 90px; left: 0; width: 100%;
+        background: rgba(255,255,255,0.99); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        z-index: 8999; padding: 20px 40px 30px;
+        box-shadow: 0 10px 30px rgba(0,180,216,0.15); border-bottom: 2px solid rgba(0,180,216,0.2);
+    }
+    .mobile-menu.open { display: flex; flex-direction: column; }
+    .mobile-menu a {
+        text-decoration: none; color: #001219; font-weight: 500; font-size: 1em;
+        text-transform: uppercase; letter-spacing: 0.5px;
+        padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--water-blue); }
 
-        .content { position: relative; z-index: 10; padding-top: 100px; }
+    .content { position: relative; z-index: 10; padding-top: 100px; }
 
-        .page-header { max-width: 1400px; margin: 0 auto; padding: 80px 40px 60px; text-align: center; }
-        .page-header h1 { font-size: 4em; font-weight: 300; color: white; margin-bottom: 20px; letter-spacing: -1px; text-shadow: 0 4px 30px rgba(0,180,216,0.5); }
-        .page-header h1 strong { font-weight: 600; background: linear-gradient(135deg, var(--water-light), var(--foam)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .page-header p { font-size: 1.15em; font-weight: 300; color: rgba(255,255,255,0.9); max-width: 750px; margin: 0 auto; line-height: 1.8; }
+    /* PAGE HEADER */
+    .page-header { max-width: 1400px; margin: 0 auto; padding: 80px 40px 60px; text-align: center; }
+    .page-header h1 { font-size: 4em; font-weight: 300; color: white; margin-bottom: 20px; letter-spacing: -1px; text-shadow: 0 4px 30px rgba(0,180,216,0.5); }
+    .page-header h1 strong { font-weight: 600; background: linear-gradient(135deg, var(--water-light), var(--foam)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-header p { font-size: 1.15em; font-weight: 300; color: rgba(255,255,255,0.9); max-width: 750px; margin: 0 auto; line-height: 1.8; }
 
-        .section { max-width: 1400px; margin: 60px auto; padding: 0 40px; }
+    /* INTRO BOX con slideshow */
+    .section { max-width: 1400px; margin: 60px auto; padding: 0 40px; }
 
-        .intro-box {
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
-            border-radius: 24px; padding: 50px;
-            box-shadow: 0 10px 40px rgba(0,180,216,0.15);
-            border: 2px solid rgba(72,202,228,0.2); margin-bottom: 60px;
-        }
-        .intro-box h2 { font-size: 2.2em; color: var(--water-dark); margin-bottom: 20px; }
-        .intro-box h3 { font-size: 1.6em; color: var(--water-dark); margin: 30px 0 15px; }
-        .intro-box p { font-size: 1.1em; line-height: 1.8; color: #2c3e50; margin-bottom: 15px; }
-        .intro-box ul { list-style: none; padding-left: 0; margin: 20px 0; }
-        .intro-box ul li { padding: 8px 0 8px 30px; position: relative; color: #2c3e50; line-height: 1.6; }
-        .intro-box ul li::before { content: "✓"; position: absolute; left: 0; color: var(--water-blue); font-weight: bold; font-size: 1.2em; }
+    .intro-box {
+        background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+        border-radius: 24px; padding: 50px;
+        box-shadow: 0 10px 40px rgba(0,180,216,0.15);
+        border: 2px solid rgba(72,202,228,0.2); margin-bottom: 60px;
+        display: grid; grid-template-columns: 1fr 380px; gap: 50px; align-items: start;
+    }
+    .intro-text h2 { font-size: 2.2em; color: var(--water-dark); margin-bottom: 20px; }
+    .intro-text h3 { font-size: 1.3em; color: var(--water-deep); margin: 28px 0 12px; font-weight: 600; }
+    .intro-text p { font-size: 1.05em; line-height: 1.8; color: #2c3e50; margin-bottom: 12px; }
+    .intro-text ul { list-style: none; padding-left: 0; margin: 12px 0; }
+    .intro-text ul li { padding: 6px 0 6px 28px; position: relative; color: #2c3e50; line-height: 1.6; font-size: 0.98em; }
+    .intro-text ul li::before { content: "✓"; position: absolute; left: 0; color: var(--water-blue); font-weight: bold; }
 
-        .services-grid {
-            max-width: 1400px; margin: 60px auto; padding: 0 40px;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;
-        }
-        .service-card {
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
-            border-radius: 24px; padding: 0;
-            box-shadow: 0 10px 40px rgba(0,180,216,0.15);
-            border: 2px solid rgba(72,202,228,0.2); transition: all 0.4s; overflow: hidden;
-        }
-        .service-card:hover { transform: translateY(-12px); box-shadow: 0 20px 60px rgba(0,180,216,0.3); border-color: var(--water-blue); }
-        .service-image { width: 100%; height: 220px; object-fit: cover; display: block; }
-        .service-content { padding: 40px; }
-        .service-icon {
-            width: 75px; height: 75px;
-            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
-            border-radius: 18px; display: flex; align-items: center; justify-content: center;
-            font-size: 2.2em; margin-bottom: 22px; box-shadow: 0 8px 24px rgba(0,180,216,0.3);
-        }
-        .service-card h3 { font-size: 1.8em; color: var(--water-dark); margin-bottom: 20px; font-weight: 500; }
-        .service-card p { color: #2c3e50; line-height: 1.8; margin-bottom: 15px; font-size: 1.05em; }
-        .service-features { list-style: none; margin-top: 15px; padding-left: 0; }
-        .service-features li { padding: 6px 0; font-size: 0.95em; color: #555; display: flex; align-items: center; gap: 8px; }
-        .service-features li::before { content: '✓'; color: var(--water-blue); font-weight: 600; }
+    /* SLIDESHOW genérico */
+    .slideshow {
+        position: relative; border-radius: 16px; overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0,180,216,0.2);
+        background: rgba(0,20,40,0.6);
+        aspect-ratio: 4/3;
+    }
+    .slideshow img {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; opacity: 0;
+        transition: opacity 1.2s ease;
+    }
+    .slideshow img.active { opacity: 1; }
+    /* dots */
+    .slide-dots {
+        position: absolute; bottom: 10px; left: 0; right: 0;
+        display: flex; justify-content: center; gap: 6px; z-index: 3;
+    }
+    .slide-dot {
+        width: 7px; height: 7px; border-radius: 50%;
+        background: rgba(255,255,255,0.4); border: 1px solid rgba(72,202,228,0.5);
+        cursor: pointer; transition: background 0.3s, transform 0.3s;
+    }
+    .slide-dot.active { background: rgba(72,202,228,0.95); transform: scale(1.3); }
 
-        .cta-section {
-            max-width: 1400px; margin: 80px auto; padding: 80px 40px; text-align: center;
-            background: linear-gradient(135deg, rgba(0,180,216,0.15), rgba(72,202,228,0.15));
-            backdrop-filter: blur(20px); border-radius: 30px; border: 2px solid rgba(72,202,228,0.3);
-        }
-        .cta-section h2 { font-size: 3em; color: white; margin-bottom: 20px; font-weight: 600; text-shadow: 0 2px 20px rgba(0,180,216,0.5); }
-        .cta-section p { font-size: 1.25em; color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto 40px; line-height: 1.7; }
-        .cta-button {
-            display: inline-block; padding: 18px 45px; background: white;
-            color: var(--water-deep); text-decoration: none; border-radius: 50px;
-            font-weight: 600; font-size: 1.1em; transition: all 0.3s;
-            box-shadow: 0 8px 30px rgba(255,255,255,0.3);
-        }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,255,255,0.5); background: var(--foam); }
+    /* CARDS DE SERVICIOS */
+    .services-grid {
+        max-width: 1400px; margin: 0 auto 60px; padding: 0 40px;
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px;
+    }
+    .service-card {
+        background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+        border-radius: 24px; overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0,180,216,0.15);
+        border: 2px solid rgba(72,202,228,0.2); transition: all 0.4s;
+        display: flex; flex-direction: column;
+    }
+    .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,180,216,0.3); border-color: var(--water-blue); }
 
-        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.7); background: rgba(0,18,25,0.8); backdrop-filter: blur(10px); margin-top: 100px; font-weight: 300; }
+    /* slideshow dentro de card */
+    .card-slideshow {
+        position: relative; width: 100%; height: 210px;
+        background: rgba(0,20,40,0.5); overflow: hidden; flex-shrink: 0;
+    }
+    .card-slideshow img {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; opacity: 0; transition: opacity 1.2s ease;
+    }
+    .card-slideshow img.active { opacity: 1; }
+    .card-slideshow .slide-dots { bottom: 8px; }
 
-        @media (max-width: 968px) {
-            .page-header h1 { font-size: 2.5em; }
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            .nav-container { padding: 0 20px; }
-            .nav-logo img { height: 50px; }
-            .intro-box { padding: 30px; }
-            .services-grid { grid-template-columns: 1fr; padding: 0 20px; }
-            .section { padding: 0 20px; }
-        }
-    </style>
+    .service-content { padding: 36px; flex: 1; }
+    .service-icon {
+        width: 68px; height: 68px;
+        background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
+        border-radius: 16px; display: flex; align-items: center; justify-content: center;
+        font-size: 2em; margin-bottom: 18px; box-shadow: 0 8px 24px rgba(0,180,216,0.3);
+    }
+    .service-card h3 { font-size: 1.6em; color: var(--water-dark); margin-bottom: 14px; font-weight: 500; }
+    .service-card p { color: #2c3e50; line-height: 1.8; margin-bottom: 14px; font-size: 1em; }
+    .service-features { list-style: none; margin-top: 12px; padding-left: 0; }
+    .service-features li { padding: 5px 0; font-size: 0.93em; color: #555; display: flex; align-items: center; gap: 8px; }
+    .service-features li::before { content: '✓'; color: var(--water-blue); font-weight: 600; flex-shrink: 0; }
+
+    /* CTA */
+    .cta-section {
+        max-width: 1400px; margin: 80px auto; padding: 80px 40px; text-align: center;
+        background: linear-gradient(135deg, rgba(0,180,216,0.15), rgba(72,202,228,0.15));
+        backdrop-filter: blur(20px); border-radius: 30px; border: 2px solid rgba(72,202,228,0.3);
+    }
+    .cta-section h2 { font-size: 3em; color: white; margin-bottom: 20px; font-weight: 600; text-shadow: 0 2px 20px rgba(0,180,216,0.5); }
+    .cta-section p { font-size: 1.25em; color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto 40px; line-height: 1.7; }
+    .cta-button {
+        display: inline-block; padding: 18px 45px; background: white;
+        color: var(--water-deep); text-decoration: none; border-radius: 50px;
+        font-weight: 600; font-size: 1.1em; transition: all 0.3s;
+        box-shadow: 0 8px 30px rgba(255,255,255,0.3);
+    }
+    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,255,255,0.5); background: var(--foam); }
+
+    /* FOOTER */
+    footer {
+        position: relative; z-index: 10;
+        background: rgba(0,8,18,0.96); backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(72,202,228,0.15);
+    }
+    .footer-main {
+        max-width: 1400px; margin: 0 auto; padding: 56px 40px 40px;
+        display: grid; grid-template-columns: 160px 1fr 1fr 1fr auto; gap: 48px; align-items: start;
+    }
+    .footer-logo { display: flex; align-items: center; }
+    .footer-logo img { height: 60px; width: auto; display: block; object-fit: contain; }
+    .footer-logo-fallback { font-size: 1.6em; font-weight: 800; letter-spacing: 3px; color: var(--water-blue); text-transform: uppercase; display: none; }
+    .footer-col-label { font-size: 10px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: var(--water-light); margin-bottom: 14px; opacity: 0.7; }
+    .footer-col p { font-size: 0.92em; color: rgba(255,255,255,0.72); line-height: 1.75; font-weight: 300; }
+    .footer-col a { display: block; font-size: 0.92em; color: rgba(255,255,255,0.72); text-decoration: none; line-height: 1.75; font-weight: 300; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--water-light); }
+    .footer-social { display: flex; gap: 12px; margin-top: 16px; }
+    .footer-social a { width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(72,202,228,0.2); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .footer-social a:hover { background: rgba(0,180,216,0.2); border-color: rgba(72,202,228,0.6); transform: translateY(-2px); }
+    .footer-social img { width: 18px; height: 18px; filter: brightness(0) invert(1); opacity: 0.75; }
+    .footer-divider { max-width: 1400px; margin: 0 auto; border: none; border-top: 1px solid rgba(72,202,228,0.1); }
+    .footer-bottom { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { font-size: 0.8em; color: rgba(255,255,255,0.35); font-weight: 300; }
+
+    /* RESPONSIVE */
+    @media (max-width: 968px) {
+        .page-header h1 { font-size: 2.4em; }
+        .nav-links { display: none; }
+        .hamburger { display: flex; }
+        .nav-container { padding: 0 20px; height: 70px; }
+        .nav-logo img { height: 42px; }
+        .mobile-menu { top: 70px; padding: 16px 20px 24px; }
+        .intro-box { grid-template-columns: 1fr; padding: 30px; gap: 28px; }
+        .services-grid { grid-template-columns: 1fr; padding: 0 20px; }
+        .section { padding: 0 20px; }
+        .cta-section { padding: 60px 20px; margin: 60px 12px; border-radius: 20px; }
+        .cta-section h2 { font-size: 2em; }
+        .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; padding: 36px 20px 24px; }
+        .footer-logo { grid-column: 1 / -1; }
+        .footer-bottom { padding: 14px 20px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 520px) {
+        .footer-main { grid-template-columns: 1fr; }
+        .page-header { padding: 60px 20px 40px; }
+        .page-header h1 { font-size: 1.9em; }
+    }
+</style>
+```
+
 </head>
 <body>
     <canvas id="waterCanvas"></canvas>
     <div class="water-overlay"></div>
 
-    <nav>
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="soluciones.html">Soluciones En Agua</a></li>
-                <li><a href="refrigeracion.html">Refrigeración</a></li>
-                <li><a href="mantenimiento.html" class="active">Mantenimiento</a></li>
-                <li><a href="proyectos.html">Proyectos</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Menú">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
-
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Inicio</a>
-        <a href="soluciones.html">Soluciones</a>
-        <a href="control-electrico.html">Control Eléctrico</a>
-        <a href="refrigeracion.html">Refrigeración</a>
-        <a href="mantenimiento.html">Mantenimiento</a>
-        <a href="proyectos.html">Proyectos</a>
-        <a href="blog.html">Blog</a>
-        <a href="contacto.html">Contacto</a>
+```
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo" id="navLogo">
+            <img id="navLogoImg" alt="SIECO Logo" style="display:none;">
+            <span class="nav-logo-text" id="navLogoText">SIECO</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="agua.html">Soluciones En Agua</a></li>
+            <li><a href="refrigeracion.html">Refrigeración</a></li>
+            <li><a href="mantenimiento.html" class="active">Mantenimiento</a></li>
+            <li><a href="proyectos.html">Proyectos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menú">
+            <span></span><span></span><span></span>
+        </button>
     </div>
+</nav>
 
-    <div class="content">
-        <section class="page-header">
-            <h1><strong>Mantenimiento Industrial</strong> Integral</h1>
-            <p>Prevención, diagnóstico y solución para máxima continuidad operativa</p>
-        </section>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Inicio</a>
+    <a href="agua.html">Soluciones</a>
+    <a href="refrigeracion.html">Refrigeración</a>
+    <a href="mantenimiento.html">Mantenimiento</a>
+    <a href="proyectos.html">Proyectos</a>
+    <a href="blog.html">Blog</a>
+    <a href="contacto.html">Contacto</a>
+</div>
 
-        <section class="section">
-            <div class="intro-box">
+<div class="content">
+    <section class="page-header">
+        <h1><strong>Mantenimiento Industrial</strong> Integral</h1>
+        <p>Prevención, diagnóstico y solución para máxima continuidad operativa</p>
+    </section>
+
+    <!-- INTRO: texto + slideshow -->
+    <section class="section">
+        <div class="intro-box">
+            <div class="intro-text">
                 <h2>Tipos de Mantenimiento</h2>
-                
+
                 <h3>1. Mantenimiento Preventivo</h3>
                 <p>Actividades programadas para prevenir fallas:</p>
                 <ul>
@@ -221,122 +310,263 @@
                     <li>Refacciones originales en stock</li>
                     <li>Técnicos en toda la República Mexicana</li>
                 </ul>
-            </div>
-        </section>
 
-        <section class="services-grid">
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="Mantenimiento Básico" class="service-image">
-                <div class="service-content">
-                    <div class="service-icon">📋</div>
-                    <h3>Plan Básico</h3>
-                    <p>Mantenimiento preventivo semestral diseñado para mantener tus equipos en óptimas condiciones.</p>
-                    <ul class="service-features">
-                        <li>Mantenimiento semestral programado</li>
-                        <li>Soporte en horario de oficina</li>
-                        <li>Reportes de inspección detallados</li>
-                        <li>Garantía de refacciones</li>
-                    </ul>
+                <h3>4. Mantenimiento a Instalaciones Hidráulicas, Eléctricas y Sanitarias</h3>
+                <ul>
+                    <li>Revisión y reparación de tuberías y conexiones hidráulicas</li>
+                    <li>Mantenimiento de tableros eléctricos e instalaciones</li>
+                    <li>Diagnóstico y corrección de instalaciones sanitarias</li>
+                    <li>Inspección preventiva de toda la infraestructura</li>
+                </ul>
+            </div>
+
+            <!-- Slideshow intro — reemplaza con fotos de carpeta 5 -->
+            <div class="slideshow" id="introSlideshow">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" class="active" alt="Mantenimiento 1">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80" alt="Mantenimiento 2">
+                <div class="slide-dots">
+                    <div class="slide-dot active" data-idx="0"></div>
+                    <div class="slide-dot" data-idx="1"></div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80" alt="Mantenimiento Premium" class="service-image">
-                <div class="service-content">
-                    <div class="service-icon">⭐</div>
-                    <h3>Plan Premium</h3>
-                    <p>Protección completa con mantenimiento trimestral y soporte prioritario las 24 horas.</p>
-                    <ul class="service-features">
-                        <li>Mantenimiento trimestral</li>
-                        <li>Soporte técnico 24/7</li>
-                        <li>Monitoreo remoto continuo</li>
-                        <li>Descuentos en refacciones</li>
-                        <li>Tiempo de respuesta garantizado</li>
-                    </ul>
+    <!-- CARDS con slideshow individual -->
+    <section class="services-grid">
+
+        <!-- Card 1: Preventivo -->
+        <div class="service-card">
+            <div class="card-slideshow" id="ss1">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" class="active" alt="">
+                <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80" alt="">
+                <div class="slide-dots">
+                    <div class="slide-dot active" data-idx="0"></div>
+                    <div class="slide-dot" data-idx="1"></div>
                 </div>
             </div>
+            <div class="service-content">
+                <div class="service-icon">📋</div>
+                <h3>Plan Básico</h3>
+                <p>Mantenimiento preventivo semestral para mantener tus equipos en óptimas condiciones.</p>
+                <ul class="service-features">
+                    <li>Mantenimiento semestral programado</li>
+                    <li>Soporte en horario de oficina</li>
+                    <li>Reportes de inspección detallados</li>
+                    <li>Garantía de refacciones</li>
+                </ul>
+            </div>
+        </div>
 
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80" alt="Mantenimiento Enterprise" class="service-image">
-                <div class="service-content">
-                    <div class="service-icon">🏆</div>
-                    <h3>Plan Enterprise</h3>
-                    <p>Solución integral para operaciones críticas con técnico residente y monitoreo avanzado.</p>
-                    <ul class="service-features">
-                        <li>Mantenimiento mensual</li>
-                        <li>Técnico residente disponible</li>
-                        <li>Sistema CMMS integrado</li>
-                        <li>KPIs y reportes ejecutivos</li>
-                        <li>Optimización energética</li>
-                        <li>Prioridad absoluta en emergencias</li>
-                    </ul>
+        <!-- Card 2: Premium -->
+        <div class="service-card">
+            <div class="card-slideshow" id="ss2">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80" class="active" alt="">
+                <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80" alt="">
+                <div class="slide-dots">
+                    <div class="slide-dot active" data-idx="0"></div>
+                    <div class="slide-dot" data-idx="1"></div>
                 </div>
             </div>
-        </section>
+            <div class="service-content">
+                <div class="service-icon">⭐</div>
+                <h3>Plan Premium</h3>
+                <p>Protección completa con mantenimiento trimestral y soporte prioritario 24 horas.</p>
+                <ul class="service-features">
+                    <li>Mantenimiento trimestral</li>
+                    <li>Soporte técnico 24/7</li>
+                    <li>Monitoreo remoto continuo</li>
+                    <li>Descuentos en refacciones</li>
+                    <li>Tiempo de respuesta garantizado</li>
+                </ul>
+            </div>
+        </div>
 
-        <section class="cta-section">
-            <h2>Protege Tu Inversión</h2>
-            <p>Reduce paros imprevistos en 90% con mantenimiento profesional</p>
-            <a href="contacto.html" class="cta-button">Contratar Plan</a>
-        </section>
+        <!-- Card 3: Enterprise -->
+        <div class="service-card">
+            <div class="card-slideshow" id="ss3">
+                <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80" class="active" alt="">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="">
+                <div class="slide-dots">
+                    <div class="slide-dot active" data-idx="0"></div>
+                    <div class="slide-dot" data-idx="1"></div>
+                </div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">🏆</div>
+                <h3>Plan Enterprise</h3>
+                <p>Solución integral para operaciones críticas con técnico residente y monitoreo avanzado.</p>
+                <ul class="service-features">
+                    <li>Mantenimiento mensual</li>
+                    <li>Técnico residente disponible</li>
+                    <li>Sistema CMMS integrado</li>
+                    <li>KPIs y reportes ejecutivos</li>
+                    <li>Optimización energética</li>
+                    <li>Prioridad absoluta en emergencias</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card 4: Climatización y Refrigeración -->
+        <div class="service-card">
+            <div class="card-slideshow" id="ss4">
+                <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80" class="active" alt="">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80" alt="">
+                <div class="slide-dots">
+                    <div class="slide-dot active" data-idx="0"></div>
+                    <div class="slide-dot" data-idx="1"></div>
+                </div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">❄️</div>
+                <h3>Climatización y Refrigeración</h3>
+                <p>Mantenimiento especializado en sistemas de climatización y refrigeración industrial y comercial.</p>
+                <ul class="service-features">
+                    <li>Revisión y carga de refrigerante</li>
+                    <li>Limpieza de serpentines y filtros</li>
+                    <li>Diagnóstico de compresores</li>
+                    <li>Calibración de termostatos y controles</li>
+                    <li>Mantenimiento de cámaras frías</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card 5: Hidráulico, Eléctrico, Sanitario -->
+        <div class="service-card">
+            <div class="card-slideshow" id="ss5">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" class="active" alt="">
+                <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80" alt="">
+                <div class="slide-dots">
+                    <div class="slide-dot active" data-idx="0"></div>
+                    <div class="slide-dot" data-idx="1"></div>
+                </div>
+            </div>
+            <div class="service-content">
+                <div class="service-icon">🔧</div>
+                <h3>Instalaciones Hidráulicas, Eléctricas y Sanitarias</h3>
+                <p>Mantenimiento integral de toda la infraestructura de instalaciones del inmueble o planta industrial.</p>
+                <ul class="service-features">
+                    <li>Reparación de tuberías y conexiones</li>
+                    <li>Mantenimiento de tableros eléctricos</li>
+                    <li>Diagnóstico de instalaciones sanitarias</li>
+                    <li>Inspección preventiva de infraestructura</li>
+                    <li>Cumplimiento de normativas NOM</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="cta-section">
+        <h2>Protege Tu Inversión</h2>
+        <p>Reduce paros imprevistos en 90% con mantenimiento profesional</p>
+        <a href="contacto.html" class="cta-button">Contratar Plan</a>
+    </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-main">
+        <div class="footer-logo">
+            <img id="footerLogoImg" alt="SIECO" style="display:none;">
+            <span class="footer-logo-fallback" id="footerLogoText">SIECO</span>
+        </div>
+        <div class="footer-col">
+            <p class="footer-col-label">Querétaro</p>
+            <p>Calle Fenix Lt 8<br>Santa Magdalena<br>76137, Querétaro, Qro</p>
+        </div>
+        <div class="footer-col">
+            <p class="footer-col-label">Ciudad de México</p>
+            <p>Benito Miranda No. 21<br>Las Peñas, Iztapalapa<br>09750, CDMX</p>
+        </div>
+        <div class="footer-col">
+            <p class="footer-col-label">Contacto</p>
+            <a href="tel:+524461253813">446 125 3813</a>
+            <a href="mailto:ventas@siecomexico.com.mx">ventas@siecomexico.com.mx</a>
+        </div>
+        <div class="footer-col">
+            <p class="footer-col-label">Síguenos</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><img src="https://img.icons8.com/?size=100&id=Q9takPniPZr5&format=png&color=FFFFFF" alt="Facebook"></a>
+                <a href="#" aria-label="Instagram"><img src="https://img.icons8.com/?size=100&id=u0m7D4oNPpJp&format=png&color=FFFFFF" alt="Instagram"></a>
+                <a href="#" aria-label="LinkedIn"><img src="https://img.icons8.com/?size=100&id=8808&format=png&color=FFFFFF" alt="LinkedIn"></a>
+            </div>
+        </div>
     </div>
-
-    <footer>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
         <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
-    </footer>
+    </div>
+</footer>
 
-    <script>
-        const canvas = document.getElementById('waterCanvas');
-        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-        function resizeCanvas() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            if(gl) gl.viewport(0, 0, canvas.width, canvas.height);
-        }
-        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
-        if(gl) {
-            const vs = gl.createShader(gl.VERTEX_SHADER);
-            gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }');
-            gl.compileShader(vs);
-            const fs = gl.createShader(gl.FRAGMENT_SHADER);
-            gl.shaderSource(fs, `precision highp float;
-                uniform float time; uniform vec2 resolution;
-                float noise(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
-                float smoothNoise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);float a=noise(i);float b=noise(i+vec2(1.0,0.0));float c=noise(i+vec2(0.0,1.0));float d=noise(i+vec2(1.0,1.0));return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);}
-                float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<6;i++){v+=a*smoothNoise(p);p*=2.0;a*=0.5;}return v;}
-                void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
-            gl.compileShader(fs);
-            const prog = gl.createProgram();
-            gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
-            const buf = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
-            const posLoc = gl.getAttribLocation(prog, 'position');
-            gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
-            const timeLoc = gl.getUniformLocation(prog, 'time');
-            const resLoc = gl.getUniformLocation(prog, 'resolution');
-            let start = Date.now();
-            function render() {
-                const t = (Date.now() - start) * 0.001;
-                gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height);
-                gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT);
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(render);
-            }
-            render();
-        }
+<script>
+    // Logo loader via fetch blob
+    (function() {
+        const LOGO = 'https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png';
+        fetch(LOGO).then(r => r.blob()).then(blob => {
+            const url = URL.createObjectURL(blob);
+            const ni = document.getElementById('navLogoImg');
+            const nt = document.getElementById('navLogoText');
+            const fi = document.getElementById('footerLogoImg');
+            const ft = document.getElementById('footerLogoText');
+            if (ni) { ni.src = url; ni.style.display = 'block'; if(nt) nt.style.display = 'none'; }
+            if (fi) { fi.src = url; fi.style.display = 'block'; if(ft) ft.style.display = 'none'; }
+        }).catch(()=>{});
+    })();
 
-        // Hamburguesa
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('open');
-            mobileMenu.classList.toggle('open');
-        });
-        mobileMenu.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => {
-                hamburger.classList.remove('open');
-                mobileMenu.classList.remove('open');
-            });
-        });
-    </script>
+    // WebGL water canvas
+    const canvas = document.getElementById('waterCanvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; if(gl) gl.viewport(0,0,canvas.width,canvas.height); }
+    resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+    if(gl) {
+        const vs = gl.createShader(gl.VERTEX_SHADER);
+        gl.shaderSource(vs,'attribute vec2 position;void main(){gl_Position=vec4(position,0.0,1.0);}');
+        gl.compileShader(vs);
+        const fs = gl.createShader(gl.FRAGMENT_SHADER);
+        gl.shaderSource(fs,`precision highp float;uniform float time;uniform vec2 resolution;float noise(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}float smoothNoise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);float a=noise(i);float b=noise(i+vec2(1.0,0.0));float c=noise(i+vec2(0.0,1.0));float d=noise(i+vec2(1.0,1.0));return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);}float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<6;i++){v+=a*smoothNoise(p);p*=2.0;a*=0.5;}return v;}void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
+        gl.compileShader(fs);
+        const prog=gl.createProgram();gl.attachShader(prog,vs);gl.attachShader(prog,fs);gl.linkProgram(prog);gl.useProgram(prog);
+        const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+        const posLoc=gl.getAttribLocation(prog,'position');gl.enableVertexAttribArray(posLoc);gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
+        const timeLoc=gl.getUniformLocation(prog,'time');const resLoc=gl.getUniformLocation(prog,'resolution');
+        let start=Date.now();
+        function render(){const t=(Date.now()-start)*0.001;gl.uniform1f(timeLoc,t);gl.uniform2f(resLoc,canvas.width,canvas.height);gl.clearColor(0,0.37,0.45,1);gl.clear(gl.COLOR_BUFFER_BIT);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(render);}
+        render();
+    }
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }));
+
+    // Slideshow engine — funciona para intro y para cada card
+    function initSlideshow(container, intervalMs) {
+        const imgs  = Array.from(container.querySelectorAll('img'));
+        const dots  = Array.from(container.querySelectorAll('.slide-dot'));
+        if (imgs.length < 2) return;
+        let cur = 0;
+        function go(n) {
+            imgs[cur].classList.remove('active');
+            dots[cur] && dots[cur].classList.remove('active');
+            cur = (n + imgs.length) % imgs.length;
+            imgs[cur].classList.add('active');
+            dots[cur] && dots[cur].classList.add('active');
+        }
+        dots.forEach(d => d.addEventListener('click', () => { go(+d.dataset.idx); }));
+        setInterval(() => go(cur + 1), intervalMs || 3500);
+    }
+
+    // Init intro slideshow
+    initSlideshow(document.getElementById('introSlideshow'), 4000);
+    // Init card slideshows
+    ['ss1','ss2','ss3','ss4','ss5'].forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (el) initSlideshow(el, 3000 + i * 400);
+    });
+</script>
+```
+
 </body>
 </html>
