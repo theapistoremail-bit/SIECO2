@@ -816,7 +816,7 @@
         margin: 0 auto;
         padding: 56px 40px 40px;
         display: grid;
-        grid-template-columns: 160px 1fr 1fr 1fr;
+        grid-template-columns: 160px 1fr 1fr 1fr auto;
         gap: 48px;
         align-items: start;
     }
@@ -849,13 +849,34 @@
     }
     .footer-col a:hover { color: var(--water-light); }
 
+    .footer-social {
+        display: flex;
+        gap: 12px;
+        margin-top: 16px;
+    }
+    .footer-social a {
+        width: 38px; height: 38px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(72,202,228,0.2);
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .footer-social a:hover {
+        background: rgba(0,180,216,0.2);
+        border-color: rgba(72,202,228,0.6);
+        transform: translateY(-2px);
+    }
+    .footer-social img {
+        width: 18px; height: 18px;
+        opacity: 0.75;
+        filter: brightness(0) invert(1);
+    }
+
     .footer-divider {
         max-width: 1400px; margin: 0 auto;
         border: none; border-top: 1px solid rgba(72,202,228,0.1);
     }
-
-    .footer-bottom {
-        max-width: 1400px; margin: 0 auto;
         padding: 20px 40px;
         display: flex; justify-content: space-between; align-items: center;
         flex-wrap: wrap; gap: 10px;
@@ -930,15 +951,14 @@
         .cta-section p { font-size: 1em; }
         .cta-white { padding: 14px 32px; font-size: 1em; margin-bottom: 40px; }
 
-        /* Videos — apilados verticalmente en mobile */
-        .video-cards { flex-direction: column; align-items: center; gap: 14px; }
-        .video-card { width: 100%; max-width: 400px; }
+        /* Videos — siempre en línea horizontal */
+        .video-cards { flex-direction: row; gap: 12px; }
+        .video-card { max-width: none; flex: 1; }
 
         /* Footer */
         .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; padding: 36px 20px 24px; }
         .footer-logo { grid-column: 1 / -1; }
-        .footer-bottom { padding: 14px 20px; flex-direction: column; align-items: flex-start; gap: 4px; }
-    }
+        .footer-bottom { padding: 14px 20px; flex-direction: column; align-items: flex-start; gap: 4px; }        }
 
     @media (max-width: 520px) {
         .nav-container { padding: 0 16px; }
@@ -1203,6 +1223,22 @@ Nos especializamos en ofrecer servicios de ingeniería para una variedad de sect
             <p class="footer-col-label">Contacto</p>
             <a href="tel:+524461253813">446 125 3813</a>
             <a href="mailto:ventas@siecomexico.com.mx">ventas@siecomexico.com.mx</a>
+        </div>
+
+        <!-- Redes sociales -->
+        <div class="footer-col">
+            <p class="footer-col-label">Síguenos</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook">
+                    <img src="https://img.icons8.com/?size=100&id=Q9takPniPZr5&format=png&color=FFFFFF" alt="Facebook">
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <img src="https://img.icons8.com/?size=100&id=Xy10Jcu1L2Su&format=png&color=FFFFFF" alt="Instagram">
+                </a>
+                <a href="#" aria-label="LinkedIn">
+                    <img src="https://img.icons8.com/?size=100&id=8808&format=png&color=FFFFFF" alt="LinkedIn">
+                </a>
+            </div>
         </div>
     </div>
 
