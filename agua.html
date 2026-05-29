@@ -32,6 +32,13 @@
             background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
             z-index: 1; pointer-events: none;
         }
+        .content { 
+    position: relative; 
+    z-index: 10; 
+    padding-top: 90px; /* Asegura que no tape el espacio del nav */
+    background: transparent; /* Importante para que el filtro del nav funcione */
+}
+
 
         /* NAV */
         nav {
