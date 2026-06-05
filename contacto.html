@@ -189,6 +189,372 @@
         .email-picker-copy { border: none; background: none; width: 100%; text-align: left; }
         .email-picker-divider { height: 1px; background: rgba(0,180,216,0.15); margin: 5px 0; }
         .email-picker img { width: 18px; height: 18px; border-radius: 3px; }
+        <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas de Refrigeración Industrial - SIECO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --water-blue: #00b4d8;
+            --water-light: #48cae4;
+            --water-deep: #0077b6;
+            --water-dark: #03045e;
+            --foam: #caf0f8;
+        }
+        body { font-family: 'IBM Plex Sans', sans-serif; background: #001219; color: #333; overflow-x: hidden; }
+        #waterCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .water-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
+            z-index: 1; pointer-events: none;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,180,216,0.1);
+            z-index: 1000; border-bottom: 2px solid rgba(0,180,216,0.2);
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto; padding: 0 40px;
+            display: flex; justify-content: space-between; align-items: center; height: 90px;
+        }
+        .nav-logo img { height: 188px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 11px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: #001219; font-weight: 500; font-size: 0.82em;
+            transition: all 0.3s; position: relative; letter-spacing: 0.6px; text-transform: uppercase;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--water-blue); transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--water-deep); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--water-blue); font-weight: 600; }
+        .nav-links a.active::after { width: 100%; }
+
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; padding: 5px; background: none; border: none;
+        }
+        .hamburger span { display: block; width: 24px; height: 2px; background: #001219; border-radius: 2px; transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none; position: fixed; top: 90px; left: 0; width: 100%;
+            background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+            z-index: 999; padding: 20px 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,180,216,0.15);
+            border-bottom: 2px solid rgba(0,180,216,0.2);
+        }
+        .mobile-menu.open { display: flex; flex-direction: column; }
+        .mobile-menu a {
+            text-decoration: none; color: #001219; font-weight: 500; font-size: 1em;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
+        }
+        .mobile-menu a:hover { color: var(--water-blue); }
+
+        .content { position: relative; z-index: 10; padding-top: 100px; }
+
+        .page-header { max-width: 1400px; margin: 0 auto; padding: 80px 40px 60px; text-align: center; }
+        .page-header h1 { font-size: 4em; font-weight: 300; color: white; margin-bottom: 20px; letter-spacing: -1px; text-shadow: 0 4px 30px rgba(0,180,216,0.5); }
+        .page-header h1 strong { font-weight: 600; background: linear-gradient(135deg, var(--water-light), var(--foam)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .page-header p { font-size: 1.15em; font-weight: 300; color: rgba(255,255,255,0.9); max-width: 750px; margin: 0 auto; line-height: 1.8; }
+
+        .section { max-width: 1400px; margin: 60px auto; padding: 0 40px; }
+
+        .intro-box {
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+            border-radius: 24px; padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,180,216,0.15);
+            border: 2px solid rgba(72,202,228,0.2); margin-bottom: 60px;
+        }
+        .intro-box h2 { font-size: 2.2em; color: var(--water-dark); margin-bottom: 20px; }
+        .intro-box h3 { font-size: 1.6em; color: var(--water-dark); margin: 30px 0 15px; }
+        .intro-box p { font-size: 1.1em; line-height: 1.8; color: #2c3e50; margin-bottom: 15px; }
+        .intro-box ul { list-style: none; padding-left: 0; margin: 20px 0; }
+        .intro-box ul li { padding: 8px 0 8px 30px; position: relative; color: #2c3e50; line-height: 1.6; }
+        .intro-box ul li::before { content: "✓"; position: absolute; left: 0; color: var(--water-blue); font-weight: bold; font-size: 1.2em; }
+
+        .cta-section {
+            max-width: 1400px; margin: 80px auto; padding: 80px 40px; text-align: center;
+            background: linear-gradient(135deg, rgba(0,180,216,0.15), rgba(72,202,228,0.15));
+            backdrop-filter: blur(20px); border-radius: 30px; border: 2px solid rgba(72,202,228,0.3);
+        }
+        .cta-section h2 { font-size: 3em; color: white; margin-bottom: 20px; font-weight: 600; text-shadow: 0 2px 20px rgba(0,180,216,0.5); }
+        .cta-section p { font-size: 1.25em; color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto 40px; line-height: 1.7; }
+        .cta-button {
+            display: inline-block; padding: 18px 45px; background: white;
+            color: var(--water-deep); text-decoration: none; border-radius: 50px;
+            font-weight: 600; font-size: 1.1em; transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(255,255,255,0.3);
+        }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,255,255,0.5); background: var(--foam); }
+
+        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.7); background: rgba(0,18,25,0.8); backdrop-filter: blur(10px); margin-top: 100px; font-weight: 300; }
+
+        @media (max-width: 968px) {
+            .page-header h1 { font-size: 2.5em; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .nav-container { padding: 0 20px; }
+            .nav-logo img { height: 50px; }
+            .intro-box { padding: 30px; }
+            .section { padding: 0 20px; }
+        }
+           FOOTER
+===================================================== */
+footer {
+  position: relative;
+  z-index: 10;
+  margin-top: 0;
+  background: rgba(0,8,18,0.96);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(72,202,228,0.15);
+}
+.footer-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 56px 40px 40px;
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr 1fr auto;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Logo footer — más grande */
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.footer-logo img {
+  height: 100px;
+  width: auto;
+  display: block;
+  filter: brightness(1.08) drop-shadow(0 4px 18px rgba(0,180,216,0.25));
+  transition: filter 0.3s, transform 0.3s;
+}
+.footer-logo img:hover {
+  filter: brightness(1.15) drop-shadow(0 6px 24px rgba(0,180,216,0.45));
+  transform: translateY(-2px);
+}
+.footer-logo-fallback {
+  font-size: 1.8em; font-weight: 800; letter-spacing: 3px;
+  color: var(--water-blue); text-transform: uppercase;
+}
+.footer-logo-tagline {
+  font-size: 0.72em;
+  color: rgba(255,255,255,0.38);
+  font-weight: 300;
+  letter-spacing: 1.2px;
+  line-height: 1.55;
+  margin-top: 2px;
+}
+
+.footer-col-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 3.5px;
+  text-transform: uppercase; color: var(--water-light);
+  margin-bottom: 14px; opacity: 0.7;
+}
+.footer-col p {
+  font-size: 0.92em; color: rgba(255,255,255,0.72);
+  line-height: 1.75; font-weight: 300;
+}
+.footer-col a {
+  display: block; font-size: 0.92em;
+  color: rgba(255,255,255,0.72); text-decoration: none;
+  line-height: 1.75; font-weight: 300;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--water-light); }
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.footer-social a {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(72,202,228,0.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.footer-social a:hover {
+  background: rgba(0,180,216,0.2);
+  border-color: rgba(72,202,228,0.6);
+  transform: translateY(-2px);
+}
+.footer-social img {
+  width: 18px; height: 18px;
+  opacity: 0.75;
+  filter: brightness(0) invert(1);
+}
+.footer-divider {
+  max-width: 1400px; margin: 0 auto;
+  border: none; border-top: 1px solid rgba(72,202,228,0.1);
+}
+.footer-bottom {
+  max-width: 1400px; margin: 0 auto;
+  padding: 20px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 10px;
+}
+.footer-bottom p {
+  font-size: 0.8em; color: rgba(255,255,255,0.35);
+  font-weight: 300; letter-spacing: 0.3px;
+}
+    </style>
+</head>
+<body>
+    <canvas id="waterCanvas"></canvas>
+    <div class="water-overlay"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="agua.html">Soluciones En Agua</a></li>
+                <li><a href="refrigeracion.html" class="active">Refrigeración</a></li>
+                <li><a href="mantenimiento.html">Mantenimiento</a></li>
+                <li><a href="proyectos.html">Proyectos</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Inicio</a>
+        <a href="soluciones.html">Soluciones En Agua</a>
+        <a href="control-electrico.html">Control Eléctrico</a>
+        <a href="refrigeracion.html">Refrigeración</a>
+        <a href="mantenimiento.html">Mantenimiento</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="blog.html">Blog</a>
+        <a href="contacto.html">Contacto</a>
+    </div>
+
+    <div class="content">
+        <section class="page-header">
+            <h1><strong>Sistemas de Refrigeración</strong> Industrial</h1>
+            <p>Tecnología de enfriamiento eficiente para conservación y procesos</p>
+        </section>
+
+        <section class="section">
+            <div class="intro-box">
+                <h2>Ciclo de Refrigeración por Compresión de Vapor</h2>
+                <p>La refrigeración es crítica en industrias alimentaria, farmacéutica, química y manufactura. Nuestros sistemas garantizan temperatura controlada, eficiencia energética y continuidad operativa.</p>
+                
+                <h3>Las 4 Etapas del Ciclo</h3>
+                <ul>
+                    <li><strong>COMPRESIÓN:</strong> El compresor eleva presión y temperatura del refrigerante</li>
+                    <li><strong>CONDENSACIÓN:</strong> El gas cede calor al ambiente y se convierte en líquido</li>
+                    <li><strong>EXPANSIÓN:</strong> Válvula reduce presión, temperatura baja drásticamente</li>
+                    <li><strong>EVAPORACIÓN:</strong> Absorbe calor del espacio, enfriando el ambiente</li>
+                </ul>
+
+                <h3>Soluciones Completas</h3>
+                <ul>
+                    <li>Cámaras Frigoríficas de Conservación (0°C a 10°C)</li>
+                    <li>Cámaras de Congelación (-18°C a -25°C)</li>
+                    <li>Túneles de Congelación Rápida IQF (-35°C a -40°C)</li>
+                    <li>Equipos Comerciales (Vitrinas, Refrigeradores, Abatidores)</li>
+                    <li>Chillers Industriales (3 TR hasta 500 TR)</li>
+                    <li>Sistemas de Glicol para Procesos</li>
+                </ul>
+
+                <h3>Refrigerantes Ecológicos</h3>
+                <p>Utilizamos R-134a, R-410A, R-290 (Propano) y CO₂ cumpliendo con el Protocolo de Montreal y Enmienda Kigali.</p>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Refrigeración Eficiente</h2>
+            <p>Cotiza tu cámara frigorífica o sistema de refrigeración industrial</p>
+            <a href="contacto.html" class="cta-button">Solicitar Cotización</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('waterCanvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        function resizeCanvas() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            if(gl) gl.viewport(0, 0, canvas.width, canvas.height);
+        }
+        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+        if(gl) {
+            const vs = gl.createShader(gl.VERTEX_SHADER);
+            gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }');
+            gl.compileShader(vs);
+            const fs = gl.createShader(gl.FRAGMENT_SHADER);
+            gl.shaderSource(fs, `precision highp float;
+                uniform float time; uniform vec2 resolution;
+                float noise(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+                float smoothNoise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);float a=noise(i);float b=noise(i+vec2(1.0,0.0));float c=noise(i+vec2(0.0,1.0));float d=noise(i+vec2(1.0,1.0));return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);}
+                float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<6;i++){v+=a*smoothNoise(p);p*=2.0;a*=0.5;}return v;}
+                void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
+            gl.compileShader(fs);
+            const prog = gl.createProgram();
+            gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+            const posLoc = gl.getAttribLocation(prog, 'position');
+            gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+            const timeLoc = gl.getUniformLocation(prog, 'time');
+            const resLoc = gl.getUniformLocation(prog, 'resolution');
+            let start = Date.now();
+            function render() {
+                const t = (Date.now() - start) * 0.001;
+                gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height);
+                gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(render);
+            }
+            render();
+        }
+
+        // Hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
     </style>
 </head>
 <body>
