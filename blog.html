@@ -17,469 +17,235 @@
             --water-dark: #03045e;
             --foam: #caf0f8;
         }
+        body { font-family: 'IBM Plex Sans', sans-serif; background: #001219; color: #333; overflow-x: hidden; }
+        #waterCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .water-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
+            z-index: 1; pointer-events: none;
+        }
 
 ```
-    body {
-        font-family: 'IBM Plex Sans', sans-serif;
-        background: #001219;
-        color: #e8e8e8;
-        overflow-x: hidden;
-    }
-
-    /* ========== CANVAS & OVERLAY ========== */
-    #waterCanvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-    }
-
-    .water-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
-        z-index: 1;
-        pointer-events: none;
-    }
-
-    /* ========== NAVIGATION ========== */
+    /* NAV */
     nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: rgba(0, 18, 25, 0.88);
-        backdrop-filter: blur(15px);
-        border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+        position: fixed; top: 0; width: 100%;
+        background: rgba(255,255,255,0.97);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 4px 30px rgba(0,180,216,0.1);
         z-index: 1000;
-        padding: 0;
-        margin: 0;
+        border-bottom: 2px solid rgba(0,180,216,0.2);
     }
-
     .nav-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0.8rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 80px;
+        max-width: 1400px; margin: 0 auto;
+        padding: 0 40px;
+        display: flex; justify-content: space-between; align-items: center;
+        height: 90px;
     }
-
-    .nav-logo img {
-        height: 60px;
-        width: auto;
-        object-fit: contain;
-    }
-
-    .nav-links {
-        display: flex;
-        list-style: none;
-        gap: 1.5rem;
-        align-items: center;
-    }
-
+    .nav-logo img { height: 188px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 11px; list-style: none; align-items: center; }
     .nav-links a {
-        color: #caf0f8;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: all 0.3s ease;
-        position: relative;
+        text-decoration: none; color: #001219;
+        font-weight: 500; font-size: 0.82em;
+        transition: all 0.3s; position: relative;
+        letter-spacing: 0.6px; text-transform: uppercase;
     }
-
     .nav-links a::after {
-        content: '';
-        position: absolute;
-        bottom: -6px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--water-light);
-        transition: width 0.3s ease;
+        content: ''; position: absolute; bottom: -4px; left: 0;
+        width: 0; height: 2px; background: var(--water-blue); transition: width 0.3s;
     }
-
-    .nav-links a:hover { color: var(--water-light); }
+    .nav-links a:hover { color: var(--water-deep); }
     .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active { color: var(--water-blue); font-weight: 700; }
+    .nav-links a.active { color: var(--water-blue); font-weight: 600; }
     .nav-links a.active::after { width: 100%; }
 
     .hamburger {
-        display: none;
-        flex-direction: column;
-        gap: 5px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1001;
+        display: none; flex-direction: column; gap: 5px;
+        cursor: pointer; padding: 5px; background: none; border: none;
     }
-
     .hamburger span {
-        width: 24px;
-        height: 2px;
-        background: var(--water-light);
-        border-radius: 2px;
-        transition: all 0.3s ease;
+        display: block; width: 24px; height: 2px;
+        background: #001219; border-radius: 2px; transition: all 0.3s;
     }
-
-    .hamburger.open span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-    }
-
-    .hamburger.open span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.open span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background: rgba(0, 18, 25, 0.95);
-        backdrop-filter: blur(15px);
-        flex-direction: column;
-        z-index: 999;
-        border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+        display: none; position: fixed; top: 90px; left: 0; width: 100%;
+        background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+        z-index: 999; padding: 20px 40px 30px;
+        box-shadow: 0 10px 30px rgba(0,180,216,0.15);
+        border-bottom: 2px solid rgba(0,180,216,0.2);
     }
-
-    .mobile-menu.open {
-        display: flex;
-    }
-
+    .mobile-menu.open { display: flex; flex-direction: column; }
     .mobile-menu a {
-        padding: 1rem 2rem;
-        color: #caf0f8;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        border-bottom: 1px solid rgba(0, 180, 216, 0.1);
-        transition: all 0.3s ease;
+        text-decoration: none; color: #001219; font-weight: 500;
+        font-size: 1em; text-transform: uppercase; letter-spacing: 0.5px;
+        padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
     }
+    .mobile-menu a:hover { color: var(--water-blue); }
 
-    .mobile-menu a:hover {
-        background: rgba(0, 180, 216, 0.1);
-        color: var(--water-light);
-    }
+    .content { position: relative; z-index: 10; padding-top: 100px; }
 
-    /* ========== CONTENT WRAPPER ========== */
-    .content {
-        position: relative;
-        z-index: 2;
-        min-height: 100vh;
-        padding: 5rem 0 3rem 0;
-    }
-
-    /* ========== PAGE HEADER ========== */
     .page-header {
-        max-width: 1400px;
-        margin: 0 auto 4rem;
-        padding: 4rem 2rem;
-        text-align: center;
-        background: rgba(0, 77, 182, 0.08);
-        backdrop-filter: blur(10px);
-        border-radius: 12px;
-        border: 1px solid rgba(0, 180, 216, 0.2);
+        max-width: 1400px; margin: 0 auto;
+        padding: 80px 40px 60px; text-align: center;
     }
-
     .page-header h1 {
-        font-size: clamp(2.5rem, 6vw, 4rem);
-        color: var(--water-light);
-        margin-bottom: 1.5rem;
-        font-weight: 300;
-        letter-spacing: -1px;
+        font-size: 4em; font-weight: 300; color: white;
+        margin-bottom: 20px; letter-spacing: -1px;
+        text-shadow: 0 4px 30px rgba(0,180,216,0.5);
     }
-
     .page-header h1 strong {
-        font-weight: 700;
-        color: var(--water-blue);
-    }
-
-    .page-header p {
-        font-size: 1.15rem;
-        color: #b0d4e3;
-        font-weight: 300;
-        max-width: 700px;
-        margin: 0 auto;
-        line-height: 1.6;
-    }
-
-    /* ========== BLOG GRID ========== */
-    .blog-grid {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 2rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-        gap: 2.5rem;
-        margin-bottom: 5rem;
-    }
-
-    /* ========== BLOG CARD ========== */
-    .blog-card {
-        display: flex;
-        flex-direction: column;
-        background: rgba(0, 77, 182, 0.08);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(0, 180, 216, 0.15);
-        border-radius: 12px;
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        height: 100%;
-        cursor: pointer;
-    }
-
-    .blog-card:hover {
-        transform: translateY(-10px);
-        border-color: rgba(0, 180, 216, 0.4);
-        background: rgba(0, 77, 182, 0.12);
-        box-shadow: 0 25px 50px rgba(0, 180, 216, 0.2);
-    }
-
-    .blog-image {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .blog-card:hover .blog-image {
-        transform: scale(1.08);
-    }
-
-    .blog-content {
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-    }
-
-    .blog-category {
-        display: inline-block;
-        background: rgba(0, 180, 216, 0.2);
-        color: var(--water-light);
-        padding: 0.5rem 1rem;
-        border-radius: 24px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 1rem;
-        width: fit-content;
-        transition: all 0.3s ease;
-    }
-
-    .blog-card:hover .blog-category {
-        background: rgba(0, 180, 216, 0.3);
-    }
-
-    .blog-card h3 {
-        font-size: 1.35rem;
-        color: var(--water-light);
-        margin-bottom: 1rem;
-        line-height: 1.4;
         font-weight: 600;
-        transition: color 0.3s ease;
+        background: linear-gradient(135deg, var(--water-light), var(--foam));
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-header p {
+        font-size: 1.15em; font-weight: 300;
+        color: rgba(255,255,255,0.9); max-width: 750px;
+        margin: 0 auto; line-height: 1.8;
     }
 
-    .blog-card:hover h3 {
-        color: var(--foam);
+    /* ARTICLES GRID */
+    .articles-grid {
+        max-width: 1400px; margin: 60px auto; padding: 0 40px;
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;
     }
 
-    .blog-card p {
-        color: #b0d4e3;
-        font-size: 0.98rem;
-        line-height: 1.7;
-        margin-bottom: 1.5rem;
-        flex-grow: 1;
-        font-weight: 300;
+    /* ARTICLE CARD */
+    .article-card {
+        background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+        border-radius: 20px; padding: 0;
+        box-shadow: 0 10px 40px rgba(0,180,216,0.15);
+        border: 2px solid rgba(72,202,228,0.2); transition: all 0.4s;
+        overflow: hidden; cursor: pointer;
     }
+    .article-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,180,216,0.3); border-color: var(--water-blue); }
 
-    .blog-read-more {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        color: var(--water-blue);
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.95rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        width: fit-content;
+    /* SLIDER */
+    .article-slider { position: relative; height: 240px; overflow: hidden; flex-shrink: 0; background: #001a2e; }
+    .as-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease; }
+    .as-slide.active { opacity: 1; }
+    .as-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 7s ease; }
+    .as-slide.active img { transform: scale(1.07); }
+
+    .as-placeholder {
+        width: 100%; height: 100%;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+        background: linear-gradient(135deg, #001525, #002a42, #001525);
+        background-size: 200% 200%; animation: shimmer 5s ease infinite;
     }
+    @keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .as-placeholder svg { width: 54px; height: 54px; opacity: 0.45; }
+    .as-placeholder span { font-size: 0.7em; font-weight: 300; letter-spacing: 4px; color: rgba(0,180,216,0.55); text-transform: uppercase; }
 
-    .blog-read-more:hover {
-        color: var(--water-light);
-        transform: translateX(4px);
+    .as-arrow {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        width: 34px; height: 34px; border-radius: 50%;
+        background: rgba(0,0,0,0.5); border: 1.5px solid rgba(255,255,255,0.25);
+        color: white; font-size: 0.9em; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        z-index: 10; transition: all 0.25s; backdrop-filter: blur(4px); opacity: 0;
     }
+    .article-slider:hover .as-arrow { opacity: 1; }
+    .as-arrow:hover { background: var(--water-blue); border-color: var(--water-blue); transform: translateY(-50%) scale(1.12); }
+    .as-prev { left: 10px; } .as-next { right: 10px; }
 
-    /* ========== FOOTER ========== */
+    .as-dots { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; gap: 7px; z-index: 10; }
+    .as-dot { width: 7px; height: 7px; border-radius: 50%; border: none; background: rgba(255,255,255,0.3); cursor: pointer; padding: 0; transition: all 0.3s; }
+    .as-dot.active { background: var(--water-blue); transform: scale(1.5); box-shadow: 0 0 7px var(--water-blue); }
+
+    /* ARTICLE CONTENT */
+    .article-content { padding: 35px; }
+    .article-meta {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 15px; font-size: 0.9em;
+    }
+    .article-category {
+        background: rgba(0,180,216,0.15); color: var(--water-blue);
+        padding: 5px 12px; border-radius: 15px; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .article-date { color: #888; font-weight: 300; }
+    .article-card h3 { font-size: 1.6em; font-weight: 500; color: var(--water-dark); margin-bottom: 15px; }
+    .article-card p { color: #555; line-height: 1.75; font-weight: 300; font-size: 1.05em; margin-bottom: 18px; }
+    .read-more {
+        display: inline-block; color: var(--water-blue); text-decoration: none;
+        font-weight: 600; transition: all 0.3s; margin-top: 10px;
+    }
+    .read-more:hover { color: var(--water-deep); transform: translateX(5px); }
+
+    /* FOOTER */
     footer {
-        position: relative;
-        z-index: 2;
-        background: rgba(0, 18, 25, 0.95);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(0, 180, 216, 0.2);
-        padding: 3rem 2rem;
-        text-align: center;
-        color: #7eb3cc;
-        font-size: 0.95rem;
-        font-weight: 300;
-        line-height: 1.6;
+        background: rgba(0,18,25,0.95); backdrop-filter: blur(10px);
+        margin-top: 100px; border-top: 1px solid rgba(0,180,216,0.2);
+        color: rgba(255,255,255,0.85); font-weight: 300;
     }
-
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 768px) {
-        .hamburger {
-            display: flex;
-        }
-
-        .nav-links {
-            display: none;
-        }
-
-        .nav-container {
-            height: 70px;
-            padding: 0.5rem 1.5rem;
-        }
-
-        .nav-logo img {
-            height: 50px;
-        }
-
-        .content {
-            padding: 4.5rem 0 2rem 0;
-        }
-
-        .page-header {
-            padding: 3rem 1.5rem;
-            margin-bottom: 3rem;
-            border-radius: 8px;
-        }
-
-        .page-header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .page-header p {
-            font-size: 1rem;
-        }
-
-        .blog-grid {
-            grid-template-columns: 1fr;
-            padding: 0 1.5rem;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .blog-content {
-            padding: 1.5rem;
-        }
-
-        .blog-image {
-            height: 180px;
-        }
-
-        .blog-card h3 {
-            font-size: 1.2rem;
-        }
-
-        footer {
-            padding: 2rem 1.5rem;
-            font-size: 0.9rem;
-        }
+    .footer-main {
+        max-width: 1400px; margin: 0 auto;
+        padding: 50px 40px 40px;
+        display: grid;
+        grid-template-columns: auto 1fr 1fr 1fr auto;
+        gap: 40px; align-items: start;
     }
-
-    @media (max-width: 480px) {
-        .page-header {
-            padding: 2rem 1rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .page-header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .page-header p {
-            font-size: 0.95rem;
-        }
-
-        .blog-grid {
-            gap: 1.5rem;
-            padding: 0 1rem;
-        }
-
-        .blog-image {
-            height: 150px;
-        }
-
-        .blog-content {
-            padding: 1.2rem;
-        }
-
-        .blog-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .blog-card p {
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .blog-category {
-            font-size: 0.7rem;
-            padding: 0.4rem 0.8rem;
-        }
-
-        footer {
-            padding: 1.5rem 1rem;
-            font-size: 0.85rem;
-        }
+    .footer-logo { display: flex; align-items: center; }
+    .footer-logo img { height: 70px; width: auto; }
+    .footer-logo-text {
+        font-size: 1.6em; font-weight: 700; color: var(--water-blue);
+        letter-spacing: 3px;
     }
-
-    /* ========== ANIMATIONS ========== */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
+    .footer-address h4 {
+        font-size: 0.72em; font-weight: 600; color: var(--water-light);
+        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+    }
+    .footer-address p {
+        font-size: 0.88em; line-height: 1.7; color: rgba(255,255,255,0.75);
+    }
+    .footer-contact h4 {
+        font-size: 0.72em; font-weight: 600; color: var(--water-light);
+        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+    }
+    .footer-contact p {
+        font-size: 0.88em; line-height: 1.9; color: rgba(255,255,255,0.75);
+    }
+    .footer-contact a {
+        color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--water-blue); }
+    .footer-social { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+    .footer-social h4 {
+        font-size: 0.72em; font-weight: 600; color: var(--water-light);
+        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; align-self: flex-end;
+    }
+    .social-icons { display: flex; gap: 12px; }
+    .social-icon {
+        width: 40px; height: 40px; border-radius: 10px;
+        background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.3s; cursor: pointer;
+    }
+    .social-icon:hover { background: var(--water-blue); border-color: var(--water-blue); transform: translateY(-3px); }
+    .social-icon svg { width: 18px; height: 18px; fill: rgba(255,255,255,0.8); }
+    .footer-bottom {
+        border-top: 1px solid rgba(0,180,216,0.12);
+        padding: 18px 40px; text-align: center;
+        font-size: 0.8em; color: rgba(255,255,255,0.4); letter-spacing: 0.5px;
+    }
+    
+    @media (max-width: 968px) {
+        .footer-main {
+            grid-template-columns: 1fr; gap: 28px; padding: 40px 20px 30px;
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .footer-social { align-items: flex-start; }
+        .footer-bottom { padding: 18px 20px; }
+        .page-header h1 { font-size: 2.5em; }
+        .nav-links { display: none; }
+        .hamburger { display: flex; }
+        .nav-container { padding: 0 20px; }
+        .nav-logo img { height: 50px; }
+        .articles-grid { grid-template-columns: 1fr; padding: 0 20px; }
     }
-
-    .page-header {
-        animation: fadeInUp 0.6s ease-out;
-    }
-
-    .blog-card {
-        animation: fadeInUp 0.6s ease-out;
-        animation-fill-mode: both;
-    }
-
-    .blog-grid > :nth-child(1) { animation-delay: 0.1s; }
-    .blog-grid > :nth-child(2) { animation-delay: 0.2s; }
-    .blog-grid > :nth-child(3) { animation-delay: 0.3s; }
-    .blog-grid > :nth-child(4) { animation-delay: 0.4s; }
-    .blog-grid > :nth-child(5) { animation-delay: 0.5s; }
-    .blog-grid > :nth-child(6) { animation-delay: 0.6s; }
 </style>
 ```
 
@@ -492,7 +258,7 @@
 <nav>
     <div class="nav-container">
         <a href="index.html" class="nav-logo">
-            <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+            <img src="Diseño sin título (9).png" alt="SIECO" onerror="this.style.display='none';this.parentNode.querySelector('span').style.display='block'"><span style="display:none;font-size:1.5em;font-weight:700;color:#001219;letter-spacing:2px;">SIECO</span>
         </a>
         <ul class="nav-links">
             <li><a href="index.html">Inicio</a></li>
@@ -508,109 +274,159 @@
         </button>
     </div>
 </nav>
-
 <div class="mobile-menu" id="mobileMenu">
     <a href="index.html">Inicio</a>
     <a href="agua.html">Soluciones En Agua</a>
     <a href="refrigeracion.html">Refrigeración</a>
     <a href="mantenimiento.html">Mantenimiento</a>
     <a href="proyectos.html">Proyectos</a>
-    <a href="blog.html" class="active">Blog</a>
+    <a href="blog.html">Blog</a>
     <a href="contacto.html">Contacto</a>
 </div>
 
 <div class="content">
     <section class="page-header">
-        <h1><strong>Blog</strong> Técnico</h1>
+        <h1>Blog <strong>Técnico</strong></h1>
         <p>Conocimiento, tendencias y mejores prácticas en ingeniería industrial</p>
     </section>
 
-    <section class="blog-grid">
-        <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1581092956056-0c4c3acd3789?w=800&q=80" alt="Purificación de Agua" class="blog-image">
-            <div class="blog-content">
-                <span class="blog-category">Tratamiento de Agua</span>
-                <h3>Nuevas Tecnologías en Purificación de Agua Industrial</h3>
-                <p>Descubre las últimas innovaciones en sistemas de ósmosis inversa y ultrafiltración que están revolucionando la industria del tratamiento de agua.</p>
-                <a href="blog-purificacion.html" class="blog-read-more">Leer más →</a>
-            </div>
-        </article>
+    <section class="articles-grid">
 
-        <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80" alt="Eficiencia Energética" class="blog-image">
-            <div class="blog-content">
-                <span class="blog-category">Eficiencia Energética</span>
-                <h3>Cómo Reducir Costos Energéticos en Sistemas de Refrigeración</h3>
-                <p>Estrategias probadas para optimizar el consumo eléctrico de tus equipos de refrigeración industrial sin comprometer el rendimiento.</p>
-                <a href="blog-eficiencia.html" class="blog-read-more">Leer más →</a>
+        <!-- ARTICLE 1 -->
+        <div class="article-card">
+            <div class="article-slider" data-total="3">
+                <div class="as-slide active"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
+                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
+                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
+                <button class="as-arrow as-prev">&#8592;</button>
+                <button class="as-arrow as-next">&#8594;</button>
+                <div class="as-dots"><button class="as-dot active" data-i="0"></button><button class="as-dot" data-i="1"></button><button class="as-dot" data-i="2"></button></div>
             </div>
-        </article>
-
-        <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Mantenimiento Predictivo" class="blog-image">
-            <div class="blog-content">
-                <span class="blog-category">Mantenimiento</span>
+            <div class="article-content">
+                <div class="article-meta">
+                    <span class="article-category">Mantenimiento</span>
+                    <span class="article-date">5 de Febrero, 2026</span>
+                </div>
                 <h3>Mantenimiento Predictivo: La Clave para Evitar Paros No Programados</h3>
                 <p>Implementa tecnologías de monitoreo continuo y análisis de datos para anticipar fallas antes de que ocurran.</p>
-                <a href="blog-mantenimiento.html" class="blog-read-more">Leer más →</a>
+                <a href="blog-mantenimiento.html" class="read-more">Leer más →</a>
             </div>
-        </article>
+        </div>
 
-        <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=800&q=80" alt="Automatización" class="blog-image">
-            <div class="blog-content">
-                <span class="blog-category">Automatización</span>
+        <!-- ARTICLE 2 -->
+        <div class="article-card">
+            <div class="article-slider" data-total="3">
+                <div class="as-slide active"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
+                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
+                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
+                <button class="as-arrow as-prev">&#8592;</button>
+                <button class="as-arrow as-next">&#8594;</button>
+                <div class="as-dots"><button class="as-dot active" data-i="0"></button><button class="as-dot" data-i="1"></button><button class="as-dot" data-i="2"></button></div>
+            </div>
+            <div class="article-content">
+                <div class="article-meta">
+                    <span class="article-category">Tratamiento de Agua</span>
+                    <span class="article-date">15 de Febrero, 2026</span>
+                </div>
+                <h3>Nuevas Tecnologías en Purificación de Agua Industrial</h3>
+                <p>Descubre las últimas innovaciones en sistemas de ósmosis inversa y ultrafiltración que están revolucionando la industria.</p>
+                <a href="blog-purificacion.html" class="read-more">Leer más →</a>
+            </div>
+        </div>
+
+        <!-- ARTICLE 3 -->
+        <div class="article-card">
+            <div class="article-slider" data-total="3">
+                <div class="as-slide active"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
+                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
+                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
+                <button class="as-arrow as-prev">&#8592;</button>
+                <button class="as-arrow as-next">&#8594;</button>
+                <div class="as-dots"><button class="as-dot active" data-i="0"></button><button class="as-dot" data-i="1"></button><button class="as-dot" data-i="2"></button></div>
+            </div>
+            <div class="article-content">
+                <div class="article-meta">
+                    <span class="article-category">Eficiencia Energética</span>
+                    <span class="article-date">10 de Febrero, 2026</span>
+                </div>
+                <h3>Cómo Reducir Costos Energéticos en Sistemas de Refrigeración</h3>
+                <p>Estrategias probadas para optimizar el consumo eléctrico de tus equipos de refrigeración industrial.</p>
+                <a href="blog-eficiencia.html" class="read-more">Leer más →</a>
+            </div>
+        </div>
+
+        <!-- ARTICLE 4 -->
+        <div class="article-card">
+            <div class="article-slider" data-total="3">
+                <div class="as-slide active"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
+                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
+                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
+                <button class="as-arrow as-prev">&#8592;</button>
+                <button class="as-arrow as-next">&#8594;</button>
+                <div class="as-dots"><button class="as-dot active" data-i="0"></button><button class="as-dot" data-i="1"></button><button class="as-dot" data-i="2"></button></div>
+            </div>
+            <div class="article-content">
+                <div class="article-meta">
+                    <span class="article-category">Automatización</span>
+                    <span class="article-date">1 de Febrero, 2026</span>
+                </div>
                 <h3>PLC vs SCADA: ¿Cuál Sistema de Control Necesitas?</h3>
-                <p>Guía completa para elegir el sistema de automatización industrial más adecuado según tus necesidades operativas.</p>
-                <a href="blog-automatizacion.html" class="blog-read-more">Leer más →</a>
+                <p>Guía completa para elegir el sistema de automatización industrial más adecuado según tus necesidades.</p>
+                <a href="blog-automatizacion.html" class="read-more">Leer más →</a>
             </div>
-        </article>
+        </div>
 
-        <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80" alt="Sostenibilidad" class="blog-image">
-            <div class="blog-content">
-                <span class="blog-category">Sostenibilidad</span>
-                <h3>Sistemas de Tratamiento Sostenible para la Industria Moderna</h3>
-                <p>Cómo implementar soluciones ecológicas en tus procesos sin sacrificar eficiencia operativa ni rentabilidad.</p>
-                <a href="blog-sostenibilidad.html" class="blog-read-more">Leer más →</a>
-            </div>
-        </article>
-
-        <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80" alt="Monitoreo Remoto" class="blog-image">
-            <div class="blog-content">
-                <span class="blog-category">Tecnología IoT</span>
-                <h3>IoT y Monitoreo Remoto en Sistemas de Refrigeración</h3>
-                <p>Control de tus equipos desde cualquier lugar con tecnología IoT, mejorando la respuesta a incidencias y reduciendo tiempos de inactividad.</p>
-                <a href="blog-iot.html" class="blog-read-more">Leer más →</a>
-            </div>
-        </article>
     </section>
 </div>
 
 <footer>
-    <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
+    <div class="footer-main">
+        <div class="footer-logo">
+            <img src="Diseño sin título (9).png" alt="SIECO"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="footer-logo-text" style="display:none;">SIECO</span>
+        </div>
+        <div class="footer-address">
+            <h4>Querétaro</h4>
+            <p>Calle Fénix Lt 8<br>Santa Magdalena<br>76137, Querétaro, Qro</p>
+        </div>
+        <div class="footer-address">
+            <h4>Ciudad de México</h4>
+            <p>Benito Miranda No. 21<br>Las Peñas, Iztapalapa<br>09750, CDMX</p>
+        </div>
+        <div class="footer-contact">
+            <h4>Contacto</h4>
+            <p>
+                📞 <a href="tel:4461253813">446 125 3813</a><br>
+                ✉️ <a href="mailto:ventas@sieco.com.mx">ventas@sieco.com.mx</a>
+            </p>
+        </div>
+        <div class="footer-social">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <div class="social-icon" title="Facebook">
+                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.
+    </div>
 </footer>
 
 <script>
-    // ========== WEBGL WATER BACKGROUND ==========
     const canvas = document.getElementById('waterCanvas');
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-
     function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         if(gl) gl.viewport(0, 0, canvas.width, canvas.height);
     }
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
+    resizeCanvas(); window.addEventListener('resize', resizeCanvas);
     if(gl) {
         const vs = gl.createShader(gl.VERTEX_SHADER);
         gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }');
         gl.compileShader(vs);
-
         const fs = gl.createShader(gl.FRAGMENT_SHADER);
         gl.shaderSource(fs, `precision highp float;
             uniform float time; uniform vec2 resolution;
@@ -619,51 +435,70 @@
             float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<6;i++){v+=a*smoothNoise(p);p*=2.0;a*=0.5;}return v;}
             void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
         gl.compileShader(fs);
-
         const prog = gl.createProgram();
-        gl.attachShader(prog, vs);
-        gl.attachShader(prog, fs);
-        gl.linkProgram(prog);
-        gl.useProgram(prog);
-
+        gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
         const buf = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, buf);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
-
         const posLoc = gl.getAttribLocation(prog, 'position');
-        gl.enableVertexAttribArray(posLoc);
-        gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
-
+        gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
         const timeLoc = gl.getUniformLocation(prog, 'time');
         const resLoc = gl.getUniformLocation(prog, 'resolution');
-
         let start = Date.now();
         function render() {
             const t = (Date.now() - start) * 0.001;
-            gl.uniform1f(timeLoc, t);
-            gl.uniform2f(resLoc, canvas.width, canvas.height);
-            gl.clearColor(0.0, 0.37, 0.45, 1.0);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-            requestAnimationFrame(render);
+            gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height);
+            gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(render);
         }
         render();
     }
 
-    // ========== MOBILE MENU TOGGLE ==========
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
-
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('open');
         mobileMenu.classList.toggle('open');
     });
-
     mobileMenu.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
             hamburger.classList.remove('open');
             mobileMenu.classList.remove('open');
         });
+    });
+
+    document.querySelectorAll('.article-slider').forEach((slider, cardIdx) => {
+        const slides = Array.from(slider.querySelectorAll('.as-slide'));
+        const dots   = Array.from(slider.querySelectorAll('.as-dot'));
+        const total  = slides.length;
+        let cur = 0, timer;
+
+        function show(idx) {
+            slides[cur].classList.remove('active');
+            dots[cur] && dots[cur].classList.remove('active');
+            cur = (idx + total) % total;
+            slides[cur].classList.add('active');
+            dots[cur] && dots[cur].classList.add('active');
+        }
+
+        function startAuto() {
+            clearInterval(timer);
+            timer = setInterval(() => show(cur + 1), 3200 + cardIdx * 350);
+        }
+
+        slider.querySelector('.as-prev').addEventListener('click', e => { e.stopPropagation(); show(cur-1); startAuto(); });
+        slider.querySelector('.as-next').addEventListener('click', e => { e.stopPropagation(); show(cur+1); startAuto(); });
+        dots.forEach((d,i) => d.addEventListener('click', e => { e.stopPropagation(); show(i); startAuto(); }));
+
+        let tx = 0;
+        slider.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+        slider.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - tx;
+            if (Math.abs(dx) > 40) { show(dx < 0 ? cur+1 : cur-1); startAuto(); }
+        });
+        slider.addEventListener('mouseenter', () => clearInterval(timer));
+        slider.addEventListener('mouseleave', () => startAuto());
+        startAuto();
     });
 </script>
 ```
