@@ -307,7 +307,7 @@ box-shadow: 0 0 20px rgba(72,202,228,0.05), 0 0 40px rgba(0,180,216,0.02), inset
 
 .water-feature-content h2 {
 font-size: 2.5em; color: white; margin-bottom: 20px;
-font-weight: 600; text-shadow: 0 2px 20px rgba(0,180,216,0.5);
+font-weight: 600; text-shadow: 0 4px 20px rgba(0,180,216,0.5);
 }
 .water-feature-content p {
 font-size: 1.15em; color: rgba(255,255,255,0.9);
@@ -346,7 +346,7 @@ border-radius: 18px; display: flex; align-items: center;
 justify-content: center; font-size: 2em; margin-bottom: 25px;
 box-shadow: 0 8px 24px rgba(0,180,216,0.3);
 }
-.glass-card h3 { font-size: 1.6em; color: var(–water-dark); margin-bottom: 15px; font-weight: 600; }
+.glass-card h3 { font-size: 1.6em; color: white; margin-bottom: 15px; font-weight: 600; text-shadow: 0 2px 10px rgba(0,180,216,0.4); }
 .glass-card p { color: #2c3e50; line-height: 1.8; font-size: 1.05em; }
 
 /* Stats */
@@ -688,7 +688,7 @@ letter-spacing: 2.2px;
 .item6 { animation-delay: -43.33s; }
 
 /* =====================================================
-CTA SECTION
+CTA SECTION (SIN VIDEOS)
 ===================================================== */
 .cta-section {
 max-width: 1400px; margin: 80px auto; padding: 80px 40px 60px; text-align: center;
@@ -716,17 +716,11 @@ margin-bottom: 14px; opacity: 0.85;
 font-size: 1.25em; color: rgba(255,255,255,0.9);
 max-width: 700px; margin: 0 auto 40px; line-height: 1.7;
 }
-.cta-section .cta-desc-right {
-font-size: 1em; color: rgba(255,255,255,0.75);
-max-width: 320px; margin: 0 auto 50px; line-height: 1.6;
-font-style: italic;
-}
 .cta-white {
 display: inline-block; padding: 18px 45px; background: white;
 color: var(–water-deep); text-decoration: none; border-radius: 50px;
 font-weight: 600; font-size: 1.1em; transition: all 0.3s;
 box-shadow: 0 8px 30px rgba(255,255,255,0.3);
-margin-bottom: 70px;
 }
 .cta-white:hover {
 transform: translateY(-3px);
@@ -906,7 +900,7 @@ FOOTER
 footer {
 position: relative;
 z-index: 10;
-margin-top: 0;
+margin-top: 60px;
 background: rgba(0,8,18,0.96);
 backdrop-filter: blur(16px);
 border-top: 1px solid rgba(72,202,228,0.15);
@@ -1051,7 +1045,7 @@ RESPONSIVE
 .cta-section h2 { font-size: 1.8em; }
 .cta-section h1 { font-size: 1.8em; }
 .cta-section p { font-size: 1em; }
-.cta-white { padding: 14px 32px; font-size: 1em; margin-bottom: 40px; }
+.cta-white { padding: 14px 32px; font-size: 1em; }
 
 .video-cards { flex-direction: row; gap: 12px; }
 .video-card { max-width: none; flex: 1; }
@@ -1112,7 +1106,7 @@ to   { transform: rotate(360deg) translateX(122px) rotate(-360deg); }
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
         <img
-          src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%2300b4d8'/%3E%3Ctext x='50%25' y='50%25' font-size='32' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3ESIECO%3C/text%3E%3C/svg%3E"
           alt="SIECO Logo"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
         >
@@ -1154,7 +1148,7 @@ to   { transform: rotate(360deg) translateX(122px) rotate(-360deg); }
   </h1>
   <p>Tecnología de purificación de agua, control eléctrico, refrigeración y mantenimiento industrial</p>
   <div class="cta-group">
-    <a href=" " class="cta-primary">Solicitar Cotización →</a>
+    <a href="contacto.html" class="cta-primary">Solicitar Cotización →</a>
   </div>
 </section>
 
@@ -1180,42 +1174,35 @@ to   { transform: rotate(360deg) translateX(122px) rotate(-360deg); }
 
         <!-- CENTER: SIECO logo -->
         <div class="circle-center">
-          <img
-            src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png"
-            alt="SIECO"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-          >
-          <div class="center-fallback" style="display:none;">
-            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 4C20 4 10 22 10 32c0 4 1.5 8.5 4.5 12C18 50 24.5 60 32 60c7.5 0 14-10 17.5-16C52.5 40.5 54 36 54 32c0-10-10-28-22-28zm0 44c-5 0-9-6.5-9-16s4-18 9-18 9 8 9 18-4 16-9 16z"/>
-            </svg>
-            <span class="center-label">SIECO</span>
-          </div>
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 4C20 4 10 22 10 32c0 4 1.5 8.5 4.5 12C18 50 24.5 60 32 60c7.5 0 14-10 17.5-16C52.5 40.5 54 36 54 32c0-10-10-28-22-28zm0 44c-5 0-9-6.5-9-16s4-18 9-18 9 8 9 18-4 16-9 16z" fill="white"/>
+          </svg>
+          <span class="center-label">SIECO</span>
         </div>
 
         <!-- 6 ORBITING SERVICE ITEMS -->
         <a href="agua.html" class="circle-item item1">
-          <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Circle1.png" alt="Agua Residual" class="item-img">
+          <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=300&h=300&fit=crop" alt="Agua Residual" class="item-img">
           <span class="item-label">Agua Residual</span>
         </a>
         <a href="agua.html" class="circle-item item2">
-          <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Circle2.png" alt="Ósmosis Inversa" class="item-img">
+          <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=300&fit=crop" alt="Ósmosis Inversa" class="item-img">
           <span class="item-label">Ósmosis Inversa</span>
         </a>
         <a href="agua.html" class="circle-item item3">
-          <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Circulo9.png" alt="Desinfección UV" class="item-img">
+          <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=300&h=300&fit=crop" alt="Desinfección UV" class="item-img">
           <span class="item-label">Desinfección UV</span>
         </a>
         <a href="agua.html" class="circle-item item4">
-          <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Circulo8.png" alt="Filtración" class="item-img">
+          <img src="https://images.unsplash.com/photo-1576091160550-112173f31f5e?w=300&h=300&fit=crop" alt="Filtración" class="item-img">
           <span class="item-label">Filtración</span>
         </a>
         <a href="contacto.html" class="circle-item item5">
-          <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Circle6.png" alt="Comercial" class="item-img">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=300&fit=crop" alt="Comercial" class="item-img">
           <span class="item-label">Comercial</span>
         </a>
         <a href="agua.html" class="circle-item item6">
-          <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Circulo8.png" alt="Resinas" class="item-img">
+          <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=300&h=300&fit=crop" alt="Resinas" class="item-img">
           <span class="item-label">Resinas</span>
         </a>
 
@@ -1228,9 +1215,9 @@ to   { transform: rotate(360deg) translateX(122px) rotate(-360deg); }
 <section class="water-feature">
   <div class="water-visual">
     <div class="image-wrapper">
-      <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/FILTRO1.png?raw=true" class="slide active" alt="Sistema de Filtración 1">
-      <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/FILTRO3.jpg?raw=true" class="slide" alt="Sistema de Filtración 2">
-      <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800" class="slide" alt="Sistema de Filtración 3">
+      <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop" class="slide active" alt="Sistema de Filtración 1">
+      <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop" class="slide" alt="Sistema de Filtración 2">
+      <img src="https://images.unsplash.com/photo-1576091160550-112173f31f5e?w=800&h=600&fit=crop" class="slide" alt="Sistema de Filtración 3">
     </div>
     <div class="glass-overlay"></div>
     <div class="water-ripple"></div>
@@ -1323,12 +1310,10 @@ to   { transform: rotate(360deg) translateX(122px) rotate(-360deg); }
 ```
   <!-- Logo más grande + tagline -->
   <div class="footer-logo">
-    <img
-      src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png"
-      alt="SIECO"
-      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-    >
-    <span class="footer-logo-fallback" style="display:none;">SIECO</span>
+    <svg viewBox="0 0 200 100" width="100" height="50" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="100" fill="#00b4d8"/>
+      <text x="100" y="55" font-size="32" font-weight="bold" fill="white" text-anchor="middle" font-family="Arial">SIECO</text>
+    </svg>
     <p class="footer-logo-tagline">
       Ingeniería Industrial<br>
       Querétaro, México
