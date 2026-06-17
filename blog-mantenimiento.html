@@ -23,21 +23,29 @@
             background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
             z-index: 1; pointer-events: none;
         }
+
+        /* ── NAV (from index.html) ── */
         nav {
             position: fixed; top: 0; width: 100%;
-            background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(20px);
             box-shadow: 0 4px 30px rgba(0,180,216,0.1);
-            z-index: 1000; border-bottom: 2px solid rgba(0,180,216,0.2);
+            z-index: 1000;
+            border-bottom: 2px solid rgba(0,180,216,0.2);
         }
         .nav-container {
-            max-width: 1400px; margin: 0 auto; padding: 0 40px;
-            display: flex; justify-content: space-between; align-items: center; height: 90px;
+            max-width: 1400px; margin: 0 auto;
+            padding: 0 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 90px;
         }
-        .nav-logo img { height: 202px; width: auto; display: block; }
-        .nav-links { display: flex; gap: 26px; list-style: none; align-items: center; }
+        .nav-logo img { height: 68px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 11px; list-style: none; align-items: center; }
         .nav-links a {
-            text-decoration: none; color: #001219; font-weight: 500; font-size: 0.82em;
-            transition: all 0.3s; position: relative; letter-spacing: 0.6px; text-transform: uppercase;
+            text-decoration: none; color: #001219;
+            font-weight: 500; font-size: 0.82em;
+            transition: all 0.3s; position: relative;
+            letter-spacing: 0.6px; text-transform: uppercase;
         }
         .nav-links a::after {
             content: ''; position: absolute; bottom: -4px; left: 0;
@@ -47,14 +55,19 @@
         .nav-links a:hover::after { width: 100%; }
         .nav-links a.active { color: var(--water-blue); font-weight: 600; }
         .nav-links a.active::after { width: 100%; }
+
         .hamburger {
             display: none; flex-direction: column; gap: 5px;
             cursor: pointer; padding: 5px; background: none; border: none;
         }
-        .hamburger span { display: block; width: 24px; height: 2px; background: #001219; border-radius: 2px; transition: all 0.3s; }
+        .hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: #001219; border-radius: 2px; transition: all 0.3s;
+        }
         .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
         .mobile-menu {
             display: none; position: fixed; top: 90px; left: 0; width: 100%;
             background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
@@ -64,11 +77,12 @@
         }
         .mobile-menu.open { display: flex; flex-direction: column; }
         .mobile-menu a {
-            text-decoration: none; color: #001219; font-weight: 500; font-size: 1em;
-            text-transform: uppercase; letter-spacing: 0.5px;
+            text-decoration: none; color: #001219; font-weight: 500;
+            font-size: 1em; text-transform: uppercase; letter-spacing: 0.5px;
             padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
         }
         .mobile-menu a:hover { color: var(--water-blue); }
+
         .content { position: relative; z-index: 10; padding-top: 100px; }
 
         /* ARTICLE LAYOUT */
@@ -263,8 +277,47 @@
         .stat-num { font-size: 1.8em; font-weight: 700; color: var(--water-blue); line-height: 1; }
         .stat-lbl { font-size: 0.72em; color: #666; font-weight: 400; margin-top: 4px; line-height: 1.3; }
 
-        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.7); background: rgba(0,18,25,0.8); backdrop-filter: blur(10px); margin-top: 60px; font-weight: 300; }
+        /* ── FOOTER (from index.html) ── */
+        footer {
+            position: relative; z-index: 10; margin-top: 60px;
+            background: rgba(0,8,18,0.96); backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(72,202,228,0.15);
+        }
+        .footer-main {
+            max-width: 1400px; margin: 0 auto; padding: 56px 40px 40px;
+            display: grid; grid-template-columns: 200px 1fr 1fr 1fr auto;
+            gap: 48px; align-items: start;
+        }
+        .footer-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+        .footer-logo img {
+            height: 100px; width: auto; display: block;
+            filter: brightness(1.08) drop-shadow(0 4px 18px rgba(0,180,216,0.25));
+            transition: filter 0.3s, transform 0.3s;
+        }
+        .footer-logo img:hover {
+            filter: brightness(1.15) drop-shadow(0 6px 24px rgba(0,180,216,0.45));
+            transform: translateY(-2px);
+        }
+        .footer-logo-fallback { font-size: 1.8em; font-weight: 800; letter-spacing: 3px; color: var(--water-blue); text-transform: uppercase; }
+        .footer-logo-tagline { font-size: 0.72em; color: rgba(255,255,255,0.38); font-weight: 300; letter-spacing: 1.2px; line-height: 1.55; margin-top: 2px; }
+        .footer-col-label { font-size: 10px; font-weight: 700; letter-spacing: 3.5px; text-transform: uppercase; color: var(--water-light); margin-bottom: 14px; opacity: 0.7; }
+        .footer-col p { font-size: 0.92em; color: rgba(255,255,255,0.72); line-height: 1.75; font-weight: 300; }
+        .footer-col a { display: block; font-size: 0.92em; color: rgba(255,255,255,0.72); text-decoration: none; line-height: 1.75; font-weight: 300; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--water-light); }
+        .footer-social { display: flex; gap: 12px; margin-top: 16px; }
+        .footer-social a {
+            width: 38px; height: 38px; border-radius: 10px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(72,202,228,0.2);
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, border-color 0.2s, transform 0.2s;
+        }
+        .footer-social a:hover { background: rgba(0,180,216,0.2); border-color: rgba(72,202,228,0.6); transform: translateY(-2px); }
+        .footer-social img { width: 18px; height: 18px; opacity: 0.75; filter: brightness(0) invert(1); }
+        .footer-divider { max-width: 1400px; margin: 0 auto; border: none; border-top: 1px solid rgba(72,202,228,0.1); }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .footer-bottom p { font-size: 0.8em; color: rgba(255,255,255,0.35); font-weight: 300; letter-spacing: 0.3px; }
 
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
             .article-body { grid-template-columns: 1fr; }
             .article-sidebar { order: -1; }
@@ -274,26 +327,36 @@
             .article-content { padding: 32px 24px; }
             .nav-links { display: none; }
             .hamburger { display: flex; }
-            .nav-container { padding: 0 20px; }
-            .nav-logo img { height: 50px; }
+            .nav-container { padding: 0 20px; height: 70px; }
+            .nav-logo img { height: 42px; }
+            .mobile-menu { top: 70px; }
             .article-hero, .article-body { padding-left: 20px; padding-right: 20px; }
             .article-cover { height: 260px; border-radius: 12px; }
+            .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; padding: 36px 20px 24px; }
+            .footer-logo { grid-column: 1 / -1; }
+            .footer-logo img { height: 76px; }
+            .footer-bottom { padding: 14px 20px; flex-direction: column; align-items: flex-start; gap: 4px; }
         }
-</style>
+        @media (max-width: 520px) {
+            .footer-main { grid-template-columns: 1fr; gap: 20px; }
+            .footer-logo img { height: 64px; }
+        }
+    </style>
 </head>
 <body>
     <canvas id="waterCanvas"></canvas>
     <div class="water-overlay"></div>
-    
+
+    <!-- NAV (from index.html) -->
     <nav>
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+                <img src="Diseño sin título (9).png" alt="SIECO" onerror="this.style.display='none';this.parentNode.querySelector('span').style.display='block'">
+                <span style="display:none;font-size:1.5em;font-weight:700;color:#001219;letter-spacing:2px;">SIECO</span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="soluciones.html">Soluciones</a></li>
-                <li><a href="control-electrico.html">Control Eléctrico</a></li>
+                <li><a href="agua.html">Soluciones En Agua</a></li>
                 <li><a href="refrigeracion.html">Refrigeración</a></li>
                 <li><a href="mantenimiento.html">Mantenimiento</a></li>
                 <li><a href="proyectos.html">Proyectos</a></li>
@@ -305,10 +368,10 @@
             </button>
         </div>
     </nav>
+
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html">Inicio</a>
-        <a href="soluciones.html">Soluciones</a>
-        <a href="control-electrico.html">Control Eléctrico</a>
+        <a href="agua.html">Soluciones</a>
         <a href="refrigeracion.html">Refrigeración</a>
         <a href="mantenimiento.html">Mantenimiento</a>
         <a href="proyectos.html">Proyectos</a>
@@ -339,62 +402,62 @@
 
         <section class="article-body">
             <article class="article-content">
-                
-<h2>Del Mantenimiento Reactivo al Predictivo</h2>
-<p>Durante décadas, la industria operó bajo un modelo correctivo: reparar cuando algo se rompe. Luego vino el mantenimiento preventivo: cambiar componentes según calendario, independientemente de su estado real. Hoy, el mantenimiento predictivo —apoyado en sensores, análisis de datos y machine learning— está redefiniendo lo que significa mantener una planta industrial operando.</p>
-<p>La diferencia en costo es dramática. Un paro no programado en una planta industrial promedio cuesta entre <strong>$50,000 y $500,000 MXN por hora</strong>, considerando pérdida de producción, materias primas en proceso, horas extra y penalidades por incumplimiento de entregas.</p>
 
-<div class="highlight-box">
-    <p><strong>Estadística de industria:</strong> Según estudios de Deloitte, el mantenimiento predictivo reduce los costos de mantenimiento en un <strong>25–30%</strong>, disminuye los paros no programados en un <strong>70–75%</strong> y extiende la vida útil de los equipos entre un <strong>20–40%</strong>.</p>
-</div>
+                <h2>Del Mantenimiento Reactivo al Predictivo</h2>
+                <p>Durante décadas, la industria operó bajo un modelo correctivo: reparar cuando algo se rompe. Luego vino el mantenimiento preventivo: cambiar componentes según calendario, independientemente de su estado real. Hoy, el mantenimiento predictivo —apoyado en sensores, análisis de datos y machine learning— está redefiniendo lo que significa mantener una planta industrial operando.</p>
+                <p>La diferencia en costo es dramática. Un paro no programado en una planta industrial promedio cuesta entre <strong>$50,000 y $500,000 MXN por hora</strong>, considerando pérdida de producción, materias primas en proceso, horas extra y penalidades por incumplimiento de entregas.</p>
 
-<h2>Las 5 Tecnologías del Mantenimiento Predictivo</h2>
+                <div class="highlight-box">
+                    <p><strong>Estadística de industria:</strong> Según estudios de Deloitte, el mantenimiento predictivo reduce los costos de mantenimiento en un <strong>25–30%</strong>, disminuye los paros no programados en un <strong>70–75%</strong> y extiende la vida útil de los equipos entre un <strong>20–40%</strong>.</p>
+                </div>
 
-<h3>1. Análisis de Vibraciones</h3>
-<p>Los sensores de vibración (acelerómetros) instalados en rodamientos, ejes y acoplamientos permiten detectar con semanas de anticipación problemas como desbalanceo, desalineación, desgaste de rodamientos y holguras mecánicas. El análisis espectral de la señal de vibración permite incluso identificar <em>qué tipo</em> de problema existe y en <em>qué componente específico</em>.</p>
+                <h2>Las 5 Tecnologías del Mantenimiento Predictivo</h2>
 
-<h3>2. Termografía Infrarroja</h3>
-<p>Las cámaras termográficas revelan puntos calientes en conexiones eléctricas, motores, transformadores y superficies de intercambio de calor. Una conexión eléctrica mal apretada puede estar generando pérdidas de energía durante meses antes de causar un incendio o un paro.</p>
+                <h3>1. Análisis de Vibraciones</h3>
+                <p>Los sensores de vibración (acelerómetros) instalados en rodamientos, ejes y acoplamientos permiten detectar con semanas de anticipación problemas como desbalanceo, desalineación, desgaste de rodamientos y holguras mecánicas. El análisis espectral de la señal de vibración permite incluso identificar <em>qué tipo</em> de problema existe y en <em>qué componente específico</em>.</p>
 
-<h3>3. Análisis de Aceite Lubricante</h3>
-<p>El aceite de un sistema hidráulico o de un compresor contiene información valiosísima. El análisis de partículas metálicas en suspensión (espectrometría), la viscosidad, el índice de acidez y la presencia de agua permiten detectar desgaste incipiente antes de que sea visible o cause daño.</p>
+                <h3>2. Termografía Infrarroja</h3>
+                <p>Las cámaras termográficas revelan puntos calientes en conexiones eléctricas, motores, transformadores y superficies de intercambio de calor. Una conexión eléctrica mal apretada puede estar generando pérdidas de energía durante meses antes de causar un incendio o un paro.</p>
 
-<h3>4. Ultrasonido Estructural</h3>
-<p>Los sensores de ultrasonido detectan fricciones, fugas de gas o vapor, y cavitación en bombas con una sensibilidad imposible para el oído humano. Son especialmente útiles para detectar fugas en sistemas de aire comprimido, donde las pérdidas pueden representar hasta el 30% del consumo del compresor.</p>
+                <h3>3. Análisis de Aceite Lubricante</h3>
+                <p>El aceite de un sistema hidráulico o de un compresor contiene información valiosísima. El análisis de partículas metálicas en suspensión (espectrometría), la viscosidad, el índice de acidez y la presencia de agua permiten detectar desgaste incipiente antes de que sea visible o cause daño.</p>
 
-<h3>5. Monitoreo de Parámetros de Proceso</h3>
-<p>El análisis de tendencias en variables como presión diferencial, temperatura de descarga, corriente de motores y caudales puede revelar degradación gradual del equipo que no dispara alarmas pero sí reduce eficiencia y precede fallas.</p>
+                <h3>4. Ultrasonido Estructural</h3>
+                <p>Los sensores de ultrasonido detectan fricciones, fugas de gas o vapor, y cavitación en bombas con una sensibilidad imposible para el oído humano. Son especialmente útiles para detectar fugas en sistemas de aire comprimido, donde las pérdidas pueden representar hasta el 30% del consumo del compresor.</p>
 
-<table class="data-table">
-    <tr>
-        <th>Tecnología</th>
-        <th>Tipo de Equipo</th>
-        <th>Anticipación Detección</th>
-        <th>Costo Relativo</th>
-    </tr>
-    <tr><td>Análisis de vibraciones</td><td>Motores, bombas, compresores</td><td>2–8 semanas</td><td>Medio</td></tr>
-    <tr><td>Termografía IR</td><td>Eléctrico, intercambiadores</td><td>1–4 semanas</td><td>Medio-Alto</td></tr>
-    <tr><td>Análisis de aceite</td><td>Hidráulico, compresores, reductores</td><td>4–12 semanas</td><td>Bajo</td></tr>
-    <tr><td>Ultrasonido</td><td>Rodamientos, fugas, válvulas</td><td>2–10 semanas</td><td>Bajo</td></tr>
-    <tr><td>Monitoreo de proceso</td><td>Todos</td><td>1–6 semanas</td><td>Variable</td></tr>
-</table>
+                <h3>5. Monitoreo de Parámetros de Proceso</h3>
+                <p>El análisis de tendencias en variables como presión diferencial, temperatura de descarga, corriente de motores y caudales puede revelar degradación gradual del equipo que no dispara alarmas pero sí reduce eficiencia y precede fallas.</p>
 
-<h2>Implementación por Fases: El Modelo SIECO</h2>
-<ol class="steps-list">
-    <li><strong>Inventario y criticidad de equipos</strong> — Clasificar todos los equipos por impacto en producción, costo de reemplazo y frecuencia histórica de fallas. Los equipos Clase A (críticos) son el primer objetivo.</li>
-    <li><strong>Instalación de sensores permanentes en equipos críticos</strong> — Acelerómetros, sensores de temperatura y transductores de presión conectados a un gateway IoT con transmisión en tiempo real.</li>
-    <li><strong>Establecimiento de líneas base</strong> — Durante 4–6 semanas de operación normal, el sistema aprende el comportamiento "saludable" de cada equipo y establece umbrales de alerta personalizados.</li>
-    <li><strong>Integración con CMMS</strong> — Las alertas predictivas generan automáticamente órdenes de trabajo en el sistema de gestión de mantenimiento, con la información de diagnóstico ya incluida.</li>
-    <li><strong>Revisiones periódicas con tecnologías portátiles</strong> — Para equipos de criticidad media, inspecciones programadas mensuales o trimestrales con equipos portátiles de vibración y termografía.</li>
-</ol>
+                <table class="data-table">
+                    <tr>
+                        <th>Tecnología</th>
+                        <th>Tipo de Equipo</th>
+                        <th>Anticipación Detección</th>
+                        <th>Costo Relativo</th>
+                    </tr>
+                    <tr><td>Análisis de vibraciones</td><td>Motores, bombas, compresores</td><td>2–8 semanas</td><td>Medio</td></tr>
+                    <tr><td>Termografía IR</td><td>Eléctrico, intercambiadores</td><td>1–4 semanas</td><td>Medio-Alto</td></tr>
+                    <tr><td>Análisis de aceite</td><td>Hidráulico, compresores, reductores</td><td>4–12 semanas</td><td>Bajo</td></tr>
+                    <tr><td>Ultrasonido</td><td>Rodamientos, fugas, válvulas</td><td>2–10 semanas</td><td>Bajo</td></tr>
+                    <tr><td>Monitoreo de proceso</td><td>Todos</td><td>1–6 semanas</td><td>Variable</td></tr>
+                </table>
 
-<h2>El Factor Humano</h2>
-<p>La tecnología por sí sola no salva equipos. El mantenimiento predictivo exitoso requiere técnicos capacitados que sepan interpretar los datos, experiencia para distinguir falsas alarmas de señales reales, y una cultura organizacional que valore la prevención sobre la reacción.</p>
+                <h2>Implementación por Fases: El Modelo SIECO</h2>
+                <ol class="steps-list">
+                    <li><strong>Inventario y criticidad de equipos</strong> — Clasificar todos los equipos por impacto en producción, costo de reemplazo y frecuencia histórica de fallas. Los equipos Clase A (críticos) son el primer objetivo.</li>
+                    <li><strong>Instalación de sensores permanentes en equipos críticos</strong> — Acelerómetros, sensores de temperatura y transductores de presión conectados a un gateway IoT con transmisión en tiempo real.</li>
+                    <li><strong>Establecimiento de líneas base</strong> — Durante 4–6 semanas de operación normal, el sistema aprende el comportamiento "saludable" de cada equipo y establece umbrales de alerta personalizados.</li>
+                    <li><strong>Integración con CMMS</strong> — Las alertas predictivas generan automáticamente órdenes de trabajo en el sistema de gestión de mantenimiento, con la información de diagnóstico ya incluida.</li>
+                    <li><strong>Revisiones periódicas con tecnologías portátiles</strong> — Para equipos de criticidad media, inspecciones programadas mensuales o trimestrales con equipos portátiles de vibración y termografía.</li>
+                </ol>
 
-<div class="tip-box">
-    <div class="tip-icon">🔧</div>
-    <p><strong>Recomendación SIECO:</strong> Comienza el predictivo con 5–10 equipos críticos bien monitoreados antes de intentar cubrir toda la planta. Los resultados rápidos generan el apoyo organizacional necesario para expandir el programa.</p>
-</div>
+                <h2>El Factor Humano</h2>
+                <p>La tecnología por sí sola no salva equipos. El mantenimiento predictivo exitoso requiere técnicos capacitados que sepan interpretar los datos, experiencia para distinguir falsas alarmas de señales reales, y una cultura organizacional que valore la prevención sobre la reacción.</p>
+
+                <div class="tip-box">
+                    <div class="tip-icon">🔧</div>
+                    <p><strong>Recomendación SIECO:</strong> Comienza el predictivo con 5–10 equipos críticos bien monitoreados antes de intentar cubrir toda la planta. Los resultados rápidos generan el apoyo organizacional necesario para expandir el programa.</p>
+                </div>
 
                 <div class="cta-article">
                     <h3>¿Necesitas una Solución a Medida?</h3>
@@ -404,45 +467,48 @@
             </article>
 
             <aside class="article-sidebar">
-                
-<div class="sidebar-card">
-    <h4>Impacto Comprobado</h4>
-    <div class="stat-grid">
-        <div class="stat-item"><div class="stat-num">75%</div><div class="stat-lbl">Menos paros no programados</div></div>
-        <div class="stat-item"><div class="stat-num">30%</div><div class="stat-lbl">Reducción costo mantto.</div></div>
-        <div class="stat-item"><div class="stat-num">40%</div><div class="stat-lbl">Mayor vida útil equipos</div></div>
-        <div class="stat-item"><div class="stat-num">8 sem</div><div class="stat-lbl">Anticipación promedio</div></div>
-    </div>
-</div>
-<div class="sidebar-card">
-    <h4>Artículos Relacionados</h4>
-    <a href="blog-automatizacion.html" class="related-post">
-        <img src="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=200&q=80" class="rp-img" alt="">
-        <div class="rp-content">
-            <div class="rp-cat">Automatización</div>
-            <div class="rp-title">PLC vs SCADA: ¿Cuál Sistema Necesitas?</div>
-        </div>
-    </a>
-    <a href="blog-eficiencia.html" class="related-post">
-        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=200&q=80" class="rp-img" alt="">
-        <div class="rp-content">
-            <div class="rp-cat">Eficiencia Energética</div>
-            <div class="rp-title">Reducir Costos en Sistemas de Refrigeración</div>
-        </div>
-    </a>
-    <a href="blog-normas.html" class="related-post">
-        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=200&q=80" class="rp-img" alt="">
-        <div class="rp-content">
-            <div class="rp-cat">Normativas</div>
-            <div class="rp-title">Cumplimiento NOM-127 en Instalaciones Eléctricas</div>
-        </div>
-    </a>
-</div>
-
+                <div class="sidebar-card">
+                    <h4>Impacto Comprobado</h4>
+                    <div class="stat-grid">
+                        <div class="stat-item"><div class="stat-num">75%</div><div class="stat-lbl">Menos paros no programados</div></div>
+                        <div class="stat-item"><div class="stat-num">30%</div><div class="stat-lbl">Reducción costo mantto.</div></div>
+                        <div class="stat-item"><div class="stat-num">40%</div><div class="stat-lbl">Mayor vida útil equipos</div></div>
+                        <div class="stat-item"><div class="stat-num">8 sem</div><div class="stat-lbl">Anticipación promedio</div></div>
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h4>Artículos Relacionados</h4>
+                    <a href="blog-automatizacion.html" class="related-post">
+                        <img src="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=200&q=80" class="rp-img" alt="">
+                        <div class="rp-content">
+                            <div class="rp-cat">Automatización</div>
+                            <div class="rp-title">PLC vs SCADA: ¿Cuál Sistema Necesitas?</div>
+                        </div>
+                    </a>
+                    <a href="blog-eficiencia.html" class="related-post">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=200&q=80" class="rp-img" alt="">
+                        <div class="rp-content">
+                            <div class="rp-cat">Eficiencia Energética</div>
+                            <div class="rp-title">Reducir Costos en Sistemas de Refrigeración</div>
+                        </div>
+                    </a>
+                    <a href="blog-normas.html" class="related-post">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=200&q=80" class="rp-img" alt="">
+                        <div class="rp-content">
+                            <div class="rp-cat">Normativas</div>
+                            <div class="rp-title">Cumplimiento NOM-127 en Instalaciones Eléctricas</div>
+                        </div>
+                    </a>
+                </div>
                 <div class="sidebar-card">
                     <h4>Etiquetas</h4>
                     <div class="tags-list">
-                        <a href="blog.html" class="tag">Mantenimiento Predictivo</a><a href="blog.html" class="tag">Vibraciones</a><a href="blog.html" class="tag">Termografía</a><a href="blog.html" class="tag">IoT Industrial</a><a href="blog.html" class="tag">CMMS</a><a href="blog.html" class="tag">Industria 4.0</a>
+                        <a href="blog.html" class="tag">Mantenimiento Predictivo</a>
+                        <a href="blog.html" class="tag">Vibraciones</a>
+                        <a href="blog.html" class="tag">Termografía</a>
+                        <a href="blog.html" class="tag">IoT Industrial</a>
+                        <a href="blog.html" class="tag">CMMS</a>
+                        <a href="blog.html" class="tag">Industria 4.0</a>
                     </div>
                 </div>
                 <div class="sidebar-card">
@@ -454,18 +520,67 @@
         </section>
     </div>
 
+    <!-- FOOTER (from index.html) -->
     <footer>
-        <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
+        <div class="footer-main">
+
+            <div class="footer-logo">
+                <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png" alt="SIECO" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="footer-logo-fallback" style="display:none;">SIECO</span>
+                <p class="footer-logo-tagline">
+                    Ingeniería Industrial<br>
+                    Querétaro, México
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <p class="footer-col-label">Querétaro</p>
+                <p>Calle Fenix Lt 8<br>Santa Magdalena<br>76137, Querétaro, Qro</p>
+            </div>
+
+            <div class="footer-col">
+                <p class="footer-col-label">Ciudad de México</p>
+                <p>Benito Miranda No. 21<br>Las Peñas, Iztapalapa<br>09750, CDMX</p>
+            </div>
+
+            <div class="footer-col">
+                <p class="footer-col-label">Contacto</p>
+                <a href="tel:+524461253813">446 125 3813</a>
+                <a href="mailto:ventas@siecomexico.com.mx">ventas@siecomexico.com.mx</a>
+            </div>
+
+            <div class="footer-col">
+                <p class="footer-col-label">Síguenos</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">
+                        <img src="https://img.icons8.com/?size=100&id=Q9takPniPZr5&format=png&color=FFFFFF" alt="Facebook">
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <img src="https://img.icons8.com/?size=100&id=u0m7D4oNPpJp&format=png&color=FFFFFF" alt="Instagram">
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <img src="https://img.icons8.com/?size=100&id=8808&format=png&color=FFFFFF" alt="LinkedIn">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <hr class="footer-divider">
+        <div class="footer-bottom">
+            <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
+        </div>
     </footer>
+
     <script>
+        // Water Canvas WebGL
         const canvas = document.getElementById('waterCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         function resizeCanvas() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            if(gl) gl.viewport(0, 0, canvas.width, canvas.height);
+            if (gl) gl.viewport(0, 0, canvas.width, canvas.height);
         }
         resizeCanvas(); window.addEventListener('resize', resizeCanvas);
-        if(gl) {
+        if (gl) {
             const vs = gl.createShader(gl.VERTEX_SHADER);
             gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }');
             gl.compileShader(vs);
@@ -479,22 +594,24 @@
             gl.compileShader(fs);
             const prog = gl.createProgram();
             gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
-            const buf = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
-            const posLoc = gl.getAttribLocation(prog, 'position');
-            gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+            const posLoc = gl.getAttribLocation(prog, 'position'); gl.enableVertexAttribArray(posLoc);
+            gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
             const timeLoc = gl.getUniformLocation(prog, 'time');
-            const resLoc = gl.getUniformLocation(prog, 'resolution');
+            const resLoc  = gl.getUniformLocation(prog, 'resolution');
             let start = Date.now();
             function render() {
                 const t = (Date.now() - start) * 0.001;
                 gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height);
                 gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT);
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(render);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(render);
             }
             render();
         }
+
+        // Hamburger menu
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
         hamburger.addEventListener('click', () => {
@@ -507,6 +624,6 @@
                 mobileMenu.classList.remove('open');
             });
         });
-</script>
+    </script>
 </body>
 </html>
