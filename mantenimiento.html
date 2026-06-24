@@ -170,7 +170,6 @@
             flex-shrink: 0; margin-top: 1px;
         }
 
-        /* Maintenance type heading inside card */
         .maint-type-heading {
             font-size: 0.88em; font-weight: 600; color: var(--water-deep);
             margin: 10px 0 4px; text-decoration: underline;
@@ -192,19 +191,6 @@
         .cs-slide.active { opacity: 1; }
         .cs-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 7s ease; }
         .cs-slide.active img { transform: scale(1.06); }
-
-        .cs-placeholder {
-            width: 100%; height: 100%;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
-            background: linear-gradient(135deg, #001525, #002a42, #001525);
-            background-size: 200% 200%; animation: shimmer 5s ease infinite;
-        }
-        @keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-        .cs-placeholder svg { width: 54px; height: 54px; opacity: 0.4; }
-        .cs-placeholder span {
-            font-size: 0.7em; font-weight: 300; letter-spacing: 4px;
-            color: rgba(0,180,216,0.55); text-transform: uppercase;
-        }
 
         .cs-arrow {
             position: absolute; top: 50%; transform: translateY(-50%);
@@ -230,46 +216,78 @@
 
         /* FOOTER */
         footer {
-            background: rgba(0,18,25,0.95); backdrop-filter: blur(10px);
-            margin-top: 40px; border-top: 1px solid rgba(0,180,216,0.2);
-            color: rgba(255,255,255,0.85); font-weight: 300;
+            background: rgba(0,18,25,0.95);
+            backdrop-filter: blur(10px);
+            margin-top: 40px;
+            border-top: 1px solid rgba(0,180,216,0.2);
+            color: rgba(255,255,255,0.85);
+            font-weight: 300;
         }
         .footer-main {
-            max-width: 1400px; margin: 0 auto;
-            padding: 50px 40px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px 50px;
             display: grid;
-            grid-template-columns: auto 1fr 1fr 1fr auto;
-            gap: 40px; align-items: start;
+            grid-template-columns: 180px 1fr 1fr 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        .footer-logo {
+            display: flex;
+            align-items: flex-start;
         }
         .footer-logo img { height: 70px; width: auto; }
-        .footer-logo-text { font-size: 1.6em; font-weight: 700; color: var(--water-blue); letter-spacing: 3px; }
-        .footer-address h4, .footer-contact h4, .footer-social h4 {
-            font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+        .footer-logo-text {
+            font-size: 1.6em; font-weight: 700;
+            color: var(--water-blue); letter-spacing: 3px;
         }
-        .footer-address p, .footer-contact p {
-            font-size: 0.88em; line-height: 1.7; color: rgba(255,255,255,0.75);
+        .footer-col h4 {
+            font-size: 0.72em; font-weight: 600;
+            color: var(--water-light);
+            text-transform: uppercase; letter-spacing: 2px;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0,180,216,0.2);
         }
-        .footer-contact a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s; }
-        .footer-contact a:hover { color: var(--water-blue); }
-        .footer-social { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
-        .footer-social h4 { align-self: flex-end; }
-        .social-icons { display: flex; gap: 12px; }
+        .footer-col p {
+            font-size: 0.88em; line-height: 1.8;
+            color: rgba(255,255,255,0.7);
+        }
+        .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: block;
+            font-size: 0.88em;
+            line-height: 2;
+        }
+        .footer-col a:hover { color: var(--water-blue); }
+        .social-icons {
+            display: flex; gap: 10px; flex-wrap: wrap;
+        }
         .social-icon {
             width: 40px; height: 40px; border-radius: 10px;
-            background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);
+            background: rgba(0,180,216,0.12);
+            border: 1px solid rgba(0,180,216,0.25);
             display: flex; align-items: center; justify-content: center;
             transition: all 0.3s; cursor: pointer;
         }
-        .social-icon:hover { background: var(--water-blue); border-color: var(--water-blue); transform: translateY(-3px); }
+        .social-icon:hover {
+            background: var(--water-blue);
+            border-color: var(--water-blue);
+            transform: translateY(-3px);
+        }
         .social-icon svg { width: 18px; height: 18px; fill: rgba(255,255,255,0.8); }
         .footer-bottom {
             border-top: 1px solid rgba(0,180,216,0.12);
-            padding: 18px 40px; text-align: center;
-            font-size: 0.8em; color: rgba(255,255,255,0.4); letter-spacing: 0.5px;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 0.8em;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.5px;
         }
 
-        /* RESPONSIVE — always side by side: text left, slider right */
+        /* RESPONSIVE */
         @media (max-width: 968px) {
             .page-header h1 { font-size: 2.5em; }
             .nav-links { display: none; }
@@ -286,8 +304,8 @@
             .service-card h3 { font-size: 1.15em; }
             .service-icon { width: 48px; height: 48px; font-size: 1.5em; border-radius: 12px; }
             .service-features li { font-size: 0.8em; }
-            .footer-main { grid-template-columns: 1fr; gap: 28px; padding: 40px 20px 30px; }
-            .footer-social { align-items: flex-start; }
+            .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; padding: 40px 20px 30px; }
+            .footer-logo { grid-column: 1 / -1; }
             .footer-bottom { padding: 18px 20px; }
         }
         @media (max-width: 480px) {
@@ -343,7 +361,7 @@
 
     <div class="content">
         <section class="page-header">
-            <h1>Mantenimiento  <strong>Integral</strong></h1>
+            <h1>Mantenimiento <strong>Integral</strong></h1>
             <p>Servicios especializados de mantenimiento preventivo y correctivo para sistemas hidráulicos, eléctricos y de refrigeración</p>
         </section>
 
@@ -370,13 +388,18 @@
                         <li>Sensores, alarmas, actuadores, lógica de control, automatización y variadores de frecuencia</li>
                     </ul>
                 </div>
-                <div class="card-slider" data-total="3">
-                         <div class="cs-slide"><img src="F5.png" alt="Industria Cosmética- Foto 3" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 3&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="F2.png" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
+                <div class="card-slider" data-total="4">
+                    <div class="cs-slide active"><img src="osmosis1.png" alt="Ósmosis Inversa 1"></div>
+                    <div class="cs-slide"><img src="osmosis2.png" alt="Ósmosis Inversa 2"></div>
+                    <div class="cs-slide"><img src="osmosis3.png" alt="Ósmosis Inversa 3"></div>
+                    <div class="cs-slide"><img src="osmosis4.png" alt="Ósmosis Inversa 4"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
                     <div class="cs-dots">
                         <button class="cs-dot active" data-i="0"></button>
                         <button class="cs-dot" data-i="1"></button>
                         <button class="cs-dot" data-i="2"></button>
+                        <button class="cs-dot" data-i="3"></button>
                     </div>
                 </div>
             </div>
@@ -397,10 +420,10 @@
                     </ul>
                 </div>
                 <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 4</span></div></div>
+                    <div class="cs-slide active"><img src="bombas1.png" alt="Bombas 1"></div>
+                    <div class="cs-slide"><img src="bombas2.png" alt="Bombas 2"></div>
+                    <div class="cs-slide"><img src="bombas3.png" alt="Bombas 3"></div>
+                    <div class="cs-slide"><img src="bombas4.png" alt="Bombas 4"></div>
                     <button class="cs-arrow cs-prev">&#8592;</button>
                     <button class="cs-arrow cs-next">&#8594;</button>
                     <div class="cs-dots">
@@ -427,12 +450,11 @@
                         <li>Rehabilitación, restauración y reparación</li>
                     </ul>
                 </div>
-                <div class="card-slider" data-total="5">
-                    <div class="cs-slide active"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 4</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 5</span></div></div>
+                <div class="card-slider" data-total="4">
+                    <div class="cs-slide active"><img src="hidro1.png" alt="Hidroneumáticos 1"></div>
+                    <div class="cs-slide"><img src="hidro2.png" alt="Hidroneumáticos 2"></div>
+                    <div class="cs-slide"><img src="hidro3.png" alt="Hidroneumáticos 3"></div>
+                    <div class="cs-slide"><img src="hidro4.png" alt="Hidroneumáticos 4"></div>
                     <button class="cs-arrow cs-prev">&#8592;</button>
                     <button class="cs-arrow cs-next">&#8594;</button>
                     <div class="cs-dots">
@@ -440,7 +462,6 @@
                         <button class="cs-dot" data-i="1"></button>
                         <button class="cs-dot" data-i="2"></button>
                         <button class="cs-dot" data-i="3"></button>
-                        <button class="cs-dot" data-i="4"></button>
                     </div>
                 </div>
             </div>
@@ -461,10 +482,10 @@
                     </ul>
                 </div>
                 <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 4</span></div></div>
+                    <div class="cs-slide active"><img src="quimica1.png" alt="Limpieza Química 1"></div>
+                    <div class="cs-slide"><img src="quimica2.png" alt="Limpieza Química 2"></div>
+                    <div class="cs-slide"><img src="quimica3.png" alt="Limpieza Química 3"></div>
+                    <div class="cs-slide"><img src="quimica4.png" alt="Limpieza Química 4"></div>
                     <button class="cs-arrow cs-prev">&#8592;</button>
                     <button class="cs-arrow cs-next">&#8594;</button>
                     <div class="cs-dots">
@@ -491,12 +512,11 @@
                         <li>Rehabilitación y reparación de componentes</li>
                     </ul>
                 </div>
-                <div class="card-slider" data-total="5">
-                    <div class="cs-slide active"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 4</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 5</span></div></div>
+                <div class="card-slider" data-total="4">
+                    <div class="cs-slide active"><img src="torres1.png" alt="Torres de Enfriamiento 1"></div>
+                    <div class="cs-slide"><img src="torres2.png" alt="Torres de Enfriamiento 2"></div>
+                    <div class="cs-slide"><img src="torres3.png" alt="Torres de Enfriamiento 3"></div>
+                    <div class="cs-slide"><img src="torres4.png" alt="Torres de Enfriamiento 4"></div>
                     <button class="cs-arrow cs-prev">&#8592;</button>
                     <button class="cs-arrow cs-next">&#8594;</button>
                     <div class="cs-dots">
@@ -504,7 +524,6 @@
                         <button class="cs-dot" data-i="1"></button>
                         <button class="cs-dot" data-i="2"></button>
                         <button class="cs-dot" data-i="3"></button>
-                        <button class="cs-dot" data-i="4"></button>
                     </div>
                 </div>
             </div>
@@ -523,14 +542,18 @@
                         <li>Sistemas de riego y calefacción</li>
                     </ul>
                 </div>
-                <div class="card-slider" data-total="2">
-                    <div class="cs-slide active"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
+                <div class="card-slider" data-total="4">
+                    <div class="cs-slide active"><img src="residencial1.png" alt="Residencial y Comercial 1"></div>
+                    <div class="cs-slide"><img src="residencial2.png" alt="Residencial y Comercial 2"></div>
+                    <div class="cs-slide"><img src="residencial3.png" alt="Residencial y Comercial 3"></div>
+                    <div class="cs-slide"><img src="residencial4.png" alt="Residencial y Comercial 4"></div>
                     <button class="cs-arrow cs-prev">&#8592;</button>
                     <button class="cs-arrow cs-next">&#8594;</button>
                     <div class="cs-dots">
                         <button class="cs-dot active" data-i="0"></button>
                         <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                        <button class="cs-dot" data-i="3"></button>
                     </div>
                 </div>
             </div>
@@ -549,14 +572,18 @@
                         <li>Diagnóstico y corrección de fallas</li>
                     </ul>
                 </div>
-                <div class="card-slider" data-total="2">
-                    <div class="cs-slide active"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
-                    <div class="cs-slide"><div class="cs-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
+                <div class="card-slider" data-total="4">
+                    <div class="cs-slide active"><img src="clima1.png" alt="Climatización y Refrigeración 1"></div>
+                    <div class="cs-slide"><img src="clima2.png" alt="Climatización y Refrigeración 2"></div>
+                    <div class="cs-slide"><img src="clima3.png" alt="Climatización y Refrigeración 3"></div>
+                    <div class="cs-slide"><img src="clima4.png" alt="Climatización y Refrigeración 4"></div>
                     <button class="cs-arrow cs-prev">&#8592;</button>
                     <button class="cs-arrow cs-next">&#8594;</button>
                     <div class="cs-dots">
                         <button class="cs-dot active" data-i="0"></button>
                         <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                        <button class="cs-dot" data-i="3"></button>
                     </div>
                 </div>
             </div>
@@ -566,27 +593,35 @@
 
     <footer>
         <div class="footer-main">
+
+            <!-- LOGO -->
             <div class="footer-logo">
                 <img src="Diseño sin título (9).png" alt="SIECO"
                      onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
                 <span class="footer-logo-text" style="display:none;">SIECO</span>
             </div>
-            <div class="footer-address">
+
+            <!-- QUERÉTARO -->
+            <div class="footer-col">
                 <h4>Querétaro</h4>
                 <p>Calle Fénix Lt 8<br>Santa Magdalena<br>76137, Querétaro, Qro</p>
             </div>
-            <div class="footer-address">
+
+            <!-- CDMX -->
+            <div class="footer-col">
                 <h4>Ciudad de México</h4>
                 <p>Benito Miranda No. 21<br>Las Peñas, Iztapalapa<br>09750, CDMX</p>
             </div>
-            <div class="footer-contact">
+
+            <!-- CONTACTO -->
+            <div class="footer-col">
                 <h4>Contacto</h4>
-                <p>
-                    📞 <a href="tel:4461253813">446 125 3813</a><br>
-                    ✉️ <a href="mailto:ventas@sieco.com.mx">ventas@sieco.com.mx</a>
-                </p>
+                <a href="tel:4461253813">📞 446 125 3813</a>
+                <a href="mailto:ventas@sieco.com.mx">✉️ ventas@sieco.com.mx</a>
             </div>
-            <div class="footer-social">
+
+            <!-- REDES -->
+            <div class="footer-col">
                 <h4>Síguenos</h4>
                 <div class="social-icons">
                     <div class="social-icon" title="Facebook">
@@ -603,6 +638,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="footer-bottom">
             © 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.
