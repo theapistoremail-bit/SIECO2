@@ -23,6 +23,8 @@
             background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
             z-index: 1; pointer-events: none;
         }
+
+        /* NAV */
         nav {
             position: fixed; top: 0; width: 100%;
             background: rgba(255,255,255,0.97);
@@ -78,6 +80,8 @@
             padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
         }
         .mobile-menu a:hover { color: var(--water-blue); }
+
+        /* CONTENT */
         .content { position: relative; z-index: 10; padding-top: 100px; }
         .page-header {
             max-width: 1400px; margin: 0 auto;
@@ -98,26 +102,36 @@
             color: rgba(255,255,255,0.9); max-width: 750px;
             margin: 0 auto; line-height: 1.8;
         }
-        .services-grid {
-            max-width: 960px; margin: 60px auto; padding: 0 40px;
-            display: flex; flex-direction: column; gap: 30px;
+
+        /* 3-COLUMN GRID */
+        .projects-grid {
+            max-width: 1400px; margin: 60px auto 100px; padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
         }
-        .service-card {
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
-            border-radius: 20px; padding: 0;
+
+        /* PROJECT CARD — vertical layout */
+        .project-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
             box-shadow: 0 10px 40px rgba(0,180,216,0.15);
             border: 2px solid rgba(72,202,228,0.2);
-            transition: all 0.4s; overflow: hidden; cursor: pointer;
-            display: flex; flex-direction: row;
+            transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+            display: flex; flex-direction: column;
         }
-        .service-card:hover {
+        .project-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 20px 60px rgba(0,180,216,0.3);
             border-color: var(--water-blue);
         }
+
+        /* SLIDER */
         .card-slider {
-            position: relative; width: 300px; min-width: 300px;
-            overflow: hidden; flex-shrink: 0; background: #001a2e;
+            position: relative; width: 100%; height: 220px;
+            overflow: hidden; background: #001a2e; flex-shrink: 0;
         }
         .cs-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease; }
         .cs-slide.active { opacity: 1; }
@@ -134,9 +148,9 @@
         .cs-placeholder span { font-size: 0.7em; font-weight: 300; letter-spacing: 4px; color: rgba(0,180,216,0.55); text-transform: uppercase; }
         .cs-arrow {
             position: absolute; top: 50%; transform: translateY(-50%);
-            width: 34px; height: 34px; border-radius: 50%;
+            width: 32px; height: 32px; border-radius: 50%;
             background: rgba(0,0,0,0.5); border: 1.5px solid rgba(255,255,255,0.25);
-            color: white; font-size: 0.9em; cursor: pointer;
+            color: white; font-size: 0.85em; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
             z-index: 10; transition: all 0.25s; backdrop-filter: blur(4px); opacity: 0;
         }
@@ -146,21 +160,40 @@
         .cs-dots { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; gap: 7px; z-index: 10; }
         .cs-dot { width: 7px; height: 7px; border-radius: 50%; border: none; background: rgba(255,255,255,0.3); cursor: pointer; padding: 0; transition: all 0.3s; }
         .cs-dot.active { background: var(--water-blue); transform: scale(1.5); box-shadow: 0 0 7px var(--water-blue); }
-        .service-content { padding: 35px; display: flex; flex-direction: column; justify-content: center; }
-        .service-icon {
-            width: 60px; height: 60px;
+
+        /* CARD BODY */
+        .card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+        .card-icon {
+            width: 48px; height: 48px;
             background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
-            border-radius: 15px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.8em; margin-bottom: 18px; box-shadow: 0 8px 24px rgba(0,180,216,0.3);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.4em; margin-bottom: 14px;
+            box-shadow: 0 6px 18px rgba(0,180,216,0.3);
         }
-        .service-card h3 { font-size: 1.4em; font-weight: 500; color: var(--water-dark); margin-bottom: 12px; }
-        .service-card p { color: #555; line-height: 1.75; font-weight: 300; font-size: 1em; margin-bottom: 14px; }
-        .service-features { list-style: none; margin-top: 10px; }
-        .service-features li { padding: 5px 0; font-size: 0.9em; font-weight: 300; color: #666; display: flex; align-items: center; gap: 8px; }
-        .service-features li::before { content: '✓'; color: var(--water-blue); font-weight: 600; }
+        .card-body h3 {
+            font-size: 1.15em; font-weight: 600;
+            color: var(--water-dark); margin-bottom: 6px;
+        }
+        .card-location {
+            font-size: 0.78em; font-weight: 500;
+            color: var(--water-blue); letter-spacing: 0.5px;
+            margin-bottom: 10px; text-transform: uppercase;
+        }
+        .card-body p {
+            color: #555; line-height: 1.7; font-weight: 300;
+            font-size: 0.9em; margin-bottom: 14px; flex: 1;
+        }
+        .card-features { list-style: none; margin-top: auto; }
+        .card-features li {
+            padding: 4px 0; font-size: 0.82em; font-weight: 300;
+            color: #666; display: flex; align-items: flex-start; gap: 8px;
+        }
+        .card-features li::before { content: '✓'; color: var(--water-blue); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+        /* FOOTER */
         footer {
             background: rgba(0,18,25,0.95); backdrop-filter: blur(10px);
-            margin-top: 100px; border-top: 1px solid rgba(0,180,216,0.2);
+            border-top: 1px solid rgba(0,180,216,0.2);
             color: rgba(255,255,255,0.85); font-weight: 300;
         }
         .footer-main {
@@ -191,6 +224,11 @@
         .social-icon:hover { background: var(--water-blue); border-color: var(--water-blue); transform: translateY(-3px); }
         .social-icon svg { width: 18px; height: 18px; fill: rgba(255,255,255,0.8); }
         .footer-bottom { border-top: 1px solid rgba(0,180,216,0.12); padding: 18px 40px; text-align: center; font-size: 0.8em; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 968px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
@@ -200,11 +238,10 @@
             .footer-social { align-items: flex-start; }
             .footer-bottom { padding: 18px 20px; }
         }
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
+            .projects-grid { grid-template-columns: 1fr; padding: 0 16px; }
+            .page-header { padding: 60px 20px 40px; }
             .page-header h1 { font-size: 2.5em; }
-            .services-grid { padding: 0 16px; }
-            .service-card { flex-direction: column; }
-            .card-slider { width: 100%; min-width: unset; height: 220px; }
         }
     </style>
 </head>
@@ -215,7 +252,7 @@
     <nav>
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="Diseño sin título (9).png" alt="SIECO"
+                <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png" alt="SIECO"
                      onerror="this.style.display='none';this.parentNode.querySelector('span').style.display='block'">
                 <span style="display:none;font-size:1.5em;font-weight:700;color:#001219;letter-spacing:2px;">SIECO</span>
             </a>
@@ -250,196 +287,265 @@
             <p>Soluciones implementadas en diversas industrias</p>
         </section>
 
-        <section class="services-grid">
+        <section class="projects-grid">
 
-            <!-- CARD 1 -->
-            <div class="service-card">
-                <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><img src="F1.png" alt="Industria Cosmética - Foto 1" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 1&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="F3.png" alt="Industria Cosmética - Foto 2" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 2&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="F5.png" alt="Industria Cosmética- Foto 3" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 3&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="F2.png" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <button class="cs-arrow cs-prev">&#8592;</button><button class="cs-arrow cs-next">&#8594;</button>
-                    <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot" data-i="1"></button><button class="cs-dot" data-i="2"></button><button class="cs-dot" data-i="3"></button></div>
+            <!-- CARD 1 — Sector Cosmético (carpeta 7, 4 fotos) -->
+            <div class="project-card">
+                <div class="card-slider">
+                    <div class="cs-slide active"><img src="F1.png" alt="Sector Cosmético 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><svg viewBox=\'0 0 60 60\' fill=\'none\'><rect x=\'8\' y=\'14\' width=\'44\' height=\'32\' rx=\'3\' stroke=\'%2300b4d8\' stroke-width=\'1.5\' stroke-dasharray=\'4 3\'></rect><circle cx=\'22\' cy=\'26\' r=\'5\' stroke=\'%2348cae4\' stroke-width=\'1.2\'></circle><path d=\'M8 38 L20 28 L30 35 L40 24 L52 38\' stroke=\'%230077b6\' stroke-width=\'1.2\' stroke-linejoin=\'round\'></path></svg><span>Foto 1</span></div>'"></div>
+                    <div class="cs-slide"><img src="F3.png" alt="Sector Cosmético 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
+                    <div class="cs-slide"><img src="F5.png" alt="Sector Cosmético 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
+                    <div class="cs-slide"><img src="F2.png" alt="Sector Cosmético 4" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 4</span></div>'"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                        <button class="cs-dot" data-i="3"></button>
+                    </div>
                 </div>
-                <div class="service-content">
-                    <div class="service-icon"> 💄</div>
-                    <h3>Industria Cosmética</h3>
-                    <p>Instalación de un sistema de osmosis inversa 4x40 para obtener agua de calidad optima para los procesos de formulación y producción biocosmético.</p>
-CDMX
-  </p>
-                    <ul class="service-features"><li>Agua libre de impuresas, sales y metales</li><li> Reducir riesgo por contaminación</li><li> Producíon constante en sitio de agua purificada  </li>
+                <div class="card-body">
+                    <div class="card-icon">💄</div>
+                    <h3>Sector Cosmético</h3>
+                    <div class="card-location">📍 CDMX</div>
+                    <p>Instalación de un sistema de osmosis inversa 4x40 para obtener agua de calidad óptima para los procesos de formulación y producción biocosmético.</p>
+                    <ul class="card-features">
+                        <li>Agua libre de impurezas, sales y metales</li>
+                        <li>Reducir riesgo por contaminación</li>
+                        <li>Producción constante en sitio de agua purificada</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- CARD 2 -->
-    <div class="service-card">
-                <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><img src="54B8E094-8821-444A-83E2-391E99DEFCF9.png" alt="Industria Cosmética - Foto 1" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 1&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0528.png" alt="Industria Cosmética - Foto 2" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 2&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0530.png" alt="Industria Cosmética- Foto 3" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 3&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0527.png" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                       <div class="cs-slide"><img src="IMG_0522.png" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                       <div class="cs-slide"><img src="IMG_0523.png" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <button class="cs-arrow cs-prev">&#8592;</button><button class="cs-arrow cs-next">&#8594;</button>
-                    <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot" data-i="1"></button><button class="cs-dot" data-i="2"></button><button class="cs-dot" data-i="3"></button></div>
+            <!-- CARD 2 — Sector Industrial (carpeta 1, 8 fotos) -->
+            <div class="project-card">
+                <div class="card-slider">
+                    <div class="cs-slide active"><img src="54B8E094-8821-444A-83E2-391E99DEFCF9.png" alt="Sector Industrial 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0528.png" alt="Sector Industrial 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0530.png" alt="Sector Industrial 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0527.png" alt="Sector Industrial 4" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 4</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0522.png" alt="Sector Industrial 5" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 5</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0523.png" alt="Sector Industrial 6" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 6</span></div>'"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                        <button class="cs-dot" data-i="3"></button>
+                        <button class="cs-dot" data-i="4"></button>
+                        <button class="cs-dot" data-i="5"></button>
+                    </div>
                 </div>
-                <div class="service-content">
-                    <div class="service-icon">🏭</div>
+                <div class="card-body">
+                    <div class="card-icon">🏭</div>
                     <h3>Sector Industrial</h3>
-                    <p>Proyecto integral de un tren de suavizadores para la reducción de dureza de agua  en sistemas de enfriamiento evaporativo.</p>
-Saltillo, Coahuila
-</p>
-                    <ul class="service-features"><li> Almacenamiento de agua para evitar paros en el suministro.
-  </li><li>Mecánica de suelos, obra civil y calculo estructural
- </li><li>Documentación IQ/OQ/PQ</li><li>Diseño e instalación del sistema de bombeo </li></ul>
+                    <div class="card-location">📍 Saltillo, Coahuila</div>
+                    <p>Proyecto integral de un tren de suavizadores para la reducción de dureza de agua en sistemas de enfriamiento evaporativo.</p>
+                    <ul class="card-features">
+                        <li>Mecánica de suelos, obra civil y cálculo estructural</li>
+                        <li>Documentación IQ/OQ/PQ</li>
+                        <li>Diseño e instalación del sistema de bombeo</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- CARD 3 -->
-            <div class="service-card">
-                <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><img src="IMG_0548.jpeg" alt="Industria Cosmética - Foto 1" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 1&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0547.jpeg" alt="Industria Cosmética - Foto 2" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 2&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0545.jpeg" alt="Industria Cosmética- Foto 3" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 3&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0550.jpeg" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <button class="cs-arrow cs-prev">&#8592;</button><button class="cs-arrow cs-next">&#8594;</button>
-                    <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot" data-i="1"></button><button class="cs-dot" data-i="2"></button><button class="cs-dot" data-i="3"></button></div>
+            <!-- CARD 3 — Sector Comercial (carpeta 5, 3 fotos) -->
+            <div class="project-card">
+                <div class="card-slider">
+                    <div class="cs-slide active"><img src="IMG_0548.jpeg" alt="Sector Comercial 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0547.jpeg" alt="Sector Comercial 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0545.jpeg" alt="Sector Comercial 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                    </div>
                 </div>
-                <div class="service-content">
-                    <div class="service-icon">🏨</div>
-                    <h3> Sector Comercial </h3>
-                    <p>Sistema de filtración de sedimentos y suavización  para el suministro de agua red dentro de un centro de distribución.
-Guadalajara, Jal.
-</p>
-                    <ul class="service-features"><li>Previene la formación de sarro en boilers , tuberías y equipos.
-</li><li>Plantas de tratamiento de agua</li><li>Abastece agua suavizada para los diferentes procesos
- </li><li>Instalación en espacios reducidos y/o limitados</li></ul>
-                </div>
-            </div>
-
-            <!-- CARD 4 -->
-           <div class="service-card">
-                <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><img src="IMG_0559.jpeg" alt="Industria Cosmética - Foto 1" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 1&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0558.jpeg" alt="Industria Cosmética - Foto 2" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 2&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0565.jpeg" alt="Industria Cosmética- Foto 3" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 3&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0561.jpeg" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0560.jpeg"alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0567.jpeg"alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0564.jpeg" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_O566.jpeg" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <button class="cs-arrow cs-prev">&#8592;</button><button class="cs-arrow cs-next">&#8594;</button>
-                    <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot" data-i="1"></button><button class="cs-dot" data-i="2"></button><button class="cs-dot" data-i="3"></button></div>
-                </div>
-                <div class="service-content">
-                    <div class="service-icon">🔧</div>
-                    <h3>Sector Metal Mecanico</h3>
-                    <p>Diseño, construcción e instalación de una planta de osmosis inversa para la purificación de agua  con recuperación de agua de rechazo.
-Lagos de Moreno, Jal.
-</p>
-                    <ul class="service-features"><li>Optimización en los consumos de agua en los procesos.
-</li><li>Reducción de agua de rechazo 
-</li><li>Eficiencia operativa y control eléctrico
-</li>
+                <div class="card-body">
+                    <div class="card-icon">🏨</div>
+                    <h3>Sector Comercial</h3>
+                    <div class="card-location">📍 Guadalajara, Jal.</div>
+                    <p>Sistema de filtración de sedimentos y suavización para el suministro de agua red dentro de un centro de distribución.</p>
+                    <ul class="card-features">
+                        <li>Previene la formación de sarro en boilers, tuberías y equipos</li>
+                        <li>Abastece agua suavizada para los diferentes procesos</li>
+                        <li>Instalación en espacios reducidos y/o limitados</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- CARD 5 -->
-            <div class="service-card">
-                <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><img src="IMG_0569.jpeg" alt="Industria Cosmética - Foto 1" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 1&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0588.png" alt="Industria Cosmética - Foto 2" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 2&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0567.jpeg" alt="Industria Cosmética- Foto 3" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 3&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <button class="cs-arrow cs-prev">&#8592;</button><button class="cs-arrow cs-next">&#8594;</button>
-                    <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot" data-i="1"></button><button class="cs-dot" data-i="2"></button><button class="cs-dot" data-i="3"></button></div>
+            <!-- CARD 4 — Sector Metal Mecánico (carpeta 2, 8 fotos) -->
+            <div class="project-card">
+                <div class="card-slider">
+                    <div class="cs-slide active"><img src="IMG_0559.jpeg" alt="Sector Metal Mecánico 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0558.jpeg" alt="Sector Metal Mecánico 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0565.jpeg" alt="Sector Metal Mecánico 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0561.jpeg" alt="Sector Metal Mecánico 4" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 4</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0560.jpeg" alt="Sector Metal Mecánico 5" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 5</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0567.jpeg" alt="Sector Metal Mecánico 6" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 6</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0564.jpeg" alt="Sector Metal Mecánico 7" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 7</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_O566.jpeg" alt="Sector Metal Mecánico 8" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 8</span></div>'"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                        <button class="cs-dot" data-i="3"></button>
+                        <button class="cs-dot" data-i="4"></button>
+                        <button class="cs-dot" data-i="5"></button>
+                        <button class="cs-dot" data-i="6"></button>
+                        <button class="cs-dot" data-i="7"></button>
+                    </div>
                 </div>
-                <div class="service-content">
-                    <div class="service-icon">🦺</div>
+                <div class="card-body">
+                    <div class="card-icon">🔧</div>
+                    <h3>Sector Metal Mecánico</h3>
+                    <div class="card-location">📍 Lagos de Moreno, Jal.</div>
+                    <p>Diseño, construcción e instalación de una planta de osmosis inversa para la purificación de agua con recuperación de agua de rechazo.</p>
+                    <ul class="card-features">
+                        <li>Optimización en los consumos de agua en los procesos</li>
+                        <li>Reducción de agua de rechazo</li>
+                        <li>Eficiencia operativa y control eléctrico</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CARD 5 — Manufactura Industrial (carpeta 6, 3 fotos) -->
+            <div class="project-card">
+                <div class="card-slider">
+                    <div class="cs-slide active"><img src="IMG_0569.jpeg" alt="Manufactura Industrial 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0588.png" alt="Manufactura Industrial 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0567.jpeg" alt="Manufactura Industrial 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-icon">🦺</div>
                     <h3>Manufactura Industrial</h3>
-                    <p>Integración e instalación de un sistema de pretratamiento para aumentar la eficiencia de purificación de agua. Jalisco
-
-</p>
-                    <ul class="service-features"><li> Entendimiento de las necesidades del cliente
-<li>Capacitación y asesoramiento continuo
-</li><li>Solución a la medida </li></ul>
+                    <div class="card-location">📍 Jalisco</div>
+                    <p>Integración e instalación de un sistema de pretratamiento para aumentar la eficiencia de purificación de agua.</p>
+                    <ul class="card-features">
+                        <li>Entendimiento de las necesidades del cliente</li>
+                        <li>Capacitación y asesoramiento continuo</li>
+                        <li>Solución a la medida</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- CARD 6 -->
-                <div class="service-card">
-                <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><img src="1E4B1E59-02ED-454B-9A55-3F328836165D.png" alt="Industria Cosmética - Foto 1" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 1&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="54B8E094-8821-444A-83E2-391E99DEFCF9.png" alt="Industria Cosmética - Foto 2" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 2&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="5E710086-DC5C-4298-A191-5AA8D666B88E.png" alt="Industria Cosmética- Foto 3" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 3&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="54B8E094-8821-444A-83E2-391E99DEFCF9.png" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <button class="cs-arrow cs-prev">&#8592;</button><button class="cs-arrow cs-next">&#8594;</button>
-                    <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot" data-i="1"></button><button class="cs-dot" data-i="2"></button><button class="cs-dot" data-i="3"></button></div>
+            <!-- CARD 6 — Sistemas de Bombeo (carpeta 4, 4 fotos) -->
+            <div class="project-card">
+                <div class="card-slider">
+                    <div class="cs-slide active"><img src="1E4B1E59-02ED-454B-9A55-3F328836165D.png" alt="Sistemas de Bombeo 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
+                    <div class="cs-slide"><img src="54B8E094-8821-444A-83E2-391E99DEFCF9.png" alt="Sistemas de Bombeo 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
+                    <div class="cs-slide"><img src="5E710086-DC5C-4298-A191-5AA8D666B88E.png" alt="Sistemas de Bombeo 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0550.jpeg" alt="Sistemas de Bombeo 4" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 4</span></div>'"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                        <button class="cs-dot" data-i="3"></button>
+                    </div>
                 </div>
-                <div class="service-content">
-                    <div class="service-icon">⛲️</div>
-                    <h3>Sistemas de bombeo </h3>
-                    <p>Tratamiento de agua para embotellado, refrigeración de proceso y sistemas CIP automatizados.</p>
-                    <ul class="service-features"><li>Integración hidráulica 
- </li><li> </li><li> </li><li>Cumplimiento NOM-201-SSA1</li></ul>
-                </div>
-            </div>
-
-            <!-- CARD 7 -->
-                <div class="service-card">
-                <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><img src="IMG_0573.jpeg" alt="Industria Cosmética - Foto 1" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 1&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0572.jpeg" alt="Industria Cosmética - Foto 2" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 2&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0570.jpeg" alt="Industria Cosmética- Foto 3" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 3&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="F2.png" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <button class="cs-arrow cs-prev">&#8592;</button><button class="cs-arrow cs-next">&#8594;</button>
-                    <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot" data-i="1"></button><button class="cs-dot" data-i="2"></button><button class="cs-dot" data-i="3"></button></div>
-                </div>
-                <div class="service-content">
-                    <div class="service-icon">🔩</div>
-                    <h3>Sector Recidencial</h3>
-                    <p>Skids de bombeo con bombas verticales multietapa para distribución y presurización en plantas.</p>
-                    <ul class="service-features"><li>Bombas multietapa de acero inoxidable</li><li>Tablero de control integrado</li><li>Variadores de frecuencia VFD</li><li>Instalación llave en mano</li></ul>
+                <div class="card-body">
+                    <div class="card-icon">⛲️</div>
+                    <h3>Sistemas de Bombeo</h3>
+                    <div class="card-location">📍 Monterrey, N.L.</div>
+                    <p>Instalación y puesta en marcha de un sistema de bombeo y filtración.</p>
+                    <ul class="card-features">
+                        <li>Integración hidráulica</li>
+                        <li>Control de presión y optimización de flujos</li>
+                        <li>Distribución y continuidad operativa</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- CARD 8 -->
-             <div class="service-card">
-                <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><img src="IMG_0579.jpeg" alt="Industria Cosmética - Foto 1" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 1&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0581.jpeg" alt="Industria Cosmética - Foto 2" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 2&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0577.jpeg" alt="Industria Cosmética- Foto 3" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 3&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <div class="cs-slide"><img src="IMG_0583.jpeg" alt="Industria Cosmética - Foto 4" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 4&lt;/span&gt;&lt;/div&gt;'"></div>
-                    <button class="cs-arrow cs-prev">&#8592;</button><button class="cs-arrow cs-next">&#8594;</button>
-                    <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot" data-i="1"></button><button class="cs-dot" data-i="2"></button><button class="cs-dot" data-i="3"></button></div>
+            <!-- CARD 7 — Sector Maquinados (carpeta 8, 2 fotos) -->
+            <div class="project-card">
+                <div class="card-slider">
+                    <div class="cs-slide active"><img src="IMG_0573.jpeg" alt="Sector Maquinados 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0572.jpeg" alt="Sector Maquinados 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                    </div>
                 </div>
-                <div class="service-content">
-                    <div class="service-icon">💧</div>
-                    <h3>Filtración y Suavización</h3>
-                    <p>Sistemas de filtración de sedimentos y suavización con válvulas de control digital programables.</p>
-                    <ul class="service-features"><li>*Limpieza mecánica a torres evaporativas de enfriamiento
-</li><li>Suavizador con resina iónica</li><li>Válvulas digitales con LCD</li><li>Regeneración automática programable</li></ul>
-                </div>
-            </div>
-
-            <!-- CARD 9 -->
-          <div class="service-card">
-                <div class="card-slider" data-total="4">
-                    <div class="cs-slide active"><img src="IMG_0472.jpeg" alt="Industria Cosmética - Foto 1" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-placeholder&quot;&gt;&lt;svg viewBox=&quot;0 0 60 60&quot; fill=&quot;none&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;14&quot; width=&quot;44&quot; height=&quot;32&quot; rx=&quot;3&quot; stroke=&quot;%2300b4d8&quot; stroke-width=&quot;1.5&quot; stroke-dasharray=&quot;4 3&quot;&gt;&lt;/rect&gt;&lt;circle cx=&quot;22&quot; cy=&quot;26&quot; r=&quot;5&quot; stroke=&quot;%2348cae4&quot; stroke-width=&quot;1.2&quot;&gt;&lt;/circle&gt;&lt;path d=&quot;M8 38 L20 28 L30 35 L40 24 L52 38&quot; stroke=&quot;%230077b6&quot; stroke-width=&quot;1.2&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;span&gt;Foto 1&lt;/span&gt;&lt;/div&gt;'"></
-                    <button class="cs-arrow cs-prev">&#8592;</button><button class="cs-arrow cs-next">&#8594;</button>
-                    <div class="cs-dots"><button class="cs-dot active" data-i="0"></button><button class="cs-dot" data-i="1"></button><button class="cs-dot" data-i="2"></button><button class="cs-dot" data-i="3"></button></div>
-                </div>
-                <div class="service-content">
-                    <div class="service-icon">🫙</div>
-                    <h3>Consumo de agua</h3>
-                    <p>Sistemas de riego tecnificado, tratamiento de agua y refrigeración para el sector agrícola y agroindustrial.</p>
-                    <ul class="service-features"><li>Puntos de distribución constante
-</li><li>Reducción de costos y almacenaje
-</li><li> Rehabilitación y reuso de despachadores de agua </li>
+                <div class="card-body">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Sector Maquinados</h3>
+                    <div class="card-location">📍 San Juan Río, Qro.</div>
+                    <p>Integración de un módulo de osmosis e interconexión hidráulica a máquina de corte y limpieza.</p>
+                    <ul class="card-features">
+                        <li>Evita manchas y residuos en las superficies</li>
+                        <li>Eficiencia en procesos de limpieza</li>
+                        <li>Disminución de costos por mantenimiento</li>
+                    </ul>
                 </div>
             </div>
 
+            <!-- CARD 8 — Sector Residencial (carpeta 3, 4 fotos) -->
+            <div class="project-card">
+                <div class="card-slider">
+                    <div class="cs-slide active"><img src="IMG_0579.jpeg" alt="Sector Residencial 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0581.jpeg" alt="Sector Residencial 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0577.jpeg" alt="Sector Residencial 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
+                    <div class="cs-slide"><img src="IMG_0583.jpeg" alt="Sector Residencial 4" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 4</span></div>'"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                        <button class="cs-dot" data-i="1"></button>
+                        <button class="cs-dot" data-i="2"></button>
+                        <button class="cs-dot" data-i="3"></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-icon">🏡</div>
+                    <h3>Sector Residencial</h3>
+                    <div class="card-location">📍 Querétaro</div>
+                    <p>Instalación de sistemas de riego tecnificado con integración hidráulica completa.</p>
+                    <ul class="card-features">
+                        <li>Optimizar el uso eficiente del agua</li>
+                        <li>Integración de tuberías, bomba y sistema de control</li>
+                        <li>Riego constante y uniforme</li>
+                    </ul>
+                </div>
+            </div>
 
+            <!-- CARD 9 — Consumo de Agua (carpeta 9, 1 foto) -->
+            <div class="project-card">
+                <div class="card-slider">
+                    <div class="cs-slide active"><img src="IMG_0472.jpeg" alt="Consumo de Agua 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
+                    <button class="cs-arrow cs-prev">&#8592;</button>
+                    <button class="cs-arrow cs-next">&#8594;</button>
+                    <div class="cs-dots">
+                        <button class="cs-dot active" data-i="0"></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-icon">🫙</div>
+                    <h3>Consumo de Agua</h3>
+                    <div class="card-location">📍 CDMX</div>
+                    <p>Sustitución de garrafones por sistemas de filtración en línea para beber.</p>
+                    <ul class="card-features">
+                        <li>Puntos de distribución constante</li>
+                        <li>Reducción de costos y almacenaje</li>
+                        <li>Rehabilitación y reuso de despachadores de agua</li>
+                    </ul>
+                </div>
             </div>
 
         </section>
@@ -448,7 +554,7 @@ Lagos de Moreno, Jal.
     <footer>
         <div class="footer-main">
             <div class="footer-logo">
-                <img src="Diseño sin título (9).png" alt="SIECO"
+                <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png" alt="SIECO"
                      onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
                 <span class="footer-logo-text" style="display:none;">SIECO</span>
             </div>
@@ -491,6 +597,7 @@ Lagos de Moreno, Jal.
     </footer>
 
     <script>
+        /* WebGL Water */
         const canvas = document.getElementById('waterCanvas');
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         function resizeCanvas() {
@@ -529,6 +636,7 @@ Lagos de Moreno, Jal.
             render();
         }
 
+        /* Hamburger */
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
         hamburger.addEventListener('click', () => {
@@ -542,33 +650,50 @@ Lagos de Moreno, Jal.
             });
         });
 
+        /* Sliders */
         document.querySelectorAll('.card-slider').forEach((slider, cardIdx) => {
             const slides = Array.from(slider.querySelectorAll('.cs-slide'));
             const dots   = Array.from(slider.querySelectorAll('.cs-dot'));
             const total  = slides.length;
+            if (total === 0) return;
             let cur = 0, timer;
+
             function show(idx) {
                 slides[cur].classList.remove('active');
-                dots[cur] && dots[cur].classList.remove('active');
+                if (dots[cur]) dots[cur].classList.remove('active');
                 cur = (idx + total) % total;
                 slides[cur].classList.add('active');
-                dots[cur] && dots[cur].classList.add('active');
+                if (dots[cur]) dots[cur].classList.add('active');
             }
             function startAuto() {
                 clearInterval(timer);
-                timer = setInterval(() => show(cur + 1), 3200 + cardIdx * 350);
+                if (total > 1) timer = setInterval(() => show(cur + 1), 3200 + cardIdx * 350);
             }
-            slider.querySelector('.cs-prev').addEventListener('click', e => { e.stopPropagation(); show(cur-1); startAuto(); });
-            slider.querySelector('.cs-next').addEventListener('click', e => { e.stopPropagation(); show(cur+1); startAuto(); });
-            dots.forEach((d,i) => d.addEventListener('click', e => { e.stopPropagation(); show(i); startAuto(); }));
+
+            const prevBtn = slider.querySelector('.cs-prev');
+            const nextBtn = slider.querySelector('.cs-next');
+            if (prevBtn) prevBtn.addEventListener('click', e => { e.stopPropagation(); show(cur - 1); startAuto(); });
+            if (nextBtn) nextBtn.addEventListener('click', e => { e.stopPropagation(); show(cur + 1); startAuto(); });
+            dots.forEach((d, i) => d.addEventListener('click', e => { e.stopPropagation(); show(i); startAuto(); }));
+
+            /* Touch swipe */
             let tx = 0;
-            slider.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+            slider.addEventListener('touchstart', e => tx = e.touches[0].clientX, { passive: true });
             slider.addEventListener('touchend', e => {
                 const dx = e.changedTouches[0].clientX - tx;
-                if (Math.abs(dx) > 40) { show(dx < 0 ? cur+1 : cur-1); startAuto(); }
+                if (Math.abs(dx) > 40) { show(dx < 0 ? cur + 1 : cur - 1); startAuto(); }
             });
+
+            /* Pause on hover */
             slider.addEventListener('mouseenter', () => clearInterval(timer));
             slider.addEventListener('mouseleave', () => startAuto());
+
+            /* Hide arrows if only 1 slide */
+            if (total <= 1) {
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+            }
+
             startAuto();
         });
     </script>
