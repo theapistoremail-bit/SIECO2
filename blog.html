@@ -282,21 +282,23 @@
         gap: 40px; align-items: start;
     }
     .footer-logo { display: flex; align-items: center; }
-    .footer-logo img { height: 70px; width: auto; }
+    .footer-logo img { height: 130px; width: auto; filter: drop-shadow(0 0 22px rgba(0,180,216,0.35)); }
     .footer-logo-text {
         font-size: 1.6em; font-weight: 700; color: var(--water-blue);
         letter-spacing: 3px;
     }
     .footer-address h4 {
         font-size: 0.72em; font-weight: 600; color: var(--water-light);
-        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px;
+        padding-bottom: 8px; border-bottom: 1px solid rgba(0,180,216,0.2);
     }
     .footer-address p {
         font-size: 0.88em; line-height: 1.7; color: rgba(255,255,255,0.75);
     }
     .footer-contact h4 {
         font-size: 0.72em; font-weight: 600; color: var(--water-light);
-        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px;
+        padding-bottom: 8px; border-bottom: 1px solid rgba(0,180,216,0.2);
     }
     .footer-contact p {
         font-size: 0.88em; line-height: 1.9; color: rgba(255,255,255,0.75);
@@ -308,7 +310,9 @@
     .footer-social { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
     .footer-social h4 {
         font-size: 0.72em; font-weight: 600; color: var(--water-light);
-        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; align-self: flex-end;
+        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px;
+        padding-bottom: 8px; border-bottom: 1px solid rgba(0,180,216,0.2);
+        width: 100%; text-align: right;
     }
     .social-icons { display: flex; gap: 12px; }
     .social-icon {
@@ -327,9 +331,12 @@
     
     @media (max-width: 968px) {
         .footer-main {
-            grid-template-columns: 1fr; gap: 28px; padding: 40px 20px 30px;
+            grid-template-columns: 1fr 1fr; gap: 28px; padding: 40px 20px 30px;
         }
+        .footer-logo { grid-column: 1 / -1; }
+        .footer-logo img { height: 130px; }
         .footer-social { align-items: flex-start; }
+        .footer-social h4 { text-align: left; }
         .footer-bottom { padding: 18px 20px; }
         .page-header h1 { font-size: 2.5em; }
         .nav-links { display: none; }
@@ -339,14 +346,12 @@
         .articles-grid { grid-template-columns: 1fr; padding: 0 20px; }
     }
 </style>
-```
 
 </head>
 <body>
     <canvas id="waterCanvas"></canvas>
     <div class="water-overlay"></div>
 
-```
 <nav>
     <div class="nav-container">
         <a href="index.html" class="nav-logo">
@@ -387,7 +392,7 @@
         <!-- ARTICLE 1 -->
         <div class="article-card">
             <div class="article-slider" data-total="3">
-                <div class="as-slide active"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
+                <div class="as-slide active"><img src="https://images.unsplash.com/photo-1502068898470-ad70c83938be?w=800&h=600&fit=crop" alt="Mantenimiento predictivo" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 1</span></div>'"></div>
                 <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
                 <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
                 <button class="as-arrow as-prev">&#8592;</button>
@@ -408,7 +413,7 @@
         <!-- ARTICLE 2 -->
         <div class="article-card">
             <div class="article-slider" data-total="3">
-                <div class="as-slide active"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
+                <div class="as-slide active"><img src="https://images.unsplash.com/photo-1662647344062-b0cdb1ed7227?w=800&h=600&fit=crop" alt="Purificación de agua" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 1</span></div>'"></div>
                 <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
                 <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
                 <button class="as-arrow as-prev">&#8592;</button>
@@ -429,7 +434,7 @@
         <!-- ARTICLE 3 -->
         <div class="article-card">
             <div class="article-slider" data-total="3">
-                <div class="as-slide active"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
+                <div class="as-slide active"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=600&fit=crop" alt="Eficiencia energética" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 1</span></div>'"></div>
                 <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
                 <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
                 <button class="as-arrow as-prev">&#8592;</button>
@@ -450,7 +455,7 @@
         <!-- ARTICLE 4 -->
         <div class="article-card">
             <div class="article-slider" data-total="3">
-                <div class="as-slide active"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 1</span></div></div>
+                <div class="as-slide active"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop" alt="Automatización industrial" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 1</span></div>'"></div>
                 <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
                 <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
                 <button class="as-arrow as-prev">&#8592;</button>
@@ -593,7 +598,6 @@
         startAuto();
     });
 </script>
-```
 
 </body>
 </html>
