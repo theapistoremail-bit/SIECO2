@@ -183,7 +183,7 @@
         }
         .cta-button:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,255,255,0.5); background: var(--foam); }
 
-        /* FOOTER — canon */
+        /* FOOTER — updated to 2-column layout */
         footer {
             background: rgba(0,18,25,0.95); backdrop-filter: blur(10px);
             margin-top: 100px; border-top: 1px solid rgba(0,180,216,0.2);
@@ -191,40 +191,51 @@
         }
         .footer-main {
             max-width: 1400px; margin: 0 auto;
-            padding: 50px 40px 40px;
+            padding: 130px 40px 110px;
             display: grid;
-            grid-template-columns: auto 1fr 1fr 1fr auto;
-            gap: 40px; align-items: start;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 60px;
+            row-gap: 90px;
         }
-        .footer-logo { display: flex; align-items: center; }
+        .footer-logo { display: flex; align-items: center; grid-column: 1; grid-row: 1; }
         .footer-logo img { height: 70px; width: auto; }
         .footer-logo-text { font-size: 1.6em; font-weight: 700; color: var(--water-blue); letter-spacing: 3px; }
+
+        .footer-address-qro { grid-column: 1; grid-row: 2; }
+        .footer-address-cdmx { grid-column: 2; grid-row: 2; }
         .footer-address h4 {
-            font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+            font-size: 0.8em; font-weight: 600; color: var(--water-light);
+            text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 14px;
+            padding-bottom: 14px; border-bottom: 1px solid rgba(0,180,216,0.2);
         }
-        .footer-address p { font-size: 0.88em; line-height: 1.7; color: rgba(255,255,255,0.75); }
+        .footer-address p { font-size: 1.2em; line-height: 2.6; color: rgba(255,255,255,0.75); }
+
+        .footer-contact { grid-column: 1; grid-row: 3; }
         .footer-contact h4 {
-            font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+            font-size: 0.8em; font-weight: 600; color: var(--water-light);
+            text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 14px;
+            padding-bottom: 14px; border-bottom: 1px solid rgba(0,180,216,0.2);
         }
-        .footer-contact p { font-size: 0.88em; line-height: 1.9; color: rgba(255,255,255,0.75); }
+        .footer-contact p { font-size: 1.2em; line-height: 2.9; color: rgba(255,255,255,0.75); }
         .footer-contact a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s; }
         .footer-contact a:hover { color: var(--water-blue); }
-        .footer-social { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+        .footer-social { grid-column: 2; grid-row: 3; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
         .footer-social h4 {
-            font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; align-self: flex-end;
+            font-size: 0.8em; font-weight: 600; color: var(--water-light);
+            text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 4px;
+            padding-bottom: 14px; border-bottom: 1px solid rgba(0,180,216,0.2);
+            width: 100%;
         }
-        .social-icons { display: flex; gap: 12px; }
+        .social-icons { display: flex; gap: 20px; }
         .social-icon {
-            width: 40px; height: 40px; border-radius: 10px;
+            width: 80px; height: 80px; border-radius: 18px;
             background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);
             display: flex; align-items: center; justify-content: center;
             transition: all 0.3s; cursor: pointer;
         }
         .social-icon:hover { background: var(--water-blue); border-color: var(--water-blue); transform: translateY(-3px); }
-        .social-icon svg { width: 18px; height: 18px; fill: rgba(255,255,255,0.8); }
+        .social-icon svg { width: 34px; height: 34px; fill: rgba(255,255,255,0.8); }
         .footer-bottom {
             border-top: 1px solid rgba(0,180,216,0.12);
             padding: 18px 40px; text-align: center;
@@ -241,9 +252,26 @@
             .stage-card { padding: 30px; }
             .benefits-grid { grid-template-columns: 1fr; }
             .section { padding: 0 20px; }
-            .footer-main { grid-template-columns: 1fr; gap: 28px; padding: 40px 20px 30px; }
-            .footer-social { align-items: flex-start; }
-            .footer-bottom { padding: 18px 20px; }
+            .footer-main {
+                padding: 70px 20px 50px;
+                column-gap: 20px;
+                row-gap: 50px;
+            }
+            .footer-logo { grid-column: 1; grid-row: 1; }
+            .footer-logo img { height: 50px; }
+            .footer-address-qro { grid-column: 1; grid-row: 2; }
+            .footer-address-cdmx { grid-column: 2; grid-row: 2; }
+            .footer-address h4 { font-size: 0.62em; letter-spacing: 1.5px; margin-bottom: 8px; padding-bottom: 8px; }
+            .footer-address p { font-size: 0.82em; line-height: 1.9; }
+            .footer-contact { grid-column: 1; grid-row: 3; }
+            .footer-contact h4 { font-size: 0.62em; letter-spacing: 1.5px; margin-bottom: 8px; padding-bottom: 8px; }
+            .footer-contact p { font-size: 0.82em; line-height: 2.1; }
+            .footer-social { grid-column: 2; grid-row: 3; gap: 10px; }
+            .footer-social h4 { font-size: 0.62em; letter-spacing: 1.5px; margin-bottom: 8px; padding-bottom: 8px; }
+            .social-icons { gap: 10px; flex-wrap: wrap; }
+            .social-icon { width: 42px; height: 42px; border-radius: 10px; }
+            .social-icon svg { width: 18px; height: 18px; }
+            .footer-bottom { padding: 18px 20px; font-size: 0.7em; }
         }
     </style>
 </head>
@@ -430,7 +458,7 @@
         </section>
     </div>
 
-    <!-- FOOTER — canon -->
+    <!-- FOOTER — 2-column layout matching reference -->
     <footer>
         <div class="footer-main">
             <div class="footer-logo">
@@ -438,14 +466,17 @@
                      onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
                 <span class="footer-logo-text" style="display:none;">SIECO</span>
             </div>
-            <div class="footer-address">
+
+            <div class="footer-address footer-address-qro">
                 <h4>Querétaro</h4>
                 <p>Calle Fénix Lt 8<br>Santa Magdalena<br>76137, Querétaro, Qro</p>
             </div>
-            <div class="footer-address">
+
+            <div class="footer-address footer-address-cdmx">
                 <h4>Ciudad de México</h4>
                 <p>Benito Miranda No. 21<br>Las Peñas, Iztapalapa<br>09750, CDMX</p>
             </div>
+
             <div class="footer-contact">
                 <h4>Contacto</h4>
                 <p>
@@ -453,6 +484,7 @@
                     ✉️ <a href="mailto:ventas@sieco.com.mx">ventas@sieco.com.mx</a>
                 </p>
             </div>
+
             <div class="footer-social">
                 <h4>Síguenos</h4>
                 <div class="social-icons">
