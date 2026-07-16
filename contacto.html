@@ -212,41 +212,53 @@
             color: #b91c1c;
         }
 
-        /* FOOTER */
+        /* FOOTER — actualizado: logo arriba, 2 columnas, divisorias */
         footer {
             background: rgba(0,18,25,0.95); backdrop-filter: blur(10px);
             margin-top: 100px; border-top: 1px solid rgba(0,180,216,0.2);
             color: rgba(255,255,255,0.85); font-weight: 300;
         }
         .footer-main {
-            max-width: 1400px; margin: 0 auto;
-            padding: 50px 40px 40px;
+            max-width: 1400px; margin: 0 auto; padding: 50px 40px 40px;
             display: grid;
-            grid-template-columns: auto 1fr 1fr 1fr auto;
-            gap: 40px; align-items: start;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+                "logo logo"
+                "queretaro cdmx"
+                "contacto social";
+            gap: 40px;
         }
-        .footer-logo { display: flex; align-items: center; }
+        .footer-logo { grid-area: logo; display: flex; align-items: center; }
         .footer-logo img { height: 70px; width: auto; }
         .footer-logo-text {
             font-size: 1.6em; font-weight: 700; color: var(--water-blue);
             letter-spacing: 3px;
         }
+        .footer-queretaro { grid-area: queretaro; }
+        .footer-cdmx { grid-area: cdmx; }
         .footer-address h4 {
             font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+            padding-bottom: 12px; border-bottom: 1px solid rgba(0,180,216,0.2);
         }
         .footer-address p { font-size: 0.88em; line-height: 1.7; color: rgba(255,255,255,0.75); }
+        .footer-contact { grid-area: contacto; }
         .footer-contact h4 {
             font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+            padding-bottom: 12px; border-bottom: 1px solid rgba(0,180,216,0.2);
         }
         .footer-contact p { font-size: 0.88em; line-height: 1.9; color: rgba(255,255,255,0.75); }
         .footer-contact a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s; }
         .footer-contact a:hover { color: var(--water-blue); }
-        .footer-social { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+        .footer-social {
+            grid-area: social;
+            display: flex; flex-direction: column; gap: 12px; align-items: flex-start;
+        }
         .footer-social h4 {
             font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; align-self: flex-end;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+            padding-bottom: 12px; border-bottom: 1px solid rgba(0,180,216,0.2); align-self: stretch;
         }
         .social-icons { display: flex; gap: 12px; }
         .social-icon {
@@ -273,8 +285,7 @@
             .form-row { grid-template-columns: 1fr; }
             .contact-form-container { padding: 35px; }
             .contact-info { padding: 35px; }
-            .footer-main { grid-template-columns: 1fr; gap: 28px; padding: 40px 20px 30px; }
-            .footer-social { align-items: flex-start; }
+            .footer-main { padding: 40px 20px 30px; gap: 28px; }
             .footer-bottom { padding: 18px 20px; }
         }
     </style>
@@ -431,11 +442,11 @@
                      onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
                 <span class="footer-logo-text" style="display:none;">SIECO</span>
             </div>
-            <div class="footer-address">
+            <div class="footer-address footer-queretaro">
                 <h4>Querétaro</h4>
                 <p>Calle Fénix Lt 8<br>Santa Magdalena<br>76137, Querétaro, Qro</p>
             </div>
-            <div class="footer-address">
+            <div class="footer-address footer-cdmx">
                 <h4>Ciudad de México</h4>
                 <p>Benito Miranda No. 21<br>Las Peñas, Iztapalapa<br>09750, CDMX</p>
             </div>
