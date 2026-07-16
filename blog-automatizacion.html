@@ -263,7 +263,57 @@
         .stat-num { font-size: 1.8em; font-weight: 700; color: var(--water-blue); line-height: 1; }
         .stat-lbl { font-size: 0.72em; color: #666; font-weight: 400; margin-top: 4px; line-height: 1.3; }
 
-        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.7); background: rgba(0,18,25,0.8); backdrop-filter: blur(10px); margin-top: 60px; font-weight: 300; }
+        footer.site-footer {
+            background: rgba(0,18,25,0.92); backdrop-filter: blur(10px);
+            margin-top: 60px; padding: clamp(40px, 8vw, 70px) clamp(20px, 4vw, 40px) 0;
+            color: rgba(255,255,255,0.65);
+        }
+        /* Grid fijo: SIEMPRE 2 columnas en cualquier dispositivo, igual que el diseño de referencia.
+           logo ocupa el ancho completo arriba; luego Querétaro/CDMX en fila; luego Contacto/Síguenos en fila. */
+        .footer-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+                "logo    logo"
+                "qro     cdmx"
+                "contacto siguenos";
+            column-gap: clamp(20px, 6vw, 80px);
+            row-gap: clamp(28px, 6vw, 44px);
+        }
+        .footer-brand { grid-area: logo; margin-bottom: clamp(10px, 3vw, 20px); }
+        .footer-brand img { height: clamp(48px, 8vw, 90px); width: auto; display: block; }
+        .footer-qro { grid-area: qro; }
+        .footer-cdmx { grid-area: cdmx; }
+        .footer-contacto { grid-area: contacto; }
+        .footer-siguenos { grid-area: siguenos; }
+        .footer-col h4 {
+            color: var(--water-light); font-weight: 700;
+            font-size: clamp(0.68em, 2vw, 0.82em);
+            letter-spacing: 1.2px; text-transform: uppercase;
+            padding-bottom: 14px; margin-bottom: 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+        .footer-col p {
+            font-size: clamp(0.78em, 2.6vw, 0.95em);
+            line-height: 1.9; font-weight: 300; color: rgba(255,255,255,0.65);
+        }
+        .footer-col p a { color: rgba(255,255,255,0.65); text-decoration: none; }
+        .footer-col p a:hover { color: var(--water-light); }
+        .footer-social { display: flex; gap: clamp(8px, 2.5vw, 12px); }
+        .footer-social a {
+            width: clamp(34px, 8vw, 44px); height: clamp(34px, 8vw, 44px); border-radius: 10px;
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.75); transition: all 0.25s;
+        }
+        .footer-social a:hover { background: var(--water-blue); border-color: var(--water-blue); color: white; transform: translateY(-2px); }
+        .footer-social svg { width: clamp(14px, 3.5vw, 18px); height: clamp(14px, 3.5vw, 18px); fill: currentColor; }
+        .footer-bottom {
+            max-width: 1400px; margin: clamp(30px, 6vw, 50px) auto 0; padding: clamp(18px, 4vw, 26px) 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center; font-size: clamp(0.72em, 2.4vw, 0.85em); font-weight: 300;
+        }
 
         @media (max-width: 1024px) {
             .article-body { grid-template-columns: 1fr; }
@@ -462,8 +512,38 @@
         </section>
     </div>
 
-    <footer>
-        <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-col footer-brand">
+                <a href="index.html">
+                    <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+                </a>
+            </div>
+            <div class="footer-col footer-qro">
+                <h4>Querétaro</h4>
+                <p>Calle Fénix Lt 8<br>Santa Magdalena<br>76137, Querétaro, Qro</p>
+            </div>
+            <div class="footer-col footer-cdmx">
+                <h4>Ciudad de México</h4>
+                <p>Benito Miranda No. 21<br>Las Peñas, Iztapalapa<br>09750, CDMX</p>
+            </div>
+            <div class="footer-col footer-contacto">
+                <h4>Contacto</h4>
+                <p>📞 <a href="tel:+524461253813">446 125 3813</a><br>✉️ <a href="mailto:ventas@sieco.com.mx">ventas@sieco.com.mx</a></p>
+            </div>
+            <div class="footer-col footer-siguenos">
+                <h4>Síguenos</h4>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+                    <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.68L23.3 22h-7.02l-5.5-7.2L4.5 22H1.4l8.14-9.3L.9 2h7.2l4.98 6.58L18.9 2zM17.6 20h1.95L6.5 3.9H4.4L17.6 20z"/></svg></a>
+                    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.22.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.05.41 2.22.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.22-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.05.36-2.22.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.22-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.05-.41-2.22-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.22.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.05-.36 2.22-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.56-.79.31-1.46.72-2.13 1.39-.67.67-1.08 1.34-1.39 2.13-.3.76-.5 1.63-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13.67.67 1.34 1.08 2.13 1.39.76.3 1.63.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.39.67-.67 1.08-1.34 1.39-2.13.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.39-2.13C19.51 1.75 18.84 1.34 18.05 1.03c-.76-.3-1.63-.5-2.91-.56C13.86.01 13.46 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 12 8a4 4 0 0 1 0 8zm6.41-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg></a>
+                    <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.</p>
+        </div>
     </footer>
     <script>
         const canvas = document.getElementById('waterCanvas');
