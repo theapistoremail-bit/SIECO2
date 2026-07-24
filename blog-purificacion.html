@@ -337,10 +337,10 @@
             .article-sidebar { order: -1; }
         }
 
-        /* NAV responsive — canon fluido con clamp() en desktop/tablet.
-           Por debajo de 640px el burger menu queda FIJO (sin vw/clamp)
-           para verse idéntico en cualquier celular. */
-        @media (max-width: 640px) {
+        /* NAV responsive — a partir de tablet (1024px) todo el nav se
+           embebe dentro del burger menu, con valores FIJOS (sin vw/clamp)
+           para verse idéntico en tablet y en cualquier celular. */
+        @media (max-width: 1024px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
             .nav-container {
@@ -350,7 +350,7 @@
             .nav-logo img { height: 42px !important; }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 1024px) {
             .mobile-menu { padding: 16px 24px 24px !important; }
         }
 
