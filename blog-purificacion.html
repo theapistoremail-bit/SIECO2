@@ -23,6 +23,8 @@
             background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
             z-index: 1; pointer-events: none;
         }
+
+        /* NAV — canon del index */
         nav {
             position: fixed; top: 0; width: 100%;
             background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
@@ -30,14 +32,20 @@
             z-index: 1000; border-bottom: 2px solid rgba(0,180,216,0.2);
         }
         .nav-container {
-            max-width: 1400px; margin: 0 auto; padding: 0 40px;
-            display: flex; justify-content: space-between; align-items: center; height: 90px;
+            max-width: 1400px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 40px);
+            display: flex; justify-content: space-between; align-items: center;
+            height: clamp(70px, 8vw, 90px);
         }
-        .nav-logo img { height: 202px; width: auto; display: block; }
-        .nav-links { display: flex; gap: 26px; list-style: none; align-items: center; }
+        .nav-logo img { height: clamp(42px, 5.5vw, 68px); width: auto; display: block; }
+        .nav-links {
+            display: flex; gap: clamp(6px, 1vw, 11px); list-style: none; align-items: center;
+            flex-wrap: nowrap;
+        }
         .nav-links a {
-            text-decoration: none; color: #001219; font-weight: 500; font-size: 0.82em;
+            text-decoration: none; color: #001219; font-weight: 500;
+            font-size: clamp(0.66em, 1.1vw, 0.82em);
             transition: all 0.3s; position: relative; letter-spacing: 0.6px; text-transform: uppercase;
+            white-space: nowrap;
         }
         .nav-links a::after {
             content: ''; position: absolute; bottom: -4px; left: 0;
@@ -328,13 +336,17 @@
             .article-body { grid-template-columns: 1fr; }
             .article-sidebar { order: -1; }
         }
+
+        /* NAV responsive — canon fluido con clamp(): el nav completo se mantiene
+           visible en tablet y solo colapsa a hamburger en móvil real */
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+        }
+
         @media (max-width: 768px) {
             .article-header h1 { font-size: 2em; }
             .article-content { padding: 32px 24px; }
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            .nav-container { padding: 0 20px; }
-            .nav-logo img { height: 50px; }
             .article-hero, .article-body { padding-left: 20px; padding-right: 20px; }
             .article-cover { height: 260px; border-radius: 12px; }
             .footer-main { padding: 36px 20px 24px; gap: 24px; }
@@ -345,16 +357,16 @@
 <body>
     <canvas id="waterCanvas"></canvas>
     <div class="water-overlay"></div>
-    
+
     <nav>
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo">
+                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo" onerror="this.style.display='none';this.parentNode.querySelector('span').style.display='block'">
+                <span style="display:none;font-size:1.5em;font-weight:700;color:#001219;letter-spacing:2px;">SIECO</span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="soluciones.html">Soluciones</a></li>
-                <li><a href="control-electrico.html">Control Eléctrico</a></li>
+                <li><a href="agua.html">Soluciones En Agua</a></li>
                 <li><a href="refrigeracion.html">Refrigeración</a></li>
                 <li><a href="mantenimiento.html">Mantenimiento</a></li>
                 <li><a href="proyectos.html">Proyectos</a></li>
@@ -368,8 +380,7 @@
     </nav>
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html">Inicio</a>
-        <a href="soluciones.html">Soluciones</a>
-        <a href="control-electrico.html">Control Eléctrico</a>
+        <a href="agua.html">Soluciones En Agua</a>
         <a href="refrigeracion.html">Refrigeración</a>
         <a href="mantenimiento.html">Mantenimiento</a>
         <a href="proyectos.html">Proyectos</a>
@@ -400,7 +411,7 @@
 
         <section class="article-body">
             <article class="article-content">
-                
+
 <h2>El Problema del Agua Industrial en México</h2>
 <p>En México, más del <strong>78% de las fuentes de agua superficial</strong> presentan algún grado de contaminación, lo que representa un reto enorme para la industria. Los sistemas de producción que requieren agua de alta pureza —como la industria farmacéutica, alimentaria y electrónica— no pueden depender de tratamientos convencionales.</p>
 <p>La ósmosis inversa y la ultrafiltración han emergido como las tecnologías más eficaces y económicas para resolver este problema a escala industrial. En los últimos cinco años, los avances en materiales de membrana han reducido los costos operativos hasta en un 40%, abriendo el acceso a empresas medianas.</p>
@@ -462,7 +473,7 @@
             </article>
 
             <aside class="article-sidebar">
-                
+
 <div class="sidebar-card">
     <h4>Estadísticas Clave</h4>
     <div class="stat-grid">
