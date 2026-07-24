@@ -1,633 +1,999 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevas Tecnologías en Purificación de Agua Industrial — Blog SIECO</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --water-blue: #00b4d8;
-            --water-light: #48cae4;
-            --water-deep: #0077b6;
-            --water-dark: #03045e;
-            --foam: #caf0f8;
-        }
-        body { font-family: 'IBM Plex Sans', sans-serif; background: #001219; color: #333; overflow-x: hidden; }
-        #waterCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-        .water-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
-            z-index: 1; pointer-events: none;
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingeniería Industrial en Querétaro | Refrigeración, Control Eléctrico y Purificación | SIECO</title>
+  <meta name="description" content="Empresa de ingeniería industrial en Querétaro especializada en refrigeración industrial, control eléctrico y sistemas de purificación de agua.">
+  <meta name="keywords" content="ingeniería industrial Querétaro, refrigeración industrial Querétaro, control eléctrico Querétaro, purificación de agua industrial Querétaro,SIECO,sieco">
+  <meta name="author" content="SIECO Ingeniería Industrial Para Purificación de agua">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://siecomexico.com.mx/">
+  <meta name="geo.region" content="MX-QUE">
+  <meta name="geo.placename" content="Querétaro">
+  <meta property="og:title" content="Ingeniería Industrial en Querétaro | SIECO">
+  <meta property="og:description" content="Soluciones industriales en Querétaro: refrigeración, automatización eléctrica y purificación de agua para empresas.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "SIECO Ingeniería Industrial",
+    "url": "https://siecomexico.com.mx/",
+    "telephone": "+52 446 125 3813",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle Fenix Lt 8, Santa Magdalena",
+      "addressLocality": "Querétaro",
+      "addressRegion": "QRO",
+      "postalCode": "76137",
+      "addressCountry": "MX"
+    },
+    "areaServed": "Querétaro"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --water-blue: #00b4d8;
+      --water-light: #48cae4;
+      --water-deep: #0077b6;
+      --water-dark: #03045e;
+      --foam: #caf0f8;
+    }
 
-        /* NAV — canon del index */
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0,180,216,0.1);
-            z-index: 1000; border-bottom: 2px solid rgba(0,180,216,0.2);
-        }
-        .nav-container {
-            max-width: 1400px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 40px);
-            display: flex; justify-content: space-between; align-items: center;
-            height: clamp(70px, 8vw, 90px);
-        }
-        .nav-logo img { height: clamp(42px, 5.5vw, 68px); width: auto; display: block; }
-        .nav-links {
-            display: flex; gap: clamp(6px, 1vw, 11px); list-style: none; align-items: center;
-            flex-wrap: nowrap;
-        }
-        .nav-links a {
-            text-decoration: none; color: #001219; font-weight: 500;
-            font-size: clamp(0.66em, 1.1vw, 0.82em);
-            transition: all 0.3s; position: relative; letter-spacing: 0.6px; text-transform: uppercase;
-            white-space: nowrap;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -4px; left: 0;
-            width: 0; height: 2px; background: var(--water-blue); transition: width 0.3s;
-        }
-        .nav-links a:hover { color: var(--water-deep); }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a.active { color: var(--water-blue); font-weight: 600; }
-        .nav-links a.active::after { width: 100%; }
-        .hamburger {
-            display: none; flex-direction: column; gap: 5px;
-            cursor: pointer; padding: 5px; background: none; border: none;
-        }
-        .hamburger span { display: block; width: 24px; height: 2px; background: #001219; border-radius: 2px; transition: all 0.3s; }
-        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-        .mobile-menu {
-            display: none; position: fixed; top: 70px; left: 0; width: 100%;
-            background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
-            z-index: 999; padding: 20px 40px 30px;
-            box-shadow: 0 10px 30px rgba(0,180,216,0.15);
-            border-bottom: 2px solid rgba(0,180,216,0.2);
-        }
-        .mobile-menu.open { display: flex; flex-direction: column; }
-        .mobile-menu a {
-            text-decoration: none; color: #001219; font-weight: 500; font-size: 1em;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
-        }
-        .mobile-menu a:hover { color: var(--water-blue); }
-        .content { position: relative; z-index: 10; padding-top: 100px; }
+    h1 { color: white; -webkit-text-fill-color: white; }
 
-        /* ARTICLE LAYOUT */
-        .article-hero {
-            max-width: 1400px; margin: 0 auto; padding: 60px 40px 0;
-        }
-        .breadcrumb {
-            display: flex; align-items: center; gap: 10px;
-            font-size: 0.82em; color: rgba(255,255,255,0.5);
-            margin-bottom: 40px; flex-wrap: wrap;
-        }
-        .breadcrumb a { color: var(--water-light); text-decoration: none; transition: color 0.2s; }
-        .breadcrumb a:hover { color: white; }
-        .breadcrumb span { color: rgba(255,255,255,0.3); }
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: #001219;
+      color: #333;
+      overflow-x: hidden;
+    }
+    #waterCanvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+    .water-overlay {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,18,25,0.3) 100%);
+      z-index: 1; pointer-events: none;
+    }
 
-        .article-header { margin-bottom: 48px; }
-        .article-category {
-            display: inline-block; padding: 7px 20px;
-            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
-            color: white; border-radius: 20px; font-size: 0.78em; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 22px;
-        }
-        .article-header h1 {
-            font-size: 3.2em; font-weight: 300; color: white; line-height: 1.2;
-            letter-spacing: -1px; margin-bottom: 20px;
-            text-shadow: 0 4px 40px rgba(0,180,216,0.4);
-        }
-        .article-header h1 strong { font-weight: 700; }
-        .article-meta {
-            display: flex; align-items: center; gap: 28px;
-            color: rgba(255,255,255,0.55); font-size: 0.88em; flex-wrap: wrap;
-        }
-        .article-meta span { display: flex; align-items: center; gap: 7px; }
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(0,180,216,0.1);
+      z-index: 1000;
+      border-bottom: 2px solid rgba(0,180,216,0.2);
+    }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      height: 90px;
+    }
+    .nav-logo img { height: 68px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 11px; list-style: none; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: #001219;
+      font-weight: 500; font-size: 0.82em;
+      transition: all 0.3s; position: relative;
+      letter-spacing: 0.6px; text-transform: uppercase;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--water-blue); transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--water-deep); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--water-blue); font-weight: 600; }
+    .nav-links a.active::after { width: 100%; }
 
-        .article-cover {
-            width: 100%; height: 520px; object-fit: cover;
-            border-radius: 20px; margin-bottom: 0;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-        }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 5px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: #001219; border-radius: 2px; transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* TWO-COLUMN LAYOUT */
-        .article-body {
-            max-width: 1400px; margin: 0 auto; padding: 0 40px 80px;
-            display: grid; grid-template-columns: 1fr 340px; gap: 60px;
-            align-items: start;
-        }
+    .mobile-menu {
+      display: none; position: fixed; top: 90px; left: 0; width: 100%;
+      background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+      z-index: 999; padding: 20px 40px 30px;
+      box-shadow: 0 10px 30px rgba(0,180,216,0.15);
+      border-bottom: 2px solid rgba(0,180,216,0.2);
+    }
+    .mobile-menu.open { display: flex; flex-direction: column; }
+    .mobile-menu a {
+      text-decoration: none; color: #001219; font-weight: 500;
+      font-size: 1em; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1); transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--water-blue); }
 
-        /* ARTICLE CONTENT */
-        .article-content {
-            background: rgba(255,255,255,0.97);
-            border-radius: 0 0 24px 24px;
-            padding: 56px 60px;
-        }
-        .article-content h2 {
-            font-size: 1.75em; font-weight: 600; color: var(--water-dark);
-            margin: 48px 0 18px; line-height: 1.3;
-        }
-        .article-content h2:first-child { margin-top: 0; }
-        .article-content h3 {
-            font-size: 1.25em; font-weight: 600; color: var(--water-deep);
-            margin: 32px 0 14px;
-        }
-        .article-content p {
-            color: #444; line-height: 1.95; font-weight: 300; font-size: 1.05em;
-            margin-bottom: 22px;
-        }
-        .article-content ul, .article-content ol {
-            color: #444; line-height: 1.9; font-weight: 300; font-size: 1.05em;
-            margin: 16px 0 22px; padding-left: 28px;
-        }
-        .article-content li { margin-bottom: 10px; }
-        .article-content strong { color: var(--water-dark); font-weight: 600; }
+    .content { position: relative; z-index: 10; padding-top: 100px; }
 
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(0,180,216,0.08), rgba(0,119,182,0.06));
-            border-left: 4px solid var(--water-blue);
-            border-radius: 0 14px 14px 0;
-            padding: 24px 28px; margin: 32px 0;
-        }
-        .highlight-box p { margin: 0; color: #333; font-size: 1.05em; line-height: 1.85; }
-        .highlight-box strong { color: var(--water-deep); }
+    .cta-section {
+      max-width: 1400px; margin: 80px auto; padding: 80px 40px 60px; text-align: center;
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, rgba(0,180,216,0.15), rgba(72,202,228,0.15));
+      backdrop-filter: blur(20px); border-radius: 30px;
+      border: 2px solid rgba(72,202,228,0.3);
+    }
+    .cta-section h1 {
+      font-size: 3em; color: white !important; -webkit-text-fill-color: white !important;
+      margin-bottom: 20px; font-weight: 600;
+      text-shadow: 0 2px 20px rgba(0,180,216,0.5);
+    }
+    .cta-section .section-tag {
+      display: inline-block;
+      font-size: 0.72em; font-weight: 700; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--water-light);
+      margin-bottom: 14px; opacity: 0.85;
+    }
+    .cta-section p {
+      font-size: 1.25em; color: rgba(255,255,255,0.9);
+      max-width: 700px; margin: 0 auto 40px; line-height: 1.7;
+    }
+    .cta-white {
+      display: inline-block; padding: 18px 45px; background: white;
+      color: var(--water-deep); text-decoration: none; border-radius: 50px;
+      font-weight: 600; font-size: 1.1em; transition: all 0.3s;
+      box-shadow: 0 8px 30px rgba(255,255,255,0.3);
+    }
+    .cta-white:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,255,255,0.5); background: var(--foam); }
 
-        .data-table {
-            width: 100%; border-collapse: collapse; margin: 28px 0;
-            font-size: 0.95em;
-        }
-        .data-table th {
-            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
-            color: white; padding: 14px 18px; text-align: left;
-            font-weight: 600; font-size: 0.9em; letter-spacing: 0.3px;
-        }
-        .data-table th:first-child { border-radius: 10px 0 0 0; }
-        .data-table th:last-child { border-radius: 0 10px 0 0; }
-        .data-table td {
-            padding: 12px 18px; border-bottom: 1px solid rgba(0,180,216,0.1);
-            color: #444; font-weight: 300;
-        }
-        .data-table tr:nth-child(even) td { background: rgba(0,180,216,0.04); }
-        .data-table tr:last-child td { border-bottom: none; }
-        .data-table tr:last-child td:first-child { border-radius: 0 0 0 10px; }
-        .data-table tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+    .hero { max-width: 1400px; margin: 0 auto; padding: 100px 40px 80px; text-align: center; }
+    .hero h1 {
+      font-size: 5em; font-weight: 700; color: white;
+      margin-bottom: 22px; letter-spacing: -3px; line-height: 1.1;
+      text-shadow: 0 4px 30px rgba(0,180,216,0.5);
+    }
+    .hero h1 strong {
+      display: block;
+      background: linear-gradient(135deg, var(--water-light), var(--foam), var(--water-blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 20px rgba(72,202,228,0.6));
+    }
+    .hero p {
+      font-size: 1.35em; color: rgba(255,255,255,0.95);
+      max-width: 750px; margin: 0 auto 50px; line-height: 1.7;
+      text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    }
+    .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 18px 45px;
+      background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
+      color: white; text-decoration: none; border-radius: 50px;
+      font-weight: 600; font-size: 1.1em; transition: all 0.3s;
+      box-shadow: 0 8px 30px rgba(0,180,216,0.4);
+    }
+    .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,180,216,0.6); }
 
-        .tip-box {
-            background: rgba(202,240,248,0.4);
-            border: 1px solid rgba(0,180,216,0.25);
-            border-radius: 14px; padding: 22px 26px; margin: 28px 0;
-            display: flex; gap: 16px; align-items: flex-start;
-        }
-        .tip-icon { font-size: 1.6em; flex-shrink: 0; margin-top: 2px; }
-        .tip-box p { margin: 0; font-size: 0.98em; color: #333; line-height: 1.85; }
+    .water-feature {
+      max-width: 1400px; margin: 60px auto; padding: 0 40px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .water-visual {
+      position: relative; height: 500px;
+      border-radius: 30px; overflow: hidden;
+      box-shadow: 0 0 80px rgba(0,180,216,0.4), 0 0 160px rgba(72,202,228,0.2), 0 20px 60px rgba(0,180,216,0.25);
+      border: 2px solid rgba(0,180,216,0.4);
+      animation: waterGlow 6s ease-in-out infinite;
+    }
+    @keyframes waterGlow {
+      0%, 100% { box-shadow: 0 0 80px rgba(0,180,216,0.4), 0 0 160px rgba(72,202,228,0.2), 0 20px 60px rgba(0,180,216,0.25); }
+      50% { box-shadow: 0 0 100px rgba(0,180,216,0.55), 0 0 200px rgba(72,202,228,0.3), 0 20px 80px rgba(0,180,216,0.35); }
+    }
+    .image-wrapper { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    .slide {
+      position: absolute; width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .slide.active { opacity: 1; }
+    .glass-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(72,202,228,0.15) 0%, rgba(0,180,216,0.08) 50%, rgba(72,202,228,0.15) 100%);
+      border-radius: 30px; z-index: 1;
+    }
+    .water-ripple {
+      position: absolute; border-radius: 50%;
+      border: 1.5px solid rgba(0,180,216,0.35); top: 50%; left: 50%;
+      transform: translate(-50%,-50%); animation: ripple 5s ease-out infinite; z-index: 2;
+    }
+    .water-ripple:nth-child(3) { animation-delay: 1.7s; }
+    .water-ripple:nth-child(4) { animation-delay: 3.4s; }
+    @keyframes ripple {
+      0%   { width: 40px;  height: 40px;  opacity: 0.8; }
+      50%  { width: 280px; height: 280px; opacity: 0.3; }
+      100% { width: 520px; height: 520px; opacity: 0; }
+    }
+    .water-feature-content h2 {
+      font-size: 2.5em; color: white; margin-bottom: 20px;
+      font-weight: 600; text-shadow: 0 4px 20px rgba(0,180,216,0.5);
+    }
+    .water-feature-content p {
+      font-size: 1.15em; color: rgba(255,255,255,0.9);
+      line-height: 1.8; margin-bottom: 30px;
+    }
 
-        .steps-list { counter-reset: step; list-style: none; padding: 0; margin: 24px 0; }
-        .steps-list li {
-            counter-increment: step;
-            display: flex; gap: 20px; align-items: flex-start;
-            margin-bottom: 24px; font-size: 1.05em; color: #444; font-weight: 300; line-height: 1.85;
-        }
-        .steps-list li::before {
-            content: counter(step);
-            flex-shrink: 0; width: 36px; height: 36px;
-            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
-            color: white; border-radius: 50%; font-weight: 700; font-size: 0.85em;
-            display: flex; align-items: center; justify-content: center;
-            margin-top: 3px;
-        }
+    .cards-section {
+      max-width: 1400px; margin: 80px auto; padding: 0 40px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;
+    }
+    .glass-card {
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+      border-radius: 24px; padding: 45px;
+      box-shadow: 0 10px 40px rgba(0,180,216,0.15);
+      border: 2px solid rgba(72,202,228,0.2);
+      transition: all 0.4s; position: relative; overflow: hidden;
+    }
+    .glass-card:hover { transform: translateY(-12px); box-shadow: 0 20px 60px rgba(0,180,216,0.3); }
+    .card-icon {
+      width: 70px; height: 70px;
+      background: linear-gradient(135deg, var(--water-blue), var(--water-light));
+      border-radius: 18px; display: flex; align-items: center;
+      justify-content: center; font-size: 2em; margin-bottom: 25px;
+    }
+    .glass-card h3 { font-size: 1.6em; color: var(--water-dark); margin-bottom: 15px; font-weight: 600; }
+    .glass-card p { color: #2c3e50; line-height: 1.8; font-size: 1.05em; }
 
-        .cta-article {
-            background: linear-gradient(135deg, var(--water-blue), var(--water-dark));
-            border-radius: 18px; padding: 36px 40px; margin-top: 52px; text-align: center;
-            box-shadow: 0 12px 40px rgba(0,180,216,0.25);
-        }
-        .cta-article h3 { color: white; font-size: 1.5em; font-weight: 600; margin-bottom: 12px; }
-        .cta-article p { color: rgba(255,255,255,0.85); font-size: 1em; font-weight: 300; margin-bottom: 28px; line-height: 1.75; }
-        .cta-btn {
-            display: inline-block; padding: 15px 40px;
-            background: white; color: var(--water-deep);
-            border-radius: 40px; font-weight: 700; font-size: 0.95em;
-            text-decoration: none; transition: all 0.3s; letter-spacing: 0.3px;
-        }
-        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+    /* ====================================================
+       ORBIT SERVICES SECTION
+    ==================================================== */
+    .services-orbit-section {
+      max-width: 1400px; margin: 10px auto 80px;
+      padding: 20px 40px 80px; text-align: center;
+    }
+    .services-orbit-section .section-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--water-light);
+      margin-bottom: 16px; opacity: 0.85;
+    }
+    .services-orbit-section .section-heading {
+      font-size: 2.6em; font-weight: 700; color: #fff;
+      margin-bottom: 60px; text-shadow: 0 2px 20px rgba(0,180,216,0.4);
+      letter-spacing: -1px;
+    }
+    .orbit-wrapper { display: flex; justify-content: center; align-items: center; }
+    .orbit-card {
+      background: #ffffff; border-radius: 36px; padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,180,216,0.18), 0 4px 20px rgba(0,0,0,0.08);
+      border: 1.5px solid rgba(72,202,228,0.25);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .circle-container { position: relative; width: 720px; height: 720px; }
 
-        /* SIDEBAR */
-        .article-sidebar { padding-top: 0; }
-        .sidebar-card {
-            background: rgba(255,255,255,0.96);
-            border-radius: 20px; padding: 30px 28px;
-            box-shadow: 0 8px 30px rgba(0,180,216,0.12);
-            border: 1px solid rgba(0,180,216,0.15);
-            margin-bottom: 28px;
-        }
-        .sidebar-card h4 {
-            font-size: 1em; font-weight: 700; color: var(--water-dark);
-            margin-bottom: 18px; padding-bottom: 12px;
-            border-bottom: 2px solid rgba(0,180,216,0.2);
-            text-transform: uppercase; letter-spacing: 0.5px;
-        }
-        .sidebar-card p { font-size: 0.92em; color: #555; line-height: 1.8; font-weight: 300; margin-bottom: 16px; }
-        .sidebar-btn {
-            display: block; padding: 12px 20px; text-align: center;
-            background: linear-gradient(135deg, var(--water-blue), var(--water-deep));
-            color: white; border-radius: 10px; text-decoration: none;
-            font-weight: 600; font-size: 0.88em; transition: all 0.3s;
-        }
-        .sidebar-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,180,216,0.35); }
+    .orbit-glow {
+      position: absolute; top: 50%; left: 50%;
+      width: 710px; height: 710px; transform: translate(-50%,-50%);
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(72,202,228,0.08), rgba(0,180,216,0.25), rgba(255,255,255,0.12), rgba(0,119,182,0.2), rgba(72,202,228,0.08));
+      animation: spinGlow 18s linear infinite; pointer-events: none;
+    }
+    @keyframes spinGlow {
+      from { transform: translate(-50%,-50%) rotate(0deg); }
+      to   { transform: translate(-50%,-50%) rotate(360deg); }
+    }
+    .orbit-track {
+      position: absolute; top: 50%; left: 50%;
+      width: 570px; height: 570px; transform: translate(-50%,-50%);
+      border-radius: 50%; border: 1.5px dashed rgba(72,202,228,0.4);
+      pointer-events: none; animation: rotateCW 80s linear infinite;
+    }
+    @keyframes rotateCW {
+      from { transform: translate(-50%,-50%) rotate(0deg); }
+      to   { transform: translate(-50%,-50%) rotate(360deg); }
+    }
+    .orbit-inner-ring {
+      position: absolute; top: 50%; left: 50%;
+      width: 270px; height: 270px; transform: translate(-50%,-50%);
+      border-radius: 50%; border: 1.5px solid rgba(72,202,228,0.25);
+      pointer-events: none; animation: rotateCCW 30s linear infinite;
+    }
+    @keyframes rotateCCW {
+      from { transform: translate(-50%,-50%) rotate(0deg); }
+      to   { transform: translate(-50%,-50%) rotate(-360deg); }
+    }
+    .pulse-ring {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%); border-radius: 50%;
+      border: 1.5px solid rgba(72,202,228,0.6);
+      pointer-events: none; z-index: 4;
+      animation: pulseRing 3.6s ease-out infinite;
+    }
+    .pulse-ring.p2 { animation-delay: 1.2s; border-color: rgba(0,180,216,0.5); }
+    .pulse-ring.p3 { animation-delay: 2.4s; border-color: rgba(0,119,182,0.4); }
+    @keyframes pulseRing {
+      0%   { width: 220px; height: 220px; opacity: 0.8; }
+      100% { width: 630px; height: 630px; opacity: 0; }
+    }
+    .orbit-dot {
+      position: absolute; top: 50%; left: 50%;
+      width: 9px; height: 9px; margin: -4.5px;
+      background: #48cae4; border-radius: 50%;
+      box-shadow: 0 0 16px 5px rgba(72,202,228,0.75);
+      animation: orbitDot 9s linear infinite;
+      pointer-events: none; z-index: 6;
+    }
+    .orbit-dot.d2 { animation-delay: -3s; background: #00b4d8; width: 7px; height: 7px; margin: -3.5px; }
+    .orbit-dot.d3 { animation-delay: -6s; background: #90e0ef; width: 5px; height: 5px; margin: -2.5px; }
+    @keyframes orbitDot {
+      from { transform: rotate(0deg) translateX(285px) rotate(0deg); }
+      to   { transform: rotate(360deg) translateX(285px) rotate(-360deg); }
+    }
 
-        .related-post {
-            display: flex; gap: 14px; align-items: flex-start;
-            padding: 14px 0; border-bottom: 1px solid rgba(0,180,216,0.1);
-            text-decoration: none; transition: all 0.2s;
-        }
-        .related-post:last-child { border-bottom: none; padding-bottom: 0; }
-        .related-post:hover .rp-title { color: var(--water-blue); }
-        .rp-img { width: 68px; height: 52px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-        .rp-content { flex: 1; }
-        .rp-cat { font-size: 0.7em; font-weight: 700; color: var(--water-blue); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
-        .rp-title { font-size: 0.88em; font-weight: 600; color: #222; line-height: 1.35; transition: color 0.2s; }
+    .circle-center {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 210px; height: 210px; border-radius: 50%;
+      background: linear-gradient(145deg, #FAFDFF 0%, #0ea5e9 40%, #0284c7 75%, #0369a1 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; z-index: 20; overflow: hidden;
+      box-shadow: 0 0 0 10px rgba(14,165,233,0.12), 0 24px 70px rgba(2,132,199,0.55);
+      animation: centerPulse 3.5s ease-in-out infinite;
+    }
+    .circle-center svg { width: 80px; height: 80px; fill: rgba(255,255,255,0.95); position: relative; z-index: 1; }
+    .circle-center .center-label {
+      font-size: 13px; font-weight: 800; letter-spacing: 3px;
+      color: rgba(255,255,255,0.92); text-transform: uppercase; position: relative; z-index: 1;
+    }
+    @keyframes centerPulse {
+      0%, 100% { box-shadow: 0 0 0 10px rgba(14,165,233,0.12), 0 24px 70px rgba(2,132,199,0.55); }
+      50%       { box-shadow: 0 0 0 14px rgba(14,165,233,0.18), 0 24px 90px rgba(2,132,199,0.72); }
+    }
 
-        .tags-list { display: flex; flex-wrap: wrap; gap: 8px; }
-        .tag {
-            padding: 6px 14px; border: 1px solid rgba(0,180,216,0.3);
-            border-radius: 20px; font-size: 0.8em; color: var(--water-deep);
-            text-decoration: none; font-weight: 500; transition: all 0.2s;
-        }
-        .tag:hover { background: rgba(0,180,216,0.1); border-color: var(--water-blue); }
+    /* ====================================================
+       CIRCLE ITEMS — FIX PRINCIPAL
+       Las rutas ya no tienen espacios: Circle6.png, Circulo8.png
+       Todos tienen class="item-img" y object-fit: cover
+       transform: scale(1) por defecto evita magnificación involuntaria
+    ==================================================== */
+    .circle-item {
+      position: absolute; top: 50%; left: 50%;
+      width: 148px; height: 148px; margin: -74px;
+      border-radius: 50%; background: #040d14;
+      border: 3px solid rgba(56,189,248,0.65);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 0; cursor: pointer;
+      animation: orbit 52s linear infinite;
+      box-shadow: 0 6px 28px rgba(14,165,233,0.3);
+      z-index: 5; transition: box-shadow 0.3s, border-color 0.3s;
+      overflow: hidden; text-decoration: none;
+    }
+    .circle-item:hover {
+      border-color: #7dd3fc;
+      box-shadow: 0 10px 40px rgba(56,189,222,0.7), 0 0 24px rgba(56,189,222,0.35);
+    }
 
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .stat-item {
-            background: linear-gradient(135deg, rgba(0,180,216,0.08), rgba(0,119,182,0.06));
-            border-radius: 12px; padding: 16px 14px; text-align: center;
-            border: 1px solid rgba(0,180,216,0.15);
-        }
-        .stat-num { font-size: 1.8em; font-weight: 700; color: var(--water-blue); line-height: 1; }
-        .stat-lbl { font-size: 0.72em; color: #666; font-weight: 400; margin-top: 4px; line-height: 1.3; }
+    /* FIX: imagen siempre contenida, sin magnificación espontánea */
+    .item-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transform: scale(1);
+      transition: transform 0.45s ease;
+      z-index: 1;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+    .circle-item:hover .item-img { transform: scale(1.06); }
 
-        /* FOOTER — canon: logo arriba, 2 columnas, divisorias */
-        footer {
-            position: relative; z-index: 10; margin-top: 60px;
-            background: rgba(0,18,25,0.95); backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(0,180,216,0.2);
-            color: rgba(255,255,255,0.85); font-weight: 300;
-        }
-        .footer-main {
-            max-width: 1400px; margin: 0 auto; padding: 50px 40px 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-areas:
-                "logo logo"
-                "queretaro cdmx"
-                "contacto social";
-            gap: 40px;
-        }
-        .footer-logo { grid-area: logo; display: flex; align-items: center; }
-        .footer-logo img { height: 70px; width: auto; }
-        .footer-logo-fallback { font-size: 1.6em; font-weight: 700; color: var(--water-blue); letter-spacing: 3px; }
-        .footer-queretaro { grid-area: queretaro; }
-        .footer-cdmx { grid-area: cdmx; }
-        .footer-address h4 {
-            font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
-            padding-bottom: 12px; border-bottom: 1px solid rgba(0,180,216,0.2);
-        }
-        .footer-address p { font-size: 0.88em; line-height: 1.7; color: rgba(255,255,255,0.75); }
-        .footer-contact { grid-area: contacto; }
-        .footer-contact h4 {
-            font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
-            padding-bottom: 12px; border-bottom: 1px solid rgba(0,180,216,0.2);
-        }
-        .footer-contact p { font-size: 0.88em; line-height: 1.9; color: rgba(255,255,255,0.75); }
-        .footer-contact a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s; }
-        .footer-contact a:hover { color: var(--water-blue); }
-        .footer-social {
-            grid-area: social;
-            display: flex; flex-direction: column; gap: 12px; align-items: flex-start;
-        }
-        .footer-social h4 {
-            font-size: 0.72em; font-weight: 600; color: var(--water-light);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
-            padding-bottom: 12px; border-bottom: 1px solid rgba(0,180,216,0.2); align-self: stretch;
-        }
-        .social-icons { display: flex; gap: 12px; }
-        .social-icon {
-            width: 40px; height: 40px; border-radius: 10px;
-            background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s; cursor: pointer;
-        }
-        .social-icon:hover { background: var(--water-blue); border-color: var(--water-blue); transform: translateY(-3px); }
-        .social-icon svg { width: 18px; height: 18px; fill: rgba(255,255,255,0.8); }
-        .footer-bottom {
-            border-top: 1px solid rgba(0,180,216,0.12);
-            padding: 18px 40px; text-align: center;
-            font-size: 0.8em; color: rgba(255,255,255,0.4); letter-spacing: 0.5px;
-        }
+    .circle-item::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: linear-gradient(to top, rgba(0,8,24,0.88) 0%, rgba(0,8,24,0.45) 45%, transparent 100%);
+      z-index: 2;
+    }
+    .item-label {
+      position: absolute; bottom: 16px; left: 0; right: 0;
+      font-size: 10.5px; font-weight: 800; color: #e8f8ff;
+      letter-spacing: 1.8px; text-transform: uppercase; line-height: 1.25;
+      z-index: 3; text-shadow: 0 1px 10px rgba(0,0,0,1), 0 0 20px rgba(0,180,216,0.6);
+      padding: 0 8px; transition: color 0.25s;
+    }
+    .circle-item:hover .item-label { color: #7dd3fc; }
 
-        @media (max-width: 1024px) {
-            .article-body { grid-template-columns: 1fr; }
-            .article-sidebar { order: -1; }
-        }
+    .item1 { transform: rotate(0deg)   translateX(285px) rotate(0deg);   animation-name: orbit1; }
+    .item2 { transform: rotate(72deg)  translateX(285px) rotate(-72deg); animation-name: orbit2; }
+    .item3 { transform: rotate(144deg) translateX(285px) rotate(-144deg);animation-name: orbit3; }
+    .item4 { transform: rotate(216deg) translateX(285px) rotate(-216deg);animation-name: orbit4; }
+    .item5 { transform: rotate(288deg) translateX(285px) rotate(-288deg);animation-name: orbit5; }
 
-        /* NAV responsive — canon fluido con clamp() en desktop/tablet.
-           Por debajo de 640px el burger menu queda FIJO (sin vw/clamp)
-           para verse idéntico en cualquier celular. */
-        @media (max-width: 640px) {
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            .nav-container {
-                padding: 0 20px !important;
-                height: 70px !important;
-            }
-            .nav-logo img { height: 42px !important; }
-        }
+    @keyframes orbit1 { from{transform:rotate(0deg)   translateX(285px) rotate(0deg);}   to{transform:rotate(360deg)   translateX(285px) rotate(-360deg);}   }
+    @keyframes orbit2 { from{transform:rotate(72deg)  translateX(285px) rotate(-72deg);}  to{transform:rotate(432deg)  translateX(285px) rotate(-432deg);}  }
+    @keyframes orbit3 { from{transform:rotate(144deg) translateX(285px) rotate(-144deg);} to{transform:rotate(504deg) translateX(285px) rotate(-504deg);} }
+    @keyframes orbit4 { from{transform:rotate(216deg) translateX(285px) rotate(-216deg);} to{transform:rotate(576deg) translateX(285px) rotate(-576deg);} }
+    @keyframes orbit5 { from{transform:rotate(288deg) translateX(285px) rotate(-288deg);} to{transform:rotate(648deg) translateX(285px) rotate(-648deg);} }
 
-        @media (max-width: 640px) {
-            .mobile-menu { padding: 16px 24px 24px !important; }
-        }
+    /* Videos */
+    .videos-emergence { width: 100%; margin-top: 16px; position: relative; }
+    .video-cards { display: flex; justify-content: center; gap: 18px; align-items: flex-end; }
+    .video-card {
+      flex: 1; max-width: 340px; aspect-ratio: 16 / 9;
+      border-radius: 14px; overflow: hidden; position: relative;
+      background: rgba(0,10,25,0.9); border: 1.5px solid rgba(72,202,228,0.2);
+      cursor: pointer; opacity: 0;
+      filter: blur(12px) brightness(0.2) saturate(0.5);
+      transform: translateY(50px) scaleY(0.9);
+      transition: opacity 1.8s ease, filter 2s ease, transform 2s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.3s;
+    }
+    .video-card.popped {
+      opacity: 1; filter: blur(0) brightness(1) saturate(1);
+      transform: translateY(0) scaleY(1); border-color: rgba(72,202,228,0.38);
+      box-shadow: 0 8px 35px rgba(0,180,216,0.2);
+    }
+    .video-card.popped:nth-child(1) { animation: vFloat1 7s ease-in-out 2.2s infinite; }
+    .video-card.popped:nth-child(2) { animation: vFloat2 8.5s ease-in-out 1.8s infinite; }
+    .video-card.popped:nth-child(3) { animation: vFloat3 6.8s ease-in-out 2.6s infinite; }
+    @keyframes vFloat1 { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-7px); } }
+    @keyframes vFloat2 { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+    @keyframes vFloat3 { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+    .video-card:hover { border-color: rgba(72,202,228,0.75) !important; }
+    .video-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+    .video-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,8,22,0.75) 0%, transparent 55%); z-index: 2; pointer-events: none; }
+    .video-label {
+      position: absolute; bottom: 10px; left: 0; right: 0; text-align: center;
+      font-size: 9px; font-weight: 700; letter-spacing: 3.5px;
+      text-transform: uppercase; color: rgba(72,202,228,0.92); z-index: 4;
+    }
+    .video-expand {
+      position: absolute; top: 9px; right: 9px; width: 28px; height: 28px;
+      background: rgba(0,15,32,0.7); border: 1px solid rgba(72,202,228,0.4);
+      border-radius: 7px; display: flex; align-items: center; justify-content: center;
+      z-index: 5; opacity: 0; transition: opacity 0.2s; cursor: pointer;
+    }
+    .video-expand svg { width: 13px; height: 13px; fill: none; stroke: rgba(72,202,228,0.9); stroke-width: 1.8; }
+    .video-card:hover .video-expand { opacity: 1; }
 
-        @media (max-width: 768px) {
-            .article-header h1 { font-size: 2em; }
-            .article-content { padding: 32px 24px; }
-            .article-hero, .article-body { padding-left: 20px; padding-right: 20px; }
-            .article-cover { height: 260px; border-radius: 12px; }
-            .footer-main { padding: 36px 20px 24px; gap: 24px; }
-            .footer-bottom { padding: 14px 20px; }
-        }
-</style>
+    .video-modal {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,4,14,0.94); backdrop-filter: blur(20px);
+      align-items: center; justify-content: center;
+    }
+    .video-modal.open { display: flex; }
+    .video-modal-inner {
+      position: relative; width: min(90vw, 1120px); aspect-ratio: 16/9;
+      border-radius: 18px; overflow: hidden;
+      border: 1.5px solid rgba(72,202,228,0.35);
+      box-shadow: 0 0 90px rgba(0,180,216,0.28);
+      animation: modalIn 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    @keyframes modalIn {
+      from { opacity:0; transform:scale(0.91) translateY(24px); }
+      to   { opacity:1; transform:scale(1) translateY(0); }
+    }
+    .video-modal-inner video { width:100%; height:100%; object-fit:cover; }
+    .video-modal-close {
+      position: absolute; top: 14px; right: 14px; width: 36px; height: 36px;
+      background: rgba(0,15,32,0.8); border: 1.5px solid rgba(72,202,228,0.4);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 2;
+    }
+    .video-modal-close svg { width:15px; height:15px; stroke:rgba(255,255,255,0.88); stroke-width:2; fill:none; }
+
+    footer {
+      background: rgba(0,18,25,0.95);
+      backdrop-filter: blur(10px);
+      margin-top: 40px;
+      border-top: 1px solid rgba(0,180,216,0.2);
+      color: rgba(255,255,255,0.85);
+      font-weight: 300;
+    }
+    .footer-main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 40px 50px;
+      display: grid;
+      grid-template-columns: 180px 1fr 1fr 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: flex-start;
+    }
+    .footer-logo img { height: 130px; width: auto; filter: drop-shadow(0 0 22px rgba(0,180,216,0.35)); }
+    .footer-logo-text {
+      font-size: 1.6em; font-weight: 700;
+      color: var(--water-blue); letter-spacing: 3px;
+    }
+    .footer-col h4 {
+      font-size: 0.72em; font-weight: 600;
+      color: var(--water-light);
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(0,180,216,0.2);
+    }
+    .footer-col p {
+      font-size: 0.88em; line-height: 1.8;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-col a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: block;
+      font-size: 0.88em;
+      line-height: 2;
+    }
+    .footer-col a:hover { color: var(--water-blue); }
+    .social-icons {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .social-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(0,180,216,0.12);
+      border: 1px solid rgba(0,180,216,0.25);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .social-icon:hover {
+      background: var(--water-blue);
+      border-color: var(--water-blue);
+      transform: translateY(-3px);
+    }
+    .social-icon svg { width: 18px; height: 18px; fill: rgba(255,255,255,0.8); }
+    .footer-bottom {
+      border-top: 1px solid rgba(0,180,216,0.12);
+      padding: 20px 40px;
+      text-align: center;
+      font-size: 0.8em;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.5px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 968px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-container { padding: 0 20px; height: 70px; }
+      .nav-logo img { height: 42px; }
+      .hero { padding: 80px 20px 60px; }
+      .hero h1 { font-size: 2.4em; letter-spacing: -1px; }
+      .mobile-menu { top: 70px; }
+      .water-feature { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; }
+      .water-visual { height: 340px; }
+      .cards-section { grid-template-columns: 1fr; padding: 0 20px; }
+      .glass-card { padding: 30px; }
+      .services-orbit-section { margin: 0 auto 40px; padding: 0 20px 40px; }
+      .services-orbit-section .section-heading { font-size: 1.8em; margin-bottom: 30px; }
+      .orbit-card { padding: 20px; }
+      .circle-container { width: 380px; height: 380px; }
+      .orbit-glow { width: 374px; height: 374px; }
+      .orbit-track { width: 296px; height: 296px; }
+      .orbit-inner-ring { width: 155px; height: 155px; }
+      .circle-center { width: 130px; height: 130px; }
+      .circle-center svg { width: 52px; height: 52px; }
+      .circle-center .center-label { font-size: 10px; }
+      .circle-item { width: 100px; height: 100px; margin: -50px; }
+      .item-label { font-size: 8px; bottom: 10px; }
+      .cta-section { padding: 50px 20px 40px; margin: 60px 12px; border-radius: 20px; }
+      .cta-section h1 { font-size: 1.8em; }
+      .cta-section p { font-size: 1em; }
+      .cta-white { padding: 14px 32px; font-size: 1em; }
+      .video-cards { flex-direction: row; gap: 12px; }
+      .video-card { max-width: none; flex: 1; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; padding: 40px 20px 30px; }
+      .footer-logo { grid-column: 1 / -1; }
+      .footer-bottom { padding: 18px 20px; }
+
+      @keyframes orbit1 { from{transform:rotate(0deg)   translateX(148px) rotate(0deg);}   to{transform:rotate(360deg)   translateX(148px) rotate(-360deg);}   }
+      @keyframes orbit2 { from{transform:rotate(72deg)  translateX(148px) rotate(-72deg);}  to{transform:rotate(432deg)  translateX(148px) rotate(-432deg);}  }
+      @keyframes orbit3 { from{transform:rotate(144deg) translateX(148px) rotate(-144deg);} to{transform:rotate(504deg) translateX(148px) rotate(-504deg);} }
+      @keyframes orbit4 { from{transform:rotate(216deg) translateX(148px) rotate(-216deg);} to{transform:rotate(576deg) translateX(148px) rotate(-576deg);} }
+      @keyframes orbit5 { from{transform:rotate(288deg) translateX(148px) rotate(-288deg);} to{transform:rotate(648deg) translateX(148px) rotate(-648deg);} }
+      .item1 { transform: rotate(0deg)   translateX(148px) rotate(0deg);   }
+      .item2 { transform: rotate(72deg)  translateX(148px) rotate(-72deg); }
+      .item3 { transform: rotate(144deg) translateX(148px) rotate(-144deg);}
+      .item4 { transform: rotate(216deg) translateX(148px) rotate(-216deg);}
+      .item5 { transform: rotate(288deg) translateX(148px) rotate(-288deg);}
+      @keyframes orbitDot {
+        from { transform: rotate(0deg) translateX(148px) rotate(0deg); }
+        to   { transform: rotate(360deg) translateX(148px) rotate(-360deg); }
+      }
+      @keyframes pulseRing {
+        0%   { width: 130px; height: 130px; opacity: 0.8; }
+        100% { width: 360px; height: 360px; opacity: 0; }
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav-container { padding: 0 16px; }
+      .nav-logo img { height: 36px; }
+      .hero h1 { font-size: 1.9em; }
+      .circle-container { width: 310px; height: 310px; }
+      .orbit-glow { width: 304px; height: 304px; }
+      .orbit-track { width: 244px; height: 244px; }
+      .orbit-inner-ring { width: 128px; height: 128px; }
+      .circle-center { width: 108px; height: 108px; }
+      .circle-center svg { width: 42px; height: 42px; }
+      .circle-item { width: 82px; height: 82px; margin: -41px; }
+      .item-label { font-size: 7px; bottom: 8px; letter-spacing: 1px; }
+      .footer-main { grid-template-columns: 1fr; gap: 20px; }
+      .footer-logo img { height: 90px; }
+
+      @keyframes orbit1 { from{transform:rotate(0deg)   translateX(122px) rotate(0deg);}   to{transform:rotate(360deg)   translateX(122px) rotate(-360deg);}   }
+      @keyframes orbit2 { from{transform:rotate(72deg)  translateX(122px) rotate(-72deg);}  to{transform:rotate(432deg)  translateX(122px) rotate(-432deg);}  }
+      @keyframes orbit3 { from{transform:rotate(144deg) translateX(122px) rotate(-144deg);} to{transform:rotate(504deg) translateX(122px) rotate(-504deg);} }
+      @keyframes orbit4 { from{transform:rotate(216deg) translateX(122px) rotate(-216deg);} to{transform:rotate(576deg) translateX(122px) rotate(-576deg);} }
+      @keyframes orbit5 { from{transform:rotate(288deg) translateX(122px) rotate(-288deg);} to{transform:rotate(648deg) translateX(122px) rotate(-648deg);} }
+      .item1 { transform: rotate(0deg)   translateX(122px) rotate(0deg);   }
+      .item2 { transform: rotate(72deg)  translateX(122px) rotate(-72deg); }
+      .item3 { transform: rotate(144deg) translateX(122px) rotate(-144deg);}
+      .item4 { transform: rotate(216deg) translateX(122px) rotate(-216deg);}
+      .item5 { transform: rotate(288deg) translateX(122px) rotate(-288deg);}
+    }
+  </style>
 </head>
 <body>
-    <canvas id="waterCanvas"></canvas>
-    <div class="water-overlay"></div>
+  <canvas id="waterCanvas"></canvas>
+  <div class="water-overlay"></div>
 
-    <nav>
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="https://github.com/theapistoremail-bit/SIECO2/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png?raw=true" alt="SIECO Logo" onerror="this.style.display='none';this.parentNode.querySelector('span').style.display='block'">
-                <span style="display:none;font-size:1.5em;font-weight:700;color:#001219;letter-spacing:2px;">SIECO</span>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="Diseño sin título (9).png" alt="SIECO" onerror="this.style.display='none';this.parentNode.querySelector('span').style.display='block'">
+        <span style="display:none;font-size:1.5em;font-weight:700;color:#001219;letter-spacing:2px;">SIECO</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="agua.html">Soluciones En Agua</a></li>
+        <li><a href="refrigeracion.html">Refrigeración</a></li>
+        <li><a href="mantenimiento.html">Mantenimiento</a></li>
+        <li><a href="proyectos.html">Proyectos</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Inicio</a>
+    <a href="agua.html">Soluciones</a>
+    <a href="refrigeracion.html">Refrigeración</a>
+    <a href="mantenimiento.html">Mantenimiento</a>
+    <a href="proyectos.html">Proyectos</a>
+    <a href="blog.html">Blog</a>
+    <a href="contacto.html">Contacto</a>
+  </div>
+
+  <div class="content">
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>
+        <strong>BIENVENIDOS</strong>
+        SISTEMAS Y SOLUCIONES INTEGRALES
+      </h1>
+      <p>Tecnología de purificación de agua, control eléctrico, refrigeración y mantenimiento industrial</p>
+      <div class="cta-group">
+        <a href="flipbook.html" class="cta-primary">Solicitar Cotización →</a>
+      </div>
+    </section>
+
+    <!-- ORBIT SERVICES -->
+    <section class="services-orbit-section">
+      <p class="section-eyebrow">Lo que hacemos</p>
+      <h2 class="section-heading">Nuestros Servicios</h2>
+      <div class="orbit-wrapper">
+        <div class="orbit-card">
+          <div class="circle-container">
+
+            <div class="orbit-glow"></div>
+            <div class="orbit-track"></div>
+            <div class="orbit-inner-ring"></div>
+
+            <div class="pulse-ring p1"></div>
+            <div class="pulse-ring p2"></div>
+            <div class="pulse-ring p3"></div>
+
+            <div class="orbit-dot d1"></div>
+            <div class="orbit-dot d2"></div>
+            <div class="orbit-dot d3"></div>
+
+            <div class="circle-center">
+              <img src="Diseño sin título (9).png" alt="SIECO" style="width:80%;height:80%;object-fit:contain;position:relative;z-index:1;">
+            </div>
+
+            <!-- CORREGIDO: rutas sin espacios + class="item-img" en todos -->
+            <a href="agua.html" class="circle-item item1">
+              <img src="Circle1.png" alt="Agua Residual" class="item-img">
+              <span class="item-label">Agua Residual</span>
             </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="agua.html">Soluciones En Agua</a></li>
-                <li><a href="refrigeracion.html">Refrigeración</a></li>
-                <li><a href="mantenimiento.html">Mantenimiento</a></li>
-                <li><a href="proyectos.html">Proyectos</a></li>
-                <li><a href="blog.html" class="active">Blog</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Menú">
-                <span></span><span></span><span></span>
-            </button>
+            <a href="agua.html" class="circle-item item2">
+              <img src="Circle2.png" alt="Osmosis Inversa" class="item-img">
+              <span class="item-label">Osmosis Inversa</span>
+            </a>
+            <a href="agua.html" class="circle-item item3">
+              <img src="Circle3.png" alt="Bombeo" class="item-img">
+              <span class="item-label">Bombeo</span>
+            </a>
+            <a href="agua.html" class="circle-item item4">
+              <img src="Circle6 .png" alt="Mantenimiento a torres" class="item-img">
+              <span class="item-label">Mantenimiento a torres</span>
+            </a>
+            <a href="contacto.html" class="circle-item item5">
+              <img src="Circulo8 .png" alt="Aire acondicionado" class="item-img">
+              <span class="item-label">Aire acondicionado</span>
+            </a>
+
+          </div>
         </div>
-    </nav>
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Inicio</a>
-        <a href="agua.html">Soluciones En Agua</a>
-        <a href="refrigeracion.html">Refrigeración</a>
-        <a href="mantenimiento.html">Mantenimiento</a>
-        <a href="proyectos.html">Proyectos</a>
-        <a href="blog.html">Blog</a>
-        <a href="contacto.html">Contacto</a>
+      </div>
+    </section>
+
+    <!-- WATER FEATURE -->
+    <section class="water-feature">
+      <div class="water-visual">
+        <div class="image-wrapper">
+         
+          <img src="ChatGPT Image 6 mar 2026, 03_31_10 p.m..png" class="slide" alt="Sistema de Filtración 2">
+          <img src="ChatGPT Image 6 mar 2026, 03_23_49 p.m..png" class="slide" alt="Sistema de Filtración 3">
+          <img src="ChatGPT Image 5 mar 2026, 01_32_30 p.m..png" class="slide" alt="Sistema de Filtración 4">
+          <img src="ChatGPT Image 6 mar 2026, 03_26_35 p.m..png" class="slide" alt="Sistema de Filtración 5">
+          <img src="FILTRO1.png"class="slide" alt="Sistema de Filtración 6">
+          <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop" class="slide active" alt="Sistema de Filtración 1">
+        </div>
+        <div class="glass-overlay"></div>
+        <div class="water-ripple"></div>
+        <div class="water-ripple"></div>
+        <div class="water-ripple"></div>
+      </div>
+      <div class="water-feature-content">
+        <h2>¿QUIÉNES SOMOS?</h2>
+        <p>En <b>SIECO</b> somos un equipo multidisciplinario de profesionales con experiencia en el diseño e implementación de soluciones integrales en <b>el tratamiento y filtración de agua, control eléctrico, sistemas de refrigeración y aire acondicionado.</b>
+        Nos especializamos en ofrecer servicios de ingeniería para una variedad de sectores: industrial, comercial y residencial.</p>
+        <a href="contacto.html" class="cta-primary">Conocer Más →</a>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="cards-section">
+      <div class="glass-card">
+        <div class="card-icon">🏢</div>
+        <h3>Soluciones Empresariales</h3>
+        <p>Soluciones integrales en infraestructura, mantenimiento industrial y corporativo, diseñadas para prevenir fallas operativas con un enfoque sistémico y estratégico.</p>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🏠</div>
+        <h3>Filtración Residencial</h3>
+        <p>Purificadores compactos y elegantes diseñados para integrarse perfectamente en tu hogar, proporcionando agua pura ilimitada.</p>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🔬</div>
+        <h3>Análisis de Calidad</h3>
+        <p>Mediante inspecciones técnicas y pruebas físicas, obtenemos un diagnóstico claro y confiable que nos permite definir la solución más adecuada para cada necesidad.</p>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-section">
+      <span class="section-tag">Integración e Ingeniería</span>
+      <h1>INTEGRACIÓN DE PROYECTOS</h1>
+      <p>Planeamos, diseñamos y ejecutamos proyectos integrales adaptados a las necesidades de cada cliente. Coordinamos cada etapa con un enfoque en calidad, eficiencia y con objetivos técnicos y operativos.</p>
+      <a href="contacto.html" class="cta-white">Ver Más</a>
+
+      <div class="videos-emergence" id="videosEmergence">
+        <div class="video-cards">
+          <div class="video-card" data-src="VIDEOS/video1.mp4">
+            <video src="VIDEOS/video1.mp4" muted loop playsinline></video>
+            <div class="video-overlay"></div>
+            <div class="video-expand">
+              <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            </div>
+            <span class="video-label">Integración 3D</span>
+          </div>
+          <div class="video-card" data-src="VIDEOS/video2.mp4">
+            <video src="VIDEOS/video2.mp4" muted loop playsinline></video>
+            <div class="video-overlay"></div>
+            <div class="video-expand">
+              <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            </div>
+            <span class="video-label">Sistemas de Agua</span>
+          </div>
+          <div class="video-card" data-src="VIDEOS/video3.mp4">
+            <video src="VIDEOS/video3.mp4" muted loop playsinline></video>
+            <div class="video-overlay"></div>
+            <div class="video-expand">
+              <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            </div>
+            <span class="video-label">Ingeniería</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MODAL -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-modal-inner">
+      <video id="modalVideo" loop playsinline controls></video>
+      <div class="video-modal-close" id="modalClose">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
     </div>
+  </div>
 
-    <div class="content">
-        <section class="article-hero">
-            <div class="breadcrumb">
-                <a href="index.html">Inicio</a>
-                <span>/</span>
-                <a href="blog.html">Blog</a>
-                <span>/</span>
-                <span style="color:rgba(255,255,255,0.7)">Tratamiento de Agua</span>
-            </div>
-            <div class="article-header">
-                <span class="article-category">Tratamiento de Agua</span>
-                <h1>Nuevas Tecnologías en <strong>Purificación de Agua Industrial</strong></h1>
-                <div class="article-meta">
-                    <span>📅 15 de Febrero, 2026</span>
-                    <span>⏱ 8 min de lectura</span>
-                    <span>✍️ Equipo Técnico SIECO</span>
+  <!-- FOOTER -->
+<footer>
+    <div class="footer-main">
+
+        <!-- LOGO -->
+        <div class="footer-logo">
+            <img src="Diseño sin título (9).png" alt="SIECO"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="footer-logo-text" style="display:none;">SIECO</span>
+        </div>
+
+        <!-- QUERÉTARO -->
+        <div class="footer-col">
+            <h4>Querétaro</h4>
+            <p>Calle Fénix Lt 8<br>Santa Magdalena<br>76137, Querétaro, Qro</p>
+        </div>
+
+        <!-- CDMX -->
+        <div class="footer-col">
+            <h4>Ciudad de México</h4>
+            <p>Benito Miranda No. 21<br>Las Peñas, Iztapalapa<br>09750, CDMX</p>
+        </div>
+
+        <!-- CONTACTO -->
+        <div class="footer-col">
+            <h4>Contacto</h4>
+            <a href="tel:4461253813">📞 446 125 3813</a>
+            <a href="mailto:ventas@sieco.com.mx">✉️ ventas@sieco.com.mx</a>
+        </div>
+
+        <!-- REDES -->
+        <div class="footer-col">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <div class="social-icon" title="Facebook">
+                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </div>
+                <div class="social-icon" title="Twitter / X">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </div>
+                <div class="social-icon" title="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </div>
+                <div class="social-icon" title="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 </div>
             </div>
-            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1400&q=90" alt="Nuevas Tecnologías en Purificación de Agua Industrial" class="article-cover">
-        </section>
+        </div>
 
-        <section class="article-body">
-            <article class="article-content">
-
-<h2>El Problema del Agua Industrial en México</h2>
-<p>En México, más del <strong>78% de las fuentes de agua superficial</strong> presentan algún grado de contaminación, lo que representa un reto enorme para la industria. Los sistemas de producción que requieren agua de alta pureza —como la industria farmacéutica, alimentaria y electrónica— no pueden depender de tratamientos convencionales.</p>
-<p>La ósmosis inversa y la ultrafiltración han emergido como las tecnologías más eficaces y económicas para resolver este problema a escala industrial. En los últimos cinco años, los avances en materiales de membrana han reducido los costos operativos hasta en un 40%, abriendo el acceso a empresas medianas.</p>
-
-<div class="highlight-box">
-    <p><strong>Dato clave:</strong> Un sistema de ósmosis inversa correctamente dimensionado puede eliminar hasta el 99.7% de sólidos disueltos totales (SDT), bacterias, virus y metales pesados del agua de proceso, superando ampliamente los límites establecidos por la NOM-127-SSA1.</p>
-</div>
-
-<h2>Ósmosis Inversa de 5ª Generación</h2>
-<p>Las membranas de poliamida de capa delgada (TFC) de nueva generación operan a presiones significativamente menores que sus predecesoras, lo que se traduce directamente en ahorros energéticos de hasta un <strong>25% frente a sistemas instalados hace 8 años</strong>.</p>
-<p>Las principales innovaciones incluyen:</p>
-<ul>
-    <li><strong>Membranas nanocompuestas:</strong> Incorporan nanopartículas de zeolita o carbono que aumentan el flujo de permeado sin sacrificar el rechazo de contaminantes.</li>
-    <li><strong>Módulos de espiral de alta área superficial:</strong> Configuraciones 8040 y 8060 con 41 m² de área activa por elemento, duplicando la capacidad de producción por rack.</li>
-    <li><strong>Sistemas de recuperación de energía (ERD):</strong> Intercambiadores de presión isobáricos que recuperan entre el 40% y 60% de la energía del concentrado.</li>
-    <li><strong>Antifouling biológico:</strong> Revestimientos superficiales con propiedades bacteriostáticas que extienden el ciclo de limpieza de 30 a más de 90 días.</li>
-</ul>
-
-<h2>Ultrafiltración como Pretratamiento</h2>
-<p>La ultrafiltración (UF) con membranas de fibra hueca de PVDF ha ganado terreno como etapa de pretratamiento previo a la ósmosis inversa. Operando con tamaños de poro entre 0.01 y 0.1 micras, la UF elimina:</p>
-
-<table class="data-table">
-    <tr>
-        <th>Contaminante</th>
-        <th>Tamaño (micras)</th>
-        <th>% Eliminación UF</th>
-        <th>% Eliminación OI</th>
-    </tr>
-    <tr><td>Bacterias</td><td>0.5 – 5</td><td>99.99%</td><td>99.99%</td></tr>
-    <tr><td>Turbidez / SDT</td><td>&gt; 0.1</td><td>98 – 99%</td><td>95 – 99%</td></tr>
-    <tr><td>Virus</td><td>0.02 – 0.3</td><td>99.9%</td><td>99.99%</td></tr>
-    <tr><td>Coloides / Arcillas</td><td>0.001 – 1</td><td>99%</td><td>97%</td></tr>
-    <tr><td>Metales pesados disueltos</td><td>&lt; 0.001</td><td>20 – 40%</td><td>95 – 99%</td></tr>
-</table>
-
-<p>La combinación UF + OI crea un tren de tratamiento robusto que protege la membrana de ósmosis inversa, extiende su vida útil en un promedio de 3 a 5 años y reduce la frecuencia de limpiezas químicas (CIP) hasta en un 70%.</p>
-
-<h2>Electrodesionización (EDI): El Siguiente Nivel</h2>
-<p>Para aplicaciones que requieren agua ultrapura (resistividad &gt; 15 MΩ·cm), como la industria de semiconductores o laboratorios farmacéuticos, la electrodesionización continua ha reemplazado a los lechos mixtos de resinas de intercambio iónico.</p>
-<p>La EDI combina membranas selectivas de iones con resinas de intercambio iónico y una corriente eléctrica continua para regenerar las resinas <em>in situ</em>, eliminando el uso de ácidos y sosas cáusticas en la regeneración.</p>
-
-<div class="tip-box">
-    <div class="tip-icon">💡</div>
-    <p><strong>Consejo SIECO:</strong> Al diseñar un sistema de agua de proceso, define primero la calidad mínima requerida por tu proceso productivo más exigente. Sobredimensionar el tratamiento tiene un costo, pero subdimensionarlo puede significar rechazos de producto o paros de línea mucho más costosos.</p>
-</div>
-
-<h2>Monitoreo en Tiempo Real con IoT</h2>
-<p>Los sistemas modernos integran sensores en línea de conductividad, pH, turbidez, cloro residual y SDT conectados a plataformas SCADA con alertas automáticas. Esto permite detectar degradación de membranas o fugas de contaminantes en minutos, no en días.</p>
-<p>En SIECO implementamos dashboards personalizados con acceso desde cualquier dispositivo, historial de parámetros con trazabilidad completa y reportes automáticos de cumplimiento normativo.</p>
-
-<h2>Retorno de Inversión</h2>
-<p>Un sistema de ósmosis inversa industrial para 10,000 litros/día tiene un costo de instalación típico de entre $180,000 y $320,000 MXN. Comparado con el costo de compra de agua purificada en garrafones o camiones cisterna, el ROI promedio se alcanza en <strong>14 a 22 meses</strong>.</p>
-
-                <div class="cta-article">
-                    <h3>¿Necesitas una Solución a Medida?</h3>
-                    <p>Nuestro equipo de ingenieros especializados puede diseñar e implementar el sistema perfecto para tu empresa. Solicita una consulta gratuita hoy.</p>
-                    <a href="contacto.html" class="cta-btn">Contactar a un Experto →</a>
-                </div>
-            </article>
-
-            <aside class="article-sidebar">
-
-<div class="sidebar-card">
-    <h4>Estadísticas Clave</h4>
-    <div class="stat-grid">
-        <div class="stat-item"><div class="stat-num">99.7%</div><div class="stat-lbl">Eliminación de SDT</div></div>
-        <div class="stat-item"><div class="stat-num">40%</div><div class="stat-lbl">Menor consumo energético</div></div>
-        <div class="stat-item"><div class="stat-num">18 mo</div><div class="stat-lbl">ROI promedio</div></div>
-        <div class="stat-item"><div class="stat-num">5 años</div><div class="stat-lbl">Vida útil de membrana</div></div>
     </div>
-</div>
-<div class="sidebar-card">
-    <h4>Artículos Relacionados</h4>
-    <a href="blog-refrigerantes.html" class="related-post">
-        <img src="https://images.unsplash.com/photo-1581092583537-20d51876f3c3?w=200&q=80" class="rp-img" alt="">
-        <div class="rp-content">
-            <div class="rp-cat">Sustentabilidad</div>
-            <div class="rp-title">Transición a Refrigerantes Ecológicos</div>
-        </div>
-    </a>
-    <a href="blog-mantenimiento.html" class="related-post">
-        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=200&q=80" class="rp-img" alt="">
-        <div class="rp-content">
-            <div class="rp-cat">Mantenimiento</div>
-            <div class="rp-title">Mantenimiento Predictivo: Evita Paros No Programados</div>
-        </div>
-    </a>
-    <a href="blog-eficiencia.html" class="related-post">
-        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=200&q=80" class="rp-img" alt="">
-        <div class="rp-content">
-            <div class="rp-cat">Eficiencia Energética</div>
-            <div class="rp-title">Reducir Costos en Sistemas de Refrigeración</div>
-        </div>
-    </a>
-</div>
-
-                <div class="sidebar-card">
-                    <h4>Etiquetas</h4>
-                    <div class="tags-list">
-                        <a href="blog.html" class="tag">Ósmosis Inversa</a><a href="blog.html" class="tag">Ultrafiltración</a><a href="blog.html" class="tag">EDI</a><a href="blog.html" class="tag">Agua Industrial</a><a href="blog.html" class="tag">IoT</a><a href="blog.html" class="tag">NOM-127</a>
-                    </div>
-                </div>
-                <div class="sidebar-card">
-                    <h4>¿Hablamos?</h4>
-                    <p>Agenda una consulta gratuita con nuestros ingenieros y recibe una propuesta personalizada para tu empresa.</p>
-                    <a href="contacto.html" class="sidebar-btn">Solicitar Consulta Gratuita</a>
-                </div>
-            </aside>
-        </section>
+    <div class="footer-bottom">
+        © 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.
     </div>
+</footer>
 
-    <!-- FOOTER — canon: logo arriba, 2 columnas, divisorias -->
-    <footer>
-        <div class="footer-main">
-            <div class="footer-logo">
-                <img src="https://raw.githubusercontent.com/theapistoremail-bit/SIECO2/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png" alt="SIECO"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-                <span class="footer-logo-fallback" style="display:none;">SIECO</span>
-            </div>
-            <div class="footer-address footer-queretaro">
-                <h4>Querétaro</h4>
-                <p>Calle Fénix Lt 8<br>Santa Magdalena<br>76137, Querétaro, Qro</p>
-            </div>
-            <div class="footer-address footer-cdmx">
-                <h4>Ciudad de México</h4>
-                <p>Benito Miranda No. 21<br>Las Peñas, Iztapalapa<br>09750, CDMX</p>
-            </div>
-            <div class="footer-contact">
-                <h4>Contacto</h4>
-                <p>
-                    📞 <a href="tel:4461253813">446 125 3813</a><br>
-                    ✉️ <a href="mailto:ventas@sieco.com.mx">ventas@sieco.com.mx</a>
-                </p>
-            </div>
-            <div class="footer-social">
-                <h4>Síguenos</h4>
-                <div class="social-icons">
-                    <div class="social-icon" title="Facebook">
-                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    </div>
-                    <div class="social-icon" title="Twitter / X">
-                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </div>
-                    <div class="social-icon" title="Instagram">
-                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                    </div>
-                    <div class="social-icon" title="LinkedIn">
-                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            © 2026 SIECO. Sistemas y Soluciones Integrales. Todos los derechos reservados.
-        </div>
-    </footer>
-    <script>
-        const canvas = document.getElementById('waterCanvas');
-        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-        function resizeCanvas() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            if(gl) gl.viewport(0, 0, canvas.width, canvas.height);
-        }
-        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
-        if(gl) {
-            const vs = gl.createShader(gl.VERTEX_SHADER);
-            gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }');
-            gl.compileShader(vs);
-            const fs = gl.createShader(gl.FRAGMENT_SHADER);
-            gl.shaderSource(fs, `precision highp float;
-                uniform float time; uniform vec2 resolution;
-                float noise(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
-                float smoothNoise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);float a=noise(i);float b=noise(i+vec2(1.0,0.0));float c=noise(i+vec2(0.0,1.0));float d=noise(i+vec2(1.0,1.0));return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);}
-                float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<6;i++){v+=a*smoothNoise(p);p*=2.0;a*=0.5;}return v;}
-                void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
-            gl.compileShader(fs);
-            const prog = gl.createProgram();
-            gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
-            const buf = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
-            const posLoc = gl.getAttribLocation(prog, 'position');
-            gl.enableVertexAttribArray(posLoc); gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
-            const timeLoc = gl.getUniformLocation(prog, 'time');
-            const resLoc = gl.getUniformLocation(prog, 'resolution');
-            let start = Date.now();
-            function render() {
-                const t = (Date.now() - start) * 0.001;
-                gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height);
-                gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT);
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(render);
-            }
-            render();
-        }
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('open');
-            mobileMenu.classList.toggle('open');
+
+  <script>
+    // WebGL Water Canvas
+    const canvas = document.getElementById('waterCanvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+      if (gl) gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+    if (gl) {
+      const vs = gl.createShader(gl.VERTEX_SHADER);
+      gl.shaderSource(vs, 'attribute vec2 position; void main(){ gl_Position=vec4(position,0.0,1.0); }');
+      gl.compileShader(vs);
+      const fs = gl.createShader(gl.FRAGMENT_SHADER);
+      gl.shaderSource(fs, `precision highp float;
+        uniform float time; uniform vec2 resolution;
+        float noise(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+        float smoothNoise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);float a=noise(i);float b=noise(i+vec2(1.0,0.0));float c=noise(i+vec2(0.0,1.0));float d=noise(i+vec2(1.0,1.0));return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);}
+        float fbm(vec2 p){float v=0.0;float a=0.5;for(int i=0;i<6;i++){v+=a*smoothNoise(p);p*=2.0;a*=0.5;}return v;}
+        void main(){vec2 uv=gl_FragCoord.xy/resolution.xy;float w1=sin(uv.x*8.0+time*0.8)*0.05;float w2=cos(uv.y*6.0-time*0.6)*0.04;float w3=sin((uv.x+uv.y)*5.0+time*0.7)*0.03;vec2 p=uv*2.5+vec2(time*0.15,time*0.08);float n=fbm(p);uv.y+=w1+w2+w3+n*0.06;vec3 c=mix(vec3(0.0,0.28,0.35),vec3(0.0,0.37,0.45),uv.y);c=mix(c,vec3(0.04,0.58,0.59),smoothstep(0.3,0.7,uv.y));c=mix(c,vec3(0.29,0.84,0.89),smoothstep(0.6,1.0,uv.y+n*0.3));float s=smoothNoise(uv*25.0+time*0.8)*smoothNoise(uv*18.0-time*0.5);s=pow(s,2.0);c+=vec3(0.4,0.8,0.9)*s*0.5;float ca1=abs(sin(uv.x*15.0+time*1.2)*sin(uv.y*15.0-time*1.0));float ca2=abs(cos(uv.x*12.0-time*0.9)*cos(uv.y*12.0+time*1.1));float ca=max(ca1,ca2);ca=pow(ca,4.0)*0.4;c+=vec3(0.5,0.9,1.0)*ca;float surf=sin(uv.x*20.0+time*2.0)*cos(uv.y*15.0-time*1.5);surf=smoothstep(0.7,1.0,uv.y)*pow(abs(surf),3.0)*0.3;c+=vec3(0.8,1.0,1.0)*surf;gl_FragColor=vec4(c,1.0);}`);
+      gl.compileShader(fs);
+      const prog = gl.createProgram();
+      gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); gl.useProgram(prog);
+      const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+      const posLoc = gl.getAttribLocation(prog, 'position'); gl.enableVertexAttribArray(posLoc);
+      gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+      const timeLoc = gl.getUniformLocation(prog, 'time');
+      const resLoc  = gl.getUniformLocation(prog, 'resolution');
+      let start = Date.now();
+      function render() {
+        const t = (Date.now() - start) * 0.001;
+        gl.uniform1f(timeLoc, t); gl.uniform2f(resLoc, canvas.width, canvas.height);
+        gl.clearColor(0.0, 0.37, 0.45, 1.0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        requestAnimationFrame(render);
+      }
+      render();
+    }
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Video cards
+    (function () {
+      const emergence = document.getElementById('videosEmergence');
+      if (!emergence) return;
+      const cards = Array.from(emergence.querySelectorAll('.video-card'));
+      function popCards() {
+        cards.forEach((card, i) => {
+          setTimeout(() => {
+            card.classList.add('popped');
+            const vid = card.querySelector('video');
+            if (vid) { vid.muted = true; vid.loop = true; vid.play().catch(() => {}); }
+          }, i * 550);
         });
-        mobileMenu.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => {
-                hamburger.classList.remove('open');
-                mobileMenu.classList.remove('open');
-            });
-        });
-</script>
+      }
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { popCards(); observer.disconnect(); }
+      }, { threshold: 0.15 });
+      observer.observe(emergence);
+
+      const modal    = document.getElementById('videoModal');
+      const modalVid = document.getElementById('modalVideo');
+      const modalClose = document.getElementById('modalClose');
+      function openModal(src) {
+        modalVid.src = src; modalVid.muted = false;
+        modal.classList.add('open'); document.body.style.overflow = 'hidden';
+        modalVid.play().catch(() => { modalVid.muted = true; modalVid.play(); });
+      }
+      function closeModal() {
+        modal.classList.remove('open'); modalVid.pause();
+        modalVid.src = ''; document.body.style.overflow = '';
+      }
+      cards.forEach(card => {
+        card.addEventListener('click', () => { const src = card.dataset.src; if (src) openModal(src); });
+      });
+      modalClose.addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    })();
+
+    // Image slider
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    setInterval(() => {
+      slides.forEach(s => s.classList.remove('active'));
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 4000);
+  </script>
+
 </body>
 </html>
