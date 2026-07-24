@@ -337,11 +337,21 @@
             .article-sidebar { order: -1; }
         }
 
-        /* NAV responsive — canon fluido con clamp(): el nav completo se mantiene
-           visible en tablet y solo colapsa a hamburger en móvil real */
+        /* NAV responsive — canon fluido con clamp() en desktop/tablet.
+           Por debajo de 640px el burger menu queda FIJO (sin vw/clamp)
+           para verse idéntico en cualquier celular. */
         @media (max-width: 640px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
+            .nav-container {
+                padding: 0 20px !important;
+                height: 70px !important;
+            }
+            .nav-logo img { height: 42px !important; }
+        }
+
+        @media (max-width: 640px) {
+            .mobile-menu { padding: 16px 24px 24px !important; }
         }
 
         @media (max-width: 768px) {
