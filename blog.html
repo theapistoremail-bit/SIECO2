@@ -40,7 +40,7 @@
       display: flex; justify-content: space-between; align-items: center;
       height: 90px;
     }
-    .nav-logo img { height: 188px; width: auto; display: block; }
+    .nav-logo img { height: 135px; width: auto; display: block; }
     .nav-links { display: flex; gap: 11px; list-style: none; align-items: center; }
     .nav-links a {
       text-decoration: none; color: #001219;
@@ -342,7 +342,6 @@
         .nav-links { display: none; }
         .hamburger { display: flex; }
         .nav-container { padding: 0 20px; }
-        .nav-logo img { height: 50px; }
         .articles-grid { grid-template-columns: 1fr; padding: 0 20px; }
     }
 </style>
@@ -389,12 +388,12 @@
 
     <section class="articles-grid">
 
-        <!-- ARTICLE 1 -->
+        <!-- ARTICLE 1: MANTENIMIENTO PREDICTIVO — 3 fotos -->
         <div class="article-card">
             <div class="article-slider" data-total="3">
                 <div class="as-slide active"><img src="https://images.unsplash.com/photo-1502068898470-ad70c83938be?w=800&h=600&fit=crop" alt="Mantenimiento predictivo" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 1</span></div>'"></div>
-                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
-                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
+                <div class="as-slide"><img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop" alt="Ingeniero revisando equipo" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 2</span></div>'"></div>
+                <div class="as-slide"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop" alt="Monitoreo y análisis de datos" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 3</span></div>'"></div>
                 <button class="as-arrow as-prev">&#8592;</button>
                 <button class="as-arrow as-next">&#8594;</button>
                 <div class="as-dots"><button class="as-dot active" data-i="0"></button><button class="as-dot" data-i="1"></button><button class="as-dot" data-i="2"></button></div>
@@ -410,12 +409,12 @@
             </div>
         </div>
 
-        <!-- ARTICLE 2 -->
+        <!-- ARTICLE 2: PURIFICACIÓN DE AGUA — 3 fotos -->
         <div class="article-card">
             <div class="article-slider" data-total="3">
                 <div class="as-slide active"><img src="https://images.unsplash.com/photo-1662647344062-b0cdb1ed7227?w=800&h=600&fit=crop" alt="Purificación de agua" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 1</span></div>'"></div>
-                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
-                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
+                <div class="as-slide"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=600&fit=crop" alt="Planta de tratamiento de agua" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 2</span></div>'"></div>
+                <div class="as-slide"><img src="https://images.unsplash.com/photo-1495429899067-3d9a7bfd9c5c?w=800&h=600&fit=crop" alt="Tuberías industriales" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 3</span></div>'"></div>
                 <button class="as-arrow as-prev">&#8592;</button>
                 <button class="as-arrow as-next">&#8594;</button>
                 <div class="as-dots"><button class="as-dot active" data-i="0"></button><button class="as-dot" data-i="1"></button><button class="as-dot" data-i="2"></button></div>
@@ -431,12 +430,12 @@
             </div>
         </div>
 
-        <!-- ARTICLE 3 -->
+        <!-- ARTICLE 3: EFICIENCIA ENERGÉTICA — 3 fotos -->
         <div class="article-card">
             <div class="article-slider" data-total="3">
                 <div class="as-slide active"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=600&fit=crop" alt="Eficiencia energética" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 1</span></div>'"></div>
-                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
-                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
+                <div class="as-slide"><img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=600&fit=crop" alt="Paneles solares" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 2</span></div>'"></div>
+                <div class="as-slide"><img src="https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop" alt="Turbinas eólicas" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 3</span></div>'"></div>
                 <button class="as-arrow as-prev">&#8592;</button>
                 <button class="as-arrow as-next">&#8594;</button>
                 <div class="as-dots"><button class="as-dot active" data-i="0"></button><button class="as-dot" data-i="1"></button><button class="as-dot" data-i="2"></button></div>
@@ -452,12 +451,12 @@
             </div>
         </div>
 
-        <!-- ARTICLE 4 -->
+        <!-- ARTICLE 4: AUTOMATIZACIÓN — 3 fotos -->
         <div class="article-card">
             <div class="article-slider" data-total="3">
                 <div class="as-slide active"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop" alt="Automatización industrial" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 1</span></div>'"></div>
-                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 2</span></div></div>
-                <div class="as-slide"><div class="as-placeholder"><svg viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="3" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="22" cy="26" r="5" stroke="#48cae4" stroke-width="1.2"/><path d="M8 38 L20 28 L30 35 L40 24 L52 38" stroke="#0077b6" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Foto 3</span></div></div>
+                <div class="as-slide"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop" alt="Brazo robótico industrial" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 2</span></div>'"></div>
+                <div class="as-slide"><img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop" alt="Planta industrial de noche" onerror="this.parentElement.innerHTML='<div class=\'as-placeholder\'><span>Foto 3</span></div>'"></div>
                 <button class="as-arrow as-prev">&#8592;</button>
                 <button class="as-arrow as-next">&#8594;</button>
                 <div class="as-dots"><button class="as-dot active" data-i="0"></button><button class="as-dot" data-i="1"></button><button class="as-dot" data-i="2"></button></div>
