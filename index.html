@@ -648,7 +648,7 @@
   <nav>
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="Diseño sin título (9).png" alt="SIECO" onerror="this.style.display='none';this.parentNode.querySelector('span').style.display='block'">
+        <img src="Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png" alt="SIECO" onerror="this.style.display='none';this.parentNode.querySelector('span').style.display='block'">
         <span style="display:none;font-size:1.5em;font-weight:700;color:#001219;letter-spacing:2px;">SIECO</span>
       </a>
       <ul class="nav-links">
@@ -711,10 +711,10 @@
             <div class="orbit-dot d3"></div>
 
             <div class="circle-center">
-              <img src="Diseño sin título (9).png" alt="SIECO" style="width:80%;height:80%;object-fit:contain;position:relative;z-index:1;">
+              <img src="Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png" alt="SIECO" style="width:80%;height:80%;object-fit:contain;position:relative;z-index:1;">
             </div>
 
-            <!-- CORREGIDO: rutas sin espacios + class="item-img" en todos -->
+            <!-- CORREGIDO: rutas sin espacios sobrantes -->
             <a href="agua.html" class="circle-item item1">
               <img src="Circle1.png" alt="Agua Residual" class="item-img">
               <span class="item-label">Agua Residual</span>
@@ -728,11 +728,11 @@
               <span class="item-label">Bombeo</span>
             </a>
             <a href="agua.html" class="circle-item item4">
-              <img src="Circulo8 .png" alt="Mantenimiento a torres" class="item-img">
+              <img src="Circulo8.png" alt="Mantenimiento a torres" class="item-img">
               <span class="item-label">Mantenimiento a torres</span>
             </a>
             <a href="contacto.html" class="circle-item item5">
-              <img src="Circle6 .png" alt="Aire acondicionado" class="item-img">
+              <img src="Circle6.png" alt="Aire acondicionado" class="item-img">
               <span class="item-label">Aire acondicionado</span>
             </a>
 
@@ -745,13 +745,11 @@
     <section class="water-feature">
       <div class="water-visual">
         <div class="image-wrapper">
-         
-          <img src="ChatGPT Image 6 mar 2026, 03_31_10 p.m..png" class="slide" alt="Sistema de Filtración 2">
-          <img src="ChatGPT Image 6 mar 2026, 03_23_49 p.m..png" class="slide" alt="Sistema de Filtración 3">
-          <img src="ChatGPT Image 5 mar 2026, 01_32_30 p.m..png" class="slide" alt="Sistema de Filtración 4">
-          <img src="ChatGPT Image 6 mar 2026, 03_26_35 p.m..png" class="slide" alt="Sistema de Filtración 5">
-          <img src="FILTRO1.png"class="slide" alt="Sistema de Filtración 6">
-
+          <img src="ChatGPT%20Image%206%20mar%202026%2C%2003_31_10%20p.m..png" class="slide active" alt="Sistema de Filtración 2">
+          <img src="ChatGPT%20Image%206%20mar%202026%2C%2003_23_49%20p.m..png" class="slide" alt="Sistema de Filtración 3">
+          <img src="ChatGPT%20Image%205%20mar%202026%2C%2001_32_30%20p.m..png" class="slide" alt="Sistema de Filtración 4">
+          <img src="ChatGPT%20Image%206%20mar%202026%2C%2003_26_35%20p.m..png" class="slide" alt="Sistema de Filtración 5">
+          <img src="FILTRO1.png" class="slide" alt="Sistema de Filtración 6">
         </div>
         <div class="glass-overlay"></div>
         <div class="water-ripple"></div>
@@ -792,9 +790,19 @@
       <p>Planeamos, diseñamos y ejecutamos proyectos integrales adaptados a las necesidades de cada cliente. Coordinamos cada etapa con un enfoque en calidad, eficiencia y con objetivos técnicos y operativos.</p>
       <a href="contacto.html" class="cta-white">Ver Más</a>
 
+      <!--
+        FIX VIDEOS: antes el "src" que se mostraba en la tarjeta
+        no coincidía con el "data-src" que se abría en el modal
+        (una tarjeta mostraba Video.mp4 pero abría VIDEOS/video1.mp4,
+        y otra mostraba video2.mp4 pero abría VIDEOS/video3.mp4).
+        Ahora data-src = src en cada tarjeta, así el modal siempre
+        abre EXACTAMENTE el mismo archivo que ya se ve en miniatura.
+        Si tienes videos distintos para cada tarjeta, solo reemplaza
+        el nombre del archivo (mismo valor en src y data-src).
+      -->
       <div class="videos-emergence" id="videosEmergence">
         <div class="video-cards">
-          <div class="video-card" data-src="VIDEOS/video1.mp4">
+          <div class="video-card" data-src="Video.mp4">
             <video src="Video.mp4" muted loop playsinline></video>
             <div class="video-overlay"></div>
             <div class="video-expand">
@@ -810,7 +818,7 @@
             </div>
             <span class="video-label">Sistemas de Agua</span>
           </div>
-          <div class="video-card" data-src="VIDEOS/video3.mp4">
+          <div class="video-card" data-src="video2.mp4">
             <video src="video2.mp4" muted loop playsinline></video>
             <div class="video-overlay"></div>
             <div class="video-expand">
@@ -840,7 +848,7 @@
 
         <!-- LOGO -->
         <div class="footer-logo">
-            <img src="Diseño sin título (9).png" alt="SIECO"
+            <img src="Dise%C3%B1o%20sin%20t%C3%ADtulo%20(9).png" alt="SIECO"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
             <span class="footer-logo-text" style="display:none;">SIECO</span>
         </div>
@@ -982,11 +990,11 @@
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
     })();
 
-    // Image slider
+    // Image slider — arranca ya con la primera imagen activa (class="active" en el HTML)
     const slides = document.querySelectorAll('.slide');
     let current = 0;
     setInterval(() => {
-      slides.forEach(s => s.classList.remove('active'));
+      slides[current].classList.remove('active');
       current = (current + 1) % slides.length;
       slides[current].classList.add('active');
     }, 4000);
