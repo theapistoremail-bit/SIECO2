@@ -793,7 +793,7 @@
       <div class="videos-emergence" id="videosEmergence">
         <div class="video-cards">
           <div class="video-card" data-src="Video.mp4">
-            <video src="Video.mp4" muted loop playsinline></video>
+            <video src="Video.mp4" muted loop playsinline preload="auto"></video>
             <div class="video-overlay"></div>
             <div class="video-expand">
               <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
@@ -801,7 +801,7 @@
             <span class="video-label">Integración 3D</span>
           </div>
           <div class="video-card" data-src="Videos.mp4">
-            <video src="Videos.mp4" muted loop playsinline></video>
+            <video src="Videos.mp4" muted loop playsinline preload="auto"></video>
             <div class="video-overlay"></div>
             <div class="video-expand">
               <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
@@ -809,7 +809,7 @@
             <span class="video-label">Sistemas de Agua</span>
           </div>
           <div class="video-card" data-src="vide.mp4">
-            <video src="vide.mp4" muted loop playsinline></video>
+            <video src="vide.mp4" muted loop playsinline preload="auto"></video>
             <div class="video-overlay"></div>
             <div class="video-expand">
               <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
@@ -946,15 +946,30 @@
       const emergence = document.getElementById('videosEmergence');
       if (!emergence) return;
       const cards = Array.from(emergence.querySelectorAll('.video-card'));
+
       function popCards() {
         cards.forEach((card, i) => {
-          setTimeout(() => {
+          const vid = card.querySelector('video');
+          if (!vid) return;
+
+          const show = () => {
             card.classList.add('popped');
-            const vid = card.querySelector('video');
-            if (vid) { vid.muted = true; vid.loop = true; vid.play().catch(() => {}); }
-          }, i * 550);
+            vid.play().catch(() => {});
+          };
+
+          vid.addEventListener('error', () => {
+            console.error('Error cargando video:', vid.currentSrc || vid.src, vid.error);
+          });
+
+          if (vid.readyState >= 3) {
+            setTimeout(show, i * 550);
+          } else {
+            vid.addEventListener('canplay', () => setTimeout(show, i * 200), { once: true });
+            vid.load();
+          }
         });
       }
+
       const observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) { popCards(); observer.disconnect(); }
       }, { threshold: 0.15 });
