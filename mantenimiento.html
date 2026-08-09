@@ -728,6 +728,21 @@
             slider.addEventListener('mouseleave', () => startAuto());
             startAuto();
         });
+
+        // Igualar el tamaño de TODAS las tarjetas al de la tarjeta 1, en cualquier pantalla
+        function equalizeCardHeights() {
+            const cards = document.querySelectorAll('.service-card');
+            if (!cards.length) return;
+            cards.forEach(c => { c.style.minHeight = ''; });
+            const refHeight = cards[0].getBoundingClientRect().height;
+            cards.forEach(c => { c.style.minHeight = refHeight + 'px'; });
+        }
+        window.addEventListener('load', equalizeCardHeights);
+        let eqResizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(eqResizeTimer);
+            eqResizeTimer = setTimeout(equalizeCardHeights, 150);
+        });
     </script>
 </body>
 </html>
