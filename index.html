@@ -808,8 +808,8 @@
             </div>
             <span class="video-label">Sistemas de Agua</span>
           </div>
-          <div class="video-card" data-src="Videos.mp4" data-fallbacks="videos.mp4,Video3.mp4,Video 3.mp4,video3.mp4,Video3 .mp4">
-            <video muted loop playsinline data-candidates="Videos.mp4,videos.mp4,Video3.mp4,Video 3.mp4,video3.mp4,Video3 .mp4"></video>
+          <div class="video-card" data-src="Videos.mp4">
+            <video src="Videos.mp4" muted loop playsinline></video>
             <div class="video-overlay"></div>
             <div class="video-expand">
               <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
@@ -947,28 +947,18 @@
       if (!emergence) return;
       const cards = Array.from(emergence.querySelectorAll('.video-card'));
 
-      // Para tarjetas con múltiples nombres de archivo candidatos (data-candidates),
-      // probar cada uno en orden hasta que uno cargue correctamente.
+      // Si un video no puede cargar (404, ruta incorrecta, etc.), mostrar aviso visible
+      // en lugar de dejar la tarjeta en blanco, para poder diagnosticar la ruta real.
       cards.forEach(card => {
         const vid = card.querySelector('video');
-        if (!vid || !vid.dataset.candidates) return;
-        const candidates = vid.dataset.candidates.split(',').map(s => s.trim()).filter(Boolean);
-        let idx = 0;
-        function tryNext() {
-          if (idx >= candidates.length) return;
-          const src = candidates[idx];
-          vid.src = src;
-          vid.load();
-        }
+        if (!vid) return;
         vid.addEventListener('error', () => {
-          idx++;
-          tryNext();
+          const warn = document.createElement('div');
+          warn.textContent = 'No se pudo cargar: ' + vid.getAttribute('src');
+          warn.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:11px;color:#7dd3fc;background:rgba(0,10,25,0.9);z-index:6;';
+          card.appendChild(warn);
+          card.classList.add('popped');
         });
-        vid.addEventListener('loadeddata', () => {
-          // Encontrado: fijar también el data-src de la tarjeta para el modal
-          card.dataset.src = candidates[idx];
-        }, { once: true });
-        tryNext();
       });
 
       function popCards() {
