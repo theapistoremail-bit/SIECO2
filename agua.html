@@ -161,6 +161,20 @@
         .benefit-card h4 { font-size: 1.4em; color: var(--water-dark); margin-bottom: 15px; }
         .benefit-card p { color: #2c3e50; line-height: 1.6; }
 
+        .products-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 24px; margin: 50px 0;
+        }
+        .product-card {
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+            border-radius: 18px; padding: 30px 18px; text-align: center;
+            box-shadow: 0 8px 30px rgba(0,180,216,0.15);
+            border: 2px solid rgba(72,202,228,0.2); transition: all 0.3s;
+        }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,180,216,0.3); }
+        .product-icon { font-size: 2.3em; margin-bottom: 14px; }
+        .product-card h4 { font-size: 1em; color: var(--water-dark); font-weight: 600; line-height: 1.35; }
+
         .cta-section {
             max-width: 1400px; margin: 80px auto; padding: 80px 40px; text-align: center;
             background: linear-gradient(135deg, rgba(0,180,216,0.15), rgba(72,202,228,0.15));
@@ -250,6 +264,7 @@
             .intro-box { padding: 30px; }
             .stage-card { padding: 30px; }
             .benefits-grid { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
             .section { padding: 0 20px; }
             .footer-main {
                 padding: 70px 20px 50px;
@@ -270,6 +285,9 @@
             .social-icon { width: 42px; height: 42px; border-radius: 10px; }
             .social-icon svg { width: 18px; height: 18px; }
             .footer-bottom { padding: 18px 20px; font-size: 0.7em; }
+        }
+        @media (max-width: 600px) {
+            .products-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -316,110 +334,32 @@
         </section>
 
         <section class="section">
-            <div class="intro-box">
-                <h2>Purificación de Agua por Ósmosis Inversa</h2>
-                <p>La ósmosis inversa es el proceso de purificación de agua más avanzado y efectivo disponible actualmente. Utiliza tecnología de membrana semipermeable para eliminar hasta el 99.9% de contaminantes disueltos en el agua.</p>
-                <p>Este proceso trabaja mediante presión forzada del agua a través de una membrana microscópica que actúa como barrera molecular, permitiendo únicamente el paso de moléculas de agua pura mientras rechaza contaminantes, sales, metales pesados, bacterias y virus.</p>
-            </div>
-        </section>
-
-        <section class="section process-section">
-            <h2 class="process-title">Las 7 Etapas de Purificación</h2>
-
-            <div class="stage-card">
-                <div class="stage-number">1</div>
-                <h3>Pre-Filtración Sedimentos (5 Micras)</h3>
-                <p>Primera barrera de protección que elimina partículas sólidas suspendidas en el agua.</p>
-                <ul>
-                    <li>Elimina arena, óxido, tierra y sedimentos visibles</li>
-                    <li>Protege las etapas posteriores de obstrucción prematura</li>
-                    <li>Fabricado en polipropileno de alta densidad</li>
-                    <li>Vida útil: 6 meses según turbidez del agua</li>
-                    <li>Capacidad de retención: partículas mayores a 5 micrones</li>
-                </ul>
-            </div>
-
-            <div class="stage-card">
-                <div class="stage-number">2</div>
-                <h3>Filtro de Carbón Activado Granular (GAC)</h3>
-                <p>Absorbe químicos y mejora drásticamente el sabor y olor del agua.</p>
-                <ul>
-                    <li>Absorbe cloro libre y combinado (hasta 99%)</li>
-                    <li>Elimina compuestos orgánicos volátiles (VOCs)</li>
-                    <li>Remueve pesticidas, herbicidas y químicos industriales</li>
-                    <li>Mejora sabor y elimina olores desagradables</li>
-                    <li>Carbón de cáscara de coco activado a 1000°C</li>
-                    <li>Capacidad: 10,000 litros de procesamiento</li>
-                </ul>
-            </div>
-
-            <div class="stage-card">
-                <div class="stage-number">3</div>
-                <h3>Filtro de Carbón Activado en Bloque (CTO)</h3>
-                <p>Segunda barrera de carbón con mayor densidad y capacidad de filtración.</p>
-                <ul>
-                    <li>Retiene partículas finas de hasta 1 micrón</li>
-                    <li>Protección crítica de la membrana de ósmosis</li>
-                    <li>Elimina benzeno y trihalometanos</li>
-                    <li>Remueve subproductos de cloración (cancerígenos)</li>
-                    <li>Alta eficiencia en remoción de contaminantes químicos</li>
-                    <li>Construcción sólida en bloque compacto</li>
-                </ul>
-            </div>
-
-            <div class="stage-card">
-                <div class="stage-number">4</div>
-                <h3>Membrana de Ósmosis Inversa (TFC)</h3>
-                <p>El corazón del sistema: membrana de película delgada compuesta que realiza la purificación molecular.</p>
-                <ul>
-                    <li>Poros de 0.0001 micrones (100 veces más pequeño que virus)</li>
-                    <li>Rechaza hasta 99.9% de sólidos disueltos totales (TDS)</li>
-                    <li>Elimina metales pesados: plomo, mercurio, arsénico, cadmio</li>
-                    <li>Remueve sales disueltas, nitratos, fluoruros</li>
-                    <li>Presión de operación: 60–80 PSI</li>
-                    <li>Certificada NSF/ANSI Standard 58</li>
-                    <li>Vida útil: 2–3 años según calidad del agua</li>
-                </ul>
-            </div>
-
-            <div class="stage-card">
-                <div class="stage-number">5</div>
-                <h3>Post-Filtro de Carbón Activado (In-Line)</h3>
-                <p>Pulido final del agua purificada antes de su consumo.</p>
-                <ul>
-                    <li>Elimina sabores u olores residuales del tanque</li>
-                    <li>Remineralización ligera para mejorar pH</li>
-                    <li>Contacto prolongado para máxima efectividad</li>
-                    <li>Garantiza frescura y sabor premium</li>
-                    <li>Filtración final de seguridad</li>
-                </ul>
-            </div>
-
-            <div class="stage-card">
-                <div class="stage-number">6</div>
-                <h3>Filtro Remineralizador <span style="font-size:0.65em;font-weight:400;color:#888;">(Opcional)</span></h3>
-                <p>Añade minerales esenciales beneficiosos para la salud.</p>
-                <ul>
-                    <li>Añade calcio y magnesio en proporciones ideales</li>
-                    <li>Aumenta pH a niveles alcalinos (7.5–8.5)</li>
-                    <li>Mejora significativamente el sabor</li>
-                    <li>Agua estructurada con propiedades antioxidantes</li>
-                    <li>Beneficios para salud ósea y cardiovascular</li>
-                </ul>
-            </div>
-
-            <div class="stage-card">
-                <div class="stage-number">7</div>
-                <h3>Lámpara UV Germicida <span style="font-size:0.65em;font-weight:400;color:#888;">(Opcional)</span></h3>
-                <p>Desinfección final con tecnología de luz ultravioleta.</p>
-                <ul>
-                    <li>Luz UV-C de 254 nanómetros</li>
-                    <li>Elimina 99.99% de bacterias, virus y quistes</li>
-                    <li>No añade químicos ni altera sabor</li>
-                    <li>Seguridad microbiológica absoluta</li>
-                    <li>Ideal para zonas con riesgo de contaminación biológica</li>
-                    <li>Lámpara de larga duración (9,000 horas)</li>
-                </ul>
+            <h2 class="process-title" style="margin-bottom:40px;">Productos y Servicios</h2>
+            <div class="products-grid">
+                <div class="product-card"><div class="product-icon">🧂</div><h4>Medios filtrantes</h4></div>
+                <div class="product-card"><div class="product-icon">⚫</div><h4>Carbón activado</h4></div>
+                <div class="product-card"><div class="product-icon">🟤</div><h4>Resinas mixtas</h4></div>
+                <div class="product-card"><div class="product-icon">💧</div><h4>Suavizadores</h4></div>
+                <div class="product-card"><div class="product-icon">🔬</div><h4>Membranas para ósmosis</h4></div>
+                <div class="product-card"><div class="product-icon">🧫</div><h4>Membranas de ultrafiltración</h4></div>
+                <div class="product-card"><div class="product-icon">🛢️</div><h4>Tanques filtro</h4></div>
+                <div class="product-card"><div class="product-icon">🎛️</div><h4>Válvulas</h4></div>
+                <div class="product-card"><div class="product-icon">💡</div><h4>Lámparas UV</h4></div>
+                <div class="product-card"><div class="product-icon">🔄</div><h4>Bombas e hidroneumáticos</h4></div>
+                <div class="product-card"><div class="product-icon">🌊</div><h4>Ósmosis inversa</h4></div>
+                <div class="product-card"><div class="product-icon">🥤</div><h4>Filtros para beber agua</h4></div>
+                <div class="product-card"><div class="product-icon">🚰</div><h4>Despachadores de agua</h4></div>
+                <div class="product-card"><div class="product-icon">🚿</div><h4>Sistemas de riego</h4></div>
+                <div class="product-card"><div class="product-icon">📊</div><h4>Medidores de flujo</h4></div>
+                <div class="product-card"><div class="product-icon">🔗</div><h4>Conexiones y tubería PVC</h4></div>
+                <div class="product-card"><div class="product-icon">⚡</div><h4>Sistemas de ozono</h4></div>
+                <div class="product-card"><div class="product-icon">🧴</div><h4>Filtros cartucho</h4></div>
+                <div class="product-card"><div class="product-icon">👝</div><h4>Filtros bolsa</h4></div>
+                <div class="product-card"><div class="product-icon">🗄️</div><h4>Porta cartuchos</h4></div>
+                <div class="product-card"><div class="product-icon">📈</div><h4>Flujómetros</h4></div>
+                <div class="product-card"><div class="product-icon">🔩</div><h4>Refacciones en general</h4></div>
+                <div class="product-card"><div class="product-icon">⚙️</div><h4>Motores</h4></div>
+                <div class="product-card"><div class="product-icon">📐</div><h4>Consultoría, ingeniería y diseño</h4></div>
             </div>
         </section>
 
