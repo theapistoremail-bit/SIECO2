@@ -1,0 +1,99 @@
+// /api/assistant.js — Vercel serverless function
+// Uses the OPENAI_API_KEY already configured in your project.
+// Add this file to your repo under /api/assistant.js (same folder as
+// generate.js, images.js, mesh.js) and it will be deployed automatically.
+
+const SYSTEM_PROMPT = `You are the AI sales & support assistant embedded on the KIMERICA website.
+KIMERICA is a creative studio that builds luxury web design and branding systems for brands —
+both emerging brands launching for the first time and established brands seeking a full
+remasterization / rebrand. Services: creative strategy, visual identity, immersive 3D web
+experiences, AI-driven creative direction, product branding & packaging, campaign direction.
+
+Tone: elegant, warm, concise, never pushy or salesy-sounding. Always reply in English.
+Your goals, in priority order:
+1. Answer the visitor's question clearly and helpfully.
+2. Build confidence in KIMERICA's quality and process.
+3. Move qualified visitors toward starting a project or a direct conversation — without
+   pressuring them.
+
+Pricing policy: the website shows indicative budget tiers ($1k–3k, $3k–8k, $8k–20k, $20k+).
+Always make clear these are a starting point, not a fixed price — actual scope and price are
+negotiated directly with the studio, regardless of which tier a client selects on the site.
+If someone asks about price, or seems close to deciding, politely invite them to continue the
+conversation directly with the studio on WhatsApp so pricing can be tailored to their project —
+do not invent a WhatsApp number yourself, just say "you can also continue this conversation with
+our studio directly on WhatsApp using the button next to this chat."
+
+Keep replies short (2-5 sentences) unless the visitor asks for detail. Never make up project
+timelines, team names, or guarantees you cannot verify. If you don't know something concrete
+about KIMERICA's internal process, answer at a reasonable general level and offer to connect
+them with the studio for specifics.`;
+
+const STAGE_CONTEXT = {
+  'home': 'The visitor is on the homepage, has not started configuring a project yet.',
+  'about': 'The visitor is reading about the studio.',
+  'portfolio': 'The visitor is browsing past work / case studies.',
+  'process': 'The visitor is reading about the studio process.',
+  'configure': 'The visitor is filling out the project configurator (objective, style, industry, tone, budget).',
+  'proposal': 'The visitor is in the AI proposal step, writing a description of their brand vision.',
+  'project-preview': 'The visitor just received their AI-generated brand/website proposal and package.',
+  'checkout': 'The visitor is on the payment/checkout step.',
+  'confirm': 'The visitor just confirmed and paid for a project.',
+  'dash': 'The visitor is in their client dashboard.',
+};
+
+module.exports = async function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+
+  try {
+    const { messages, stage } = req.body || {};
+    if (!Array.isArray(messages) || messages.length === 0) {
+      res.status(400).json({ error: 'messages array required' });
+      return;
+    }
+
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      res.status(500).json({ error: 'OPENAI_API_KEY not configured' });
+      return;
+    }
+
+    const contextNote = STAGE_CONTEXT[stage] || '';
+    const chatMessages = [
+      { role: 'system', content: SYSTEM_PROMPT + (contextNote ? `\n\nCurrent context: ${contextNote}` : '') },
+      // keep last 12 turns to bound token usage
+      ...messages.slice(-12).map(m => ({ role: m.role === 'user' ? 'user' : 'assistant', content: String(m.content || '').slice(0, 2000) })),
+    ];
+
+    const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: chatMessages,
+        max_tokens: 350,
+        temperature: 0.7,
+      }),
+    });
+
+    if (!openaiRes.ok) {
+      const errText = await openaiRes.text().catch(() => '');
+      console.error('OpenAI error', openaiRes.status, errText);
+      res.status(502).json({ error: 'assistant upstream error' });
+      return;
+    }
+
+    const data = await openaiRes.json();
+    const reply = data?.choices?.[0]?.message?.content?.trim() || "Sorry, I couldn't generate a reply just now.";
+    res.status(200).json({ reply });
+  } catch (err) {
+    console.error('assistant handler error', err);
+    res.status(500).json({ error: 'internal error' });
+  }
+};
