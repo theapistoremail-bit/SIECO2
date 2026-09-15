@@ -1,0 +1,172 @@
+/* ============================================================
+   KIMERICA — WhatsApp + AI Sales Assistant Widget
+   Drop this file in your repo (e.g. /public/kimerica-assistant-widget.js)
+   and add ONE line before </body> in index.html:
+     <script src="/kimerica-assistant-widget.js"></script>
+   It is fully self-contained: does NOT require editing go() or any
+   existing function. It watches the DOM for the active .screen.on
+   element to know which step of the funnel the visitor is on.
+   ============================================================ */
+(function(){
+  if(window.__KIMERICA_ASSISTANT__) return;
+  window.__KIMERICA_ASSISTANT__ = true;
+
+  // ── CONFIG ──────────────────────────────────────────────
+  const WHATSAPP_NUMBER = '525647213204'; // +52 56 4721 3204, no '+' or spaces
+  const WHATSAPP_DEFAULT_MSG = "Hi KIMERICA! I'd like to talk about a branding/web project.";
+  const ASSISTANT_ENDPOINT = '/api/assistant';
+  const ACCENT = '#FF1A1A';
+
+  // Proactive, stage-specific openers. Shown once per session per stage,
+  // as a small speech-bubble near the launcher — never a blocking modal.
+  const STAGE_INTROS = {
+    'home': "Welcome to KIMERICA. I'm here for any questions — we design websites and branding for luxury brands, whether you're just launching or already established (we also do full rebrand/remasterizations). Pricing is flexible: even if you pick a budget tier later, you can always talk to us directly to negotiate scope and price. Anything I can help with?",
+    'configure': "Choosing the right direction? I can help you decide between objectives, styles or budget tiers — or connect you straight to our studio if you'd rather just talk it through.",
+    'proposal': "Need help describing your vision? Tell me a bit about your brand here in the chat and I can help you phrase it — or answer any question about our process and pricing while the AI works on your proposal.",
+    'project-preview': "This is your AI-generated proposal. If you'd like a custom quote, a revision, or just want to talk to a human about next steps, I'm right here — or we can hop on WhatsApp.",
+    'checkout': "Before you confirm — remember the price shown is a starting estimate. If your scope is different, message us directly and we'll tailor a quote.",
+  };
+
+  const STORAGE_KEY = 'kimerica_assistant_seen_stages';
+  function seenStages(){ try{ return JSON.parse(sessionStorage.getItem(STORAGE_KEY)||'[]'); }catch(e){ return []; } }
+  function markSeen(stage){ const s=seenStages(); if(!s.includes(stage)){ s.push(stage); sessionStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } }
+
+  // ── STYLES ──────────────────────────────────────────────
+  const css = `
+  #kim-fab-wrap{position:fixed;bottom:26px;right:26px;z-index:99999;font-family:'Syne',sans-serif;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  #kim-bubble{max-width:280px;background:#0d0d10;border:1px solid rgba(255,26,26,.4);color:#f8f6f2;padding:16px 18px;font-size:.78rem;line-height:1.55;box-shadow:0 8px 30px rgba(0,0,0,.5);position:relative;animation:kimIn .4s ease both}
+  #kim-bubble .kim-close{position:absolute;top:6px;right:8px;background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:13px}
+  #kim-bubble .kim-cta{display:inline-block;margin-top:10px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${ACCENT};cursor:pointer;text-decoration:underline}
+  @keyframes kimIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  #kim-fab{display:flex;gap:10px}
+  .kim-btn{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;box-shadow:0 6px 22px rgba(0,0,0,.45);transition:transform .25s}
+  .kim-btn:hover{transform:translateY(-3px)}
+  #kim-wa-btn{background:#22c55e;color:#fff;font-size:26px;text-decoration:none}
+  #kim-ai-btn{background:${ACCENT};color:#000;font-size:20px;font-weight:800}
+  #kim-panel{position:fixed;bottom:96px;right:26px;width:340px;max-width:88vw;height:460px;max-height:70vh;background:#08080b;border:1px solid rgba(255,26,26,.35);z-index:99999;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  #kim-panel.on{display:flex}
+  #kim-head{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;background:#0d0d10}
+  #kim-head b{color:#f8f6f2;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+  #kim-head span{color:rgba(255,255,255,.35);font-size:.62rem}
+  #kim-head button{background:none;border:none;color:rgba(255,255,255,.5);font-size:16px;cursor:pointer}
+  #kim-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+  .kim-msg{font-size:.78rem;line-height:1.55;max-width:88%;padding:9px 12px}
+  .kim-msg.bot{background:rgba(255,26,26,.08);border:1px solid rgba(255,26,26,.2);color:#f0efec;align-self:flex-start}
+  .kim-msg.user{background:rgba(255,255,255,.06);color:#f0efec;align-self:flex-end}
+  #kim-input-row{display:flex;border-top:1px solid rgba(255,255,255,.08)}
+  #kim-input{flex:1;background:transparent;border:none;color:#f8f6f2;padding:12px 14px;font-size:.78rem;outline:none;font-family:'Syne',sans-serif}
+  #kim-send{background:${ACCENT};color:#000;border:none;padding:0 18px;font-weight:700;font-size:.7rem;text-transform:uppercase;cursor:pointer}
+  #kim-typing{font-size:.68rem;color:rgba(255,255,255,.35);padding:0 16px 8px}
+  `;
+  const styleEl = document.createElement('style'); styleEl.textContent = css; document.head.appendChild(styleEl);
+
+  // ── MARKUP ──────────────────────────────────────────────
+  const wrap = document.createElement('div'); wrap.id = 'kim-fab-wrap';
+  wrap.innerHTML = `
+    <div id="kim-bubble" style="display:none"></div>
+    <div id="kim-fab">
+      <a id="kim-wa-btn" class="kim-btn" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_DEFAULT_MSG)}" title="Chat on WhatsApp">&#9743;</a>
+      <button id="kim-ai-btn" class="kim-btn" title="Ask our AI assistant">AI</button>
+    </div>
+    <div id="kim-panel">
+      <div id="kim-head"><div><b>KIMERICA</b><br><span>AI Assistant · usually replies instantly</span></div><button id="kim-panel-close">✕</button></div>
+      <div id="kim-msgs"></div>
+      <div id="kim-typing" style="display:none">Typing…</div>
+      <div id="kim-input-row">
+        <input id="kim-input" placeholder="Ask about pricing, process, timelines…" />
+        <button id="kim-send">Send</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(wrap);
+
+  const $panel = document.getElementById('kim-panel');
+  const $msgs = document.getElementById('kim-msgs');
+  const $input = document.getElementById('kim-input');
+  const $typing = document.getElementById('kim-typing');
+  const $bubble = document.getElementById('kim-bubble');
+
+  let history = []; // {role, content}
+
+  function addMsg(role, text){
+    const d = document.createElement('div');
+    d.className = 'kim-msg ' + (role==='user'?'user':'bot');
+    d.textContent = text;
+    $msgs.appendChild(d);
+    $msgs.scrollTop = $msgs.scrollHeight;
+  }
+
+  function openPanel(prefill){
+    $panel.classList.add('on');
+    $bubble.style.display = 'none';
+    if(prefill) $input.value = prefill;
+    $input.focus();
+    if(history.length===0){
+      const greet = "Hi! I'm the KIMERICA assistant. Ask me anything about pricing, timelines, or what we do — or I can put you in touch with the studio directly.";
+      addMsg('assistant', greet);
+      history.push({role:'assistant', content: greet});
+    }
+  }
+  document.getElementById('kim-ai-btn').onclick = ()=>openPanel();
+  document.getElementById('kim-panel-close').onclick = ()=>$panel.classList.remove('on');
+
+  async function send(){
+    const text = $input.value.trim();
+    if(!text) return;
+    $input.value='';
+    addMsg('user', text);
+    history.push({role:'user', content: text});
+    $typing.style.display='block';
+    try{
+      const stage = currentStage();
+      const res = await fetch(ASSISTANT_ENDPOINT, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ messages: history, stage })
+      });
+      if(!res.ok) throw new Error('assistant error');
+      const data = await res.json();
+      const reply = data.reply || "Sorry, I couldn't reach our system — you can also message us directly on WhatsApp.";
+      addMsg('assistant', reply);
+      history.push({role:'assistant', content: reply});
+    }catch(e){
+      addMsg('assistant', "I'm having trouble connecting right now — feel free to message us on WhatsApp instead, we reply fast there.");
+    }finally{
+      $typing.style.display='none';
+    }
+  }
+  document.getElementById('kim-send').onclick = send;
+  $input.addEventListener('keydown', e=>{ if(e.key==='Enter') send(); });
+
+  // ── STAGE DETECTION (no edits to existing app needed) ────
+  function currentStage(){
+    const active = document.querySelector('.screen.on');
+    return active ? active.id.replace(/^s-/, '') : 'home';
+  }
+
+  function showStageBubble(stage){
+    const text = STAGE_INTROS[stage];
+    if(!text) return;
+    if(seenStages().includes(stage)) return;
+    markSeen(stage);
+    $bubble.innerHTML = `<button class="kim-close">✕</button>${text}<div class="kim-cta">Ask a question →</div>`;
+    $bubble.style.display = 'block';
+    $bubble.querySelector('.kim-close').onclick = ()=>{ $bubble.style.display='none'; };
+    $bubble.querySelector('.kim-cta').onclick = ()=>openPanel();
+    setTimeout(()=>{ if($bubble.style.display!=='none') $bubble.style.display='none'; }, 14000);
+  }
+
+  let lastStage = null;
+  function checkStage(){
+    const s = currentStage();
+    if(s !== lastStage){
+      lastStage = s;
+      setTimeout(()=>showStageBubble(s), 900); // small delay so it feels intentional, not instant
+    }
+  }
+  new MutationObserver(checkStage).observe(document.body, {attributes:true, attributeFilter:['class'], subtree:true});
+  document.addEventListener('DOMContentLoaded', checkStage);
+  window.addEventListener('load', checkStage);
+  setTimeout(checkStage, 500);
+
+})();
