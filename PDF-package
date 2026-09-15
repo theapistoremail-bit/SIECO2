@@ -1,0 +1,124 @@
+/* ============================================================
+   KIMERICA — Single-PDF package builder
+   Add this file to your repo (e.g. /public/pdf-package.js) and include
+   it BEFORE your main inline <script> closes, with:
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+     <script src="/pdf-package.js"></script>
+   Then replace the download button's onclick from downloadPackage()
+   to buildSinglePDF() (see INTEGRATION-GUIDE.md).
+   ============================================================ */
+(function(){
+  async function imgUrlToDataURL(url){
+    try{
+      const res = await fetch(url, { mode: 'cors' });
+      const blob = await res.blob();
+      return await new Promise((resolve, reject)=>{
+        const r = new FileReader();
+        r.onload = ()=>resolve(r.result);
+        r.onerror = reject;
+        r.readAsDataURL(blob);
+      });
+    }catch(e){
+      return null; // CORS-blocked or unreachable — skip gracefully
+    }
+  }
+
+  function collectGalleryUrls(id){
+    const el = document.getElementById(id);
+    if(!el) return [];
+    return Array.from(el.querySelectorAll('img')).map(img=>img.src).filter(Boolean);
+  }
+
+  window.buildSinglePDF = async function buildSinglePDF(){
+    if(typeof window.toast === 'function') window.toast('Building your PDF package…','ok');
+    if(!window.jspdf){
+      if(typeof window.toast === 'function') window.toast('PDF engine not loaded — check script tags.','err');
+      return;
+    }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit:'pt', format:'a4' });
+    const W = doc.internal.pageSize.getWidth();
+    const M = 48;
+    let y = 0;
+
+    const brand = (window.S && window.S.brandName) ? window.S.brandName : 'Your Brand';
+    const vision = document.getElementById('vision')?.value?.trim() || '';
+    const creative = document.getElementById('claude-out')?.textContent?.trim()
+      || document.getElementById('pv-proposal-text')?.textContent?.trim() || '';
+    const scope = (window.S && window.S.proposal) ? window.S.proposal : {};
+
+    // ── Cover page ──
+    doc.setFillColor(6,6,8); doc.rect(0,0,W,doc.internal.pageSize.getHeight(),'F');
+    doc.setTextColor(255,26,26); doc.setFontSize(11);
+    doc.text('KIMERICA', M, 90);
+    doc.setTextColor(248,246,242); doc.setFontSize(30);
+    doc.text(brand, M, 140);
+    doc.setFontSize(12); doc.setTextColor(200,200,200);
+    doc.text('AI-Generated Brand & Creative Direction Package', M, 165);
+    doc.setFontSize(9); doc.setTextColor(140,140,140);
+    doc.text('Generated ' + new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}), M, 190);
+
+    // ── Vision page ──
+    doc.addPage(); y = M;
+    doc.setTextColor(20,20,20); doc.setFontSize(16);
+    doc.text('Client Vision', M, y); y += 26;
+    doc.setFontSize(10.5); doc.setTextColor(60,60,60);
+    const visionLines = doc.splitTextToSize(vision || '(No vision text provided — generated from configuration only.)', W - M*2);
+    doc.text(visionLines, M, y); y += visionLines.length * 14 + 26;
+
+    doc.setFontSize(16); doc.setTextColor(20,20,20);
+    doc.text('AI Creative Direction', M, y); y += 26;
+    doc.setFontSize(10.5); doc.setTextColor(60,60,60);
+    const creativeLines = doc.splitTextToSize(creative || '(No creative direction generated yet.)', W - M*2);
+    doc.text(creativeLines, M, y);
+
+    // ── Scope page ──
+    doc.addPage(); y = M;
+    doc.setFontSize(16); doc.setTextColor(20,20,20);
+    doc.text('Project Scope & Investment', M, y); y += 30;
+    const rows = [
+      ['Creative Direction & Strategy', scope.sc1 || '$2,800'],
+      ['Visual Identity System', scope.sc2 || '$4,200'],
+      ['Digital Experience Design', scope.sc3 || '$5,500'],
+      ['3D / AI-Driven Elements', scope.sc4 || '$3,800'],
+      ['Estimated Timeline', scope.time || '8–10 weeks'],
+    ];
+    doc.setFontSize(11);
+    rows.forEach(([label, val])=>{
+      doc.setTextColor(90,90,90); doc.text(label, M, y);
+      doc.setTextColor(20,20,20); doc.text(String(val), W - M - doc.getTextWidth(String(val)), y);
+      y += 22;
+    });
+    y += 10;
+    doc.setFontSize(9); doc.setTextColor(150,150,150);
+    doc.text('This estimate is a starting point. Final scope and pricing are confirmed directly with the studio.', M, y);
+
+    // ── Image sections ──
+    const galleries = [
+      { id:'leo-gallery', title:'Visual Concept — Environments' },
+      { id:'logo-gallery', title:'Logo & Identity Concepts' },
+      { id:'packaging-gallery', title:'Packaging Examples' },
+    ];
+    for(const g of galleries){
+      const urls = collectGalleryUrls(g.id);
+      if(!urls.length) continue;
+      doc.addPage(); y = M;
+      doc.setFontSize(16); doc.setTextColor(20,20,20);
+      doc.text(g.title, M, y); y += 24;
+      let x = M; const cellW = (W - M*2 - 16) / 2; const cellH = cellW * 0.62;
+      let col = 0;
+      for(const url of urls){
+        const dataUrl = await imgUrlToDataURL(url);
+        if(dataUrl){
+          try{ doc.addImage(dataUrl, 'JPEG', x, y, cellW, cellH); }catch(e){ /* skip unreadable image */ }
+        }
+        col++; x += cellW + 16;
+        if(col % 2 === 0){ x = M; y += cellH + 16; }
+        if(y > doc.internal.pageSize.getHeight() - cellH - M){ doc.addPage(); y = M; x = M; col = 0; }
+      }
+    }
+
+    doc.save((brand.replace(/[^A-Za-z0-9]/g,'_') || 'KIMERICA') + '_Brand_Package.pdf');
+    if(typeof window.toast === 'function') window.toast('PDF package downloaded ✓','ok');
+  };
+})();
