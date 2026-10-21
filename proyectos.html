@@ -137,6 +137,11 @@
         .cs-slide.active { opacity: 1; }
         .cs-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 7s ease; }
         .cs-slide.active img { transform: scale(1.07); }
+
+        /* SLIDER AJUSTADO — foto completa, sin recorte ni zoom */
+        .card-slider.fit .cs-slide img { object-fit: contain; object-position: center; background: #001a2e; }
+        .card-slider.fit .cs-slide.active img { transform: none; }
+
         .cs-placeholder {
             width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
@@ -318,7 +323,7 @@
 
             <!-- CARD 2 — Sector Industrial (carpeta 1, 7 fotos) -->
             <div class="project-card">
-                <div class="card-slider">
+                <div class="card-slider fit">
 
                     <div class="cs-slide"><img src="IMG_0528.png?v=2"alt="Sector Industrial 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
                     <div class="cs-slide"><img src="IMG_0530.png?v=2" alt="Sector Industrial 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
@@ -353,7 +358,7 @@
 
             <!-- CARD 3 — Sector Comercial (carpeta 5, 3 fotos) -->
             <div class="project-card">
-                <div class="card-slider">
+                <div class="card-slider fit">
                     <div class="cs-slide active"><img src="IMG_0548.jpeg?v=2" alt="Sector Comercial 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
                     <div class="cs-slide"><img src="IMG_0547.jpeg?v=2" alt="Sector Comercial 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
                     <div class="cs-slide"><img src="IMG_0545.jpeg?v=2" alt="Sector Comercial 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
@@ -549,7 +554,7 @@
 
             <!-- CARD 10 — Sector Comercial (calderas, 3 fotos) -->
             <div class="project-card">
-                <div class="card-slider">
+                <div class="card-slider fit">
                     <div class="cs-slide active"><img src="IMG_0935.jpeg?v=2" alt="Sector Comercial - Calderas 1" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 1</span></div>'"></div>
                     <div class="cs-slide"><img src="IMG_0934.jpeg?v=2" alt="Sector Comercial - Calderas 2" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 2</span></div>'"></div>
                     <div class="cs-slide"><img src="IMG_0933.jpeg?v=2" alt="Sector Comercial - Calderas 3" onerror="this.parentElement.innerHTML='<div class=\'cs-placeholder\'><span>Foto 3</span></div>'"></div>
